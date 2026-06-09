@@ -1,1 +1,437 @@
-<h1>Drome Map</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Drôme · Carte de vacances</title>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1c1c1c;
+      --stone:    #f0ece4;
+      --mist:     #e4dfd6;
+      --river:    #2171b5;
+      --rust:     #8b3a1a;
+      --panel-bg: rgba(240, 236, 228, 0.96);
+      --radius:   12px;
+      --shadow:   0 2px 12px rgba(0,0,0,0.18);
+      --font:     'Georgia', serif;
+      --ui-font:  system-ui, -apple-system, sans-serif;
+    }
+
+    html, body { height: 100%; overflow: hidden; background: var(--stone); }
+
+    /* ── MAP ── */
+    #map { position: absolute; inset: 0; }
+
+    /* ── HEADER ── */
+    #header {
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--panel-bg);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+      padding: 8px 18px 6px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #header h1 {
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+    #header span {
+      font-family: var(--ui-font);
+      font-size: 10px;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── BOTTOM PANEL ── */
+    #panel {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--panel-bg);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius) var(--radius) 0 0;
+      box-shadow: 0 -2px 16px rgba(0,0,0,0.12);
+      z-index: 10;
+      padding: 0 0 env(safe-area-inset-bottom);
+      transition: transform 0.3s ease;
+    }
+
+    #panel-handle {
+      width: 36px; height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin: 10px auto 6px;
+      cursor: pointer;
+    }
+
+    /* ── BASEMAP TABS ── */
+    #basemap-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 0 14px 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    #basemap-tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      flex-shrink: 0;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--mist);
+      background: white;
+      font-family: var(--ui-font);
+      font-size: 12px;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .tab.active {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+    .tab:active { opacity: 0.7; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--mist);
+      margin: 0 14px 8px;
+    }
+
+    /* ── LAYER TOGGLES ── */
+    #layers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 0 14px 14px;
+    }
+
+    .layer-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1.5px solid var(--mist);
+      background: white;
+      font-family: var(--ui-font);
+      font-size: 12px;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+    }
+    .layer-btn.active {
+      border-color: var(--river);
+      background: #eef4fb;
+      color: var(--ink);
+    }
+    .layer-btn .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .layer-btn:active { opacity: 0.7; }
+
+    /* ── GEOLOCATE BTN ── */
+    #geolocate {
+      position: absolute;
+      right: 14px;
+      bottom: 200px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--panel-bg);
+      border: none;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.15s;
+    }
+    #geolocate.active { background: var(--river); }
+    #geolocate svg { transition: stroke 0.15s; }
+    #geolocate.active svg { stroke: white; }
+    #geolocate:active { opacity: 0.7; }
+
+    /* ── ZOOM BTNS ── */
+    #zoom-btns {
+      position: absolute;
+      right: 14px;
+      bottom: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 10;
+    }
+    .zoom-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--panel-bg);
+      border: none;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .zoom-btn:active { opacity: 0.7; }
+
+    /* ── GEOLOCATE MARKER ── */
+    .geoloc-marker {
+      width: 20px; height: 20px;
+    }
+
+    /* ── COLLAPSED PANEL ── */
+    #panel.collapsed { transform: translateY(calc(100% - 52px)); }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Header -->
+<div id="header">
+  <h1>Drôme · Diois</h1>
+  <span>Aouste-sur-Sye &amp; environs</span>
+</div>
+
+<!-- Geoloc button -->
+<button id="geolocate" title="Ma position">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+    <circle cx="12" cy="12" r="8" stroke-dasharray="2 3"/>
+  </svg>
+</button>
+
+<!-- Zoom buttons -->
+<div id="zoom-btns">
+  <button class="zoom-btn" id="zoom-in">+</button>
+  <button class="zoom-btn" id="zoom-out">−</button>
+</div>
+
+<!-- Bottom panel -->
+<div id="panel">
+  <div id="panel-handle"></div>
+
+  <!-- Basemap tabs -->
+  <div id="basemap-tabs">
+    <button class="tab active" data-basemap="ign">Carte IGN</button>
+    <button class="tab" data-basemap="cassini">Cassini</button>
+    <button class="tab" data-basemap="etatmajor">État-Major</button>
+    <button class="tab" data-basemap="sat">Satellite</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Layer toggles -->
+  <div id="layers">
+    <button class="layer-btn active" data-layer="sentiers">
+      <span class="dot" style="background:#c0392b"></span>
+      Sentiers
+    </button>
+    <button class="layer-btn active" data-layer="rivieres">
+      <span class="dot" style="background:#2171b5"></span>
+      Rivières
+    </button>
+    <button class="layer-btn" data-layer="monuments">
+      <span class="dot" style="background:#8b3a1a"></span>
+      Monuments
+    </button>
+    <button class="layer-btn" data-layer="baignade">
+      <span class="dot" style="background:#27ae60"></span>
+      Baignade
+    </button>
+    <button class="layer-btn" data-layer="villages">
+      <span class="dot" style="background:#555"></span>
+      Villages
+    </button>
+    <button class="layer-btn" data-layer="bus">
+      <span class="dot" style="background:#8e44ad"></span>
+      Bus
+    </button>
+  </div>
+</div>
+
+<script>
+// ── BASEMAP SOURCES ──────────────────────────────────────────────────────────
+const BASEMAPS = {
+  ign: {
+    type: 'raster',
+    tiles: ['https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}'],
+    tileSize: 256,
+    attribution: '© IGN'
+  },
+  cassini: {
+    type: 'raster',
+    tiles: ['https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=GEOGRAPHICALGRIDSYSTEMS.CASSINI&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}'],
+    tileSize: 256,
+    attribution: '© IGN'
+  },
+  etatmajor: {
+    type: 'raster',
+    tiles: ['https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=GEOGRAPHICALGRIDSYSTEMS.ETATMAJOR40&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}'],
+    tileSize: 256,
+    attribution: '© IGN'
+  },
+  sat: {
+    type: 'raster',
+    tiles: ['https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}'],
+    tileSize: 256,
+    attribution: '© IGN'
+  }
+};
+
+// ── OVERLAY LAYERS ───────────────────────────────────────────────────────────
+const OVERLAYS = {
+  sentiers: {
+    type: 'raster',
+    tiles: ['https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png'],
+    tileSize: 256,
+    attribution: '© Waymarked Trails'
+  }
+};
+
+// ── MAP INIT ─────────────────────────────────────────────────────────────────
+const map = new maplibregl.Map({
+  container: 'map',
+  style: {
+    version: 8,
+    sources: {
+      basemap: BASEMAPS.ign,
+      sentiers: OVERLAYS.sentiers
+    },
+    layers: [
+      { id: 'basemap', type: 'raster', source: 'basemap' },
+      { id: 'sentiers', type: 'raster', source: 'sentiers', paint: { 'raster-opacity': 0.85 } }
+    ]
+  },
+  center: [5.12, 44.81], // Aouste-sur-Sye
+  zoom: 10,
+  maxZoom: 18,
+  minZoom: 7,
+  attributionControl: false
+});
+
+map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
+
+// ── BASEMAP SWITCH ───────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const key = btn.dataset.basemap;
+    map.getSource('basemap').setTiles(BASEMAPS[key].tiles);
+  });
+});
+
+// ── LAYER TOGGLES ────────────────────────────────────────────────────────────
+const layerState = {
+  sentiers: true,
+  rivieres: true,
+  monuments: false,
+  baignade: false,
+  villages: false,
+  bus: false
+};
+
+document.querySelectorAll('.layer-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const layer = btn.dataset.layer;
+    layerState[layer] = !layerState[layer];
+    btn.classList.toggle('active', layerState[layer]);
+
+    // Sentiers = raster overlay géré
+    if (layer === 'sentiers') {
+      map.setLayoutProperty('sentiers', 'visibility', layerState.sentiers ? 'visible' : 'none');
+    }
+    // Autres layers → placeholder jusqu'à ajout des GeoJSON
+  });
+});
+
+// ── GEOLOCALISATION ──────────────────────────────────────────────────────────
+let geolocActive = false;
+let geolocMarker = null;
+let watchId = null;
+
+const geoBtn = document.getElementById('geolocate');
+
+// SVG marker géoloc custom
+function createGeolocEl() {
+  const el = document.createElement('div');
+  el.innerHTML = `
+    <svg class="geoloc-marker" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="8" fill="#2171b5" fill-opacity="0.25"/>
+      <circle cx="12" cy="12" r="4" fill="#2171b5"/>
+      <circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="1.5"/>
+    </svg>`;
+  return el;
+}
+
+geoBtn.addEventListener('click', () => {
+  if (!geolocActive) {
+    if (!navigator.geolocation) { alert('Géolocalisation non disponible'); return; }
+    geolocActive = true;
+    geoBtn.classList.add('active');
+    watchId = navigator.geolocation.watchPosition(pos => {
+      const { longitude, latitude } = pos.coords;
+      if (!geolocMarker) {
+        geolocMarker = new maplibregl.Marker({ element: createGeolocEl(), anchor: 'center' })
+          .setLngLat([longitude, latitude])
+          .addTo(map);
+        map.flyTo({ center: [longitude, latitude], zoom: 13, duration: 1200 });
+      } else {
+        geolocMarker.setLngLat([longitude, latitude]);
+      }
+    }, err => {
+      console.warn('Géoloc error', err);
+      geolocActive = false;
+      geoBtn.classList.remove('active');
+    }, { enableHighAccuracy: true });
+  } else {
+    geolocActive = false;
+    geoBtn.classList.remove('active');
+    if (watchId) navigator.geolocation.clearWatch(watchId);
+    if (geolocMarker) { geolocMarker.remove(); geolocMarker = null; }
+  }
+});
+
+// ── ZOOM BUTTONS ─────────────────────────────────────────────────────────────
+document.getElementById('zoom-in').addEventListener('click', () => map.zoomIn());
+document.getElementById('zoom-out').addEventListener('click', () => map.zoomOut());
+
+// ── PANEL COLLAPSE ───────────────────────────────────────────────────────────
+const panel = document.getElementById('panel');
+let collapsed = false;
+document.getElementById('panel-handle').addEventListener('click', () => {
+  collapsed = !collapsed;
+  panel.classList.toggle('collapsed', collapsed);
+  // update geolocate + zoom btn positions
+  document.getElementById('geolocate').style.bottom = collapsed ? '70px' : '200px';
+  document.getElementById('zoom-btns').style.bottom = collapsed ? '130px' : '260px';
+});
+
+</script>
+</body>
+</html>
