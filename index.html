@@ -106,7 +106,7 @@
 
     #geolocate {
       position: absolute;
-      bottom: calc(var(--panel-h) + 52px);
+      bottom: calc(var(--panel-h) + 88px);
       right: 12px;
       width: 42px; height: 42px;
       background: var(--greige-0);
@@ -132,7 +132,7 @@
 
     #zoom-btns {
       position: absolute;
-      bottom: calc(var(--panel-h) + 104px);
+      bottom: calc(var(--panel-h) + 140px);
       right: 12px;
       display: flex;
       flex-direction: column;
@@ -140,11 +140,34 @@
       transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    /* Bouton maison : juste sous la géolocalisation, même style hardware */
+    #home-btn {
+      position: absolute;
+      bottom: calc(var(--panel-h) + 40px);
+      right: 12px;
+      width: 42px; height: 42px;
+      background: var(--greige-0);
+      border: 1px solid var(--greige-2);
+      border-radius: var(--radius-l);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.6) inset,
+        0 -1px 0 rgba(0,0,0,0.05) inset,
+        0 4px 10px rgba(0,0,0,0.10);
+      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s;
+    }
+    #home-btn:active { transform: scale(0.94); }
+
     /* Panneau baissé : les boutons descendent avec lui et se posent juste
        au-dessus des intercalaires (bande de 40px restée visible). */
     body.panel-collapsed #scale     { bottom: calc(40px + 12px); }
-    body.panel-collapsed #geolocate { bottom: calc(40px + 52px); }
-    body.panel-collapsed #zoom-btns { bottom: calc(40px + 104px); }
+    body.panel-collapsed #home-btn  { bottom: calc(40px + 40px); }
+    body.panel-collapsed #geolocate { bottom: calc(40px + 88px); }
+    body.panel-collapsed #zoom-btns { bottom: calc(40px + 140px); }
     /* Mêmes principes 3D que les toggles hardware */
     .zoom-btn {
       width: 42px; height: 36px;
@@ -399,22 +422,28 @@
         0 2px 4px rgba(0,0,0,0.12);
       transition: all 0.15s;
     }
-    /* Pastille bombée : dôme convexe, lumière en haut-gauche, ombre portée */
+    /* Cylindre extrudé sur le socle carré, avec chanfrein (collerette) entre
+       les deux. Dessus plat (pas une sphère), relief par ombre portée. */
     .checkbox::after {
       content: '';
-      width: 11px; height: 11px;
+      width: 12px; height: 12px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #ffffff 0%, var(--greige-2) 50%, var(--greige-3) 100%);
+      background: linear-gradient(180deg, #ffffff 0%, var(--greige-1) 22%, var(--greige-2) 100%);
       box-shadow:
-        0 1px 1.5px rgba(0,0,0,0.35),
-        0 0 0 0.5px rgba(0,0,0,0.08);
+        0 0 0 1.5px var(--greige-1),          /* chanfrein : collerette socle↔cylindre */
+        inset 0 -1px 1px rgba(0,0,0,0.12),
+        0 1px 0 rgba(255,255,255,0.7),
+        0 2.5px 3px rgba(0,0,0,0.30);
       transition: background 0.15s, box-shadow 0.15s;
     }
     .row.active .checkbox { border-color: var(--greige-3); }
     .row.active .checkbox::after {
-      background: radial-gradient(circle at 35% 30%, #f0a877 0%, var(--orange) 50%, var(--orange-2) 100%);
+      background: linear-gradient(180deg, #f6c09a 0%, var(--orange) 24%, var(--orange-2) 100%);
       box-shadow:
-        0 1px 2px rgba(0,0,0,0.4),
+        0 0 0 1.5px var(--greige-1),
+        inset 0 -1px 1px rgba(0,0,0,0.18),
+        0 1px 0 rgba(255,255,255,0.35),
+        0 2.5px 4px rgba(0,0,0,0.35),
         0 0 5px var(--orange-glow);
     }
     .row:active .checkbox { transform: scale(0.95); }
@@ -580,6 +609,14 @@
     <circle cx="12" cy="12" r="3"/>
     <circle cx="12" cy="12" r="8" stroke-dasharray="2 2.5"/>
     <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+  </svg>
+</button>
+
+<button id="home-btn" title="Maison">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3d3bd6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
   </svg>
 </button>
 
@@ -858,9 +895,10 @@ async function applyMonuments(gen) {
     const gj = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource('monuments-src')) return;
     map.addSource('monuments-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'monuments-pts', type: 'circle', source: 'monuments-src',
-      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 7],
-        'circle-color': '#8b5a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+    map.addLayer({ id: 'monuments-pts', type: 'symbol', source: 'monuments-src',
+      layout: { 'icon-image': 'poi-monuments',
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.42, 14, 0.72, 17, 0.95],
+        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
     if (!boundEvents.has('monuments')) {
       boundEvents.add('monuments');
       map.on('click', 'monuments-pts', onMonumentClick);
@@ -897,9 +935,10 @@ async function applyBaignade(gen) {
     const gj = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource('baignade-src')) return;
     map.addSource('baignade-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'baignade-pts', type: 'circle', source: 'baignade-src',
-      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 4, 14, 9],
-        'circle-color': '#4a7ba3', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+    map.addLayer({ id: 'baignade-pts', type: 'symbol', source: 'baignade-src',
+      layout: { 'icon-image': 'poi-baignade',
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.45, 14, 0.75, 17, 1],
+        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
   } catch(e) { console.warn('Baignade fetch failed', e); }
 }
 
@@ -910,9 +949,10 @@ async function applyViewpoints(gen) {
     const gj = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource('viewpoints-src')) return;
     map.addSource('viewpoints-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'viewpoints-pts', type: 'circle', source: 'viewpoints-src',
-      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 7],
-        'circle-color': '#8b7a4a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+    map.addLayer({ id: 'viewpoints-pts', type: 'symbol', source: 'viewpoints-src',
+      layout: { 'icon-image': 'poi-viewpoints',
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.42, 14, 0.72, 17, 0.95],
+        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
     if (!boundEvents.has('viewpoints')) {
       boundEvents.add('viewpoints');
       map.on('click', 'viewpoints-pts', e => {
@@ -950,9 +990,10 @@ async function applyPOI(key, amenityRegex, color, gen) {
     const gj = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource(`${key}-src`)) return;
     map.addSource(`${key}-src`, { type: 'geojson', data: gj });
-    map.addLayer({ id: `${key}-pts`, type: 'circle', source: `${key}-src`,
-      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 3, 15, 7],
-        'circle-color': color, 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1 } });
+    map.addLayer({ id: `${key}-pts`, type: 'symbol', source: `${key}-src`,
+      layout: { 'icon-image': `poi-${key}`,
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.45, 15, 0.8, 17, 1],
+        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
   } catch(e) { console.warn(`POI ${key} fetch failed`, e); }
 }
 
@@ -1076,6 +1117,23 @@ function iconSvg(key) {
   const p = ICON_PATHS[key];
   if (!p) return '';
   return `<svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="${ICON_COLORS[key] || '#1a1a1a'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+}
+
+// Pastilles-icônes des POI sur la carte : disque coloré + icône blanche.
+// Enregistrées une fois dans la carte, réutilisées par les couches symbol.
+const POI_ICON_KEYS = ['monuments', 'baignade', 'viewpoints', 'restaurants', 'cafes', 'glaciers', 'boulangeries'];
+function loadPoiIcons() {
+  POI_ICON_KEYS.forEach(key => {
+    if (map.hasImage('poi-' + key)) return;
+    const color = ICON_COLORS[key] || '#1a1a1a';
+    const svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">' +
+        '<g fill="none" stroke="' + color + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 2) scale(1.667)">' + ICON_PATHS[key] + '</g>' +
+      '</svg>';
+    const img = new Image(44, 44);
+    img.onload = () => { if (!map.hasImage('poi-' + key)) map.addImage('poi-' + key, img, { pixelRatio: 2 }); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
 }
 
 function renderPanel() {
@@ -1223,6 +1281,22 @@ geoBtn.addEventListener('click', () => {
 document.getElementById('zoom-in').addEventListener('click', () => map.zoomIn());
 document.getElementById('zoom-out').addEventListener('click', () => map.zoomOut());
 
+// ── MAISON ──────────────────────────────────────────────────────────────────
+const HOME = [5.0185106, 44.7316719]; // 16 Rue des Frères Gamon, Crest
+const homeEl = document.createElement('div');
+homeEl.style.cssText = 'width:30px;height:30px;cursor:pointer';
+homeEl.innerHTML =
+  '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3d3bd6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M5 12l-2 0l9 -9l9 9l-2 0"/>' +
+    '<path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/>' +
+    '<path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/>' +
+  '</svg>';
+homeEl.addEventListener('click', () => map.flyTo({ center: HOME, zoom: 15, duration: 1200 }));
+new maplibregl.Marker({ element: homeEl, anchor: 'center' }).setLngLat(HOME).addTo(map);
+
+document.getElementById('home-btn').addEventListener('click',
+  () => map.flyTo({ center: HOME, zoom: 15, duration: 1200 }));
+
 const scaleVal = document.getElementById('scale-val');
 function updateScale() {
   const zoom = map.getZoom();
@@ -1231,7 +1305,7 @@ function updateScale() {
   scaleVal.textContent = scales[rounded] || 'Z' + zoom.toFixed(1);
 }
 map.on('zoom', updateScale);
-map.on('load', () => { updateScale(); rerender(); });
+map.on('load', () => { loadPoiIcons(); updateScale(); rerender(); });
 
 // Init
 renderPanel();
