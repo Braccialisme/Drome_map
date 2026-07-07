@@ -139,6 +139,12 @@
       z-index: 10;
       transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
+    /* Panneau baissé : les boutons descendent avec lui et se posent juste
+       au-dessus des intercalaires (bande de 40px restée visible). */
+    body.panel-collapsed #scale     { bottom: calc(40px + 12px); }
+    body.panel-collapsed #geolocate { bottom: calc(40px + 52px); }
+    body.panel-collapsed #zoom-btns { bottom: calc(40px + 104px); }
     /* Mêmes principes 3D que les toggles hardware */
     .zoom-btn {
       width: 42px; height: 36px;
@@ -236,12 +242,13 @@
       position: relative;
     }
 
+    /* Chaque intercalaire = une feuille : corps + petit débord (sa tranche),
+       avec surépaisseur 3D façon pièce plastique injectée. */
     .tab {
       position: relative;
       flex: 1;
       max-height: 92px;
       background: var(--greige-1);
-      border-left: 1px solid var(--greige-2);
       border-bottom: 1px solid var(--greige-2);
       cursor: pointer;
       display: flex;
@@ -256,28 +263,49 @@
       text-transform: uppercase;
       color: var(--dust);
       transition: all 0.2s;
+      /* biseau : lumière en haut, ombre en bas = relief bombé */
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        inset 0 -1px 0 rgba(0,0,0,0.06);
     }
     .tab:last-child { border-bottom: none; }
 
-    /* Intercalaire actif = languette de la fiche tirée vers l'avant */
-    .tab.active {
-      background: var(--orange);
-      border-left-color: var(--orange-2);
-      color: var(--greige-0);
-      z-index: 2;
-    }
-    .tab.active::before {
+    /* Débord = tranche de la feuille qui dépasse sur le contenu (surépaisseur) */
+    .tab::before {
       content: '';
       position: absolute;
-      left: -8px;
+      left: -6px;
       top: 0; bottom: 0;
-      width: 8px;
-      background: var(--orange);
+      width: 6px;
+      background: var(--greige-1);
       border-radius: var(--radius) 0 0 var(--radius);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        -2px 0 4px rgba(0,0,0,0.10);
+    }
+
+    /* Feuille active = orange, débord plus marqué, relief accentué */
+    .tab.active {
+      background: var(--orange);
+      color: var(--greige-0);
+      z-index: 2;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        inset 0 -1px 0 rgba(0,0,0,0.12),
+        -3px 0 8px rgba(0,0,0,0.14);
+    }
+    .tab.active::before {
+      left: -9px;
+      width: 9px;
+      background: var(--orange);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        -3px 0 6px rgba(0,0,0,0.16);
     }
 
     .tab:not(.active):hover { background: var(--greige-2); }
-    .tab:active { filter: brightness(0.95); }
+    .tab:not(.active):hover::before { background: var(--greige-2); }
+    .tab:active { filter: brightness(0.96); }
 
     /* ── SEARCH BAR (dans le module fond ou global) ── */
     /* Barre de recherche compacte, coins prononcés */
@@ -371,21 +399,31 @@
         0 2px 4px rgba(0,0,0,0.12);
       transition: all 0.15s;
     }
+    /* Pastille bombée : dôme convexe, lumière en haut-gauche, ombre portée */
     .checkbox::after {
       content: '';
-      width: 10px; height: 10px;
+      width: 11px; height: 11px;
       border-radius: 50%;
-      background: var(--greige-3);
-      box-shadow: 0 1px 1px rgba(0,0,0,0.25) inset;
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, var(--greige-2) 50%, var(--greige-3) 100%);
+      box-shadow:
+        0 1px 1.5px rgba(0,0,0,0.35),
+        0 0 0 0.5px rgba(0,0,0,0.08);
       transition: background 0.15s, box-shadow 0.15s;
     }
     .row.active .checkbox { border-color: var(--greige-3); }
     .row.active .checkbox::after {
-      background: var(--orange);
-      box-shadow: 0 0 4px var(--orange-glow);
+      background: radial-gradient(circle at 35% 30%, #f0a877 0%, var(--orange) 50%, var(--orange-2) 100%);
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.4),
+        0 0 5px var(--orange-glow);
     }
     .row:active .checkbox { transform: scale(0.95); }
 
+    .row-icon {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      opacity: 0.92;
+    }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -586,6 +624,7 @@ const state = {
     sentiers: true,
     rivieres: false,
     baignade: false,
+    viewpoints: false,
     monuments: false,
     villages: false,
     restaurants: false,
@@ -658,24 +697,32 @@ function getBasemapConfig(key) {
 }
 
 // ── Rerender complet ────────────────────────────────────────────────────────
+// Jeton de génération : un fetch async lancé par un rerender périmé ne doit
+// PAS rajouter ses couches sur un rendu plus récent (évite la carte blanche).
+let renderGen = 0;
+const boundEvents = new Set();
+
 function rerender() {
+  const gen = ++renderGen;
+  map.getCanvas().style.cursor = ''; // évite le curseur "main" bloqué si mouseleave n'a pas fait feu
+
   const allIds = [
     'base-sat', 'base-lidar-sat', 'base-ign', 'base-lidar-ign', 'base-lidar-solo',
     'base-aerienne', 'base-lidar-aer', 'base-em',
     'contours-int', 'contours-10', 'contours-50', 'sentiers',
-    'villages-pts', 'villages-lbl', 'monuments-pts', 'baignade-pts', 'rivieres-lines',
+    'villages-pts', 'villages-lbl', 'monuments-pts', 'baignade-pts', 'rivieres-lines', 'viewpoints-pts',
     'restaurants-pts', 'cafes-pts', 'glaciers-pts', 'boulangeries-pts'
   ];
-  allIds.forEach(id => { if (map.getLayer(id)) map.removeLayer(id); });
+  allIds.forEach(id => { try { if (map.getLayer(id)) map.removeLayer(id); } catch(e){} });
 
   const allSrcs = [
     'contours-src', 'sentiers-src',
     'base-sat', 'base-lidar-sat', 'base-ign', 'base-lidar-ign', 'base-lidar-solo',
     'base-aerienne', 'base-lidar-aer', 'base-em',
-    'villages-src', 'monuments-src', 'baignade-src', 'rivieres-src',
+    'villages-src', 'monuments-src', 'baignade-src', 'rivieres-src', 'viewpoints-src',
     'restaurants-src', 'cafes-src', 'glaciers-src', 'boulangeries-src'
   ];
-  allSrcs.forEach(id => { if (map.getSource(id)) map.removeSource(id); });
+  allSrcs.forEach(id => { try { if (map.getSource(id)) map.removeSource(id); } catch(e){} });
 
   const config = getBasemapConfig(state.basemap);
   config.layers.forEach(l => {
@@ -683,17 +730,21 @@ function rerender() {
     map.addLayer({ id: l.id, type: 'raster', source: l.id, paint: { 'raster-opacity': l.opacity } });
   });
 
-  if (state.layers.rivieres) applyRivieres();
+  if (state.layers.rivieres) applyRivieres(gen);
   if (state.layers.contours) applyContours();
-  if (state.layers.villages) applyVillages();
-  if (state.layers.monuments) applyMonuments();
-  if (state.layers.baignade) applyBaignade();
-  if (state.layers.restaurants) applyPOI('restaurants', 'restaurant', '#cc6a3a');
-  if (state.layers.cafes) applyPOI('cafes', 'cafe|bar|pub', '#8b5a3a');
-  if (state.layers.glaciers) applyPOI('glaciers', 'ice_cream', '#4a7ba3');
-  if (state.layers.boulangeries) applyPOI('boulangeries', 'bakery', '#a8834a');
+  if (state.layers.villages) applyVillages(gen);
+  if (state.layers.monuments) applyMonuments(gen);
+  if (state.layers.baignade) applyBaignade(gen);
+  if (state.layers.viewpoints) applyViewpoints(gen);
+  if (state.layers.restaurants) applyPOI('restaurants', 'restaurant', '#cc6a3a', gen);
+  if (state.layers.cafes) applyPOI('cafes', 'cafe|bar|pub', '#8b5a3a', gen);
+  if (state.layers.glaciers) applyPOI('glaciers', 'ice_cream', '#4a7ba3', gen);
+  if (state.layers.boulangeries) applyPOI('boulangeries', 'bakery', '#a8834a', gen);
   if (state.layers.sentiers) applySentiers();
 }
+
+// Garde : le rendu a-t-il changé pendant le fetch ? (async périmé)
+function stale(gen) { return gen !== renderGen; }
 
 function applyContours() {
   // Courbes de niveau NATIONALES via tuiles vectorielles PLAN.IGN
@@ -734,20 +785,37 @@ const BBOX = { south: 44.55, west: 4.85, north: 45.05, east: 5.45 };
 const CACHE_TTL = 1000 * 60 * 60 * 24 * 30;
 const bboxStr = `${BBOX.south},${BBOX.west},${BBOX.north},${BBOX.east}`;
 
+// Cache mémoire : garantit UN seul fetch par jeu de données pour la session,
+// même si localStorage sature. Évite la tempête de refetch → rate-limit 429.
+const memCache = {};
+const inflight = {};
+
 async function overpassFetch(cacheKey, query) {
+  if (memCache[cacheKey]) return memCache[cacheKey];
+  if (inflight[cacheKey]) return inflight[cacheKey]; // déduplique les appels concurrents
+
   const cached = localStorage.getItem(cacheKey);
   if (cached) {
     try {
       const { ts, data } = JSON.parse(cached);
-      if (Date.now() - ts < CACHE_TTL) return data;
+      if (Date.now() - ts < CACHE_TTL) { memCache[cacheKey] = data; return data; }
     } catch(e) {}
   }
+
   const url = 'https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query);
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Overpass ' + res.status);
-  const data = await res.json();
-  try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch(e) {}
-  return data;
+  inflight[cacheKey] = (async () => {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Overpass ' + res.status);
+      const data = await res.json();
+      memCache[cacheKey] = data;
+      try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch(e) {}
+      return data;
+    } finally {
+      delete inflight[cacheKey];
+    }
+  })();
+  return inflight[cacheKey];
 }
 
 function osmToGeoJSON(osm, type) {
@@ -764,12 +832,12 @@ function osmToGeoJSON(osm, type) {
   return { type: 'FeatureCollection', features };
 }
 
-async function applyVillages() {
+async function applyVillages(gen) {
   const q = `[out:json][timeout:25];(node["place"~"^(village|town|hamlet)$"](${bboxStr}););out;`;
   try {
     const osm = await overpassFetch('drm-villages-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (map.getSource('villages-src')) return;
+    if (stale(gen) || map.getSource('villages-src')) return;
     map.addSource('villages-src', { type: 'geojson', data: gj });
     map.addLayer({ id: 'villages-pts', type: 'circle', source: 'villages-src',
       paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 2, 14, 5],
@@ -783,19 +851,22 @@ async function applyVillages() {
   } catch(e) { console.warn('Villages fetch failed', e); }
 }
 
-async function applyMonuments() {
+async function applyMonuments(gen) {
   const q = `[out:json][timeout:25];(node["historic"](${bboxStr});way["historic"](${bboxStr}););out center;`;
   try {
     const osm = await overpassFetch('drm-monuments-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (map.getSource('monuments-src')) return;
+    if (stale(gen) || map.getSource('monuments-src')) return;
     map.addSource('monuments-src', { type: 'geojson', data: gj });
     map.addLayer({ id: 'monuments-pts', type: 'circle', source: 'monuments-src',
       paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 7],
         'circle-color': '#8b5a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
-    map.on('click', 'monuments-pts', onMonumentClick);
-    map.on('mouseenter', 'monuments-pts', () => map.getCanvas().style.cursor = 'pointer');
-    map.on('mouseleave', 'monuments-pts', () => map.getCanvas().style.cursor = '');
+    if (!boundEvents.has('monuments')) {
+      boundEvents.add('monuments');
+      map.on('click', 'monuments-pts', onMonumentClick);
+      map.on('mouseenter', 'monuments-pts', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'monuments-pts', () => map.getCanvas().style.cursor = '');
+    }
   } catch(e) { console.warn('Monuments fetch failed', e); }
 }
 
@@ -819,12 +890,12 @@ function onMonumentClick(e) {
     .addTo(map);
 }
 
-async function applyBaignade() {
+async function applyBaignade(gen) {
   const q = `[out:json][timeout:25];(node["leisure"~"^(swimming_area|swimming_pool)$"](${bboxStr});node["natural"="beach"](${bboxStr}););out;`;
   try {
     const osm = await overpassFetch('drm-baignade-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (map.getSource('baignade-src')) return;
+    if (stale(gen) || map.getSource('baignade-src')) return;
     map.addSource('baignade-src', { type: 'geojson', data: gj });
     map.addLayer({ id: 'baignade-pts', type: 'circle', source: 'baignade-src',
       paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 4, 14, 9],
@@ -832,26 +903,52 @@ async function applyBaignade() {
   } catch(e) { console.warn('Baignade fetch failed', e); }
 }
 
-async function applyRivieres() {
+async function applyViewpoints(gen) {
+  const q = `[out:json][timeout:25];(node["tourism"="viewpoint"](${bboxStr});way["tourism"="viewpoint"](${bboxStr}););out center;`;
+  try {
+    const osm = await overpassFetch('drm-viewpoints-v3', q);
+    const gj = osmToGeoJSON(osm, 'point');
+    if (stale(gen) || map.getSource('viewpoints-src')) return;
+    map.addSource('viewpoints-src', { type: 'geojson', data: gj });
+    map.addLayer({ id: 'viewpoints-pts', type: 'circle', source: 'viewpoints-src',
+      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 7],
+        'circle-color': '#8b7a4a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+    if (!boundEvents.has('viewpoints')) {
+      boundEvents.add('viewpoints');
+      map.on('click', 'viewpoints-pts', e => {
+        const p = e.features[0].properties;
+        const name = p.name || 'Point de vue';
+        new maplibregl.Popup({ closeButton: true, offset: 12 })
+          .setLngLat(e.lngLat)
+          .setHTML(`<div class="p-title">${name}</div><div class="p-kind">Point de vue</div>`)
+          .addTo(map);
+      });
+      map.on('mouseenter', 'viewpoints-pts', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'viewpoints-pts', () => map.getCanvas().style.cursor = '');
+    }
+  } catch(e) { console.warn('Viewpoints fetch failed', e); }
+}
+
+async function applyRivieres(gen) {
   const q = `[out:json][timeout:25];(way["waterway"~"^(river|stream)$"](${bboxStr}););out geom;`;
   try {
     const osm = await overpassFetch('drm-rivieres-v3', q);
     const gj = osmToGeoJSON(osm, 'line');
-    if (map.getSource('rivieres-src')) return;
+    if (stale(gen) || map.getSource('rivieres-src')) return;
     map.addSource('rivieres-src', { type: 'geojson', data: gj });
     map.addLayer({ id: 'rivieres-lines', type: 'line', source: 'rivieres-src',
-      paint: { 'line-color': '#4a7ba3',
-        'line-width': ['interpolate', ['linear'], ['zoom'], 9, 0.6, 14, 2.4],
-        'line-opacity': 0.85 } });
+      paint: { 'line-color': '#3d6f9a',
+        'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1, 12, 2, 14, 3.2],
+        'line-opacity': ['interpolate', ['linear'], ['zoom'], 9, 0.7, 13, 0.95] } });
   } catch(e) { console.warn('Rivieres fetch failed', e); }
 }
 
-async function applyPOI(key, amenityRegex, color) {
+async function applyPOI(key, amenityRegex, color, gen) {
   const q = `[out:json][timeout:25];(node["amenity"~"^(${amenityRegex})$"](${bboxStr});node["shop"~"^(${amenityRegex})$"](${bboxStr}););out;`;
   try {
     const osm = await overpassFetch(`drm-poi-${key}-v3`, q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (map.getSource(`${key}-src`)) return;
+    if (stale(gen) || map.getSource(`${key}-src`)) return;
     map.addSource(`${key}-src`, { type: 'geojson', data: gj });
     map.addLayer({ id: `${key}-pts`, type: 'circle', source: `${key}-src`,
       paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 3, 15, 7],
@@ -921,6 +1018,10 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">Points de baignade</div>
     </div>
+    <div class="row ${state.layers.viewpoints ? 'active' : ''}" data-layer="viewpoints">
+      <div class="checkbox"></div>
+      <div class="row-label">Points de vue</div>
+    </div>
   `,
   patri: () => `
     <div class="row ${state.layers.monuments ? 'active' : ''}" data-layer="monuments">
@@ -952,8 +1053,38 @@ const PANELS = {
   `
 };
 
+// ── ICÔNES (Tabler, MIT) pour les toggles ponctuels ─────────────────────────
+const ICON_PATHS = {
+  contours:     '<path d="M3 20h18l-6.921 -14.612a2.3 2.3 0 0 0 -4.158 0l-6.921 14.612" /><path d="M7.5 11l2 2.5l2.5 -2.5l2 3l2.5 -2" />',
+  sentiers:     '<path d="M12 4a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 21l3 -4" /><path d="M16 21l-2 -4l-3 -3l1 -6" /><path d="M6 12l2 -3l4 -1l3 3l3 1" />',
+  rivieres:     '<path d="M3 7c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 17c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 12c3 -2 6 -2 9 0s6 2 9 0" />',
+  baignade:     '<path d="M15 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M6 11l4 -2l3.5 3l-1.5 2" /><path d="M3 16.75a2.4 2.4 0 0 0 1 .25a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 1 -.25" />',
+  viewpoints:   '<path d="M4 16a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M14 16a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M16.346 9.17l-.729 -1.261c-.16 -.248 -1.056 -.203 -1.117 .091l-.177 1.38" /><path d="M19.761 14.813l-2.84 -5.133c-.189 -.31 -.592 -.68 -1.421 -.68c-.828 0 -1.5 .448 -1.5 1v6" /><path d="M7.654 9.17l.729 -1.261c.16 -.249 1.056 -.203 1.117 .091l.177 1.38" /><path d="M4.239 14.813l2.84 -5.133c.189 -.31 .592 -.68 1.421 -.68c.828 0 1.5 .448 1.5 1v6" /><path d="M10 12h4v2h-4l0 -2" />',
+  monuments:    '<path d="M8 18l2 -13l2 -2l2 2l2 13" /><path d="M5 21v-3h14v3" /><path d="M3 21l18 0" />',
+  villages:     '<path d="M8 9l5 5v7h-5v-4m0 4h-5v-7l5 -5m1 1v-6a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v17h-8" /><path d="M13 7l0 .01" /><path d="M17 7l0 .01" /><path d="M17 11l0 .01" /><path d="M17 15l0 .01" />',
+  restaurants:  '<path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" />',
+  cafes:        '<path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1" /><path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" /><path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" /><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5" /><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />',
+  glaciers:     '<path d="M12 21.5v-4.5" /><path d="M8 17h8v-10a4 4 0 1 0 -8 0v10" /><path d="M8 10.5l8 -3.5" /><path d="M8 14.5l8 -3.5" />',
+  boulangeries: '<path d="M18 4a3 3 0 0 1 2 5.235v8.765a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-8.764a3 3 0 0 1 1.824 -5.231h12.176v-.005" />'
+};
+const ICON_COLORS = {
+  contours: '#6b6355', sentiers: '#6b6355', rivieres: '#3d6f9a', baignade: '#4a7ba3',
+  viewpoints: '#8b7a4a', monuments: '#8b5a3a', villages: '#1a1a1a',
+  restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a'
+};
+function iconSvg(key) {
+  const p = ICON_PATHS[key];
+  if (!p) return '';
+  return `<svg class="row-icon" viewBox="0 0 24 24" fill="none" stroke="${ICON_COLORS[key] || '#1a1a1a'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+}
+
 function renderPanel() {
   content.innerHTML = PANELS[state.activeTab]();
+  // Injecte l'icône après la case à cocher de chaque toggle de couche
+  content.querySelectorAll('.row[data-layer]').forEach(row => {
+    const svg = iconSvg(row.dataset.layer);
+    if (svg) row.querySelector('.checkbox').insertAdjacentHTML('afterend', svg);
+  });
   attachPanelEvents();
 }
 
@@ -1042,6 +1173,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     // Auto-open panel if collapsed
     if (panelWrap.classList.contains('collapsed')) {
       panelWrap.classList.remove('collapsed');
+      document.body.classList.remove('panel-collapsed');
       collapsed = false;
     }
   });
@@ -1053,6 +1185,7 @@ let collapsed = false;
 document.getElementById('handle').addEventListener('click', () => {
   collapsed = !collapsed;
   panelWrap.classList.toggle('collapsed', collapsed);
+  document.body.classList.toggle('panel-collapsed', collapsed);
 });
 
 // ── Géolocalisation ─────────────────────────────────────────────────────────

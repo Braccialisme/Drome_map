@@ -3,7 +3,7 @@
 // navigation, réutilisables hors-ligne pendant 30 jours.
 // Actif uniquement en https (GitHub Pages) ou localhost — pas en file://.
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = 'drome-shell-' + VERSION;
 const RUNTIME = 'drome-runtime-' + VERSION;
 const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 jours
@@ -44,15 +44,34 @@ self.addEventListener('fetch', event => {
   const url = new URL(req.url);
 
   const isRuntime = RUNTIME_HOSTS.includes(url.hostname) || url.pathname.includes('/fonts/VG5000/');
-  const isShell = url.origin === self.location.origin || url.hostname === 'unpkg.com';
+  const isSameOrigin = url.origin === self.location.origin;
+  // Le document HTML : network-first (frais si online, cache si offline).
+  // Sinon on servirait éternellement un index.html périmé.
+  const isDocument = req.mode === 'navigate' ||
+    (isSameOrigin && (url.pathname === '/' || url.pathname.endsWith('.html') || url.pathname.endsWith('/')));
 
   if (isRuntime) {
     event.respondWith(runtimeCache(req));
-  } else if (isShell) {
+  } else if (isDocument) {
+    event.respondWith(networkFirst(req, SHELL));
+  } else if (isSameOrigin || url.hostname === 'unpkg.com') {
     event.respondWith(cacheFirst(req, SHELL));
   }
   // Nominatim / Overpass : laissés au réseau (POI déjà en cache localStorage)
 });
+
+// Network-first : réseau si dispo (donc toujours à jour), cache en secours offline
+async function networkFirst(req, cacheName) {
+  const cache = await caches.open(cacheName);
+  try {
+    const net = await fetch(req);
+    if (net.ok) cache.put(req, net.clone());
+    return net;
+  } catch (e) {
+    const hit = await cache.match(req) || await cache.match('index.html') || await cache.match('./');
+    return hit || Response.error();
+  }
+}
 
 // Cache-first simple (app shell, glyphs) — sans expiration
 async function cacheFirst(req, cacheName) {
