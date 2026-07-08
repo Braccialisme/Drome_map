@@ -163,27 +163,27 @@
     }
     #home-btn:active { transform: scale(0.94); }
 
-    /* Boussole / rose des vents : coin haut-droit, revient au nord au clic */
+    /* Boussole / rose des vents : coin haut-droit, sans bulle — juste la rose */
     #compass {
       position: absolute;
       top: 12px;
       right: 12px;
       width: 42px; height: 42px;
-      background: var(--greige-0);
-      border: 1px solid var(--greige-2);
-      border-radius: 50%;
+      background: none;
+      border: none;
+      padding: 0;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.6) inset,
-        0 -1px 0 rgba(0,0,0,0.05) inset,
-        0 4px 10px rgba(0,0,0,0.10);
     }
     #compass:active { transform: scale(0.94); }
-    #compass-rose { display: block; transition: transform 0.2s linear; }
+    #compass-rose {
+      display: block;
+      transition: transform 0.2s linear;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+    }
 
     /* Panneau baissé : les boutons descendent avec lui et se posent juste
        au-dessus des intercalaires (bande de 40px restée visible). */
@@ -735,7 +735,7 @@
 </button>
 
 <button id="compass" title="Revenir au nord">
-  <svg id="compass-rose" width="26" height="26" viewBox="0 0 24 24">
+  <svg id="compass-rose" width="34" height="34" viewBox="0 0 24 24">
     <polygon points="12,2 13.5,12 10.5,12" fill="#cc6a3a"/>
     <polygon points="12,22 10.5,12 13.5,12" fill="#1a1a1a"/>
     <polygon points="22,12 12,10.5 12,13.5" fill="#1a1a1a"/>
