@@ -223,11 +223,14 @@ plusieurs raffinements sont demandés :
   jaune→rouge), sliders opacité / pente min / pente max. À améliorer : split-view
   (swipe compare), palette, perfs (256px + decode par tuile). NB : l'endpoint
   raster IGN `ELEVATION.SLOPES` renvoie 404/400 en WMTS PM → approche custom retenue.
-- **Itinéraires / randos** — V1 FAITE : import de traces GPX (onglet Exp.),
-  parse trk/rte/wpt → LineString rose + halo, fitBounds. À améliorer : profil
-  altimétrique, gestion multi-traces/suppression fine, éventuellement routing
-  (BRouter/GraphHopper) plus tard. Traces persistées en mémoire (var `gpxData`),
-  ré-ajoutées à chaque rerender.
+- **Itinéraires** — FAIT : (a) import GPX (trk/rte/wpt → tracé rose), (b)
+  **itinéraire A→B** par recherche de lieux (Nominatim) + routing **BRouter**
+  keyless, 3 profils : voiture `car-fast`, vélo `trekking`, à pied
+  `hiking-mountain`. Trace route (orange) + vol d'oiseau (pointillé) + distance/temps.
+  Onglet Exp. Route = **en ligne** (BRouter). À améliorer : profil altimétrique,
+  étapes multiples, waypoints déplaçables.
+- **Lignes de transport** (idée future) — afficher les lignes de bus/car
+  régionales (data ? GTFS régional / OSM `route=bus`). À creuser.
 
 **Plus tard :**
 - Mode nuit (palette charbon + crème)

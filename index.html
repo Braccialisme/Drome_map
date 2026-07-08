@@ -532,6 +532,22 @@
     .gpx-btn:active { transform: scale(0.98); }
     .gpx-clear { color: var(--orange-2); }
     .gpx-active { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
+
+    .route-block { border-top: 1px solid var(--greige-2); margin-top: 8px; padding-top: 10px; }
+    .route-field { margin-bottom: 6px; }
+    .route-field input {
+      width: 100%; box-sizing: border-box;
+      background: var(--greige-0); border: 1px solid var(--greige-2); border-radius: var(--radius);
+      padding: 7px 9px; font-family: var(--font-ui); font-size: 13px; color: var(--ink); outline: none;
+    }
+    .route-res { margin-top: 2px; }
+    .route-modes { display: flex; gap: 4px; margin: 6px 0; }
+    .route-modes button {
+      flex: 1; padding: 6px 4px; cursor: pointer;
+      background: var(--greige-0); border: 1px solid var(--greige-2); border-radius: var(--radius);
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dust);
+    }
+    .route-modes button.on { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -929,7 +945,7 @@ function rerender() {
   if (state.layers.boulangeries) applyPOI('boulangeries', 'bakery', '#a8834a', gen);
   if (state.layers.sentiers) applySentiers();
   if (gpxData) applyGpx();
-  if (measurePts.length) applyMeasure();
+  if (routePts().length) applyMeasure();
 
   // 3D : reliefe la carte via le MNT LiDAR HD (setTerrain)
   if (state.layers.threeD && ensureDemSource()) {
@@ -1491,11 +1507,12 @@ function applyGpx() {
 }
 function clearGpx() { gpxData = null; rerender(); }
 
-// ── MESURE / ITINÉRAIRE A → B ───────────────────────────────────────────────
-// Vol d'oiseau (haversine, instantané) + route voiture réelle (OSRM, en ligne).
-let measureMode = false;
-let measurePts = [];
-let measureRoute = null; // { distance, duration, coords }
+// ── ITINÉRAIRE A → B (recherche de lieux + BRouter, sans clé) ────────────────
+// Profils BRouter keyless : voiture (car-fast), vélo (trekking), à pied
+// (hiking-mountain). Distance + temps réels + vol d'oiseau (haversine).
+let routeA = null, routeB = null, routeProfile = 'car-fast', measureRoute = null;
+const PROFILE_LABEL = { 'car-fast': 'Voiture', 'trekking': 'Vélo', 'hiking-mountain': 'À pied' };
+function routePts() { return [routeA, routeB].filter(Boolean); }
 function haversine(a, b) {
   const R = 6371000, r = Math.PI / 180;
   const dLat = (b[1] - a[1]) * r, dLon = (b[0] - a[0]) * r;
@@ -1503,62 +1520,84 @@ function haversine(a, b) {
   return 2 * R * Math.asin(Math.sqrt(s));
 }
 function fmtDist(m) { return m < 1000 ? Math.round(m) + ' m' : (m / 1000).toFixed(1) + ' km'; }
-function fmtDur(s) { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ''; }
+function fmtDur(s) { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); }
 
 function measureGeo() {
-  const feats = measurePts.map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p }, properties: {} }));
-  if (measurePts.length === 2) {
-    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measurePts }, properties: { kind: 'straight' } });
+  const feats = routePts().map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p }, properties: {} }));
+  if (routeA && routeB) {
+    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [routeA, routeB] }, properties: { kind: 'straight' } });
     if (measureRoute) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measureRoute.coords }, properties: { kind: 'route' } });
-    const vol = haversine(measurePts[0], measurePts[1]);
+    const vol = haversine(routeA, routeB);
     const label = measureRoute
-      ? `Voiture ${fmtDist(measureRoute.distance)} · ${fmtDur(measureRoute.duration)}\nVol d'oiseau ${fmtDist(vol)}`
-      : `Vol d'oiseau ${fmtDist(vol)}\n(route…)`;
-    const mid = [(measurePts[0][0] + measurePts[1][0]) / 2, (measurePts[0][1] + measurePts[1][1]) / 2];
+      ? `${PROFILE_LABEL[routeProfile]} ${fmtDist(measureRoute.distance)} · ${fmtDur(measureRoute.duration)}\nVol d'oiseau ${fmtDist(vol)}`
+      : `Vol d'oiseau ${fmtDist(vol)}\n(calcul…)`;
+    const mid = [(routeA[0] + routeB[0]) / 2, (routeA[1] + routeB[1]) / 2];
     feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: mid }, properties: { label } });
   }
   return { type: 'FeatureCollection', features: feats };
 }
 function refreshMeasure() { const s = map.getSource('measure-src'); if (s) s.setData(measureGeo()); }
 function applyMeasure() {
-  if (!measurePts.length) return;
+  if (!routePts().length) return;
   map.addSource('measure-src', { type: 'geojson', data: measureGeo() });
-  // route voiture (dessous, orange plein)
   map.addLayer({ id: 'measure-route', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'route'],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': '#cc6a3a', 'line-width': 4, 'line-opacity': 0.9 } });
-  // vol d'oiseau (dessus, pointillé ink)
   map.addLayer({ id: 'measure-straight', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'straight'],
-    paint: { 'line-color': '#1a1a1a', 'line-width': 1.5, 'line-dasharray': [2, 1.5], 'line-opacity': 0.75 } });
-  // points A/B (pas le point-label)
+    paint: { 'line-color': '#1a1a1a', 'line-width': 1.5, 'line-dasharray': [2, 1.5], 'line-opacity': 0.7 } });
   map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src', filter: ['!', ['has', 'label']],
     paint: { 'circle-radius': 6, 'circle-color': '#cc6a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 2 } });
-  // étiquette distances
   map.addLayer({ id: 'measure-lbl', type: 'symbol', source: 'measure-src', filter: ['has', 'label'],
     layout: { 'text-field': ['get', 'label'], 'text-font': ['VG5000'], 'text-size': 12, 'text-offset': [0, -1.2], 'text-anchor': 'bottom', 'text-allow-overlap': true },
     paint: { 'text-color': '#1a1a1a', 'text-halo-color': '#f2efe7', 'text-halo-width': 2 } });
 }
-async function fetchRoute(a, b) {
+async function fetchRoute(a, b, profile) {
   try {
-    const url = `https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson`;
+    const url = `https://brouter.de/brouter?lonlats=${a[0]},${a[1]}|${b[0]},${b[1]}&profile=${profile}&alternativeidx=0&format=geojson`;
     const r = await fetch(url);
     const d = await r.json();
-    if (d.routes && d.routes[0]) return { distance: d.routes[0].distance, duration: d.routes[0].duration, coords: d.routes[0].geometry.coordinates };
+    const f = d.features && d.features[0];
+    if (f) return { distance: +f.properties['track-length'], duration: +f.properties['total-time'], coords: f.geometry.coordinates };
   } catch (e) {}
   return null;
 }
-function onMeasureClick(e) {
-  if (!measureMode) return;
-  if (measurePts.length >= 2) { measurePts = []; measureRoute = null; }
-  measurePts.push([e.lngLat.lng, e.lngLat.lat]);
+function computeRoute() {
+  if (!(routeA && routeB)) return;
+  const a = routeA, b = routeB, pf = routeProfile;
+  measureRoute = null; refreshMeasure();
+  fetchRoute(a, b, pf).then(rt => {
+    if (routeA === a && routeB === b && routeProfile === pf) { measureRoute = rt; refreshMeasure(); }
+  });
+}
+function setRoutePoint(idx, lonlat) {
+  if (idx === 0) routeA = lonlat; else routeB = lonlat;
+  measureRoute = null;
   if (map.getSource('measure-src')) refreshMeasure(); else applyMeasure();
-  if (measurePts.length === 2) {
-    const [a, b] = measurePts;
-    fetchRoute(a, b).then(rt => {
-      // ignore si l'utilisateur a déjà relancé une mesure entre-temps
-      if (measurePts.length === 2 && measurePts[0] === a && measurePts[1] === b) { measureRoute = rt; refreshMeasure(); }
-    });
+  if (routeA && routeB) {
+    computeRoute();
+    map.fitBounds([routeA, routeB], { padding: 80, duration: 900 });
+  } else {
+    map.flyTo({ center: lonlat, zoom: Math.max(map.getZoom(), 12), duration: 800 });
   }
+}
+function clearRoute() { routeA = routeB = measureRoute = null; refreshMeasure(); renderPanel(); }
+
+// Recherche Nominatim pour remplir A ou B
+async function routeSearch(q, resEl, idx, input) {
+  if (q.trim().length < 2) { resEl.classList.remove('visible'); resEl.innerHTML = ''; return; }
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=5&viewbox=${BBOX.west},${BBOX.north},${BBOX.east},${BBOX.south}&bounded=0`;
+    const res = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
+    const data = await res.json();
+    if (!data.length) { resEl.innerHTML = '<div class="search-result" style="color:var(--dust)">Aucun résultat</div>'; resEl.classList.add('visible'); return; }
+    resEl.innerHTML = data.map(r => `<div class="search-result" data-lat="${r.lat}" data-lon="${r.lon}">${esc(r.display_name.split(',').slice(0, 2).join(','))}</div>`).join('');
+    resEl.classList.add('visible');
+    resEl.querySelectorAll('.search-result[data-lat]').forEach(el => el.addEventListener('click', () => {
+      input.value = el.textContent;
+      resEl.classList.remove('visible');
+      setRoutePoint(idx, [parseFloat(el.dataset.lon), parseFloat(el.dataset.lat)]);
+    }));
+  } catch (e) {}
 }
 
 // ── Noms des forêts (label au centre) ───────────────────────────────────────
@@ -1746,10 +1785,16 @@ const PANELS = {
       <input type="range" id="slope-max" min="10" max="80" value="${state.slopeMax}">
     </div>` : ''}
 
-    <div class="gpx-block">
-      <div class="row-sub" style="margin-bottom:6px;">Itinéraire A → B (voiture + vol d'oiseau)</div>
-      <button class="gpx-btn ${measureMode ? 'gpx-active' : ''}" id="measure-btn">${measureMode ? 'Clique A puis B sur la carte…' : 'Mesurer A → B'}</button>
-      ${measurePts.length ? `<button class="gpx-btn gpx-clear" id="measure-clear">Effacer la mesure</button>` : ''}
+    <div class="route-block">
+      <div class="row-sub" style="margin-bottom:6px;">Itinéraire A → B</div>
+      <div class="route-field"><input type="text" id="route-a" placeholder="Départ (A)" autocomplete="off"><div class="search-results route-res" id="route-a-res"></div></div>
+      <div class="route-field"><input type="text" id="route-b" placeholder="Arrivée (B)" autocomplete="off"><div class="search-results route-res" id="route-b-res"></div></div>
+      <div class="route-modes">
+        <button data-prof="car-fast" class="${routeProfile === 'car-fast' ? 'on' : ''}">Voiture</button>
+        <button data-prof="trekking" class="${routeProfile === 'trekking' ? 'on' : ''}">Vélo</button>
+        <button data-prof="hiking-mountain" class="${routeProfile === 'hiking-mountain' ? 'on' : ''}">À pied</button>
+      </div>
+      ${(routeA || routeB) ? `<button class="gpx-btn gpx-clear" id="route-clear">Effacer l'itinéraire</button>` : ''}
     </div>
 
     <div class="gpx-block">
@@ -1887,19 +1932,17 @@ function attachPanelEvents() {
   const gpxClear = content.querySelector('#gpx-clear');
   if (gpxClear) gpxClear.addEventListener('click', clearGpx);
 
-  const measureBtn = content.querySelector('#measure-btn');
-  if (measureBtn) measureBtn.addEventListener('click', () => {
-    measureMode = !measureMode;
-    map.getCanvas().style.cursor = measureMode ? 'crosshair' : '';
-    renderPanel();
-  });
-  const measureClear = content.querySelector('#measure-clear');
-  if (measureClear) measureClear.addEventListener('click', () => {
-    measurePts = [];
-    const s = map.getSource('measure-src');
-    if (s) s.setData(measureGeo());
-    renderPanel();
-  });
+  const ra = content.querySelector('#route-a');
+  if (ra) ra.addEventListener('input', debounce(() => routeSearch(ra.value, content.querySelector('#route-a-res'), 0, ra), 350));
+  const rb = content.querySelector('#route-b');
+  if (rb) rb.addEventListener('input', debounce(() => routeSearch(rb.value, content.querySelector('#route-b-res'), 1, rb), 350));
+  content.querySelectorAll('.route-modes button').forEach(b => b.addEventListener('click', () => {
+    routeProfile = b.dataset.prof;
+    content.querySelectorAll('.route-modes button').forEach(x => x.classList.toggle('on', x === b));
+    computeRoute();
+  }));
+  const rc = content.querySelector('#route-clear');
+  if (rc) rc.addEventListener('click', clearRoute);
 
   const searchInput = content.querySelector('#search-input');
   if (searchInput) {
@@ -2027,8 +2070,6 @@ document.getElementById('home-btn').addEventListener('click',
 const compassRose = document.getElementById('compass-rose');
 map.on('rotate', () => { compassRose.style.transform = `rotate(${-map.getBearing()}deg)`; });
 document.getElementById('compass').addEventListener('click', () => map.easeTo({ bearing: 0, duration: 500 }));
-
-map.on('click', onMeasureClick); // mesure A→B (actif seulement si measureMode)
 
 const scaleVal = document.getElementById('scale-val');
 function updateScale() {
