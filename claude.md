@@ -161,20 +161,27 @@ https://nominatim.openstreetmap.org/search
 
 ### Ce qui fonctionne
 
-- Fond IGN Sat + LiDAR HD hillshade en superposition (opacity 0.9 + 0.35)
-- Fond Plan IGN, Aérienne 1950-1965, État-Major, LiDAR seul
-- Slider d'opacité du relief pour tuner le rendu
-- Sentiers GR via Waymarked (overlay raster toggleable)
-- Monuments avec popup + lien Wikipedia
-- Villages avec labels
-- Points de baignade
-- Rivières
-- Restaurants / Cafés / Glaciers / Boulangeries via Overpass + cache
-- Géolocalisation GPS avec marker custom SVG
-- Recherche de lieux via Nominatim
-- Panneau bas avec 4 intercalaires latéraux (Fond / Nature / Patri / Comm)
-- Panel rétractable
-- Échelle dynamique
+- Fonds : Sat + LiDAR HD, Plan IGN, Aérienne 1950-65, État-Major, **Cassini**, LiDAR seul
+- **Relief 3D** (`map.setTerrain`) sur un MNT LiDAR HD décodé client-side :
+  protocol `float32dem://` (GeoTIFF float32 via WMS mercator → terrain-RGB, lib
+  geotiff.js). La même source sert le **hillshade dynamique** ("Lumière du jour",
+  azimut solaire calculé — WIP, voir plus bas). Fallback couche SHADOW cuite si
+  pas de support.
+- **Contours** : raster `ELEVATION.CONTOUR.LINE` à z9 → vecteur `oro_courbe`
+  (PLAN.IGN) dès z10, en **orange #f04a00** (maîtresses/normales/intercalaires)
+- Sentiers GR (Waymarked), Rivières + noms, Noms des forêts
+- POI **clusterisés** (icône Tabler + compte, sans bulle) : monuments, baignade,
+  points de vue, restaurants, cafés, glaciers, boulangeries, + activités
+  (canoë/rafting, canyoning). Popups nom + horaires ; monuments = extrait
+  Wikipedia inline résolu via tag **wikidata** (article précis).
+- Villages clusterisés (compte dézoomé, noms ≥ z12)
+- Zones drone (couche IGN + légende + slider opacité), Grille de coordonnées
+- Marqueur Maison (Crest) + bouton focus ; **boussole** (retour nord)
+- Géoloc GPS, recherche Nominatim, échelle dynamique
+- Panneau bas, 6 intercalaires (Fond / Nature / Activ. / Patri / Comm / **Exp.**),
+  poignée chevron haut-gauche, panel rétractable
+- **Offline** : Service Worker (app shell + tuiles/glyphs/geotiff, cache 30j)
+- Police **VG5000** self-hostée (glyphs SDF dans `fonts/VG5000/`)
 
 ### Ce qui ne fonctionne pas
 
@@ -202,18 +209,31 @@ plusieurs raffinements sont demandés :
 7. **Boutons carte (zoom/géoloc)** doivent suivre le même principe 3D
    que les toggles
 
-### Idées à explorer
+### Roadmap / idées
 
-- **Hillshade dynamique selon l'heure réelle** — l'azimuth du soleil qui
-  suit le vrai éclairage du jour (MapLibre supporte `hillshade-illumination-direction`)
-- **Mode nuit** — inverse la palette (charbon + crème)
-- **Full offline** via Protomaps `.pmtiles` — le fichier `.pmtiles` généré
-  sur la bbox Drôme, hébergé dans le repo, lu par MapLibre nativement
-- **Impression papier A1** — objet physique plié façon carte IGN
-  (via QGIS, projet existant en Lambert-93 EPSG:2154)
-- **Récupération des vraies URLs IGN Cassini** en buildant leur app Android
-  (repo `IGNF/cartes-ign-app`) et sniffant les requêtes réseau via
-  logcat sur un Pixel 7
+**En cours / à améliorer :**
+- **Course du soleil (Lumière du jour)** — WIP. Le hillshade dynamique marche
+  mais l'azimut ne semble pas suivre l'heure de façon convaincante (rendu proche
+  du NW figé). À creuser : vérifier convention azimut MapLibre
+  (`hillshade-illumination-direction`, anchor `map`), et idéalement voir la
+  course sur le relief 3D. Fichier : `sunCompass()` / `updateSunlight()`.
+- **Pentes (slope)** — onglet Exp., placeholder "à venir". Cible = protocol
+  custom qui calcule la pente depuis notre MNT (résolution adaptée à la source,
+  BYOD COG), colorisée par degrés (min/max), style split-view. Réf CTO :
+  terrain-viewer.iconem.com (`showSlope`, `slopeOpacity`, `slopeMin/MaxDegrees`).
+  NB : l'endpoint raster IGN `ELEVATION.SLOPES(.HIGHRES)` renvoie 404/400 en
+  WMTS PM — pas exploitable simplement, d'où l'approche custom.
+- **Itinéraires / randos** — gros morceau demandé (tracer/afficher des
+  itinéraires). À concevoir proprement pour ne pas alourdir l'app ni casser la DA.
+
+**Plus tard :**
+- Mode nuit (palette charbon + crème)
+- Full offline pré-généré via Protomaps `.pmtiles` sur la bbox
+- Impression papier A1 (QGIS, Lambert-93 EPSG:2154)
+- Wiki des commerces enrichi (comme monuments)
+
+**Data connue peu fournie (OSM) :** glaciers (glaces) quasi inexistants en Drôme
+rurale ; noms de forêts épars. Pas des bugs — limite de la donnée source.
 
 ## Références visuelles (moodboard)
 

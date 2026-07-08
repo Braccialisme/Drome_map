@@ -163,6 +163,28 @@
     }
     #home-btn:active { transform: scale(0.94); }
 
+    /* Boussole / rose des vents : coin haut-droit, revient au nord au clic */
+    #compass {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px; height: 42px;
+      background: var(--greige-0);
+      border: 1px solid var(--greige-2);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.6) inset,
+        0 -1px 0 rgba(0,0,0,0.05) inset,
+        0 4px 10px rgba(0,0,0,0.10);
+    }
+    #compass:active { transform: scale(0.94); }
+    #compass-rose { display: block; transition: transform 0.2s linear; }
+
     /* Panneau baissé : les boutons descendent avec lui et se posent juste
        au-dessus des intercalaires (bande de 40px restée visible). */
     body.panel-collapsed #scale     { bottom: calc(40px + 12px); }
@@ -205,14 +227,13 @@
       transform: translateY(calc(var(--panel-h) - 40px));
     }
 
-    /* Handle en haut du bloc */
+    /* Poignée = languette de la fiche, en haut à gauche, avec chevron large */
     .panel-handle {
       position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 20px;
+      top: -24px;
+      left: 14px;
+      width: 56px;
+      height: 25px;
       background: var(--greige-1);
       border: 1px solid var(--greige-2);
       border-bottom: none;
@@ -221,14 +242,15 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
     }
-    .panel-handle::before {
-      content: '';
-      width: 28px; height: 3px;
-      background: var(--greige-4);
-      border-radius: 2px;
-      opacity: 0.6;
+    .panel-handle svg {
+      width: 24px; height: 24px;
+      color: var(--dust);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    /* Panneau ouvert : chevron vers le bas (fermer) ; baissé : vers le haut (ouvrir) */
+    #panel-wrap.collapsed .panel-handle svg { transform: rotate(180deg); }
 
     /* Le bloc lui-même */
     #panel {
@@ -650,6 +672,20 @@
       color: var(--dust);
       margin-top: 8px;
     }
+    .maplibregl-popup-content .p-line {
+      font-size: 12px;
+      line-height: 1.35;
+      margin-top: 6px;
+      color: var(--ink-2);
+    }
+    .maplibregl-popup-content .p-k {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dust);
+      margin-right: 4px;
+    }
 
     .geoloc-marker { width: 30px; height: 30px; }
   </style>
@@ -683,8 +719,19 @@
   </svg>
 </button>
 
+<button id="compass" title="Revenir au nord">
+  <svg id="compass-rose" width="26" height="26" viewBox="0 0 24 24">
+    <polygon points="12,2.5 15,12 12,10 9,12" fill="#cc3a2a"/>
+    <polygon points="12,21.5 9,12 12,14 15,12" fill="#8a877c"/>
+  </svg>
+</button>
+
 <div id="panel-wrap">
-  <div class="panel-handle" id="handle"></div>
+  <div class="panel-handle" id="handle" title="Ouvrir / fermer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="5 9 12 16 19 9"/>
+    </svg>
+  </div>
   <div id="panel">
     <div class="panel-content" id="panel-content">
       <!-- Contenu dynamique injecté ici -->
@@ -695,6 +742,7 @@
       <div class="tab" data-tab="activites">Activ.</div>
       <div class="tab" data-tab="patri">Patri.</div>
       <div class="tab" data-tab="commerce">Comm.</div>
+      <div class="tab" data-tab="experimental">Exp.</div>
     </div>
   </div>
 </div>
@@ -1062,7 +1110,8 @@ async function applyVillages(gen) {
         'circle-radius': ['step', ['get', 'point_count'], 8, 10, 11, 30, 14],
         'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1 } });
     map.addLayer({ id: 'villages-cluster-count', type: 'symbol', source: 'villages-src', filter: ['has', 'point_count'],
-      layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['VG5000'], 'text-size': 11, 'text-allow-overlap': true },
+      layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['VG5000'], 'text-size': 11,
+        'text-anchor': 'center', 'text-justify': 'center', 'text-offset': [0, 0.08], 'text-allow-overlap': true },
       paint: { 'text-color': '#f2efe7' } });
     // Villages isolés : point + nom (zoomé)
     map.addLayer({ id: 'villages-pts', type: 'circle', source: 'villages-src', filter: ['!', ['has', 'point_count']],
@@ -1107,36 +1156,64 @@ function onMonumentClick(e) {
   const p = e.features[0].properties;
   const name = p.name || (p.historic ? p.historic.replace(/_/g, ' ') : 'Monument');
   const kind = (p.historic || '').replace(/_/g, ' ');
-  const head = `<div class="p-title">${name}</div><div class="p-kind">${kind}</div>`;
+  const head = `<div class="p-title">${esc(name)}</div><div class="p-kind">${esc(kind)}</div>`;
   const popup = new maplibregl.Popup({ closeButton: true, offset: 12, maxWidth: '260px' })
     .setLngLat(e.lngLat)
     .setHTML(`${head}<div class="p-loading">Chargement…</div>`)
     .addTo(map);
 
-  // Titre Wikipedia : depuis le tag wikipedia, sinon le nom
-  let lang = 'fr', title = null;
-  if (p.wikipedia && p.wikipedia.includes(':')) {
-    const i = p.wikipedia.indexOf(':');
-    lang = p.wikipedia.slice(0, i);
-    title = p.wikipedia.slice(i + 1);
-  } else if (p.name) {
-    title = p.name;
-  }
-  if (!title) { popup.setHTML(head); return; }
-
-  fetchWikiSummary(lang, title).then(sum => {
-    if (popup.isOpen() === false) return;
-    if (!sum) {
-      const s = `https://${lang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(title)}`;
+  resolveWiki(p).then(res => {
+    if (!popup.isOpen()) return;
+    if (!res) {
+      const s = `https://fr.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(name)}`;
       popup.setHTML(`${head}<a class="p-wiki" href="${s}" target="_blank" rel="noopener">Chercher sur Wikipedia →</a>`);
       return;
     }
-    const thumb = sum.thumbnail ? `<img class="p-thumb" src="${sum.thumbnail.source}" alt="">` : '';
-    const extract = sum.extract ? `<div class="p-extract">${sum.extract}</div>` : '';
-    const url = (sum.content_urls && sum.content_urls.desktop && sum.content_urls.desktop.page) ||
-      `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(title)}`;
-    popup.setHTML(`${head}${thumb}${extract}<a class="p-wiki" href="${url}" target="_blank" rel="noopener">Wikipedia →</a>`);
+    return fetchWikiSummary(res.lang, res.title).then(sum => {
+      if (!popup.isOpen()) return;
+      const wUrl = `https://${res.lang}.wikipedia.org/wiki/${encodeURIComponent(res.title)}`;
+      if (!sum) {
+        popup.setHTML(`${head}<a class="p-wiki" href="${wUrl}" target="_blank" rel="noopener">Wikipedia →</a>`);
+        return;
+      }
+      const thumb = sum.thumbnail ? `<img class="p-thumb" src="${esc(sum.thumbnail.source)}" alt="">` : '';
+      const extract = sum.extract ? `<div class="p-extract">${esc(sum.extract)}</div>` : '';
+      const url = (sum.content_urls && sum.content_urls.desktop && sum.content_urls.desktop.page) || wUrl;
+      popup.setHTML(`${head}${thumb}${extract}<a class="p-wiki" href="${esc(url)}" target="_blank" rel="noopener">Wikipedia →</a>`);
+    });
   });
+}
+
+// Résout (lang,title) : tag wikidata en priorité (article précis, pas la page
+// d'homonymes des noms de villages), sinon tag wikipedia, sinon le nom.
+async function resolveWiki(p) {
+  if (p.wikidata && /^Q\d+$/.test(p.wikidata)) {
+    const site = await wikidataSitelink(p.wikidata);
+    if (site) return site;
+  }
+  if (p.wikipedia && p.wikipedia.includes(':')) {
+    const i = p.wikipedia.indexOf(':');
+    return { lang: p.wikipedia.slice(0, i), title: p.wikipedia.slice(i + 1) };
+  }
+  if (p.name) return { lang: 'fr', title: p.name };
+  return null;
+}
+
+async function wikidataSitelink(qid) {
+  const ck = 'wd-' + qid;
+  if (memCache[ck]) return memCache[ck];
+  try {
+    const r = await fetch(`https://www.wikidata.org/wiki/Special:EntityData/${qid}.json`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    const ent = d.entities && d.entities[qid];
+    const sl = ent && ent.sitelinks;
+    let out = null;
+    if (sl && sl.frwiki) out = { lang: 'fr', title: sl.frwiki.title };
+    else if (sl && sl.enwiki) out = { lang: 'en', title: sl.enwiki.title };
+    if (out) memCache[ck] = out;
+    return out;
+  } catch (e) { return null; }
 }
 
 async function applyBaignade(gen) {
@@ -1218,14 +1295,14 @@ function addClusteredPoi(key, gj, gen) {
   // Cluster = icône de la catégorie + le nombre à côté, pas de bulle
   map.addLayer({ id: `${key}-cluster`, type: 'symbol', source: `${key}-src`, filter: ['has', 'point_count'],
     layout: { 'icon-image': `poi-${key}`,
-      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.6, 13, 0.95],
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.8, 13, 1.2],
       'icon-allow-overlap': true, 'icon-ignore-placement': true,
       'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['VG5000'],
-      'text-size': 11, 'text-offset': [0.95, -0.95], 'text-anchor': 'left', 'text-allow-overlap': true },
+      'text-size': 11, 'text-offset': [1.0, -1.0], 'text-anchor': 'left', 'text-allow-overlap': true },
     paint: { 'text-color': color, 'text-halo-color': 'rgba(242,239,231,0.95)', 'text-halo-width': 1.5 } });
   map.addLayer({ id: `${key}-pts`, type: 'symbol', source: `${key}-src`, filter: ['!', ['has', 'point_count']],
     layout: { 'icon-image': `poi-${key}`,
-      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.45, 14, 0.75, 17, 1],
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.6, 14, 1.0, 17, 1.3],
       'icon-allow-overlap': true, 'icon-ignore-placement': true } });
   if (!boundEvents.has('cl-' + key)) {
     boundEvents.add('cl-' + key);
@@ -1239,6 +1316,34 @@ function addClusteredPoi(key, gj, gen) {
     map.on('mouseenter', `${key}-cluster`, () => map.getCanvas().style.cursor = 'pointer');
     map.on('mouseleave', `${key}-cluster`, () => map.getCanvas().style.cursor = '');
   }
+  // Popup nom + horaires pour les POI (sauf monuments/viewpoints qui ont le leur)
+  if (key !== 'monuments' && key !== 'viewpoints' && !boundEvents.has('pop-' + key)) {
+    boundEvents.add('pop-' + key);
+    map.on('click', `${key}-pts`, e => showPoiPopup(e, key));
+    map.on('mouseenter', `${key}-pts`, () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', `${key}-pts`, () => map.getCanvas().style.cursor = '');
+  }
+}
+
+const POI_KIND = {
+  restaurants: 'Restaurant', cafes: 'Café / bar', glaciers: 'Glacier', boulangeries: 'Boulangerie',
+  baignade: 'Baignade', nautique: 'Canoë · rafting', canyoning: 'Canyoning'
+};
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+function showPoiPopup(e, key) {
+  const p = e.features[0].properties;
+  const name = p.name || POI_KIND[key] || 'Lieu';
+  const bits = [];
+  if (p.opening_hours) bits.push(`<div class="p-line"><span class="p-k">Horaires</span> ${esc(p.opening_hours)}</div>`);
+  const tel = p.phone || p['contact:phone'];
+  if (tel) bits.push(`<div class="p-line"><span class="p-k">Tél</span> ${esc(tel)}</div>`);
+  const web = p.website || p['contact:website'];
+  if (web) bits.push(`<a class="p-wiki" href="${esc(web)}" target="_blank" rel="noopener">Site web →</a>`);
+  new maplibregl.Popup({ closeButton: true, offset: 12, maxWidth: '240px' })
+    .setLngLat(e.lngLat)
+    .setHTML(`<div class="p-title">${esc(name)}</div><div class="p-kind">${POI_KIND[key] || ''}</div>${bits.join('')}`)
+    .addTo(map);
 }
 
 // ── Zone drone (restrictions vol de loisir, IGN) ────────────────────────────
@@ -1330,30 +1435,7 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">Noms des villages et villes</div>
     </div>
-    <div class="row ${state.layers.grille ? 'active' : ''}" data-layer="grille">
-      <div class="checkbox"></div>
-      <div class="row-label">Grille de coordonnées</div>
-    </div>
-    <div class="row ${state.layers.drone ? 'active' : ''}" data-layer="drone">
-      <div class="checkbox"></div>
-      <div class="row-label">Zones drone (vol loisir)</div>
-    </div>
-    ${state.layers.drone ? `
-    <div class="drone-legend">
-      <div class="dl-slider"><span>Opacité</span><input type="range" id="drone-slider" min="10" max="100" value="${Math.round(state.droneOpacity * 100)}"></div>
-      <div class="dl-row"><span class="dl-sw" style="background:#c0143c"></span>Interdit (0 m)</div>
-      <div class="dl-row"><span class="dl-sw" style="background:#e0692b"></span>Hauteur réduite (30 m)</div>
-      <div class="dl-row"><span class="dl-sw" style="background:#eaa62b"></span>50–60 m</div>
-      <div class="dl-row"><span class="dl-sw" style="background:#e6cf3f"></span>Jusqu'à 100 m</div>
-      <div class="dl-row"><span class="dl-sw" style="border:1px solid var(--greige-3)"></span>Reste : 120 m (défaut loisir)</div>
-      <div class="dl-note">Indicatif. Vérifie l'appli officielle (Géoportail / AlphaTango) avant de voler.</div>
-    </div>` : ''}
-
-    <div class="row ${state.layers.daylight ? 'active' : ''}" data-layer="daylight" style="border-top:1px solid var(--greige-2); margin-top:6px;">
-      <div class="checkbox"></div>
-      <div class="row-label">Lumière du jour<div class="row-sub">relief ombré à l'heure réelle</div></div>
-    </div>
-    <div class="row ${state.layers.threeD ? 'active' : ''}" data-layer="threeD">
+    <div class="row ${state.layers.threeD ? 'active' : ''}" data-layer="threeD" style="border-top:1px solid var(--greige-2); margin-top:6px;">
       <div class="checkbox"></div>
       <div class="row-label">Relief 3D<div class="row-sub">incline la carte (MNT LiDAR HD)</div></div>
     </div>
@@ -1428,6 +1510,34 @@ const PANELS = {
     <div class="row ${state.layers.boulangeries ? 'active' : ''}" data-layer="boulangeries">
       <div class="checkbox"></div>
       <div class="row-label">Boulangeries</div>
+    </div>
+  `,
+  experimental: () => `
+    <div class="row ${state.layers.daylight ? 'active' : ''}" data-layer="daylight">
+      <div class="checkbox"></div>
+      <div class="row-label">Lumière du jour<div class="row-sub">relief ombré à l'heure réelle · WIP</div></div>
+    </div>
+    <div class="row ${state.layers.grille ? 'active' : ''}" data-layer="grille">
+      <div class="checkbox"></div>
+      <div class="row-label">Grille de coordonnées</div>
+    </div>
+    <div class="row ${state.layers.drone ? 'active' : ''}" data-layer="drone">
+      <div class="checkbox"></div>
+      <div class="row-label">Zones drone (vol loisir)</div>
+    </div>
+    ${state.layers.drone ? `
+    <div class="drone-legend">
+      <div class="dl-slider"><span>Opacité</span><input type="range" id="drone-slider" min="10" max="100" value="${Math.round(state.droneOpacity * 100)}"></div>
+      <div class="dl-row"><span class="dl-sw" style="background:#c0143c"></span>Interdit (0 m)</div>
+      <div class="dl-row"><span class="dl-sw" style="background:#e0692b"></span>Hauteur réduite (30 m)</div>
+      <div class="dl-row"><span class="dl-sw" style="background:#eaa62b"></span>50–60 m</div>
+      <div class="dl-row"><span class="dl-sw" style="background:#e6cf3f"></span>Jusqu'à 100 m</div>
+      <div class="dl-row"><span class="dl-sw" style="border:1px solid var(--greige-3)"></span>Reste : 120 m (défaut loisir)</div>
+      <div class="dl-note">Indicatif. Vérifie l'appli officielle (Géoportail / AlphaTango) avant de voler.</div>
+    </div>` : ''}
+    <div class="row" style="border-top:1px solid var(--greige-2); margin-top:6px; opacity:0.5; cursor:default;">
+      <div class="checkbox"></div>
+      <div class="row-label">Pentes (slope)<div class="row-sub">custom depuis le MNT — à venir</div></div>
     </div>
   `
 };
@@ -1652,6 +1762,11 @@ new maplibregl.Marker({ element: homeEl, anchor: 'center' }).setLngLat(HOME).add
 
 document.getElementById('home-btn').addEventListener('click',
   () => map.flyTo({ center: HOME, zoom: 15, duration: 1200 }));
+
+// Boussole : la rose tourne avec le cap, clic → retour au nord
+const compassRose = document.getElementById('compass-rose');
+map.on('rotate', () => { compassRose.style.transform = `rotate(${-map.getBearing()}deg)`; });
+document.getElementById('compass').addEventListener('click', () => map.easeTo({ bearing: 0, duration: 500 }));
 
 const scaleVal = document.getElementById('scale-val');
 function updateScale() {
