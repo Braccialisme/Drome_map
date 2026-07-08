@@ -304,10 +304,10 @@
       transform: rotate(180deg);
       padding: 8px 4px;
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
+      font-size: 9px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--dust);
+      color: rgba(26, 26, 26, 0.78);
       transition: all 0.2s;
       /* biseau : lumière en haut, ombre en bas = relief bombé */
       box-shadow:
@@ -1433,8 +1433,8 @@ function applySlope() {
   if (!demSupported()) return;
   const wms = 'data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
     '&LAYERS=IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93&STYLES=&CRS=EPSG:3857' +
-    '&FORMAT=image/geotiff&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}';
-  map.addSource('slope-src', { type: 'raster', tiles: [`slope://${state.slopeMin}/${state.slopeMax}/${wms}`], tileSize: 256, maxzoom: 15 });
+    '&FORMAT=image/geotiff&WIDTH=512&HEIGHT=512&BBOX={bbox-epsg-3857}';
+  map.addSource('slope-src', { type: 'raster', tiles: [`slope://${state.slopeMin}/${state.slopeMax}/${wms}`], tileSize: 512, maxzoom: 15 });
   map.addLayer({ id: 'slope-lyr', type: 'raster', source: 'slope-src', paint: { 'raster-opacity': state.slopeOpacity } });
 }
 function reapplySlope() {
