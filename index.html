@@ -453,6 +453,37 @@
       flex-shrink: 0;
       opacity: 0.92;
     }
+
+    .drone-legend {
+      background: var(--greige-0);
+      border: 1px solid var(--greige-2);
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      margin: 2px 0 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--ink-2);
+    }
+    .drone-legend .dl-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 2px 0;
+    }
+    .drone-legend .dl-sw {
+      width: 12px; height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .drone-legend .dl-note {
+      margin-top: 6px;
+      color: var(--dust);
+      line-height: 1.3;
+      letter-spacing: 0;
+      font-family: var(--font-ui);
+      font-size: 11px;
+    }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -587,6 +618,28 @@
     .maplibregl-popup-content .p-wiki:hover {
       background: var(--orange);
     }
+    .maplibregl-popup-content .p-thumb {
+      width: 100%;
+      border-radius: var(--radius);
+      margin-top: 8px;
+      display: block;
+    }
+    .maplibregl-popup-content .p-extract {
+      font-size: 12px;
+      line-height: 1.4;
+      margin-top: 8px;
+      color: var(--ink-2);
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .maplibregl-popup-content .p-loading {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dust);
+      margin-top: 8px;
+    }
 
     .geoloc-marker { width: 30px; height: 30px; }
   </style>
@@ -629,6 +682,7 @@
     <div class="tabs-column">
       <div class="tab active" data-tab="fond">Fond</div>
       <div class="tab" data-tab="nature">Nature</div>
+      <div class="tab" data-tab="activites">Activ.</div>
       <div class="tab" data-tab="patri">Patri.</div>
       <div class="tab" data-tab="commerce">Comm.</div>
     </div>
@@ -655,13 +709,18 @@ const SENTIERS_URL = 'https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png';
 const state = {
   activeTab: 'fond',
   basemap: 'sat',
-  reliefOpacity: 0.35,
+  reliefOpacity: 0.60,
   layers: {
     contours: true,
-    sentiers: true,
+    sentiers: false,
     rivieres: false,
     baignade: false,
     viewpoints: false,
+    forets: false,
+    grille: false,
+    drone: false,
+    nautique: false,
+    canyoning: false,
     monuments: false,
     villages: false,
     restaurants: false,
@@ -676,7 +735,8 @@ const BASEMAP_NAMES = {
   ign: 'Plan IGN',
   'lidar-only': 'LiDAR seul',
   aerienne50: 'Aérienne 50-65',
-  etatmajor: 'Etat-Major'
+  etatmajor: 'Etat-Major',
+  cassini: 'Cassini'
 };
 
 // ── Map init ────────────────────────────────────────────────────────────────
@@ -728,6 +788,10 @@ function getBasemapConfig(key) {
     },
     etatmajor: {
       layers: [{ id: 'base-em', source: IGN('GEOGRAPHICALGRIDSYSTEMS.ETATMAJOR40', 'image/jpeg'), opacity: 1, maxzoom: 16 }]
+    },
+    cassini: {
+      // Vrai identifiant = AN-IGNF_... (pas BNF-), format jpeg, TMS PM_0_14, z0-14
+      layers: [{ id: 'base-cassini', source: IGN('AN-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI', 'image/jpeg', 'PM_0_14'), opacity: 1, maxzoom: 14 }]
     }
   };
   return configs[key];
@@ -743,23 +807,11 @@ function rerender() {
   const gen = ++renderGen;
   map.getCanvas().style.cursor = ''; // évite le curseur "main" bloqué si mouseleave n'a pas fait feu
 
-  const allIds = [
-    'base-sat', 'base-lidar-sat', 'base-ign', 'base-lidar-ign', 'base-lidar-solo',
-    'base-aerienne', 'base-lidar-aer', 'base-em',
-    'contours-int', 'contours-10', 'contours-50', 'sentiers',
-    'villages-pts', 'villages-lbl', 'monuments-pts', 'baignade-pts', 'rivieres-lines', 'viewpoints-pts',
-    'restaurants-pts', 'cafes-pts', 'glaciers-pts', 'boulangeries-pts'
-  ];
-  allIds.forEach(id => { try { if (map.getLayer(id)) map.removeLayer(id); } catch(e){} });
-
-  const allSrcs = [
-    'contours-src', 'sentiers-src',
-    'base-sat', 'base-lidar-sat', 'base-ign', 'base-lidar-ign', 'base-lidar-solo',
-    'base-aerienne', 'base-lidar-aer', 'base-em',
-    'villages-src', 'monuments-src', 'baignade-src', 'rivieres-src', 'viewpoints-src',
-    'restaurants-src', 'cafes-src', 'glaciers-src', 'boulangeries-src'
-  ];
-  allSrcs.forEach(id => { try { if (map.getSource(id)) map.removeSource(id); } catch(e){} });
+  // Suppression dynamique : retire toutes les couches puis toutes les sources
+  // présentes (peu importe leur id) — robuste et future-proof pour les couches
+  // ajoutées à la volée (clusters, grille, drone, forêts…).
+  (map.getStyle().layers || []).forEach(l => { try { map.removeLayer(l.id); } catch(e){} });
+  Object.keys(map.getStyle().sources || {}).forEach(id => { try { map.removeSource(id); } catch(e){} });
 
   const config = getBasemapConfig(state.basemap);
   config.layers.forEach(l => {
@@ -767,12 +819,17 @@ function rerender() {
     map.addLayer({ id: l.id, type: 'raster', source: l.id, paint: { 'raster-opacity': l.opacity } });
   });
 
+  if (state.layers.drone) applyDrone();
+  if (state.layers.forets) applyForets(gen);
   if (state.layers.rivieres) applyRivieres(gen);
   if (state.layers.contours) applyContours();
+  if (state.layers.grille) applyGrille();
   if (state.layers.villages) applyVillages(gen);
   if (state.layers.monuments) applyMonuments(gen);
   if (state.layers.baignade) applyBaignade(gen);
   if (state.layers.viewpoints) applyViewpoints(gen);
+  if (state.layers.nautique) applyActivite('nautique', 'canoe|kayak|rafting|canoe_polo|water_ski', gen);
+  if (state.layers.canyoning) applyActivite('canyoning', 'canyoning', gen);
   if (state.layers.restaurants) applyPOI('restaurants', 'restaurant', '#cc6a3a', gen);
   if (state.layers.cafes) applyPOI('cafes', 'cafe|bar|pub', '#8b5a3a', gen);
   if (state.layers.glaciers) applyPOI('glaciers', 'ice_cream', '#4a7ba3', gen);
@@ -860,7 +917,7 @@ function osmToGeoJSON(osm, type) {
   for (const el of osm.elements || []) {
     if (type === 'point' && el.type === 'node') {
       features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [el.lon, el.lat] }, properties: { name: (el.tags && el.tags.name) || '', ...el.tags } });
-    } else if (type === 'point' && el.type === 'way' && el.center) {
+    } else if (type === 'point' && (el.type === 'way' || el.type === 'relation') && el.center) {
       features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [el.center.lon, el.center.lat] }, properties: { name: (el.tags && el.tags.name) || '', ...el.tags } });
     } else if (type === 'line' && el.type === 'way' && el.geometry) {
       features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: el.geometry.map(p => [p.lon, p.lat]) }, properties: { name: (el.tags && el.tags.name) || '', ...el.tags } });
@@ -893,12 +950,7 @@ async function applyMonuments(gen) {
   try {
     const osm = await overpassFetch('drm-monuments-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (stale(gen) || map.getSource('monuments-src')) return;
-    map.addSource('monuments-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'monuments-pts', type: 'symbol', source: 'monuments-src',
-      layout: { 'icon-image': 'poi-monuments',
-        'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.42, 14, 0.72, 17, 0.95],
-        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
+    addClusteredPoi('monuments', gj, gen);
     if (!boundEvents.has('monuments')) {
       boundEvents.add('monuments');
       map.on('click', 'monuments-pts', onMonumentClick);
@@ -912,20 +964,36 @@ function onMonumentClick(e) {
   const p = e.features[0].properties;
   const name = p.name || (p.historic ? p.historic.replace(/_/g, ' ') : 'Monument');
   const kind = (p.historic || '').replace(/_/g, ' ');
-  const wiki = p.wikipedia;
-  let wikiHtml = '';
-  if (wiki && wiki.includes(':')) {
-    const [lang, article] = wiki.split(':');
-    const url = `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(article)}`;
-    wikiHtml = `<br><a class="p-wiki" href="${url}" target="_blank" rel="noopener">Wikipedia →</a>`;
-  } else if (p.name) {
-    const url = `https://fr.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(p.name)}`;
-    wikiHtml = `<br><a class="p-wiki" href="${url}" target="_blank" rel="noopener">Chercher →</a>`;
-  }
-  new maplibregl.Popup({ closeButton: true, offset: 12 })
+  const head = `<div class="p-title">${name}</div><div class="p-kind">${kind}</div>`;
+  const popup = new maplibregl.Popup({ closeButton: true, offset: 12, maxWidth: '260px' })
     .setLngLat(e.lngLat)
-    .setHTML(`<div class="p-title">${name}</div><div class="p-kind">${kind}</div>${wikiHtml}`)
+    .setHTML(`${head}<div class="p-loading">Chargement…</div>`)
     .addTo(map);
+
+  // Titre Wikipedia : depuis le tag wikipedia, sinon le nom
+  let lang = 'fr', title = null;
+  if (p.wikipedia && p.wikipedia.includes(':')) {
+    const i = p.wikipedia.indexOf(':');
+    lang = p.wikipedia.slice(0, i);
+    title = p.wikipedia.slice(i + 1);
+  } else if (p.name) {
+    title = p.name;
+  }
+  if (!title) { popup.setHTML(head); return; }
+
+  fetchWikiSummary(lang, title).then(sum => {
+    if (popup.isOpen() === false) return;
+    if (!sum) {
+      const s = `https://${lang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(title)}`;
+      popup.setHTML(`${head}<a class="p-wiki" href="${s}" target="_blank" rel="noopener">Chercher sur Wikipedia →</a>`);
+      return;
+    }
+    const thumb = sum.thumbnail ? `<img class="p-thumb" src="${sum.thumbnail.source}" alt="">` : '';
+    const extract = sum.extract ? `<div class="p-extract">${sum.extract}</div>` : '';
+    const url = (sum.content_urls && sum.content_urls.desktop && sum.content_urls.desktop.page) ||
+      `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+    popup.setHTML(`${head}${thumb}${extract}<a class="p-wiki" href="${url}" target="_blank" rel="noopener">Wikipedia →</a>`);
+  });
 }
 
 async function applyBaignade(gen) {
@@ -933,12 +1001,7 @@ async function applyBaignade(gen) {
   try {
     const osm = await overpassFetch('drm-baignade-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (stale(gen) || map.getSource('baignade-src')) return;
-    map.addSource('baignade-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'baignade-pts', type: 'symbol', source: 'baignade-src',
-      layout: { 'icon-image': 'poi-baignade',
-        'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.45, 14, 0.75, 17, 1],
-        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
+    addClusteredPoi('baignade', gj, gen);
   } catch(e) { console.warn('Baignade fetch failed', e); }
 }
 
@@ -947,12 +1010,7 @@ async function applyViewpoints(gen) {
   try {
     const osm = await overpassFetch('drm-viewpoints-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (stale(gen) || map.getSource('viewpoints-src')) return;
-    map.addSource('viewpoints-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'viewpoints-pts', type: 'symbol', source: 'viewpoints-src',
-      layout: { 'icon-image': 'poi-viewpoints',
-        'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.42, 14, 0.72, 17, 0.95],
-        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
+    addClusteredPoi('viewpoints', gj, gen);
     if (!boundEvents.has('viewpoints')) {
       boundEvents.add('viewpoints');
       map.on('click', 'viewpoints-pts', e => {
@@ -980,6 +1038,11 @@ async function applyRivieres(gen) {
       paint: { 'line-color': '#3d6f9a',
         'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1, 12, 2, 14, 3.2],
         'line-opacity': ['interpolate', ['linear'], ['zoom'], 9, 0.7, 13, 0.95] } });
+    map.addLayer({ id: 'rivieres-lbl', type: 'symbol', source: 'rivieres-src',
+      minzoom: 12,
+      layout: { 'symbol-placement': 'line', 'text-field': ['get', 'name'], 'text-font': ['VG5000'],
+        'text-size': 11, 'symbol-spacing': 350, 'text-max-angle': 40 },
+      paint: { 'text-color': '#26506e', 'text-halo-color': 'rgba(242,239,231,0.85)', 'text-halo-width': 1.2 } });
   } catch(e) { console.warn('Rivieres fetch failed', e); }
 }
 
@@ -988,13 +1051,100 @@ async function applyPOI(key, amenityRegex, color, gen) {
   try {
     const osm = await overpassFetch(`drm-poi-${key}-v3`, q);
     const gj = osmToGeoJSON(osm, 'point');
-    if (stale(gen) || map.getSource(`${key}-src`)) return;
-    map.addSource(`${key}-src`, { type: 'geojson', data: gj });
-    map.addLayer({ id: `${key}-pts`, type: 'symbol', source: `${key}-src`,
-      layout: { 'icon-image': `poi-${key}`,
-        'icon-size': ['interpolate', ['linear'], ['zoom'], 10, 0.45, 15, 0.8, 17, 1],
-        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
+    addClusteredPoi(key, gj, gen);
   } catch(e) { console.warn(`POI ${key} fetch failed`, e); }
+}
+
+// Activités de plein air (canoë/rafting, canyoning…) via tag OSM `sport`
+async function applyActivite(key, sportRegex, gen) {
+  const q = `[out:json][timeout:25];(nwr["sport"~"^(${sportRegex})$"](${bboxStr});nwr["leisure"="water_park"](${bboxStr}););out center;`;
+  try {
+    const osm = await overpassFetch(`drm-act-${key}-v1`, q);
+    const gj = osmToGeoJSON(osm, 'point');
+    addClusteredPoi(key, gj, gen);
+  } catch(e) { console.warn(`Activité ${key} fetch failed`, e); }
+}
+
+// ── Clustering générique des POI ────────────────────────────────────────────
+// Source clusterisée + 3 couches : disque compteur, nombre, icône individuelle.
+// Évite d'avoir des milliers d'icônes au dézoom.
+function addClusteredPoi(key, gj, gen) {
+  if (stale(gen) || map.getSource(`${key}-src`)) return;
+  const color = ICON_COLORS[key] || '#8a877c';
+  map.addSource(`${key}-src`, { type: 'geojson', data: gj, cluster: true, clusterRadius: 46, clusterMaxZoom: 13 });
+  // Cluster = icône de la catégorie + le nombre à côté, pas de bulle
+  map.addLayer({ id: `${key}-cluster`, type: 'symbol', source: `${key}-src`, filter: ['has', 'point_count'],
+    layout: { 'icon-image': `poi-${key}`,
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.6, 13, 0.95],
+      'icon-allow-overlap': true, 'icon-ignore-placement': true,
+      'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['VG5000'],
+      'text-size': 11, 'text-offset': [0.95, -0.95], 'text-anchor': 'left', 'text-allow-overlap': true },
+    paint: { 'text-color': color, 'text-halo-color': 'rgba(242,239,231,0.95)', 'text-halo-width': 1.5 } });
+  map.addLayer({ id: `${key}-pts`, type: 'symbol', source: `${key}-src`, filter: ['!', ['has', 'point_count']],
+    layout: { 'icon-image': `poi-${key}`,
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.45, 14, 0.75, 17, 1],
+      'icon-allow-overlap': true, 'icon-ignore-placement': true } });
+  if (!boundEvents.has('cl-' + key)) {
+    boundEvents.add('cl-' + key);
+    map.on('click', `${key}-cluster`, e => {
+      const f = map.queryRenderedFeatures(e.point, { layers: [`${key}-cluster`] })[0];
+      if (!f) return;
+      map.getSource(`${key}-src`).getClusterExpansionZoom(f.properties.cluster_id)
+        .then(z => map.easeTo({ center: f.geometry.coordinates, zoom: z, duration: 600 }))
+        .catch(() => {});
+    });
+    map.on('mouseenter', `${key}-cluster`, () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', `${key}-cluster`, () => map.getCanvas().style.cursor = '');
+  }
+}
+
+// ── Zone drone (restrictions vol de loisir, IGN) ────────────────────────────
+function applyDrone() {
+  map.addSource('drone-src', { type: 'raster', tiles: [IGN('TRANSPORTS.DRONES.RESTRICTIONS')], tileSize: 256, maxzoom: 18 });
+  map.addLayer({ id: 'drone-lyr', type: 'raster', source: 'drone-src', paint: { 'raster-opacity': 0.6 } });
+}
+
+// ── Grille de coordonnées (graticule lat/lon) ───────────────────────────────
+function applyGrille() {
+  const feats = [], step = 0.05, W = 4.3, E = 6.0, S = 44.1, N = 45.5;
+  for (let lon = W; lon <= E + 1e-9; lon += step)
+    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[lon, S], [lon, N]] }, properties: {} });
+  for (let lat = S; lat <= N + 1e-9; lat += step)
+    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[W, lat], [E, lat]] }, properties: {} });
+  map.addSource('grille-src', { type: 'geojson', data: { type: 'FeatureCollection', features: feats } });
+  map.addLayer({ id: 'grille-lyr', type: 'line', source: 'grille-src',
+    paint: { 'line-color': '#f2efe7', 'line-opacity': 0.35, 'line-width': 0.6 } });
+}
+
+// ── Noms des forêts (label au centre) ───────────────────────────────────────
+async function applyForets(gen) {
+  const q = `[out:json][timeout:25];(way["natural"="wood"]["name"](${bboxStr});relation["natural"="wood"]["name"](${bboxStr});way["landuse"="forest"]["name"](${bboxStr});relation["landuse"="forest"]["name"](${bboxStr}););out center;`;
+  try {
+    const osm = await overpassFetch('drm-forets-v1', q);
+    const gj = osmToGeoJSON(osm, 'point');
+    if (stale(gen) || map.getSource('forets-src')) return;
+    map.addSource('forets-src', { type: 'geojson', data: gj });
+    map.addLayer({ id: 'forets-lbl', type: 'symbol', source: 'forets-src',
+      minzoom: 11,
+      layout: { 'text-field': ['get', 'name'], 'text-font': ['VG5000'],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 15, 13],
+        'text-max-width': 8, 'text-transform': 'uppercase', 'text-letter-spacing': 0.08 },
+      paint: { 'text-color': '#2f5a2a', 'text-halo-color': 'rgba(242,239,231,0.8)', 'text-halo-width': 1 } });
+  } catch(e) { console.warn('Forêts fetch failed', e); }
+}
+
+// Résumé Wikipedia (API REST) pour les popups monuments
+async function fetchWikiSummary(lang, title) {
+  const ck = `wiki-${lang}-${title}`;
+  if (memCache[ck]) return memCache[ck];
+  try {
+    const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    if (d.type && d.type.indexOf('not_found') !== -1) return null;
+    memCache[ck] = d;
+    return d;
+  } catch(e) { return null; }
 }
 
 // ── CONTENT PANELS ──────────────────────────────────────────────────────────
@@ -1028,11 +1178,32 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">État-Major</div>
     </div>
+    <div class="row ${state.basemap === 'cassini' ? 'active' : ''}" data-basemap="cassini">
+      <div class="checkbox"></div>
+      <div class="row-label">Cassini (~1750)</div>
+    </div>
 
     <div class="row ${state.layers.villages ? 'active' : ''}" data-layer="villages" style="border-top:1px solid var(--greige-2); margin-top:6px;">
       <div class="checkbox"></div>
       <div class="row-label">Noms des villages et villes</div>
     </div>
+    <div class="row ${state.layers.grille ? 'active' : ''}" data-layer="grille">
+      <div class="checkbox"></div>
+      <div class="row-label">Grille de coordonnées</div>
+    </div>
+    <div class="row ${state.layers.drone ? 'active' : ''}" data-layer="drone">
+      <div class="checkbox"></div>
+      <div class="row-label">Zones drone (vol loisir)</div>
+    </div>
+    ${state.layers.drone ? `
+    <div class="drone-legend">
+      <div class="dl-row"><span class="dl-sw" style="background:#c0143c"></span>Interdit (0 m)</div>
+      <div class="dl-row"><span class="dl-sw" style="background:#e0692b"></span>Hauteur réduite (30 m)</div>
+      <div class="dl-row"><span class="dl-sw" style="background:#eaa62b"></span>50–60 m</div>
+      <div class="dl-row"><span class="dl-sw" style="background:#e6cf3f"></span>Jusqu'à 100 m</div>
+      <div class="dl-row"><span class="dl-sw" style="border:1px solid var(--greige-3)"></span>Reste : 120 m (défaut loisir)</div>
+      <div class="dl-note">Indicatif. Vérifie l'appli officielle (Géoportail / AlphaTango) avant de voler.</div>
+    </div>` : ''}
 
     <div class="slider-block">
       <div class="slider-header">
@@ -1062,6 +1233,20 @@ const PANELS = {
     <div class="row ${state.layers.viewpoints ? 'active' : ''}" data-layer="viewpoints">
       <div class="checkbox"></div>
       <div class="row-label">Points de vue</div>
+    </div>
+    <div class="row ${state.layers.forets ? 'active' : ''}" data-layer="forets">
+      <div class="checkbox"></div>
+      <div class="row-label">Noms des forêts</div>
+    </div>
+  `,
+  activites: () => `
+    <div class="row ${state.layers.nautique ? 'active' : ''}" data-layer="nautique">
+      <div class="checkbox"></div>
+      <div class="row-label">Canoë · kayak · rafting</div>
+    </div>
+    <div class="row ${state.layers.canyoning ? 'active' : ''}" data-layer="canyoning">
+      <div class="checkbox"></div>
+      <div class="row-label">Canyoning</div>
     </div>
   `,
   patri: () => `
@@ -1106,12 +1291,18 @@ const ICON_PATHS = {
   restaurants:  '<path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" />',
   cafes:        '<path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1" /><path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" /><path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" /><path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5" /><path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />',
   glaciers:     '<path d="M12 21.5v-4.5" /><path d="M8 17h8v-10a4 4 0 1 0 -8 0v10" /><path d="M8 10.5l8 -3.5" /><path d="M8 14.5l8 -3.5" />',
-  boulangeries: '<path d="M18 4a3 3 0 0 1 2 5.235v8.765a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-8.764a3 3 0 0 1 1.824 -5.231h12.176v-.005" />'
+  boulangeries: '<path d="M18 4a3 3 0 0 1 2 5.235v8.765a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-8.764a3 3 0 0 1 1.824 -5.231h12.176v-.005" />',
+  forets:       '<path d="M16 5l3 3l-2 1l4 4l-3 1l4 4h-9" /><path d="M15 21l0 -3" /><path d="M8 13l-2 -2" /><path d="M8 12l2 -2" /><path d="M8 21v-13" /><path d="M5.824 16a3 3 0 0 1 -2.743 -3.69a3 3 0 0 1 .304 -4.833a3 3 0 0 1 4.615 -3.707a3 3 0 0 1 4.614 3.707a3 3 0 0 1 .305 4.833a3 3 0 0 1 -2.919 3.695h-4l-.176 -.005" />',
+  grille:       '<path d="M4 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M11 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M18 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M18 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 19a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M11 19a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M18 19a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />',
+  drone:        '<path d="M10 10h4v4h-4l0 -4" /><path d="M10 10l-3.5 -3.5" /><path d="M9.96 6a3.5 3.5 0 1 0 -3.96 3.96" /><path d="M14 10l3.5 -3.5" /><path d="M18 9.96a3.5 3.5 0 1 0 -3.96 -3.96" /><path d="M14 14l3.5 3.5" /><path d="M14.04 18a3.5 3.5 0 1 0 3.96 -3.96" /><path d="M10 14l-3.5 3.5" /><path d="M6 14.04a3.5 3.5 0 1 0 3.96 3.96" />',
+  nautique:     '<path d="M6.414 6.414a2 2 0 0 0 0 -2.828l-1.414 -1.414l-2.828 2.828l1.414 1.414a2 2 0 0 0 2.828 0" /><path d="M17.586 17.586a2 2 0 0 0 0 2.828l1.414 1.414l2.828 -2.828l-1.414 -1.414a2 2 0 0 0 -2.828 0" /><path d="M6.5 6.5l11 11" /><path d="M22 2.5c-9.983 2.601 -17.627 7.952 -20 19.5c9.983 -2.601 17.627 -7.952 20 -19.5" /><path d="M6.5 12.5l5 5" /><path d="M12.5 6.5l5 5" />',
+  canyoning:    '<path d="M4 7h12a1 1 0 0 1 1 1v4.5a2.5 2.5 0 0 1 -2.5 2.5h-.5a2 2 0 0 1 -2 -2a2 2 0 1 0 -4 0a2 2 0 0 1 -2 2h-.5a2.5 2.5 0 0 1 -2.5 -2.5v-4.5a1 1 0 0 1 1 -1" /><path d="M10 17a2 2 0 0 0 2 2h3.5a5.5 5.5 0 0 0 5.5 -5.5v-9.5" />'
 };
 const ICON_COLORS = {
   contours: '#6b6355', sentiers: '#6b6355', rivieres: '#3d6f9a', baignade: '#4a7ba3',
-  viewpoints: '#8b7a4a', monuments: '#8b5a3a', villages: '#1a1a1a',
-  restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a'
+  viewpoints: '#6a3fb0', monuments: '#8b5a3a', villages: '#1a1a1a',
+  restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a',
+  forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e'
 };
 function iconSvg(key) {
   const p = ICON_PATHS[key];
@@ -1121,7 +1312,7 @@ function iconSvg(key) {
 
 // Pastilles-icônes des POI sur la carte : disque coloré + icône blanche.
 // Enregistrées une fois dans la carte, réutilisées par les couches symbol.
-const POI_ICON_KEYS = ['monuments', 'baignade', 'viewpoints', 'restaurants', 'cafes', 'glaciers', 'boulangeries'];
+const POI_ICON_KEYS = ['monuments', 'baignade', 'viewpoints', 'restaurants', 'cafes', 'glaciers', 'boulangeries', 'nautique', 'canyoning'];
 function loadPoiIcons() {
   POI_ICON_KEYS.forEach(key => {
     if (map.hasImage('poi-' + key)) return;
