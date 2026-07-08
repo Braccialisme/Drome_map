@@ -1491,43 +1491,74 @@ function applyGpx() {
 }
 function clearGpx() { gpxData = null; rerender(); }
 
-// ── MESURE A → B (distance à vol d'oiseau) ──────────────────────────────────
+// ── MESURE / ITINÉRAIRE A → B ───────────────────────────────────────────────
+// Vol d'oiseau (haversine, instantané) + route voiture réelle (OSRM, en ligne).
 let measureMode = false;
 let measurePts = [];
+let measureRoute = null; // { distance, duration, coords }
 function haversine(a, b) {
   const R = 6371000, r = Math.PI / 180;
   const dLat = (b[1] - a[1]) * r, dLon = (b[0] - a[0]) * r;
   const s = Math.sin(dLat / 2) ** 2 + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.sin(dLon / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(s));
 }
-function fmtDist(m) { return m < 1000 ? Math.round(m) + ' m' : (m / 1000).toFixed(2) + ' km'; }
+function fmtDist(m) { return m < 1000 ? Math.round(m) + ' m' : (m / 1000).toFixed(1) + ' km'; }
+function fmtDur(s) { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ''; }
+
 function measureGeo() {
   const feats = measurePts.map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p }, properties: {} }));
   if (measurePts.length === 2) {
-    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measurePts }, properties: {} });
+    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measurePts }, properties: { kind: 'straight' } });
+    if (measureRoute) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measureRoute.coords }, properties: { kind: 'route' } });
+    const vol = haversine(measurePts[0], measurePts[1]);
+    const label = measureRoute
+      ? `Voiture ${fmtDist(measureRoute.distance)} · ${fmtDur(measureRoute.duration)}\nVol d'oiseau ${fmtDist(vol)}`
+      : `Vol d'oiseau ${fmtDist(vol)}\n(route…)`;
     const mid = [(measurePts[0][0] + measurePts[1][0]) / 2, (measurePts[0][1] + measurePts[1][1]) / 2];
-    feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: mid }, properties: { label: fmtDist(haversine(measurePts[0], measurePts[1])) } });
+    feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: mid }, properties: { label } });
   }
   return { type: 'FeatureCollection', features: feats };
 }
+function refreshMeasure() { const s = map.getSource('measure-src'); if (s) s.setData(measureGeo()); }
 function applyMeasure() {
   if (!measurePts.length) return;
   map.addSource('measure-src', { type: 'geojson', data: measureGeo() });
-  map.addLayer({ id: 'measure-line', type: 'line', source: 'measure-src', filter: ['==', '$type', 'LineString'],
-    paint: { 'line-color': '#1a1a1a', 'line-width': 2, 'line-dasharray': [2, 1.5], 'line-opacity': 0.8 } });
-  map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src',
-    filter: ['all', ['==', '$type', 'Point'], ['!', ['has', 'label']]],
-    paint: { 'circle-radius': 5, 'circle-color': '#cc6a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 2 } });
+  // route voiture (dessous, orange plein)
+  map.addLayer({ id: 'measure-route', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'route'],
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#cc6a3a', 'line-width': 4, 'line-opacity': 0.9 } });
+  // vol d'oiseau (dessus, pointillé ink)
+  map.addLayer({ id: 'measure-straight', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'straight'],
+    paint: { 'line-color': '#1a1a1a', 'line-width': 1.5, 'line-dasharray': [2, 1.5], 'line-opacity': 0.75 } });
+  // points A/B (pas le point-label)
+  map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src', filter: ['!', ['has', 'label']],
+    paint: { 'circle-radius': 6, 'circle-color': '#cc6a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 2 } });
+  // étiquette distances
   map.addLayer({ id: 'measure-lbl', type: 'symbol', source: 'measure-src', filter: ['has', 'label'],
-    layout: { 'text-field': ['get', 'label'], 'text-font': ['VG5000'], 'text-size': 13, 'text-offset': [0, -1.1], 'text-anchor': 'bottom' },
+    layout: { 'text-field': ['get', 'label'], 'text-font': ['VG5000'], 'text-size': 12, 'text-offset': [0, -1.2], 'text-anchor': 'bottom', 'text-allow-overlap': true },
     paint: { 'text-color': '#1a1a1a', 'text-halo-color': '#f2efe7', 'text-halo-width': 2 } });
+}
+async function fetchRoute(a, b) {
+  try {
+    const url = `https://router.project-osrm.org/route/v1/driving/${a[0]},${a[1]};${b[0]},${b[1]}?overview=full&geometries=geojson`;
+    const r = await fetch(url);
+    const d = await r.json();
+    if (d.routes && d.routes[0]) return { distance: d.routes[0].distance, duration: d.routes[0].duration, coords: d.routes[0].geometry.coordinates };
+  } catch (e) {}
+  return null;
 }
 function onMeasureClick(e) {
   if (!measureMode) return;
-  if (measurePts.length >= 2) measurePts = [];
+  if (measurePts.length >= 2) { measurePts = []; measureRoute = null; }
   measurePts.push([e.lngLat.lng, e.lngLat.lat]);
-  const src = map.getSource('measure-src');
-  if (src) src.setData(measureGeo()); else applyMeasure();
+  if (map.getSource('measure-src')) refreshMeasure(); else applyMeasure();
+  if (measurePts.length === 2) {
+    const [a, b] = measurePts;
+    fetchRoute(a, b).then(rt => {
+      // ignore si l'utilisateur a déjà relancé une mesure entre-temps
+      if (measurePts.length === 2 && measurePts[0] === a && measurePts[1] === b) { measureRoute = rt; refreshMeasure(); }
+    });
+  }
 }
 
 // ── Noms des forêts (label au centre) ───────────────────────────────────────
@@ -1716,7 +1747,7 @@ const PANELS = {
     </div>` : ''}
 
     <div class="gpx-block">
-      <div class="row-sub" style="margin-bottom:6px;">Distance à vol d'oiseau</div>
+      <div class="row-sub" style="margin-bottom:6px;">Itinéraire A → B (voiture + vol d'oiseau)</div>
       <button class="gpx-btn ${measureMode ? 'gpx-active' : ''}" id="measure-btn">${measureMode ? 'Clique A puis B sur la carte…' : 'Mesurer A → B'}</button>
       ${measurePts.length ? `<button class="gpx-btn gpx-clear" id="measure-clear">Effacer la mesure</button>` : ''}
     </div>
