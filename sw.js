@@ -3,7 +3,7 @@
 // navigation, réutilisables hors-ligne pendant 30 jours.
 // Actif uniquement en https (GitHub Pages) ou localhost — pas en file://.
 
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SHELL = 'drome-shell-' + VERSION;
 const RUNTIME = 'drome-runtime-' + VERSION;
 const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 jours
@@ -54,7 +54,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(runtimeCache(req));
   } else if (isDocument) {
     event.respondWith(networkFirst(req, SHELL));
-  } else if (isSameOrigin || url.hostname === 'unpkg.com') {
+  } else if (isSameOrigin || url.hostname === 'unpkg.com' || url.hostname === 'cdn.jsdelivr.net') {
     event.respondWith(cacheFirst(req, SHELL));
   }
   // Nominatim / Overpass : laissés au réseau (POI déjà en cache localStorage)

@@ -6,6 +6,7 @@
   <title>Drôme · Diois</title>
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/geotiff@2.1.3/dist-browser/geotiff.js"></script>
 
   <style>
     @font-face {
@@ -269,8 +270,8 @@
        avec surépaisseur 3D façon pièce plastique injectée. */
     .tab {
       position: relative;
-      flex: 1;
-      max-height: 92px;
+      flex: 1 1 0;
+      min-height: 0;
       background: var(--greige-1);
       border-bottom: 1px solid var(--greige-2);
       cursor: pointer;
@@ -484,6 +485,15 @@
       font-family: var(--font-ui);
       font-size: 11px;
     }
+    .drone-legend .dl-slider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--greige-2);
+    }
+    .drone-legend .dl-slider input { flex: 1; }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -710,8 +720,10 @@ const state = {
   activeTab: 'fond',
   basemap: 'sat',
   reliefOpacity: 0.60,
+  droneOpacity: 0.60,
   layers: {
     daylight: false,
+    threeD: false,
     contours: true,
     sentiers: false,
     rivieres: false,
@@ -798,7 +810,7 @@ function getBasemapConfig(key) {
   let cfg = configs[key];
   // En mode "Lumière du jour", on retire l'ombre LiDAR cuite : c'est la couche
   // hillshade dynamique (applyDaylight) qui fait le relief, soleil à l'heure réelle.
-  if (cfg && state.layers.daylight) cfg = { layers: cfg.layers.filter(l => !l.id.includes('lidar')) };
+  if (cfg && state.layers.daylight && demSupported()) cfg = { layers: cfg.layers.filter(l => !l.id.includes('lidar')) };
   return cfg;
 }
 
@@ -811,6 +823,7 @@ const boundEvents = new Set();
 function rerender() {
   const gen = ++renderGen;
   map.getCanvas().style.cursor = ''; // évite le curseur "main" bloqué si mouseleave n'a pas fait feu
+  try { map.setTerrain(null); } catch(e){} // détache la 3D avant de retirer les sources
 
   // Suppression dynamique : retire toutes les couches puis toutes les sources
   // présentes (peu importe leur id) — robuste et future-proof pour les couches
@@ -841,6 +854,11 @@ function rerender() {
   if (state.layers.glaciers) applyPOI('glaciers', 'ice_cream', '#4a7ba3', gen);
   if (state.layers.boulangeries) applyPOI('boulangeries', 'bakery', '#a8834a', gen);
   if (state.layers.sentiers) applySentiers();
+
+  // 3D : reliefe la carte via le MNT LiDAR HD (setTerrain)
+  if (state.layers.threeD && ensureDemSource()) {
+    map.setTerrain({ source: 'lidar-dem', exaggeration: 1.3 });
+  }
 }
 
 // Garde : le rendu a-t-il changé pendant le fetch ? (async périmé)
@@ -867,19 +885,19 @@ function applyContours() {
   map.addLayer({ id: 'contours-int', type: 'line', source: 'contours-src', 'source-layer': 'oro_courbe',
     minzoom: 13,
     filter: ['in', 'symbo', 'CNV_INTERCALAIRE', 'CUVETTE_INTERCAL', 'CNV_SS_INTERCALAIRE'],
-    paint: { 'line-color': '#3a3733', 'line-width': 0.5, 'line-opacity': 0.28, 'line-dasharray': [3, 3] } });
+    paint: { 'line-color': '#f04a00', 'line-width': 0.5, 'line-opacity': 0.3, 'line-dasharray': [3, 3] } });
   // Courbes normales
   map.addLayer({ id: 'contours-10', type: 'line', source: 'contours-src', 'source-layer': 'oro_courbe',
     filter: ['in', 'symbo', 'CNV_NORMALE', 'CUVETTE_NORMALE'],
-    paint: { 'line-color': '#3a3733',
+    paint: { 'line-color': '#f04a00',
       'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.4, 14, 0.8, 17, 1.4],
-      'line-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0.3, 14, 0.45] } });
+      'line-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0.4, 14, 0.55] } });
   // Courbes maîtresses
   map.addLayer({ id: 'contours-50', type: 'line', source: 'contours-src', 'source-layer': 'oro_courbe',
     filter: ['in', 'symbo', 'CNV_MAITRESSE', 'CUVETTE_MAITRESSE'],
-    paint: { 'line-color': '#2c2925',
+    paint: { 'line-color': '#f04a00',
       'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.9, 14, 1.6, 17, 2.6],
-      'line-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 14, 0.65] } });
+      'line-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0.6, 14, 0.75] } });
 }
 
 function applySentiers() {
@@ -888,73 +906,65 @@ function applySentiers() {
     paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0.25, 10, 0.55, 12, 0.85] } });
 }
 
-// ── HILLSHADE DYNAMIQUE (Lumière du jour) ───────────────────────────────────
-// L'élévation IGN HIGHRES (RGE ALTI, LiDAR HD là où dispo) est servie en BIL
-// float32 EN mercator par le WMS. Un protocol custom la décode et la ré-encode
-// en terrain-RGB pour que MapLibre calcule l'ombrage EN DIRECT, soleil à l'heure.
-const DEM_R = 20037508.342789244;
+// ── HILLSHADE DYNAMIQUE + 3D (MNT LiDAR HD, décodage GeoTIFF client-side) ────
+// D'après les notes CTO : on télécharge le MNT LiDAR HD brut en GeoTIFF float32
+// (WMS mercator), on le ré-encode en terrain-RGB → MapLibre calcule l'ombrage au
+// GPU. Débloque : soleil dynamique + vraie 3D (setTerrain). Bien plus propre que
+// l'ancienne version BIL 256 (coutures + falaises de nodata = les glitches).
+const DEM_URL = 'float32dem://data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
+  '&LAYERS=IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93&STYLES=&CRS=EPSG:3857' +
+  '&FORMAT=image/geotiff&WIDTH=512&HEIGHT=512&BBOX={bbox-epsg-3857}';
 
-function tileBBox3857(z, x, y) {
-  const n = Math.pow(2, z), res = 2 * DEM_R / n;
-  const minx = -DEM_R + x * res, maxx = minx + res;
-  const maxy = DEM_R - y * res, miny = maxy - res;
-  return `${minx},${miny},${maxx},${maxy}`;
-}
+function demSupported() { return typeof GeoTIFF !== 'undefined'; }
 
-// Encode 256x256 altitudes (m) en PNG terrain-RGB (encodage Mapbox)
-function encodeTerrainPng(heights) {
-  const n = 256, img = new Uint8ClampedArray(n * n * 4);
-  for (let i = 0; i < n * n; i++) {
-    let h = heights[i];
-    if (!isFinite(h) || h < -500 || h > 9000) h = 0; // NoData / mer
-    const v = Math.round((h + 10000) * 10);
-    img[i * 4] = (v >> 16) & 255;
-    img[i * 4 + 1] = (v >> 8) & 255;
-    img[i * 4 + 2] = v & 255;
-    img[i * 4 + 3] = 255;
+// Protocol : GeoTIFF float32 → terrain-RGB (encodage Mapbox)
+async function float32demTile(params, abortController) {
+  const finalUrl = 'https://' + params.url.replace('float32dem://', '');
+  const res = await fetch(finalUrl, { signal: abortController && abortController.signal });
+  const buf = await res.arrayBuffer();
+  const tiff = await GeoTIFF.fromArrayBuffer(buf);
+  const image = await tiff.getImage();
+  const w = image.getWidth(), h = image.getHeight();
+  const elev = (await image.readRasters())[0];
+  const rgba = new Uint8ClampedArray(w * h * 4);
+  for (let i = 0; i < elev.length; i++) {
+    let e = elev[i];
+    if (!isFinite(e) || e < -500 || e > 9000) e = 0; // nodata / hors couverture
+    const v = Math.round((e + 10000) / 0.1);
+    rgba[i * 4]     = (v >> 16) & 255;
+    rgba[i * 4 + 1] = (v >> 8) & 255;
+    rgba[i * 4 + 2] = v & 255;
+    rgba[i * 4 + 3] = 255;
   }
-  return new Promise(resolve => {
-    const c = document.createElement('canvas');
-    c.width = n; c.height = n;
-    c.getContext('2d').putImageData(new ImageData(img, n, n), 0, 0);
-    c.toBlob(b => b.arrayBuffer().then(resolve), 'image/png');
-  });
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  c.getContext('2d').putImageData(new ImageData(rgba, w, h), 0, 0);
+  const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+  return { data: await blob.arrayBuffer() };
 }
 
-async function demTile(params) {
-  const [z, x, y] = params.url.replace('lidardem://', '').split('/').map(Number);
-  const wms = 'https://data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
-    '&LAYERS=ELEVATION.ELEVATIONGRIDCOVERAGE.HIGHRES&CRS=EPSG:3857&STYLES=' +
-    '&WIDTH=256&HEIGHT=256&FORMAT=image/x-bil;bits=32&BBOX=' + tileBBox3857(z, x, y);
-  let heights;
-  try {
-    const res = await fetch(wms);
-    const buf = await res.arrayBuffer();
-    heights = (buf.byteLength >= 256 * 256 * 4) ? new Float32Array(buf, 0, 256 * 256) : new Float32Array(256 * 256);
-  } catch (e) {
-    heights = new Float32Array(256 * 256); // tuile plate en secours
+if (typeof maplibregl !== 'undefined') {
+  try { maplibregl.addProtocol('float32dem', float32demTile); } catch (e) {}
+}
+
+// Source DEM partagée par le hillshade dynamique ET la 3D (setTerrain)
+function ensureDemSource() {
+  if (!demSupported()) return false;
+  if (!map.getSource('lidar-dem')) {
+    map.addSource('lidar-dem', { type: 'raster-dem', tiles: [DEM_URL], tileSize: 512, encoding: 'mapbox', maxzoom: 15 });
   }
-  const png = await encodeTerrainPng(heights);
-  return { data: png };
-}
-
-if (maplibregl.getProtocol ? !maplibregl.getProtocol('lidardem') : true) {
-  try { maplibregl.addProtocol('lidardem', demTile); } catch (e) {}
+  return true;
 }
 
 function applyDaylight() {
-  map.addSource('lidardem-src', {
-    type: 'raster-dem', tiles: ['lidardem://{z}/{x}/{y}'],
-    tileSize: 256, encoding: 'mapbox', minzoom: 6, maxzoom: 15
-  });
-  map.addLayer({ id: 'lidardem-hs', type: 'hillshade', source: 'lidardem-src',
+  if (!ensureDemSource()) return; // pas de GeoTIFF (vieux navigateur) → on garde l'ombre cuite
+  map.addLayer({ id: 'lidardem-hs', type: 'hillshade', source: 'lidar-dem',
     paint: {
       'hillshade-shadow-color': '#151310',
       'hillshade-highlight-color': '#fff7ec',
       'hillshade-accent-color': '#2c2c2c',
       'hillshade-illumination-anchor': 'map',
       'hillshade-illumination-direction': sunAzimuth(),
-      'hillshade-exaggeration': 0.55
+      'hillshade-exaggeration': 0.5
     } });
   updateSunlight();
 }
@@ -1045,16 +1055,36 @@ async function applyVillages(gen) {
     const osm = await overpassFetch('drm-villages-v3', q);
     const gj = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource('villages-src')) return;
-    map.addSource('villages-src', { type: 'geojson', data: gj });
-    map.addLayer({ id: 'villages-pts', type: 'circle', source: 'villages-src',
+    map.addSource('villages-src', { type: 'geojson', data: gj, cluster: true, clusterRadius: 50, clusterMaxZoom: 11 });
+    // Clusters : petit point + nombre (dézoomé)
+    map.addLayer({ id: 'villages-cluster', type: 'circle', source: 'villages-src', filter: ['has', 'point_count'],
+      paint: { 'circle-color': '#1a1a1a', 'circle-opacity': 0.85,
+        'circle-radius': ['step', ['get', 'point_count'], 8, 10, 11, 30, 14],
+        'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1 } });
+    map.addLayer({ id: 'villages-cluster-count', type: 'symbol', source: 'villages-src', filter: ['has', 'point_count'],
+      layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-font': ['VG5000'], 'text-size': 11, 'text-allow-overlap': true },
+      paint: { 'text-color': '#f2efe7' } });
+    // Villages isolés : point + nom (zoomé)
+    map.addLayer({ id: 'villages-pts', type: 'circle', source: 'villages-src', filter: ['!', ['has', 'point_count']],
       paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 2, 14, 5],
         'circle-color': '#1a1a1a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1 } });
-    map.addLayer({ id: 'villages-lbl', type: 'symbol', source: 'villages-src',
+    map.addLayer({ id: 'villages-lbl', type: 'symbol', source: 'villages-src', filter: ['!', ['has', 'point_count']],
       layout: { 'text-field': ['get', 'name'],
         'text-font': ['VG5000'],
         'text-size': ['interpolate', ['linear'], ['zoom'], 10, 10, 14, 13],
         'text-offset': [0, 1.1], 'text-anchor': 'top', 'text-allow-overlap': false },
       paint: { 'text-color': '#1a1a1a', 'text-halo-color': 'rgba(242,239,231,0.9)', 'text-halo-width': 0.8 } });
+    if (!boundEvents.has('cl-villages')) {
+      boundEvents.add('cl-villages');
+      map.on('click', 'villages-cluster', e => {
+        const f = map.queryRenderedFeatures(e.point, { layers: ['villages-cluster'] })[0];
+        if (!f) return;
+        map.getSource('villages-src').getClusterExpansionZoom(f.properties.cluster_id)
+          .then(z => map.easeTo({ center: f.geometry.coordinates, zoom: z, duration: 600 })).catch(() => {});
+      });
+      map.on('mouseenter', 'villages-cluster', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'villages-cluster', () => map.getCanvas().style.cursor = '');
+    }
   } catch(e) { console.warn('Villages fetch failed', e); }
 }
 
@@ -1214,7 +1244,7 @@ function addClusteredPoi(key, gj, gen) {
 // ── Zone drone (restrictions vol de loisir, IGN) ────────────────────────────
 function applyDrone() {
   map.addSource('drone-src', { type: 'raster', tiles: [IGN('TRANSPORTS.DRONES.RESTRICTIONS')], tileSize: 256, maxzoom: 18 });
-  map.addLayer({ id: 'drone-lyr', type: 'raster', source: 'drone-src', paint: { 'raster-opacity': 0.6 } });
+  map.addLayer({ id: 'drone-lyr', type: 'raster', source: 'drone-src', paint: { 'raster-opacity': state.droneOpacity } });
 }
 
 // ── Grille de coordonnées (graticule lat/lon) ───────────────────────────────
@@ -1310,6 +1340,7 @@ const PANELS = {
     </div>
     ${state.layers.drone ? `
     <div class="drone-legend">
+      <div class="dl-slider"><span>Opacité</span><input type="range" id="drone-slider" min="10" max="100" value="${Math.round(state.droneOpacity * 100)}"></div>
       <div class="dl-row"><span class="dl-sw" style="background:#c0143c"></span>Interdit (0 m)</div>
       <div class="dl-row"><span class="dl-sw" style="background:#e0692b"></span>Hauteur réduite (30 m)</div>
       <div class="dl-row"><span class="dl-sw" style="background:#eaa62b"></span>50–60 m</div>
@@ -1321,6 +1352,10 @@ const PANELS = {
     <div class="row ${state.layers.daylight ? 'active' : ''}" data-layer="daylight" style="border-top:1px solid var(--greige-2); margin-top:6px;">
       <div class="checkbox"></div>
       <div class="row-label">Lumière du jour<div class="row-sub">relief ombré à l'heure réelle</div></div>
+    </div>
+    <div class="row ${state.layers.threeD ? 'active' : ''}" data-layer="threeD">
+      <div class="checkbox"></div>
+      <div class="row-label">Relief 3D<div class="row-sub">incline la carte (MNT LiDAR HD)</div></div>
     </div>
 
     <div class="slider-block">
@@ -1400,6 +1435,7 @@ const PANELS = {
 // ── ICÔNES (Tabler, MIT) pour les toggles ponctuels ─────────────────────────
 const ICON_PATHS = {
   daylight:     '<path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1M20 12h1M12 3v1M12 20v1M5.6 5.6l.7 .7M17.7 17.7l.7 .7M18.4 5.6l-.7 .7M6.3 17.7l-.7 .7" />',
+  threeD:       '<path d="M21 16.008v-8.016a2 2 0 0 0 -1 -1.732l-7 -4.008a2 2 0 0 0 -2 0l-7 4.008a2 2 0 0 0 -1 1.732v8.016a2 2 0 0 0 1 1.732l7 4.008a2 2 0 0 0 2 0l7 -4.008a2 2 0 0 0 1 -1.732z" /><path d="M12 22v-10" /><path d="M12 12l8.73 -5.04" /><path d="M3.27 6.96l8.73 5.04" />',
   contours:     '<path d="M3 20h18l-6.921 -14.612a2.3 2.3 0 0 0 -4.158 0l-6.921 14.612" /><path d="M7.5 11l2 2.5l2.5 -2.5l2 3l2.5 -2" />',
   sentiers:     '<path d="M12 4a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 21l3 -4" /><path d="M16 21l-2 -4l-3 -3l1 -6" /><path d="M6 12l2 -3l4 -1l3 3l3 1" />',
   rivieres:     '<path d="M3 7c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 17c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 12c3 -2 6 -2 9 0s6 2 9 0" />',
@@ -1422,7 +1458,7 @@ const ICON_COLORS = {
   viewpoints: '#6a3fb0', monuments: '#8b5a3a', villages: '#1a1a1a',
   restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a',
   forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e',
-  daylight: '#d99a20'
+  daylight: '#d99a20', threeD: '#6b6355'
 };
 function iconSvg(key) {
   const p = ICON_PATHS[key];
@@ -1472,6 +1508,7 @@ function attachPanelEvents() {
       state.layers[l] = !state.layers[l];
       renderPanel();
       rerender();
+      if (l === 'threeD') map.easeTo({ pitch: state.layers.threeD ? 62 : 0, duration: 700 });
     });
   });
 
@@ -1484,6 +1521,14 @@ function attachPanelEvents() {
       state.reliefOpacity = v / 100;
     });
     slider.addEventListener('change', rerender);
+  }
+
+  const dslider = content.querySelector('#drone-slider');
+  if (dslider) {
+    dslider.addEventListener('input', () => {
+      state.droneOpacity = parseInt(dslider.value) / 100;
+      if (map.getLayer('drone-lyr')) map.setPaintProperty('drone-lyr', 'raster-opacity', state.droneOpacity);
+    });
   }
 
   const searchInput = content.querySelector('#search-input');
