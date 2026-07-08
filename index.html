@@ -531,6 +531,7 @@
     }
     .gpx-btn:active { transform: scale(0.98); }
     .gpx-clear { color: var(--orange-2); }
+    .gpx-active { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -736,6 +737,8 @@
 
 <button id="compass" title="Revenir au nord">
   <svg id="compass-rose" width="34" height="34" viewBox="0 0 24 24">
+    <path d="M12 12l5.7 -5.7M12 12l5.7 5.7M12 12l-5.7 5.7M12 12l-5.7 -5.7"
+          stroke="#8a877c" stroke-width="0.5" opacity="0.6"/>
     <polygon points="12,2 13.5,12 10.5,12" fill="#cc6a3a"/>
     <polygon points="12,22 10.5,12 13.5,12" fill="#1a1a1a"/>
     <polygon points="22,12 12,10.5 12,13.5" fill="#1a1a1a"/>
@@ -926,6 +929,7 @@ function rerender() {
   if (state.layers.boulangeries) applyPOI('boulangeries', 'bakery', '#a8834a', gen);
   if (state.layers.sentiers) applySentiers();
   if (gpxData) applyGpx();
+  if (measurePts.length) applyMeasure();
 
   // 3D : reliefe la carte via le MNT LiDAR HD (setTerrain)
   if (state.layers.threeD && ensureDemSource()) {
@@ -1487,6 +1491,45 @@ function applyGpx() {
 }
 function clearGpx() { gpxData = null; rerender(); }
 
+// ── MESURE A → B (distance à vol d'oiseau) ──────────────────────────────────
+let measureMode = false;
+let measurePts = [];
+function haversine(a, b) {
+  const R = 6371000, r = Math.PI / 180;
+  const dLat = (b[1] - a[1]) * r, dLon = (b[0] - a[0]) * r;
+  const s = Math.sin(dLat / 2) ** 2 + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+function fmtDist(m) { return m < 1000 ? Math.round(m) + ' m' : (m / 1000).toFixed(2) + ' km'; }
+function measureGeo() {
+  const feats = measurePts.map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p }, properties: {} }));
+  if (measurePts.length === 2) {
+    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measurePts }, properties: {} });
+    const mid = [(measurePts[0][0] + measurePts[1][0]) / 2, (measurePts[0][1] + measurePts[1][1]) / 2];
+    feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: mid }, properties: { label: fmtDist(haversine(measurePts[0], measurePts[1])) } });
+  }
+  return { type: 'FeatureCollection', features: feats };
+}
+function applyMeasure() {
+  if (!measurePts.length) return;
+  map.addSource('measure-src', { type: 'geojson', data: measureGeo() });
+  map.addLayer({ id: 'measure-line', type: 'line', source: 'measure-src', filter: ['==', '$type', 'LineString'],
+    paint: { 'line-color': '#1a1a1a', 'line-width': 2, 'line-dasharray': [2, 1.5], 'line-opacity': 0.8 } });
+  map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src',
+    filter: ['all', ['==', '$type', 'Point'], ['!', ['has', 'label']]],
+    paint: { 'circle-radius': 5, 'circle-color': '#cc6a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 2 } });
+  map.addLayer({ id: 'measure-lbl', type: 'symbol', source: 'measure-src', filter: ['has', 'label'],
+    layout: { 'text-field': ['get', 'label'], 'text-font': ['VG5000'], 'text-size': 13, 'text-offset': [0, -1.1], 'text-anchor': 'bottom' },
+    paint: { 'text-color': '#1a1a1a', 'text-halo-color': '#f2efe7', 'text-halo-width': 2 } });
+}
+function onMeasureClick(e) {
+  if (!measureMode) return;
+  if (measurePts.length >= 2) measurePts = [];
+  measurePts.push([e.lngLat.lng, e.lngLat.lat]);
+  const src = map.getSource('measure-src');
+  if (src) src.setData(measureGeo()); else applyMeasure();
+}
+
 // ── Noms des forêts (label au centre) ───────────────────────────────────────
 async function applyForets(gen) {
   const q = `[out:json][timeout:25];(way["natural"="wood"]["name"](${bboxStr});relation["natural"="wood"]["name"](${bboxStr});way["landuse"="forest"]["name"](${bboxStr});relation["landuse"="forest"]["name"](${bboxStr}););out center;`;
@@ -1673,6 +1716,12 @@ const PANELS = {
     </div>` : ''}
 
     <div class="gpx-block">
+      <div class="row-sub" style="margin-bottom:6px;">Distance à vol d'oiseau</div>
+      <button class="gpx-btn ${measureMode ? 'gpx-active' : ''}" id="measure-btn">${measureMode ? 'Clique A puis B sur la carte…' : 'Mesurer A → B'}</button>
+      ${measurePts.length ? `<button class="gpx-btn gpx-clear" id="measure-clear">Effacer la mesure</button>` : ''}
+    </div>
+
+    <div class="gpx-block">
       <div class="row-sub" style="margin-bottom:6px;">Itinéraires (traces GPX)</div>
       <label class="gpx-btn">Importer une trace GPX<input type="file" id="gpx-input" accept=".gpx,application/gpx+xml" hidden></label>
       ${gpxData ? `<button class="gpx-btn gpx-clear" id="gpx-clear">Effacer les traces</button>` : ''}
@@ -1807,6 +1856,20 @@ function attachPanelEvents() {
   const gpxClear = content.querySelector('#gpx-clear');
   if (gpxClear) gpxClear.addEventListener('click', clearGpx);
 
+  const measureBtn = content.querySelector('#measure-btn');
+  if (measureBtn) measureBtn.addEventListener('click', () => {
+    measureMode = !measureMode;
+    map.getCanvas().style.cursor = measureMode ? 'crosshair' : '';
+    renderPanel();
+  });
+  const measureClear = content.querySelector('#measure-clear');
+  if (measureClear) measureClear.addEventListener('click', () => {
+    measurePts = [];
+    const s = map.getSource('measure-src');
+    if (s) s.setData(measureGeo());
+    renderPanel();
+  });
+
   const searchInput = content.querySelector('#search-input');
   if (searchInput) {
     searchInput.addEventListener('input', debounce(handleSearch, 350));
@@ -1933,6 +1996,8 @@ document.getElementById('home-btn').addEventListener('click',
 const compassRose = document.getElementById('compass-rose');
 map.on('rotate', () => { compassRose.style.transform = `rotate(${-map.getBearing()}deg)`; });
 document.getElementById('compass').addEventListener('click', () => map.easeTo({ bearing: 0, duration: 500 }));
+
+map.on('click', onMeasureClick); // mesure A→B (actif seulement si measureMode)
 
 const scaleVal = document.getElementById('scale-val');
 function updateScale() {
