@@ -711,6 +711,7 @@ const state = {
   basemap: 'sat',
   reliefOpacity: 0.60,
   layers: {
+    daylight: false,
     contours: true,
     sentiers: false,
     rivieres: false,
@@ -794,7 +795,11 @@ function getBasemapConfig(key) {
       layers: [{ id: 'base-cassini', source: IGN('AN-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI', 'image/jpeg', 'PM_0_14'), opacity: 1, maxzoom: 14 }]
     }
   };
-  return configs[key];
+  let cfg = configs[key];
+  // En mode "Lumière du jour", on retire l'ombre LiDAR cuite : c'est la couche
+  // hillshade dynamique (applyDaylight) qui fait le relief, soleil à l'heure réelle.
+  if (cfg && state.layers.daylight) cfg = { layers: cfg.layers.filter(l => !l.id.includes('lidar')) };
+  return cfg;
 }
 
 // ── Rerender complet ────────────────────────────────────────────────────────
@@ -819,6 +824,7 @@ function rerender() {
     map.addLayer({ id: l.id, type: 'raster', source: l.id, paint: { 'raster-opacity': l.opacity } });
   });
 
+  if (state.layers.daylight) applyDaylight();
   if (state.layers.drone) applyDrone();
   if (state.layers.forets) applyForets(gen);
   if (state.layers.rivieres) applyRivieres(gen);
@@ -844,10 +850,18 @@ function applyContours() {
   // Courbes de niveau NATIONALES via tuiles vectorielles PLAN.IGN
   // (source-layer 'oro_courbe', champ 'symbo'), visibles dès z11.
   // Couvre toute la France : pas de trou en glissant vers le Gard.
+  // Fallback bas zoom : raster ELEVATION.CONTOUR.LINE (couvre z6-18), affiché
+  // seulement à z9 (1:250k) — le vecteur oro_courbe prend le relais dès z10.
+  map.addSource('contours-raster-src', {
+    type: 'raster', tiles: [IGN('ELEVATION.CONTOUR.LINE')], tileSize: 256, maxzoom: 18
+  });
+  map.addLayer({ id: 'contours-raster', type: 'raster', source: 'contours-raster-src',
+    minzoom: 9, maxzoom: 10, paint: { 'raster-opacity': 0.6 } });
+
   map.addSource('contours-src', {
     type: 'vector',
     tiles: ['https://data.geopf.fr/tms/1.0.0/PLAN.IGN/{z}/{x}/{y}.pbf'],
-    minzoom: 11, maxzoom: 18
+    minzoom: 10, maxzoom: 18
   });
   // Intercalaires — pointillés fins, seulement zoomé
   map.addLayer({ id: 'contours-int', type: 'line', source: 'contours-src', 'source-layer': 'oro_courbe',
@@ -873,6 +887,105 @@ function applySentiers() {
   map.addLayer({ id: 'sentiers', type: 'raster', source: 'sentiers-src',
     paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0.25, 10, 0.55, 12, 0.85] } });
 }
+
+// ── HILLSHADE DYNAMIQUE (Lumière du jour) ───────────────────────────────────
+// L'élévation IGN HIGHRES (RGE ALTI, LiDAR HD là où dispo) est servie en BIL
+// float32 EN mercator par le WMS. Un protocol custom la décode et la ré-encode
+// en terrain-RGB pour que MapLibre calcule l'ombrage EN DIRECT, soleil à l'heure.
+const DEM_R = 20037508.342789244;
+
+function tileBBox3857(z, x, y) {
+  const n = Math.pow(2, z), res = 2 * DEM_R / n;
+  const minx = -DEM_R + x * res, maxx = minx + res;
+  const maxy = DEM_R - y * res, miny = maxy - res;
+  return `${minx},${miny},${maxx},${maxy}`;
+}
+
+// Encode 256x256 altitudes (m) en PNG terrain-RGB (encodage Mapbox)
+function encodeTerrainPng(heights) {
+  const n = 256, img = new Uint8ClampedArray(n * n * 4);
+  for (let i = 0; i < n * n; i++) {
+    let h = heights[i];
+    if (!isFinite(h) || h < -500 || h > 9000) h = 0; // NoData / mer
+    const v = Math.round((h + 10000) * 10);
+    img[i * 4] = (v >> 16) & 255;
+    img[i * 4 + 1] = (v >> 8) & 255;
+    img[i * 4 + 2] = v & 255;
+    img[i * 4 + 3] = 255;
+  }
+  return new Promise(resolve => {
+    const c = document.createElement('canvas');
+    c.width = n; c.height = n;
+    c.getContext('2d').putImageData(new ImageData(img, n, n), 0, 0);
+    c.toBlob(b => b.arrayBuffer().then(resolve), 'image/png');
+  });
+}
+
+async function demTile(params) {
+  const [z, x, y] = params.url.replace('lidardem://', '').split('/').map(Number);
+  const wms = 'https://data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
+    '&LAYERS=ELEVATION.ELEVATIONGRIDCOVERAGE.HIGHRES&CRS=EPSG:3857&STYLES=' +
+    '&WIDTH=256&HEIGHT=256&FORMAT=image/x-bil;bits=32&BBOX=' + tileBBox3857(z, x, y);
+  let heights;
+  try {
+    const res = await fetch(wms);
+    const buf = await res.arrayBuffer();
+    heights = (buf.byteLength >= 256 * 256 * 4) ? new Float32Array(buf, 0, 256 * 256) : new Float32Array(256 * 256);
+  } catch (e) {
+    heights = new Float32Array(256 * 256); // tuile plate en secours
+  }
+  const png = await encodeTerrainPng(heights);
+  return { data: png };
+}
+
+if (maplibregl.getProtocol ? !maplibregl.getProtocol('lidardem') : true) {
+  try { maplibregl.addProtocol('lidardem', demTile); } catch (e) {}
+}
+
+function applyDaylight() {
+  map.addSource('lidardem-src', {
+    type: 'raster-dem', tiles: ['lidardem://{z}/{x}/{y}'],
+    tileSize: 256, encoding: 'mapbox', minzoom: 6, maxzoom: 15
+  });
+  map.addLayer({ id: 'lidardem-hs', type: 'hillshade', source: 'lidardem-src',
+    paint: {
+      'hillshade-shadow-color': '#151310',
+      'hillshade-highlight-color': '#fff7ec',
+      'hillshade-accent-color': '#2c2c2c',
+      'hillshade-illumination-anchor': 'map',
+      'hillshade-illumination-direction': sunAzimuth(),
+      'hillshade-exaggeration': 0.55
+    } });
+  updateSunlight();
+}
+
+// Position du soleil (algo SunCalc) → azimut boussole depuis le Nord
+const D2R = Math.PI / 180;
+function sunAzimuth() {
+  const c = map.getCenter();
+  return sunCompass(new Date(), c.lat, c.lng);
+}
+function sunCompass(date, lat, lng) {
+  const lw = D2R * -lng, phi = D2R * lat;
+  const d = date.valueOf() / 86400000 - 0.5 + 2440588 - 2451545;
+  const M = D2R * (357.5291 + 0.98560028 * d);
+  const C = D2R * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M));
+  const L = M + C + D2R * 102.9372 + Math.PI;
+  const e = D2R * 23.4397;
+  const dec = Math.asin(Math.sin(e) * Math.sin(L));
+  const ra = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L));
+  const th = D2R * (280.16 + 360.9856235 * d) - lw;
+  const H = th - ra;
+  // azimut SunCalc : 0 = Sud, +vers Ouest → boussole depuis Nord = +180°
+  const az = Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(phi) - Math.tan(dec) * Math.cos(phi));
+  return (az / D2R + 180 + 360) % 360;
+}
+
+function updateSunlight() {
+  if (!map.getLayer('lidardem-hs')) return;
+  map.setPaintProperty('lidardem-hs', 'hillshade-illumination-direction', sunAzimuth());
+}
+setInterval(updateSunlight, 5 * 60 * 1000); // soleil qui tourne, maj toutes les 5 min
 
 // ── Overpass ─────────────────────────────────────────────────────────────
 const BBOX = { south: 44.55, west: 4.85, north: 45.05, east: 5.45 };
@@ -1205,6 +1318,11 @@ const PANELS = {
       <div class="dl-note">Indicatif. Vérifie l'appli officielle (Géoportail / AlphaTango) avant de voler.</div>
     </div>` : ''}
 
+    <div class="row ${state.layers.daylight ? 'active' : ''}" data-layer="daylight" style="border-top:1px solid var(--greige-2); margin-top:6px;">
+      <div class="checkbox"></div>
+      <div class="row-label">Lumière du jour<div class="row-sub">relief ombré à l'heure réelle</div></div>
+    </div>
+
     <div class="slider-block">
       <div class="slider-header">
         <span class="slider-label">Intensité relief</span>
@@ -1281,6 +1399,7 @@ const PANELS = {
 
 // ── ICÔNES (Tabler, MIT) pour les toggles ponctuels ─────────────────────────
 const ICON_PATHS = {
+  daylight:     '<path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1M20 12h1M12 3v1M12 20v1M5.6 5.6l.7 .7M17.7 17.7l.7 .7M18.4 5.6l-.7 .7M6.3 17.7l-.7 .7" />',
   contours:     '<path d="M3 20h18l-6.921 -14.612a2.3 2.3 0 0 0 -4.158 0l-6.921 14.612" /><path d="M7.5 11l2 2.5l2.5 -2.5l2 3l2.5 -2" />',
   sentiers:     '<path d="M12 4a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 21l3 -4" /><path d="M16 21l-2 -4l-3 -3l1 -6" /><path d="M6 12l2 -3l4 -1l3 3l3 1" />',
   rivieres:     '<path d="M3 7c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 17c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 12c3 -2 6 -2 9 0s6 2 9 0" />',
@@ -1302,7 +1421,8 @@ const ICON_COLORS = {
   contours: '#6b6355', sentiers: '#6b6355', rivieres: '#3d6f9a', baignade: '#4a7ba3',
   viewpoints: '#6a3fb0', monuments: '#8b5a3a', villages: '#1a1a1a',
   restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a',
-  forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e'
+  forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e',
+  daylight: '#d99a20'
 };
 function iconSvg(key) {
   const p = ICON_PATHS[key];

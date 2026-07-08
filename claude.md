@@ -111,8 +111,9 @@ Layers utilisées :
 - `ORTHOIMAGERY.ORTHOPHOTOS.1950-1965` — mission aérienne historique
 - `IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW` — hillshade LiDAR HD
 - `GEOGRAPHICALGRIDSYSTEMS.ETATMAJOR40` (jpeg) — Carte d'État-Major 1866
-- `BNF-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI` (jpeg, TILEMATRIXSET=PM_0_14, maxzoom 14)
-  → **ATTENTION : Cassini est en panne actuellement, à débugger**
+- `AN-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI` (jpeg, TILEMATRIXSET=PM_0_14, maxzoom 14)
+  → **RÉPARÉ (2026-07-08)** : le bug était le préfixe `BNF-` (inexistant).
+  Le bon identifiant est `AN-IGNF_...`. Fonctionne, ajouté au sélecteur de fond.
 
 ### Contours de niveau
 
@@ -177,9 +178,10 @@ https://nominatim.openstreetmap.org/search
 
 ### Ce qui ne fonctionne pas
 
-- ❌ **Cassini** — l'URL BNF avec TILEMATRIXSET=PM_0_14 renvoie du noir
-- ❌ **Contours de niveau** — les tuiles ISOHYPSE se chargent mais rien ne
-  s'affiche, probablement un problème de source-layer ou de champ altitude
+- ✅ **Cassini** — RÉPARÉ : identifiant `AN-IGNF_...` au lieu de `BNF-`.
+- ✅ **Contours de niveau** — RÉPARÉS : on a abandonné ISOHYPSE (plancher z14)
+  pour la source vectorielle nationale `PLAN.IGN` (`source-layer: oro_courbe`,
+  champ `symbo`), visibles dès z11. Reste souhaité : les avoir dès z9 (1:250k).
 
 ### Ce qui doit être amélioré (retours utilisateur)
 
