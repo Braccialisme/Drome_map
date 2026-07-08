@@ -516,6 +516,21 @@
       border-bottom: 1px solid var(--greige-2);
     }
     .drone-legend .dl-slider input { flex: 1; }
+
+    .gpx-block { border-top: 1px solid var(--greige-2); margin-top: 8px; padding-top: 10px; }
+    .gpx-btn {
+      display: block; width: 100%; text-align: center;
+      background: var(--greige-0);
+      border: 1px solid var(--greige-2);
+      border-radius: var(--radius);
+      padding: 8px 10px; margin-bottom: 6px;
+      cursor: pointer;
+      font-family: var(--font-ui); font-size: 13px;
+      color: var(--ink);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .gpx-btn:active { transform: scale(0.98); }
+    .gpx-clear { color: var(--orange-2); }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -721,8 +736,11 @@
 
 <button id="compass" title="Revenir au nord">
   <svg id="compass-rose" width="26" height="26" viewBox="0 0 24 24">
-    <polygon points="12,2.5 15,12 12,10 9,12" fill="#cc3a2a"/>
-    <polygon points="12,21.5 9,12 12,14 15,12" fill="#8a877c"/>
+    <polygon points="12,2 13.5,12 10.5,12" fill="#cc6a3a"/>
+    <polygon points="12,22 10.5,12 13.5,12" fill="#1a1a1a"/>
+    <polygon points="22,12 12,10.5 12,13.5" fill="#1a1a1a"/>
+    <polygon points="2,12 12,13.5 12,10.5" fill="#1a1a1a"/>
+    <circle cx="12" cy="12" r="1.3" fill="#1a1a1a"/>
   </svg>
 </button>
 
@@ -769,9 +787,13 @@ const state = {
   basemap: 'sat',
   reliefOpacity: 0.60,
   droneOpacity: 0.60,
+  slopeOpacity: 0.55,
+  slopeMin: 27,
+  slopeMax: 43,
   layers: {
     daylight: false,
     threeD: false,
+    slope: false,
     contours: true,
     sentiers: false,
     rivieres: false,
@@ -887,6 +909,7 @@ function rerender() {
 
   if (state.layers.daylight) applyDaylight();
   if (state.layers.drone) applyDrone();
+  if (state.layers.slope) applySlope();
   if (state.layers.forets) applyForets(gen);
   if (state.layers.rivieres) applyRivieres(gen);
   if (state.layers.contours) applyContours();
@@ -902,6 +925,7 @@ function rerender() {
   if (state.layers.glaciers) applyPOI('glaciers', 'ice_cream', '#4a7ba3', gen);
   if (state.layers.boulangeries) applyPOI('boulangeries', 'bakery', '#a8834a', gen);
   if (state.layers.sentiers) applySentiers();
+  if (gpxData) applyGpx();
 
   // 3D : reliefe la carte via le MNT LiDAR HD (setTerrain)
   if (state.layers.threeD && ensureDemSource()) {
@@ -1364,6 +1388,105 @@ function applyGrille() {
     paint: { 'line-color': '#f2efe7', 'line-opacity': 0.35, 'line-width': 0.6 } });
 }
 
+// ── PENTES (slope) — calcul client-side depuis le MNT LiDAR HD ──────────────
+// Protocol slope://<min>/<max>/<wms-geotiff> : décode le MNT, calcule la pente
+// par pixel (gradient), colorise par degrés (transparent < min, jaune→rouge).
+async function slopeTile(params) {
+  const rest = params.url.replace('slope://', '');
+  const i1 = rest.indexOf('/'), i2 = rest.indexOf('/', i1 + 1);
+  const smin = parseFloat(rest.slice(0, i1)), smax = parseFloat(rest.slice(i1 + 1, i2));
+  const wms = 'https://' + rest.slice(i2 + 1);
+  const bboxM = ((wms.match(/BBOX=([^&]+)/) || [])[1] || '0,0,0,0').split(',').map(Number);
+  const res = await fetch(wms);
+  const buf = await res.arrayBuffer();
+  const tiff = await GeoTIFF.fromArrayBuffer(buf);
+  const image = await tiff.getImage();
+  const w = image.getWidth(), h = image.getHeight();
+  const elev = (await image.readRasters())[0];
+  const latC = 2 * Math.atan(Math.exp(((bboxM[1] + bboxM[3]) / 2) / 6378137)) - Math.PI / 2;
+  const dx = ((bboxM[2] - bboxM[0]) / w) * Math.cos(latC) || 10;
+  const dy = ((bboxM[3] - bboxM[1]) / h) * Math.cos(latC) || 10;
+  const at = (x, y) => { const e = elev[y * w + x]; return (!isFinite(e) || e < -500 || e > 9000) ? 0 : e; };
+  const rgba = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const xl = x > 0 ? x - 1 : x, xr = x < w - 1 ? x + 1 : x;
+    const yu = y > 0 ? y - 1 : y, yd = y < h - 1 ? y + 1 : y;
+    const gx = (at(xr, y) - at(xl, y)) / ((xr - xl) * dx);
+    const gy = (at(x, yd) - at(x, yu)) / ((yd - yu) * dy);
+    const slope = Math.atan(Math.hypot(gx, gy)) * 180 / Math.PI;
+    const o = (y * w + x) * 4;
+    if (slope < smin) { rgba[o + 3] = 0; continue; }
+    const t = Math.min(1, (slope - smin) / Math.max(1, smax - smin));
+    let r, g, b;
+    if (t < 0.5) { const u = t / 0.5; r = 255; g = Math.round(210 - 136 * u); b = Math.round(74 - 74 * u); }
+    else { const u = (t - 0.5) / 0.5; r = Math.round(240 - 118 * u); g = Math.round(74 - 58 * u); b = Math.round(48 * u); }
+    rgba[o] = r; rgba[o + 1] = g; rgba[o + 2] = b; rgba[o + 3] = 210;
+  }
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  c.getContext('2d').putImageData(new ImageData(rgba, w, h), 0, 0);
+  const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+  return { data: await blob.arrayBuffer() };
+}
+if (typeof maplibregl !== 'undefined') { try { maplibregl.addProtocol('slope', slopeTile); } catch (e) {} }
+
+function applySlope() {
+  if (!demSupported()) return;
+  const wms = 'data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
+    '&LAYERS=IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93&STYLES=&CRS=EPSG:3857' +
+    '&FORMAT=image/geotiff&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}';
+  map.addSource('slope-src', { type: 'raster', tiles: [`slope://${state.slopeMin}/${state.slopeMax}/${wms}`], tileSize: 256, maxzoom: 15 });
+  map.addLayer({ id: 'slope-lyr', type: 'raster', source: 'slope-src', paint: { 'raster-opacity': state.slopeOpacity } });
+}
+function reapplySlope() {
+  if (map.getLayer('slope-lyr')) map.removeLayer('slope-lyr');
+  if (map.getSource('slope-src')) map.removeSource('slope-src');
+  if (state.layers.slope) applySlope();
+}
+
+// ── ITINÉRAIRES (import de traces GPX) ──────────────────────────────────────
+let gpxData = null;
+function parseGpx(text) {
+  const doc = new DOMParser().parseFromString(text, 'application/xml');
+  const feats = [];
+  doc.querySelectorAll('trk').forEach(trk => {
+    const coords = [];
+    trk.querySelectorAll('trkpt').forEach(pt => {
+      const lon = parseFloat(pt.getAttribute('lon')), lat = parseFloat(pt.getAttribute('lat'));
+      if (isFinite(lon) && isFinite(lat)) coords.push([lon, lat]);
+    });
+    if (coords.length > 1) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} });
+  });
+  if (!feats.length) {
+    const coords = [];
+    doc.querySelectorAll('rtept, wpt').forEach(pt => {
+      const lon = parseFloat(pt.getAttribute('lon')), lat = parseFloat(pt.getAttribute('lat'));
+      if (isFinite(lon) && isFinite(lat)) coords.push([lon, lat]);
+    });
+    if (coords.length > 1) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} });
+  }
+  return feats;
+}
+function loadGpxText(text) {
+  const feats = parseGpx(text);
+  if (!feats.length) { alert('Trace GPX vide ou illisible'); return; }
+  gpxData = { type: 'FeatureCollection', features: (gpxData ? gpxData.features : []).concat(feats) };
+  rerender();
+  const pts = feats.reduce((a, f) => a.concat(f.geometry.coordinates), []);
+  const b = pts.reduce((a, c) => [Math.min(a[0], c[0]), Math.min(a[1], c[1]), Math.max(a[2], c[0]), Math.max(a[3], c[1])], [180, 90, -180, -90]);
+  map.fitBounds([[b[0], b[1]], [b[2], b[3]]], { padding: 60, duration: 1000 });
+}
+function applyGpx() {
+  if (!gpxData) return;
+  map.addSource('gpx-src', { type: 'geojson', data: gpxData });
+  map.addLayer({ id: 'gpx-halo', type: 'line', source: 'gpx-src',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#f2efe7', 'line-opacity': 0.7, 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 4, 15, 8] } });
+  map.addLayer({ id: 'gpx-line', type: 'line', source: 'gpx-src',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#d81e5b', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 2, 15, 4.5] } });
+}
+function clearGpx() { gpxData = null; rerender(); }
+
 // ── Noms des forêts (label au centre) ───────────────────────────────────────
 async function applyForets(gen) {
   const q = `[out:json][timeout:25];(way["natural"="wood"]["name"](${bboxStr});relation["natural"="wood"]["name"](${bboxStr});way["landuse"="forest"]["name"](${bboxStr});relation["landuse"="forest"]["name"](${bboxStr}););out center;`;
@@ -1535,9 +1658,24 @@ const PANELS = {
       <div class="dl-row"><span class="dl-sw" style="border:1px solid var(--greige-3)"></span>Reste : 120 m (défaut loisir)</div>
       <div class="dl-note">Indicatif. Vérifie l'appli officielle (Géoportail / AlphaTango) avant de voler.</div>
     </div>` : ''}
-    <div class="row" style="border-top:1px solid var(--greige-2); margin-top:6px; opacity:0.5; cursor:default;">
+    <div class="row ${state.layers.slope ? 'active' : ''}" data-layer="slope" style="border-top:1px solid var(--greige-2); margin-top:6px;">
       <div class="checkbox"></div>
-      <div class="row-label">Pentes (slope)<div class="row-sub">custom depuis le MNT — à venir</div></div>
+      <div class="row-label">Pentes (slope)<div class="row-sub">calculé depuis le MNT LiDAR HD</div></div>
+    </div>
+    ${state.layers.slope ? `
+    <div class="slider-block">
+      <div class="slider-header"><span class="slider-label">Opacité</span><span class="slider-val">${Math.round(state.slopeOpacity * 100)}%</span></div>
+      <input type="range" id="slope-op" min="10" max="100" value="${Math.round(state.slopeOpacity * 100)}">
+      <div class="slider-header" style="margin-top:8px"><span class="slider-label">Pente min</span><span class="slider-val" id="slope-min-val">${state.slopeMin}°</span></div>
+      <input type="range" id="slope-min" min="0" max="55" value="${state.slopeMin}">
+      <div class="slider-header" style="margin-top:8px"><span class="slider-label">Pente max</span><span class="slider-val" id="slope-max-val">${state.slopeMax}°</span></div>
+      <input type="range" id="slope-max" min="10" max="80" value="${state.slopeMax}">
+    </div>` : ''}
+
+    <div class="gpx-block">
+      <div class="row-sub" style="margin-bottom:6px;">Itinéraires (traces GPX)</div>
+      <label class="gpx-btn">Importer une trace GPX<input type="file" id="gpx-input" accept=".gpx,application/gpx+xml" hidden></label>
+      ${gpxData ? `<button class="gpx-btn gpx-clear" id="gpx-clear">Effacer les traces</button>` : ''}
     </div>
   `
 };
@@ -1546,6 +1684,7 @@ const PANELS = {
 const ICON_PATHS = {
   daylight:     '<path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1M20 12h1M12 3v1M12 20v1M5.6 5.6l.7 .7M17.7 17.7l.7 .7M18.4 5.6l-.7 .7M6.3 17.7l-.7 .7" />',
   threeD:       '<path d="M21 16.008v-8.016a2 2 0 0 0 -1 -1.732l-7 -4.008a2 2 0 0 0 -2 0l-7 4.008a2 2 0 0 0 -1 1.732v8.016a2 2 0 0 0 1 1.732l7 4.008a2 2 0 0 0 2 0l7 -4.008a2 2 0 0 0 1 -1.732z" /><path d="M12 22v-10" /><path d="M12 12l8.73 -5.04" /><path d="M3.27 6.96l8.73 5.04" />',
+  slope:        '<path d="M3 20h18" /><path d="M5 20l11 -12" /><path d="M16 8l0 5" />',
   contours:     '<path d="M3 20h18l-6.921 -14.612a2.3 2.3 0 0 0 -4.158 0l-6.921 14.612" /><path d="M7.5 11l2 2.5l2.5 -2.5l2 3l2.5 -2" />',
   sentiers:     '<path d="M12 4a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 21l3 -4" /><path d="M16 21l-2 -4l-3 -3l1 -6" /><path d="M6 12l2 -3l4 -1l3 3l3 1" />',
   rivieres:     '<path d="M3 7c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 17c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 12c3 -2 6 -2 9 0s6 2 9 0" />',
@@ -1568,7 +1707,7 @@ const ICON_COLORS = {
   viewpoints: '#6a3fb0', monuments: '#8b5a3a', villages: '#1a1a1a',
   restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a',
   forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e',
-  daylight: '#d99a20', threeD: '#6b6355'
+  daylight: '#d99a20', threeD: '#6b6355', slope: '#f04a00'
 };
 function iconSvg(key) {
   const p = ICON_PATHS[key];
@@ -1640,6 +1779,33 @@ function attachPanelEvents() {
       if (map.getLayer('drone-lyr')) map.setPaintProperty('drone-lyr', 'raster-opacity', state.droneOpacity);
     });
   }
+
+  const sop = content.querySelector('#slope-op');
+  if (sop) sop.addEventListener('input', () => {
+    state.slopeOpacity = parseInt(sop.value) / 100;
+    if (map.getLayer('slope-lyr')) map.setPaintProperty('slope-lyr', 'raster-opacity', state.slopeOpacity);
+  });
+  const smin = content.querySelector('#slope-min');
+  if (smin) {
+    const v = content.querySelector('#slope-min-val');
+    smin.addEventListener('input', () => { v.textContent = smin.value + '°'; });
+    smin.addEventListener('change', () => { state.slopeMin = parseInt(smin.value); reapplySlope(); });
+  }
+  const smax = content.querySelector('#slope-max');
+  if (smax) {
+    const v = content.querySelector('#slope-max-val');
+    smax.addEventListener('input', () => { v.textContent = smax.value + '°'; });
+    smax.addEventListener('change', () => { state.slopeMax = parseInt(smax.value); reapplySlope(); });
+  }
+  const gpxInput = content.querySelector('#gpx-input');
+  if (gpxInput) gpxInput.addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => loadGpxText(rd.result);
+    rd.readAsText(f);
+  });
+  const gpxClear = content.querySelector('#gpx-clear');
+  if (gpxClear) gpxClear.addEventListener('click', clearGpx);
 
   const searchInput = content.querySelector('#search-input');
   if (searchInput) {

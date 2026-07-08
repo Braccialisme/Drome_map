@@ -217,14 +217,17 @@ plusieurs raffinements sont demandés :
   du NW figé). À creuser : vérifier convention azimut MapLibre
   (`hillshade-illumination-direction`, anchor `map`), et idéalement voir la
   course sur le relief 3D. Fichier : `sunCompass()` / `updateSunlight()`.
-- **Pentes (slope)** — onglet Exp., placeholder "à venir". Cible = protocol
-  custom qui calcule la pente depuis notre MNT (résolution adaptée à la source,
-  BYOD COG), colorisée par degrés (min/max), style split-view. Réf CTO :
-  terrain-viewer.iconem.com (`showSlope`, `slopeOpacity`, `slopeMin/MaxDegrees`).
-  NB : l'endpoint raster IGN `ELEVATION.SLOPES(.HIGHRES)` renvoie 404/400 en
-  WMTS PM — pas exploitable simplement, d'où l'approche custom.
-- **Itinéraires / randos** — gros morceau demandé (tracer/afficher des
-  itinéraires). À concevoir proprement pour ne pas alourdir l'app ni casser la DA.
+- **Pentes (slope)** — V1 FAITE (onglet Exp.). Protocol custom `slope://` qui
+  décode le MNT LiDAR HD (GeoTIFF) et calcule la pente par pixel (gradient,
+  échelle métrique corrigée cos(lat)), colorisée par degrés (transparent < min,
+  jaune→rouge), sliders opacité / pente min / pente max. À améliorer : split-view
+  (swipe compare), palette, perfs (256px + decode par tuile). NB : l'endpoint
+  raster IGN `ELEVATION.SLOPES` renvoie 404/400 en WMTS PM → approche custom retenue.
+- **Itinéraires / randos** — V1 FAITE : import de traces GPX (onglet Exp.),
+  parse trk/rte/wpt → LineString rose + halo, fitBounds. À améliorer : profil
+  altimétrique, gestion multi-traces/suppression fine, éventuellement routing
+  (BRouter/GraphHopper) plus tard. Traces persistées en mémoire (var `gpxData`),
+  ré-ajoutées à chaque rerender.
 
 **Plus tard :**
 - Mode nuit (palette charbon + crème)
