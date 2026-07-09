@@ -1107,6 +1107,23 @@ function updateSunlight() {
   const az = sunManual ? sunAzimuthManual : sunAzimuth();
   map.setPaintProperty('lidardem-hs', 'hillshade-illumination-direction', az);
 }
+// Inverse : à quel moment de la journée le soleil est-il à cet azimut ?
+function azimuthToHour(az) {
+  const c = map.getCenter();
+  let best = null, bestDiff = 999;
+  for (let h = 3.5; h <= 22; h += 0.25) {
+    const d = new Date(); d.setHours(Math.floor(h), Math.round((h % 1) * 60), 0, 0);
+    let diff = Math.abs(sunCompass(d, c.lat, c.lng) - az);
+    if (diff > 180) diff = 360 - diff;
+    if (diff < bestDiff) { bestDiff = diff; best = h; }
+  }
+  return bestDiff < 10 ? best : null;
+}
+function sunLabel(az) {
+  const h = azimuthToHour(az);
+  const hs = h == null ? '' : ' · ' + Math.floor(h) + 'h' + (h % 1 ? String(Math.round((h % 1) * 60)).padStart(2, '0') : '');
+  return 'Azimut ' + Math.round(az) + '°' + hs;
+}
 setInterval(updateSunlight, 5 * 60 * 1000); // soleil qui tourne, maj toutes les 5 min
 
 // ── Overpass ─────────────────────────────────────────────────────────────
@@ -2122,7 +2139,7 @@ function attachPanelEvents() {
       let az = Math.atan2(p.clientX - cx, -(p.clientY - cy)) * 180 / Math.PI;
       az = (az + 360) % 360;
       sunManual = true; sunAzimuthManual = az;
-      place(az); azEl.textContent = 'Azimut ' + Math.round(az) + '°';
+      place(az); azEl.textContent = sunLabel(az);
       setModeButtons(); updateSunlight();
     };
     const stop = () => { window.removeEventListener('pointermove', drag); window.removeEventListener('pointerup', stop); };
@@ -2131,7 +2148,7 @@ function attachPanelEvents() {
       sunManual = b.dataset.sun === 'manual';
       setModeButtons(); updateSunlight();
       const az = sunManual ? sunAzimuthManual : sunAzimuth();
-      place(az); azEl.textContent = 'Azimut ' + Math.round(az) + '°';
+      place(az); azEl.textContent = sunLabel(az);
     }));
     const hourSlider = content.querySelector('#sun-hour');
     if (hourSlider) hourSlider.addEventListener('input', () => {
