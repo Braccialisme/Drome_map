@@ -481,6 +481,33 @@
       font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dust);
     }
     .route-modes button.on { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
+
+    .sun-block { border-top: 1px solid var(--greige-2); margin-top: 6px; padding-top: 10px; }
+    .sun-modes { display: flex; gap: 4px; margin-bottom: 12px; }
+    .sun-modes button {
+      flex: 1; padding: 6px 4px; cursor: pointer;
+      background: var(--greige-0); border: 1px solid var(--greige-2); border-radius: var(--radius);
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dust);
+    }
+    .sun-modes button.on { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
+    .joystick {
+      position: relative; width: 120px; height: 120px; margin: 0 auto;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #ffffff, var(--greige-1) 68%, var(--greige-2));
+      border: 1px solid var(--greige-3);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.1);
+      touch-action: none;
+    }
+    .joystick::after {
+      content: 'N'; position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-mono); font-size: 9px; color: var(--dust);
+    }
+    .joystick-dot {
+      position: absolute; width: 22px; height: 22px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #f6c09a, var(--orange) 58%, var(--orange-2));
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      transform: translate(-50%, -50%); cursor: grab; touch-action: none;
+    }
     .row-label {
       flex: 1;
       font-family: var(--font-ui);
@@ -1008,6 +1035,8 @@ function applyDaylight() {
   updateSunlight();
 }
 
+// Contrôle du soleil : auto (heure réelle) ou manuel (joystick)
+let sunManual = false, sunAzimuthManual = 200;
 // Position du soleil (algo SunCalc) → azimut boussole depuis le Nord
 const D2R = Math.PI / 180;
 function sunAzimuth() {
@@ -1032,7 +1061,8 @@ function sunCompass(date, lat, lng) {
 
 function updateSunlight() {
   if (!map.getLayer('lidardem-hs')) return;
-  map.setPaintProperty('lidardem-hs', 'hillshade-illumination-direction', sunAzimuth());
+  const az = sunManual ? sunAzimuthManual : sunAzimuth();
+  map.setPaintProperty('lidardem-hs', 'hillshade-illumination-direction', az);
 }
 setInterval(updateSunlight, 5 * 60 * 1000); // soleil qui tourne, maj toutes les 5 min
 
@@ -1748,8 +1778,17 @@ const PANELS = {
   experimental: () => `
     <div class="row ${state.layers.daylight ? 'active' : ''}" data-layer="daylight">
       <div class="checkbox"></div>
-      <div class="row-label">Lumière du jour<div class="row-sub">relief ombré à l'heure réelle · WIP</div></div>
+      <div class="row-label">Lumière du jour<div class="row-sub">relief ombré · soleil réglable</div></div>
     </div>
+    ${state.layers.daylight ? `
+    <div class="sun-block">
+      <div class="sun-modes">
+        <button data-sun="auto" class="${!sunManual ? 'on' : ''}">Auto (heure)</button>
+        <button data-sun="manual" class="${sunManual ? 'on' : ''}">Manuel</button>
+      </div>
+      <div class="joystick" id="joystick"><div class="joystick-dot" id="joystick-dot"></div></div>
+      <div class="row-sub" id="sun-az" style="text-align:center; margin-top:8px;">Azimut ${Math.round(sunManual ? sunAzimuthManual : sunAzimuth())}°</div>
+    </div>` : ''}
     <div class="row ${state.layers.grille ? 'active' : ''}" data-layer="grille">
       <div class="checkbox"></div>
       <div class="row-label">Grille de coordonnées</div>
@@ -1936,6 +1975,39 @@ function attachPanelEvents() {
 
   const precacheBtn = content.querySelector('#precache-btn');
   if (precacheBtn) precacheBtn.addEventListener('click', () => precacheZone(precacheBtn));
+
+  const joy = content.querySelector('#joystick');
+  if (joy) {
+    const dot = content.querySelector('#joystick-dot');
+    const azEl = content.querySelector('#sun-az');
+    const R = 46; // rayon du rail (px)
+    const place = az => {
+      const rad = az * Math.PI / 180;
+      dot.style.left = (60 + R * Math.sin(rad)) + 'px';
+      dot.style.top = (60 - R * Math.cos(rad)) + 'px';
+    };
+    const setModeButtons = () => content.querySelectorAll('.sun-modes button')
+      .forEach(b => b.classList.toggle('on', (b.dataset.sun === 'manual') === sunManual));
+    place(sunManual ? sunAzimuthManual : sunAzimuth());
+    const drag = ev => {
+      const r = joy.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const p = ev.touches ? ev.touches[0] : ev;
+      let az = Math.atan2(p.clientX - cx, -(p.clientY - cy)) * 180 / Math.PI;
+      az = (az + 360) % 360;
+      sunManual = true; sunAzimuthManual = az;
+      place(az); azEl.textContent = 'Azimut ' + Math.round(az) + '°';
+      setModeButtons(); updateSunlight();
+    };
+    const stop = () => { window.removeEventListener('pointermove', drag); window.removeEventListener('pointerup', stop); };
+    joy.addEventListener('pointerdown', ev => { ev.preventDefault(); drag(ev); window.addEventListener('pointermove', drag); window.addEventListener('pointerup', stop); });
+    content.querySelectorAll('.sun-modes button').forEach(b => b.addEventListener('click', () => {
+      sunManual = b.dataset.sun === 'manual';
+      setModeButtons(); updateSunlight();
+      const az = sunManual ? sunAzimuthManual : sunAzimuth();
+      place(az); azEl.textContent = 'Azimut ' + Math.round(az) + '°';
+    }));
+  }
 
   const ra = content.querySelector('#route-a');
   if (ra) ra.addEventListener('input', debounce(() => routeSearch(ra.value, content.querySelector('#route-a-res'), 0, ra), 350));
