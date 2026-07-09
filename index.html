@@ -829,6 +829,8 @@ const state = {
   grilleStep: 'auto',
   grilleColor: '#f2efe7',
   grilleWidth: 0.7,
+  curvOpacity: 0.6,
+  curvStrength: 9000,
   layers: {
     daylight: false,
     threeD: false,
@@ -1035,8 +1037,8 @@ function applyContours() {
 
 function applySentiers() {
   map.addSource('sentiers-src', { type: 'raster', tiles: [SENTIERS_URL], tileSize: 256 });
-  map.addLayer({ id: 'sentiers', type: 'raster', source: 'sentiers-src',
-    paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0.25, 10, 0.55, 12, 0.85] } });
+  map.addLayer({ id: 'sentiers', type: 'raster', source: 'sentiers-src', minzoom: 9,
+    paint: { 'raster-opacity': ['interpolate', ['linear'], ['zoom'], 9, 0, 11, 0.4, 13, 0.7, 15, 0.8] } });
 }
 
 // ── HILLSHADE DYNAMIQUE + 3D (MNT LiDAR HD, décodage GeoTIFF client-side) ────
@@ -1566,7 +1568,10 @@ function reapplySlope() {
 
 // ── COURBURE (curvature) — laplacien du MNT : crêtes vs talwegs ──────────────
 async function curvTile(params) {
-  const wms = 'https://' + params.url.replace('curv://', '');
+  const rest = params.url.replace('curv://', '');
+  const i1 = rest.indexOf('/');
+  const strength = parseFloat(rest.slice(0, i1)) || 9000;
+  const wms = 'https://' + rest.slice(i1 + 1);
   const bboxM = ((wms.match(/BBOX=([^&]+)/) || [])[1] || '0,0,0,0').split(',').map(Number);
   const res = await fetch(wms);
   const tiff = await GeoTIFF.fromArrayBuffer(await res.arrayBuffer());
@@ -1580,7 +1585,7 @@ async function curvTile(params) {
   for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
     const xl = x > 0 ? x - 1 : x, xr = x < w - 1 ? x + 1 : x, yu = y > 0 ? y - 1 : y, yd = y < h - 1 ? y + 1 : y;
     const lap = (at(xl, y) + at(xr, y) + at(x, yu) + at(x, yd) - 4 * at(x, y)) / (dx * dx);
-    const v = lap * 9000; // échelle vers du visible
+    const v = lap * strength; // échelle vers du visible (réglable)
     const o = (y * w + x) * 4, m = Math.min(1, Math.abs(v));
     if (Math.abs(v) < 0.12) { rgba[o + 3] = 0; continue; }
     if (v > 0) { rgba[o] = 60; rgba[o + 1] = 120; rgba[o + 2] = 180; } // concave = talweg (bleu)
@@ -1598,22 +1603,47 @@ function applyCurvature() {
   const wms = 'data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
     '&LAYERS=IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93&STYLES=&CRS=EPSG:3857' +
     '&FORMAT=image/geotiff&WIDTH=512&HEIGHT=512&BBOX={bbox-epsg-3857}';
-  map.addSource('curv-src', { type: 'raster', tiles: [`curv://${wms}`], tileSize: 512, maxzoom: 15 });
-  map.addLayer({ id: 'curv-lyr', type: 'raster', source: 'curv-src', paint: { 'raster-opacity': 0.6 } });
+  map.addSource('curv-src', { type: 'raster', tiles: [`curv://${state.curvStrength}/${wms}`], tileSize: 512, maxzoom: 15 });
+  map.addLayer({ id: 'curv-lyr', type: 'raster', source: 'curv-src', paint: { 'raster-opacity': state.curvOpacity } });
+}
+function reapplyCurvature() {
+  if (map.getLayer('curv-lyr')) map.removeLayer('curv-lyr');
+  if (map.getSource('curv-src')) map.removeSource('curv-src');
+  if (state.layers.curvature) applyCurvature();
 }
 
 // ── LIGNES DE TRANSPORT (bus / car / train) via OSM ─────────────────────────
 async function applyTransport(gen) {
-  const q = `[out:json][timeout:25];relation["route"~"^(bus|train|tram|light_rail|trolleybus)$"](${bboxStr});way(r);out geom;`;
+  const q = `[out:json][timeout:25];(relation["route"~"^(bus|train|tram|light_rail|trolleybus)$"](${bboxStr});way(r);node["highway"="bus_stop"](${bboxStr});node["railway"="station"](${bboxStr}););out geom;`;
   try {
-    const osm = await overpassFetch('drm-transport-v1', q);
-    const gj = osmToGeoJSON(osm, 'line');
+    const osm = await overpassFetch('drm-transport-v2', q);
+    const lines = osmToGeoJSON(osm, 'line');
+    const stops = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource('transport-src')) return;
-    map.addSource('transport-src', { type: 'geojson', data: gj });
+    map.addSource('transport-src', { type: 'geojson', data: lines });
     map.addLayer({ id: 'transport-lines', type: 'line', source: 'transport-src',
       layout: { 'line-cap': 'round', 'line-join': 'round' },
       paint: { 'line-color': '#7a3ea8', 'line-opacity': 0.75, 'line-dasharray': [2, 1.5],
         'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1, 14, 3] } });
+    map.addSource('transport-stops-src', { type: 'geojson', data: stops });
+    map.addLayer({ id: 'transport-stops', type: 'circle', source: 'transport-stops-src',
+      minzoom: 12,
+      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 2.5, 15, 5],
+        'circle-color': '#7a3ea8', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+    if (!boundEvents.has('transport-stops')) {
+      boundEvents.add('transport-stops');
+      map.on('click', 'transport-stops', e => {
+        const p = e.features[0].properties;
+        const nm = p.name || 'Arrêt';
+        const kind = p.railway === 'station' ? 'Gare' : 'Arrêt de bus';
+        new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: '220px' })
+          .setLngLat(e.lngLat)
+          .setHTML(`<div class="p-title">${esc(nm)}</div><div class="p-kind">${kind}</div><div class="p-line">Horaires : appli régionale (Oura / SNCF)</div>`)
+          .addTo(map);
+      });
+      map.on('mouseenter', 'transport-stops', () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', 'transport-stops', () => map.getCanvas().style.cursor = '');
+    }
   } catch(e) { console.warn('Transport fetch failed', e); }
 }
 
@@ -2044,6 +2074,13 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">Courbure<div class="row-sub">crêtes (orange) · talwegs (bleu)</div></div>
     </div>
+    ${state.layers.curvature ? `
+    <div class="slider-block">
+      <div class="slider-header"><span class="slider-label">Opacité</span><span class="slider-val">${Math.round(state.curvOpacity * 100)}%</span></div>
+      <input type="range" id="curv-op" min="10" max="100" value="${Math.round(state.curvOpacity * 100)}">
+      <div class="slider-header" style="margin-top:8px"><span class="slider-label">Intensité</span></div>
+      <input type="range" id="curv-str" min="3000" max="22000" step="500" value="${state.curvStrength}">
+    </div>` : ''}
 
     <div class="route-block">
       <div class="row-sub" style="margin-bottom:6px;">Itinéraire A → B</div>
@@ -2191,6 +2228,14 @@ function attachPanelEvents() {
     smax.addEventListener('input', () => { v.textContent = smax.value + '°'; });
     smax.addEventListener('change', () => { state.slopeMax = parseInt(smax.value); reapplySlope(); });
   }
+  const cop = content.querySelector('#curv-op');
+  if (cop) cop.addEventListener('input', () => {
+    state.curvOpacity = parseInt(cop.value) / 100;
+    if (map.getLayer('curv-lyr')) map.setPaintProperty('curv-lyr', 'raster-opacity', state.curvOpacity);
+  });
+  const cstr = content.querySelector('#curv-str');
+  if (cstr) cstr.addEventListener('change', () => { state.curvStrength = parseInt(cstr.value); reapplyCurvature(); });
+
   const gpxInput = content.querySelector('#gpx-input');
   if (gpxInput) gpxInput.addEventListener('change', e => {
     const f = e.target.files[0]; if (!f) return;
