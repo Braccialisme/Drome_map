@@ -823,6 +823,8 @@ const state = {
     drone: false,
     nautique: false,
     canyoning: false,
+    transport: false,
+    curvature: false,
     monuments: false,
     villages: false,
     restaurants: false,
@@ -946,6 +948,8 @@ function rerender() {
   if (state.layers.daylight) applyDaylight();
   if (state.layers.drone) applyDrone();
   if (state.layers.slope) applySlope();
+  if (state.layers.curvature) applyCurvature();
+  if (state.layers.transport) applyTransport(gen);
   if (state.layers.forets) applyForets(gen);
   if (state.layers.rivieres) applyRivieres(gen);
   if (state.layers.contours) applyContours();
@@ -1430,15 +1434,31 @@ function showPoiPopup(e, key) {
   const p = e.features[0].properties;
   const name = p.name || POI_KIND[key] || 'Lieu';
   const bits = [];
+  const kind = [POI_KIND[key], p.cuisine ? p.cuisine.replace(/_/g, ' ').replace(/;/g, ', ') : ''].filter(Boolean).join(' · ');
   if (p.opening_hours) bits.push(`<div class="p-line"><span class="p-k">Horaires</span> ${esc(p.opening_hours)}</div>`);
   const tel = p.phone || p['contact:phone'];
   if (tel) bits.push(`<div class="p-line"><span class="p-k">Tél</span> ${esc(tel)}</div>`);
+  const addr = [p['addr:housenumber'], p['addr:street']].filter(Boolean).join(' ');
+  if (addr) bits.push(`<div class="p-line"><span class="p-k">Adresse</span> ${esc(addr)}</div>`);
+  if (p.description) bits.push(`<div class="p-extract">${esc(p.description)}</div>`);
   const web = p.website || p['contact:website'];
   if (web) bits.push(`<a class="p-wiki" href="${esc(web)}" target="_blank" rel="noopener">Site web →</a>`);
-  new maplibregl.Popup({ closeButton: true, offset: 12, maxWidth: '240px' })
+  const head = `<div class="p-title">${esc(name)}</div><div class="p-kind">${esc(kind)}</div>`;
+  const popup = new maplibregl.Popup({ closeButton: true, offset: 12, maxWidth: '240px' })
     .setLngLat(e.lngLat)
-    .setHTML(`<div class="p-title">${esc(name)}</div><div class="p-kind">${POI_KIND[key] || ''}</div>${bits.join('')}`)
+    .setHTML(`${head}${bits.join('')}`)
     .addTo(map);
+  // Si le commerce a un tag wiki, on ajoute l'extrait Wikipedia (comme les monuments)
+  if (p.wikidata || p.wikipedia) resolveWiki(p).then(r => {
+    if (!r || !popup.isOpen()) return;
+    fetchWikiSummary(r.lang, r.title).then(sum => {
+      if (!sum || !popup.isOpen()) return;
+      const thumb = sum.thumbnail ? `<img class="p-thumb" src="${esc(sum.thumbnail.source)}" alt="">` : '';
+      const extract = sum.extract ? `<div class="p-extract">${esc(sum.extract)}</div>` : '';
+      const url = (sum.content_urls && sum.content_urls.desktop && sum.content_urls.desktop.page) || `https://${r.lang}.wikipedia.org/wiki/${encodeURIComponent(r.title)}`;
+      popup.setHTML(`${head}${bits.join('')}${thumb}${extract}<a class="p-wiki" href="${esc(url)}" target="_blank" rel="noopener">Wikipedia →</a>`);
+    });
+  });
 }
 
 // ── Zone drone (restrictions vol de loisir, IGN) ────────────────────────────
@@ -1522,6 +1542,59 @@ function reapplySlope() {
   if (map.getLayer('slope-lyr')) map.removeLayer('slope-lyr');
   if (map.getSource('slope-src')) map.removeSource('slope-src');
   if (state.layers.slope) applySlope();
+}
+
+// ── COURBURE (curvature) — laplacien du MNT : crêtes vs talwegs ──────────────
+async function curvTile(params) {
+  const wms = 'https://' + params.url.replace('curv://', '');
+  const bboxM = ((wms.match(/BBOX=([^&]+)/) || [])[1] || '0,0,0,0').split(',').map(Number);
+  const res = await fetch(wms);
+  const tiff = await GeoTIFF.fromArrayBuffer(await res.arrayBuffer());
+  const image = await tiff.getImage();
+  const w = image.getWidth(), h = image.getHeight();
+  const elev = (await image.readRasters())[0];
+  const latC = 2 * Math.atan(Math.exp(((bboxM[1] + bboxM[3]) / 2) / 6378137)) - Math.PI / 2;
+  const dx = ((bboxM[2] - bboxM[0]) / w) * Math.cos(latC) || 10;
+  const at = (x, y) => { const e = elev[y * w + x]; return (!isFinite(e) || e < -500 || e > 9000) ? 0 : e; };
+  const rgba = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const xl = x > 0 ? x - 1 : x, xr = x < w - 1 ? x + 1 : x, yu = y > 0 ? y - 1 : y, yd = y < h - 1 ? y + 1 : y;
+    const lap = (at(xl, y) + at(xr, y) + at(x, yu) + at(x, yd) - 4 * at(x, y)) / (dx * dx);
+    const v = lap * 9000; // échelle vers du visible
+    const o = (y * w + x) * 4, m = Math.min(1, Math.abs(v));
+    if (Math.abs(v) < 0.12) { rgba[o + 3] = 0; continue; }
+    if (v > 0) { rgba[o] = 60; rgba[o + 1] = 120; rgba[o + 2] = 180; } // concave = talweg (bleu)
+    else { rgba[o] = 210; rgba[o + 1] = 90; rgba[o + 2] = 30; }         // convexe = crête (orange)
+    rgba[o + 3] = Math.round(60 + 150 * m);
+  }
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  c.getContext('2d').putImageData(new ImageData(rgba, w, h), 0, 0);
+  const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+  return { data: await blob.arrayBuffer() };
+}
+if (typeof maplibregl !== 'undefined') { try { maplibregl.addProtocol('curv', curvTile); } catch (e) {} }
+function applyCurvature() {
+  if (!demSupported()) return;
+  const wms = 'data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
+    '&LAYERS=IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93&STYLES=&CRS=EPSG:3857' +
+    '&FORMAT=image/geotiff&WIDTH=512&HEIGHT=512&BBOX={bbox-epsg-3857}';
+  map.addSource('curv-src', { type: 'raster', tiles: [`curv://${wms}`], tileSize: 512, maxzoom: 15 });
+  map.addLayer({ id: 'curv-lyr', type: 'raster', source: 'curv-src', paint: { 'raster-opacity': 0.6 } });
+}
+
+// ── LIGNES DE TRANSPORT (bus / car / train) via OSM ─────────────────────────
+async function applyTransport(gen) {
+  const q = `[out:json][timeout:25];relation["route"~"^(bus|train|tram|light_rail|trolleybus)$"](${bboxStr});way(r);out geom;`;
+  try {
+    const osm = await overpassFetch('drm-transport-v1', q);
+    const gj = osmToGeoJSON(osm, 'line');
+    if (stale(gen) || map.getSource('transport-src')) return;
+    map.addSource('transport-src', { type: 'geojson', data: gj });
+    map.addLayer({ id: 'transport-lines', type: 'line', source: 'transport-src',
+      layout: { 'line-cap': 'round', 'line-join': 'round' },
+      paint: { 'line-color': '#7a3ea8', 'line-opacity': 0.75, 'line-dasharray': [2, 1.5],
+        'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1, 14, 3] } });
+  } catch(e) { console.warn('Transport fetch failed', e); }
 }
 
 // ── ITINÉRAIRES (import de traces GPX) ──────────────────────────────────────
@@ -1860,6 +1933,10 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">Canyoning</div>
     </div>
+    <div class="row ${state.layers.transport ? 'active' : ''}" data-layer="transport" style="border-top:1px solid var(--greige-2); margin-top:6px;">
+      <div class="checkbox"></div>
+      <div class="row-label">Lignes de transport<div class="row-sub">bus · car · train (OSM)</div></div>
+    </div>
   `,
   patri: () => `
     <div class="row ${state.layers.monuments ? 'active' : ''}" data-layer="monuments">
@@ -1943,6 +2020,10 @@ const PANELS = {
       <div class="slider-header" style="margin-top:8px"><span class="slider-label">Pente max</span><span class="slider-val" id="slope-max-val">${state.slopeMax}°</span></div>
       <input type="range" id="slope-max" min="10" max="80" value="${state.slopeMax}">
     </div>` : ''}
+    <div class="row ${state.layers.curvature ? 'active' : ''}" data-layer="curvature">
+      <div class="checkbox"></div>
+      <div class="row-label">Courbure<div class="row-sub">crêtes (orange) · talwegs (bleu)</div></div>
+    </div>
 
     <div class="route-block">
       <div class="row-sub" style="margin-bottom:6px;">Itinéraire A → B</div>
@@ -1974,6 +2055,8 @@ const ICON_PATHS = {
   daylight:     '<path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1M20 12h1M12 3v1M12 20v1M5.6 5.6l.7 .7M17.7 17.7l.7 .7M18.4 5.6l-.7 .7M6.3 17.7l-.7 .7" />',
   threeD:       '<path d="M21 16.008v-8.016a2 2 0 0 0 -1 -1.732l-7 -4.008a2 2 0 0 0 -2 0l-7 4.008a2 2 0 0 0 -1 1.732v8.016a2 2 0 0 0 1 1.732l7 4.008a2 2 0 0 0 2 0l7 -4.008a2 2 0 0 0 1 -1.732z" /><path d="M12 22v-10" /><path d="M12 12l8.73 -5.04" /><path d="M3.27 6.96l8.73 5.04" />',
   slope:        '<path d="M3 20h18" /><path d="M5 20l11 -12" /><path d="M16 8l0 5" />',
+  curvature:    '<path d="M21 12h-2c-.894 0 -1.662 -.857 -1.761 -2c-.296 -3.45 -.749 -6 -2.749 -6s-2.5 3.582 -2.5 8s-.5 8 -2.5 8s-2.452 -2.547 -2.749 -6c-.1 -1.147 -.867 -2 -1.763 -2h-2" />',
+  transport:    '<path d="M4 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M16 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M4 17h-2v-11a1 1 0 0 1 1 -1h14a5 7 0 0 1 5 7v5h-2m-4 0h-8" /><path d="M16 5l1.5 7l4.5 0" /><path d="M2 10l15 0" /><path d="M7 5l0 5" /><path d="M12 5l0 5" />',
   contours:     '<path d="M3 20h18l-6.921 -14.612a2.3 2.3 0 0 0 -4.158 0l-6.921 14.612" /><path d="M7.5 11l2 2.5l2.5 -2.5l2 3l2.5 -2" />',
   sentiers:     '<path d="M12 4a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 21l3 -4" /><path d="M16 21l-2 -4l-3 -3l1 -6" /><path d="M6 12l2 -3l4 -1l3 3l3 1" />',
   rivieres:     '<path d="M3 7c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 17c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 12c3 -2 6 -2 9 0s6 2 9 0" />',
@@ -1996,7 +2079,7 @@ const ICON_COLORS = {
   viewpoints: '#6a3fb0', monuments: '#8b5a3a', villages: '#1a1a1a',
   restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a',
   forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e',
-  daylight: '#d99a20', threeD: '#6b6355', slope: '#f04a00'
+  daylight: '#d99a20', threeD: '#6b6355', slope: '#f04a00', curvature: '#7a3ea8', transport: '#7a3ea8'
 };
 function iconSvg(key) {
   const p = ICON_PATHS[key];
