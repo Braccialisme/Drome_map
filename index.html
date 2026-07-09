@@ -162,6 +162,31 @@
     }
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+    /* Profil altimétrique */
+    #elev-box {
+      position: absolute;
+      left: 12px; bottom: calc(var(--panel-h) + 12px);
+      width: 220px;
+      background: var(--greige-0);
+      border: 1px solid var(--greige-2);
+      border-radius: var(--radius-l);
+      padding: 8px 10px 6px;
+      z-index: 15;
+      display: none;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #elev-box.show { display: block; }
+    body.panel-collapsed #elev-box { bottom: calc(40px + 12px); }
+    #elev-box .elev-stats {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.03em;
+      color: var(--dust); margin-top: 4px;
+    }
+    #elev-box .elev-close {
+      position: absolute; top: 4px; right: 8px;
+      font-family: var(--font-mono); font-size: 14px; color: var(--dust); cursor: pointer;
+    }
+
     /* ── PANEL BOTTOM = LE BLOC ── */
     #panel-wrap {
       position: absolute;
@@ -698,6 +723,8 @@
 <div id="map"></div>
 
 <div id="toast"></div>
+
+<div id="elev-box"></div>
 
 <div id="scale">
   Ech. <span class="num" id="scale-val">1:100k</span>
@@ -1489,7 +1516,11 @@ function parseGpx(text) {
     const coords = [];
     trk.querySelectorAll('trkpt').forEach(pt => {
       const lon = parseFloat(pt.getAttribute('lon')), lat = parseFloat(pt.getAttribute('lat'));
-      if (isFinite(lon) && isFinite(lat)) coords.push([lon, lat]);
+      if (isFinite(lon) && isFinite(lat)) {
+        const eEl = pt.querySelector('ele');
+        const ele = eEl ? parseFloat(eEl.textContent) : NaN;
+        coords.push(isFinite(ele) ? [lon, lat, ele] : [lon, lat]);
+      }
     });
     if (coords.length > 1) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} });
   });
@@ -1497,7 +1528,11 @@ function parseGpx(text) {
     const coords = [];
     doc.querySelectorAll('rtept, wpt').forEach(pt => {
       const lon = parseFloat(pt.getAttribute('lon')), lat = parseFloat(pt.getAttribute('lat'));
-      if (isFinite(lon) && isFinite(lat)) coords.push([lon, lat]);
+      if (isFinite(lon) && isFinite(lat)) {
+        const eEl = pt.querySelector('ele');
+        const ele = eEl ? parseFloat(eEl.textContent) : NaN;
+        coords.push(isFinite(ele) ? [lon, lat, ele] : [lon, lat]);
+      }
     });
     if (coords.length > 1) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} });
   }
@@ -1511,6 +1546,27 @@ function loadGpxText(text) {
   const pts = feats.reduce((a, f) => a.concat(f.geometry.coordinates), []);
   const b = pts.reduce((a, c) => [Math.min(a[0], c[0]), Math.min(a[1], c[1]), Math.max(a[2], c[0]), Math.max(a[3], c[1])], [180, 90, -180, -90]);
   map.fitBounds([[b[0], b[1]], [b[2], b[3]]], { padding: 60, duration: 1000 });
+  showElevProfile(pts);
+}
+
+// Profil altimétrique (mini courbe + D+/D−) depuis des coords [lon,lat,ele]
+function showElevProfile(coords) {
+  const box = document.getElementById('elev-box');
+  const ele = coords.map(c => c[2]).filter(v => isFinite(v));
+  if (ele.length < 2) { box.classList.remove('show'); return; }
+  let up = 0, down = 0;
+  for (let i = 1; i < ele.length; i++) { const d = ele[i] - ele[i - 1]; if (d > 0) up += d; else down -= d; }
+  const mn = Math.min(...ele), mx = Math.max(...ele), span = Math.max(1, mx - mn);
+  const W = 200, H = 46;
+  const pdata = ele.map((v, i) => `${(i / (ele.length - 1) * W).toFixed(1)},${(H - (v - mn) / span * H).toFixed(1)}`).join(' ');
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:46px;display:block">
+      <polyline points="${pdata}" fill="none" stroke="#cc6a3a" stroke-width="1.5"/>
+    </svg>
+    <div class="elev-stats">D+ ${Math.round(up)} m · D− ${Math.round(down)} m · ${Math.round(mn)}–${Math.round(mx)} m</div>
+    <div class="elev-close" id="elev-close">×</div>`;
+  box.classList.add('show');
+  const c = document.getElementById('elev-close');
+  if (c) c.onclick = () => box.classList.remove('show');
 }
 function applyGpx() {
   if (!gpxData) return;
@@ -1522,7 +1578,7 @@ function applyGpx() {
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': '#d81e5b', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 2, 15, 4.5] } });
 }
-function clearGpx() { gpxData = null; rerender(); }
+function clearGpx() { gpxData = null; rerender(); document.getElementById('elev-box').classList.remove('show'); }
 
 // ── PRÉCACHE HORS-LIGNE (30 j) ──────────────────────────────────────────────
 // Amorce le cache : tous les jeux Overpass + les tuiles du fond/contours sur la
@@ -1592,7 +1648,7 @@ function measureGeo() {
     if (measureRoute) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measureRoute.coords }, properties: { kind: 'route' } });
     const vol = haversine(routeA, routeB);
     const label = measureRoute
-      ? `${PROFILE_LABEL[routeProfile]} ${fmtDist(measureRoute.distance)} · ${fmtDur(measureRoute.duration)}\nVol d'oiseau ${fmtDist(vol)}`
+      ? `${PROFILE_LABEL[routeProfile]} ${fmtDist(measureRoute.distance)} · ${fmtDur(measureRoute.duration)}${measureRoute.ascend ? ' · D+ ' + Math.round(measureRoute.ascend) + ' m' : ''}\nVol d'oiseau ${fmtDist(vol)}`
       : `Vol d'oiseau ${fmtDist(vol)}\n(calcul…)`;
     const mid = [(routeA[0] + routeB[0]) / 2, (routeA[1] + routeB[1]) / 2];
     feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: mid }, properties: { label } });
@@ -1618,7 +1674,7 @@ async function fetchRoute(a, b, profile) {
     const r = await fetch(url);
     const d = await r.json();
     const f = d.features && d.features[0];
-    if (f) return { distance: +f.properties['track-length'], duration: +f.properties['total-time'], coords: f.geometry.coordinates };
+    if (f) return { distance: +f.properties['track-length'], duration: +f.properties['total-time'], ascend: +(f.properties['filtered ascend'] || 0), coords: f.geometry.coordinates };
   } catch (e) {}
   return null;
 }
