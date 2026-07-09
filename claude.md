@@ -183,6 +183,101 @@ https://nominatim.openstreetmap.org/search
 - **Offline** : Service Worker (app shell + tuiles/glyphs/geotiff, cache 30j)
 - Police **VG5000** self-hostée (glyphs SDF dans `fonts/VG5000/`)
 
+## Récap technique — couches & chargement
+
+Tout est dans `index.html` (HTML+CSS+JS inline). Le style MapLibre démarre vide
+(`{version:8, glyphs, sources:{}, layers:[]}`) ; **tout est ajouté par JS**.
+
+### Architecture de rendu
+
+- **`rerender()`** = fonction centrale. À chaque changement : (1) `setTerrain(null)`,
+  (2) supprime **toutes** les couches puis **toutes** les sources présentes
+  (dynamique, pas de liste), (3) ré-ajoute le fond selon `state.basemap`,
+  (4) ré-applique chaque overlay actif via `state.layers.*`.
+- **Jeton de génération** (`renderGen` + `stale(gen)`) : un fetch async lancé par
+  un rerender périmé n'ajoute pas ses couches (évite la carte blanche / races).
+- **Cache mémoire** (`memCache` + `inflight`) : chaque jeu Overpass/Wikidata
+  fetché une fois par session (même si localStorage sature) → pas de tempête de
+  refetch ni de rate-limit 429.
+- **Service Worker** (`sw.js`) : app-shell + tuiles/glyphs/geotiff en cache 30j,
+  network-first sur le HTML. Marche https/localhost, pas `file://`.
+- **Persistance hors state.layers** : traces GPX (`gpxData`), itinéraire
+  (`routeA/routeB/measureRoute`) — ré-ajoutés en fin de `rerender()`.
+
+### Fonds de carte (WMTS IGN, TMS `PM`, via `IGN(layer, format, tms)`)
+
+| Fond | Layer | Format |
+|------|-------|--------|
+| Sat | `ORTHOIMAGERY.ORTHOPHOTOS` | jpeg |
+| Sat relief | `IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW` (ombre cuite) | png |
+| Plan IGN | `GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2` | png |
+| Aérienne 1950-65 | `ORTHOIMAGERY.ORTHOPHOTOS.1950-1965` | png |
+| État-Major | `GEOGRAPHICALGRIDSYSTEMS.ETATMAJOR40` | jpeg |
+| Cassini | `AN-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI` (TMS `PM_0_14`) | jpeg |
+
+### Relief dynamique + 3D (protocol custom `float32dem://`)
+
+- Source de l'élévation : **MNT LiDAR HD** en GeoTIFF float32, servi par le **WMS**
+  IGN `data.geopf.fr/wms-r/wms` (`LAYERS=IGNF_LIDAR-HD_MNT_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93`,
+  `FORMAT=image/geotiff`, `CRS=EPSG:3857`, `BBOX={bbox-epsg-3857}` substitué par MapLibre).
+- Le protocol `float32dem://` (lib **geotiff.js**) décode le float32 et le
+  ré-encode en **terrain-RGB Mapbox** (PNG via canvas).
+- Source `raster-dem` (`encoding:'mapbox'`) alimente : couche **`hillshade`**
+  ("Lumière du jour", azimut solaire calculé par `sunCompass()`, WIP) ET
+  **`setTerrain`** (toggle "Relief 3D", pitch 62°). Fallback = couche SHADOW cuite
+  si pas de GeoTIFF.
+
+### Pentes (protocol custom `slope://`)
+
+- `slope://<min>/<max>/<wms-geotiff>` : même MNT LiDAR HD (GeoTIFF 512px), calcule
+  la **pente par pixel** (gradient, échelle métrique corrigée `cos(lat)`),
+  colorise par degrés (transparent < min, jaune→rouge). Raster overlay, sliders
+  opacité/min/max. Min/max encodés dans l'URL de tuile (refetch au change).
+
+### Contours (hybride)
+
+- **z9** : raster `ELEVATION.CONTOUR.LINE` (WMTS, couche `minzoom:9 maxzoom:10`).
+- **z10+** : vecteur **PLAN.IGN** (`tms/1.0.0/PLAN.IGN/{z}/{x}/{y}.pbf`),
+  `source-layer:'oro_courbe'`, filtré par champ `symbo`
+  (maîtresses/normales/intercalaires), **orange #f04a00**.
+
+### Overlays vecteur / raster
+
+- **Sentiers GR** : raster Waymarked Trails (`tile.waymarkedtrails.org/hiking`).
+- **Zones drone** : raster WMTS `TRANSPORTS.DRONES.RESTRICTIONS` + légende + slider opacité.
+- **Grille de coordonnées** : GeoJSON généré en JS (graticule 0.05°).
+
+### POI (Overpass API + clustering)
+
+- `overpassFetch(cacheKey, query)` → cache mémoire + localStorage 30j.
+  `osmToGeoJSON` gère node / way-center / relation-center / line.
+- **Clustering** (`addClusteredPoi`) : source geojson `cluster:true` → 2 couches
+  symbol (cluster = icône Tabler + compte, individuel = icône). Icônes = pastilles
+  SVG Tabler générées en images (`loadPoiIcons`, `map.addImage`), colorées par
+  catégorie, **contour pur sans bulle**.
+- Catégories : monuments (popup = extrait Wikipedia résolu via tag **wikidata**),
+  baignade, points de vue, restaurants, cafés, glaciers, boulangeries, nautique
+  (canoë/rafting), canyoning. Popups nom + horaires + site.
+- **Villages** : clusterisés aussi (compte < z12, noms ≥ z12).
+- **Rivières** (Overpass `waterway`, ligne + label le long), **noms de forêts**
+  (Overpass `natural=wood`/`landuse=forest` name, label au centre).
+
+### Itinéraire A→B
+
+- Recherche lieux : **Nominatim** (2 champs départ/arrivée).
+- Routing : **BRouter** (`brouter.de/brouter`, keyless, geojson) — profils
+  `car-fast` (voiture), `trekking` (vélo), `hiking-mountain` (à pied). Renvoie
+  `track-length` + `total-time`. Tracé orange + A/B + étiquette distance/temps +
+  vol d'oiseau (haversine). **En ligne uniquement.**
+- **Import GPX** : `DOMParser` sur trk/rte/wpt → LineString rose.
+
+### Divers
+
+- Police **VG5000** : glyphs SDF générés (fontnik) dans `fonts/VG5000/{range}.pbf`,
+  `glyphs:'fonts/{fontstack}/{range}.pbf'`.
+- Boussole (rose des vents SVG, tourne avec le cap), marqueur Maison (Crest),
+  géoloc GPS (`watchPosition`), échelle dynamique.
+
 ### Ce qui ne fonctionne pas
 
 - ✅ **Cassini** — RÉPARÉ : identifiant `AN-IGNF_...` au lieu de `BNF-`.

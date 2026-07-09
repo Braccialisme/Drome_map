@@ -1525,7 +1525,6 @@ function fmtDur(s) { const m = Math.round(s / 60); return m < 60 ? m + ' min' : 
 function measureGeo() {
   const feats = routePts().map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p }, properties: {} }));
   if (routeA && routeB) {
-    feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [routeA, routeB] }, properties: { kind: 'straight' } });
     if (measureRoute) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measureRoute.coords }, properties: { kind: 'route' } });
     const vol = haversine(routeA, routeB);
     const label = measureRoute
@@ -1543,8 +1542,6 @@ function applyMeasure() {
   map.addLayer({ id: 'measure-route', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'route'],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': '#cc6a3a', 'line-width': 4, 'line-opacity': 0.9 } });
-  map.addLayer({ id: 'measure-straight', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'straight'],
-    paint: { 'line-color': '#1a1a1a', 'line-width': 1.5, 'line-dasharray': [2, 1.5], 'line-opacity': 0.7 } });
   map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src', filter: ['!', ['has', 'label']],
     paint: { 'circle-radius': 6, 'circle-color': '#cc6a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 2 } });
   map.addLayer({ id: 'measure-lbl', type: 'symbol', source: 'measure-src', filter: ['has', 'label'],
