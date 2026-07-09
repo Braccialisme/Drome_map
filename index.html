@@ -162,6 +162,24 @@
     }
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+    /* Splash / écran d'accueil (logo) */
+    #splash {
+      position: absolute; inset: 0;
+      z-index: 100;
+      background: var(--greige-0);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 18px;
+      transition: opacity 0.6s ease;
+    }
+    #splash img { width: min(56vw, 300px); height: auto; }
+    #splash .splash-cap {
+      font-family: var(--font-mono);
+      font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--dust);
+    }
+    #splash.hide { opacity: 0; pointer-events: none; }
+
     /* Profil altimétrique */
     #elev-box {
       position: absolute;
@@ -719,6 +737,8 @@
   </style>
 </head>
 <body>
+
+<div id="splash"><img src="assets_logo.png" alt="Drôme · Diois"><div class="splash-cap">Drôme · Diois</div></div>
 
 <div id="map"></div>
 
@@ -2395,7 +2415,14 @@ map.on('moveend', () => {
   const z = Math.round(map.getZoom());
   if (z !== grilleZ) { grilleZ = z; reapplyGrille(); }
 });
-map.on('load', () => { loadPoiIcons(); updateScale(); rerender(); });
+function hideSplash() {
+  const s = document.getElementById('splash');
+  if (!s || s.classList.contains('hide')) return;
+  s.classList.add('hide');
+  setTimeout(() => { s.style.display = 'none'; }, 650);
+}
+map.on('load', () => { loadPoiIcons(); updateScale(); rerender(); setTimeout(hideSplash, 500); });
+setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
 renderPanel();
