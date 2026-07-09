@@ -1166,18 +1166,19 @@ async function overpassFetch(cacheKey, query) {
   if (memCache[cacheKey]) return memCache[cacheKey];
   if (inflight[cacheKey]) return inflight[cacheKey]; // déduplique les appels concurrents
 
-  const cached = localStorage.getItem(cacheKey);
-  if (cached) {
-    try {
-      const { ts, data } = JSON.parse(cached);
-      if (Date.now() - ts < CACHE_TTL) { memCache[cacheKey] = data; return data; }
-    } catch(e) {}
-  }
-
   inflight[cacheKey] = (async () => {
     try {
-      // Bascule sur plusieurs miroirs Overpass : le public overpass-api.de est
-      // souvent saturé (5 min / timeout). On tente le suivant si un rame.
+      // 1. Fichier statique pré-cuit (poi/*.json) : instantané, offline, fiable.
+      try {
+        const r = await fetch('poi/' + cacheKey + '.json');
+        if (r.ok) { const data = await r.json(); if (data && data.elements) { memCache[cacheKey] = data; return data; } }
+      } catch(e) {}
+      // 2. Cache localStorage frais (rafraîchissements réseau précédents)
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        try { const { ts, data } = JSON.parse(cached); if (Date.now() - ts < CACHE_TTL) { memCache[cacheKey] = data; return data; } } catch(e) {}
+      }
+      // 3. Réseau : bascule sur plusieurs miroirs Overpass (souvent saturés).
       for (const host of OVERPASS_HOSTS) {
         try {
           const ctrl = new AbortController();
