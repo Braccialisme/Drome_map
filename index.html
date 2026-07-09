@@ -126,6 +126,28 @@
     /* Panneau baissé : seule l'échelle suit (les boutons sont ancrés en haut) */
     body.panel-collapsed #scale { bottom: calc(40px + 12px); }
 
+    /* Toast (fallback / messages) */
+    #toast {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translate(-50%, -12px);
+      background: var(--ink);
+      color: var(--greige-0);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 8px 14px;
+      border-radius: var(--radius-l);
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      max-width: 80vw;
+      text-align: center;
+    }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
     /* ── PANEL BOTTOM = LE BLOC ── */
     #panel-wrap {
       position: absolute;
@@ -637,6 +659,8 @@
 
 <div id="map"></div>
 
+<div id="toast"></div>
+
 <div id="scale">
   Ech. <span class="num" id="scale-val">1:100k</span>
 </div>
@@ -767,6 +791,23 @@ map.addControl(new maplibregl.AttributionControl({
   compact: true,
   customAttribution: 'IGN · Waymarked · OSM'
 }), 'bottom-left');
+
+// ── Toast (fallback gracieux) ───────────────────────────────────────────────
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+function toast(msg, ms) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms || 3200);
+}
+// Erreurs de tuiles (IGN/Waymarked down, ou hors-ligne) → message discret throttlé
+let tileErrAt = 0;
+map.on('error', e => {
+  if (!e || !e.error) return;
+  const now = Date.now();
+  if (now - tileErrAt > 6000) { tileErrAt = now; toast('Tuiles indisponibles (hors-ligne ?)'); }
+});
 
 // ── Basemap config ─────────────────────────────────────────────────────────
 function getBasemapConfig(key) {
@@ -1026,6 +1067,9 @@ async function overpassFetch(cacheKey, query) {
       memCache[cacheKey] = data;
       try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch(e) {}
       return data;
+    } catch (e) {
+      toast('Données OSM indisponibles (réseau ?)');
+      throw e;
     } finally {
       delete inflight[cacheKey];
     }
@@ -1413,6 +1457,53 @@ function applyGpx() {
 }
 function clearGpx() { gpxData = null; rerender(); }
 
+// ── PRÉCACHE HORS-LIGNE (30 j) ──────────────────────────────────────────────
+// Amorce le cache : tous les jeux Overpass + les tuiles du fond/contours sur la
+// bbox. Le Service Worker les garde 30 j → carte utilisable sans réseau.
+function tilesForBbox(bbox, z) {
+  const n = Math.pow(2, z), rad = l => l * Math.PI / 180;
+  const x0 = Math.floor((bbox.west + 180) / 360 * n), x1 = Math.floor((bbox.east + 180) / 360 * n);
+  const y0 = Math.floor((1 - Math.log(Math.tan(rad(bbox.north)) + 1 / Math.cos(rad(bbox.north))) / Math.PI) / 2 * n);
+  const y1 = Math.floor((1 - Math.log(Math.tan(rad(bbox.south)) + 1 / Math.cos(rad(bbox.south))) / Math.PI) / 2 * n);
+  const out = [];
+  for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) out.push([z, x, y]);
+  return out;
+}
+async function precacheTiles(onProgress) {
+  const cfg = getBasemapConfig(state.basemap);
+  const urls = [];
+  for (const z of [10, 11, 12, 13]) {
+    for (const [zz, x, y] of tilesForBbox(BBOX, z)) {
+      cfg.layers.forEach(l => urls.push(l.source.replace('{z}', zz).replace('{x}', x).replace('{y}', y)));
+      urls.push(`https://data.geopf.fr/tms/1.0.0/PLAN.IGN/${zz}/${x}/${y}.pbf`);
+    }
+  }
+  let done = 0; const total = urls.length;
+  const worker = async list => { for (const u of list) { try { await fetch(u); } catch (e) {} done++; if (done % 20 === 0) onProgress(done, total); } };
+  const lanes = [[], [], [], [], [], []];
+  urls.forEach((u, i) => lanes[i % lanes.length].push(u));
+  await Promise.all(lanes.map(worker));
+  onProgress(total, total);
+}
+async function precacheZone(btn) {
+  if (!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) {
+    toast('Précache actif seulement en ligne (https/localhost)'); return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = 'Préchargement…'; }
+  toast('Préchargement des données OSM…', 5000);
+  const g = -1; // gen périmé : fetch sans ajouter de couche
+  const jobs = [
+    applyVillages(g), applyMonuments(g), applyBaignade(g), applyViewpoints(g), applyRivieres(g), applyForets(g),
+    applyPOI('restaurants', 'restaurant', '#cc6a3a', g), applyPOI('cafes', 'cafe|bar|pub', '#8b5a3a', g),
+    applyPOI('glaciers', 'ice_cream', '#4a7ba3', g), applyPOI('boulangeries', 'bakery', '#a8834a', g),
+    applyActivite('nautique', 'canoe|kayak|rafting|canoe_polo|water_ski', g), applyActivite('canyoning', 'canyoning', g)
+  ];
+  try { await Promise.all(jobs); } catch (e) {}
+  await precacheTiles((d, t) => toast(`Préchargement tuiles ${d}/${t}`, 5000));
+  toast('Zone préchargée pour 30 jours', 4000);
+  if (btn) { btn.disabled = false; btn.textContent = 'Précharger la zone (30 j)'; }
+}
+
 // ── ITINÉRAIRE A → B (recherche de lieux + BRouter, sans clé) ────────────────
 // Profils BRouter keyless : voiture (car-fast), vélo (trekking), à pied
 // (hiking-mountain). Distance + temps réels + vol d'oiseau (haversine).
@@ -1708,6 +1799,11 @@ const PANELS = {
       <label class="gpx-btn">Importer une trace GPX<input type="file" id="gpx-input" accept=".gpx,application/gpx+xml" hidden></label>
       ${gpxData ? `<button class="gpx-btn gpx-clear" id="gpx-clear">Effacer les traces</button>` : ''}
     </div>
+
+    <div class="gpx-block">
+      <div class="row-sub" style="margin-bottom:6px;">Hors-ligne</div>
+      <button class="gpx-btn" id="precache-btn">Précharger la zone (30 j)</button>
+    </div>
   `
 };
 
@@ -1837,6 +1933,9 @@ function attachPanelEvents() {
   });
   const gpxClear = content.querySelector('#gpx-clear');
   if (gpxClear) gpxClear.addEventListener('click', clearGpx);
+
+  const precacheBtn = content.querySelector('#precache-btn');
+  if (precacheBtn) precacheBtn.addEventListener('click', () => precacheZone(precacheBtn));
 
   const ra = content.querySelector('#route-a');
   if (ra) ra.addEventListener('input', debounce(() => routeSearch(ra.value, content.querySelector('#route-a-res'), 0, ra), 350));
