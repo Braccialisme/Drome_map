@@ -522,7 +522,7 @@
       border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative;
     }
     .best-card:active { transform: scale(0.98); }
-    .best-card img, .best-noimg { width: 100%; height: 72px; object-fit: cover; display: block; background: var(--greige-2); }
+    .best-ic { height: 54px; display: flex; align-items: center; justify-content: center; background: var(--greige-1); }
     .best-name { font-family: var(--font-ui); font-size: 11px; padding: 4px 6px; color: var(--ink); line-height: 1.2; }
     .best-count {
       position: absolute; top: 4px; right: 4px;
@@ -713,6 +713,7 @@
     .maplibregl-popup-content .p-wiki:hover {
       background: var(--orange);
     }
+    .maplibregl-popup-content .pop-faune { display: flex; align-items: center; gap: 9px; margin-bottom: 4px; }
     .maplibregl-popup-content .p-thumb {
       width: 100%;
       border-radius: var(--radius);
@@ -1666,6 +1667,19 @@ async function applyTransport(gen) {
 }
 
 // ── FAUNE (observations iNaturalist + bestiaire) ────────────────────────────
+// SVG stylés par groupe (pas de photos) : oiseau, mammifère, générique.
+const TAXON_ICON = {
+  Aves: '<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4"/><path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4"/>',
+  Mammalia: '<path d="M3 3c0 2 1 3 4 3c2 0 3 1 3 3"/><path d="M21 3c0 2 -1 3 -4 3c-2 0 -3 .333 -3 3"/><path d="M12 18c-1 0 -4 -3 -4 -6c0 -2 1.333 -3 4 -3s4 1 4 3c0 3 -3 6 -4 6"/><path d="M15.185 14.889l.095 -.18a4 4 0 1 1 -6.56 0"/><path d="M17 3c0 1.333 -.333 2.333 -1 3"/><path d="M7 3c0 1.333 .333 2.333 1 3"/><path d="M8.5 10l-1.5 -1"/><path d="M15.5 10l1.5 -1"/>',
+  _default: '<path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538"/><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052"/><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267"/><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.885 0 1.73 -.974 1.93 -2.267"/><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866"/>'
+};
+const TAXON_COLOR = { Aves: '#d99a20', Mammalia: '#8b5a3a', Reptilia: '#3f8f4a', Amphibia: '#2f9e9e' };
+function taxonColor(g) { return TAXON_COLOR[g] || '#6b6355'; }
+function taxonSvg(g, size) {
+  const p = TAXON_ICON[g] || TAXON_ICON._default;
+  return `<svg width="${size || 22}" height="${size || 22}" viewBox="0 0 24 24" fill="none" stroke="${taxonColor(g)}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+}
+
 let fauneData = null, fauneInflight = null;
 async function fetchFaune() {
   if (fauneData) return fauneData;
@@ -1675,7 +1689,7 @@ async function fetchFaune() {
     try { const r = await fetch('poi/drm-faune-v1.json'); if (r.ok) { const d = await r.json(); fauneData = d.results || d; return fauneData; } } catch(e) {}
     // 2. iNaturalist live
     try {
-      const url = 'https://api.inaturalist.org/v1/observations?nelat=45.05&nelng=5.45&swlat=44.55&swlng=4.85&iconic_taxa=Animalia&quality_grade=research&photos=true&per_page=200&order_by=votes';
+      const url = 'https://api.inaturalist.org/v1/observations?nelat=45.05&nelng=5.45&swlat=44.55&swlng=4.85&iconic_taxa=Mammalia,Aves,Reptilia,Amphibia&quality_grade=research&photos=true&per_page=200&order_by=votes';
       const r = await fetch(url); const d = await r.json(); fauneData = d.results || [];
       return fauneData;
     } catch(e) { toast('Faune indisponible (réseau ?)'); return []; }
@@ -1699,14 +1713,14 @@ async function applyFaune(gen) {
   map.addSource('faune-src', { type: 'geojson', data: fauneGeo(obs) });
   map.addLayer({ id: 'faune-pts', type: 'circle', source: 'faune-src',
     paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 6],
-      'circle-color': '#3f8f4a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+      'circle-color': ['match', ['get', 'taxon'], 'Aves', '#d99a20', 'Mammalia', '#8b5a3a', 'Reptilia', '#3f8f4a', 'Amphibia', '#2f9e9e', '#6b6355'],
+      'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
   if (!boundEvents.has('faune')) {
     boundEvents.add('faune');
     map.on('click', 'faune-pts', e => {
       const p = e.features[0].properties;
-      const img = p.photo ? `<img class="p-thumb" src="${esc(p.photo)}" alt="">` : '';
       new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: '220px' }).setLngLat(e.lngLat)
-        .setHTML(`<div class="p-title">${esc(p.name)}</div><div class="p-kind">${esc((p.taxon || '').toLowerCase())}</div>${img}<a class="p-wiki" href="https://www.inaturalist.org/observations/${p.id}" target="_blank" rel="noopener">iNaturalist →</a>`)
+        .setHTML(`<div class="pop-faune">${taxonSvg(p.taxon, 26)}<div><div class="p-title">${esc(p.name)}</div><div class="p-kind">${esc((p.taxon || '').toLowerCase())}</div></div></div><a class="p-wiki" href="https://www.inaturalist.org/observations/${p.id}" target="_blank" rel="noopener">iNaturalist →</a>`)
         .addTo(map);
     });
     map.on('mouseenter', 'faune-pts', () => map.getCanvas().style.cursor = 'pointer');
@@ -1722,13 +1736,13 @@ async function renderBestiaire() {
   obs.forEach(o => {
     if (!o.taxon) return;
     const k = o.taxon.id;
-    if (!byTaxon[k]) byTaxon[k] = { name: o.taxon.preferred_common_name || o.taxon.name, photo: (o.taxon.default_photo || {}).square_url || '', count: 0, ll: o.geojson ? o.geojson.coordinates : null };
+    if (!byTaxon[k]) byTaxon[k] = { name: o.taxon.preferred_common_name || o.taxon.name, group: o.taxon.iconic_taxon_name, count: 0, ll: o.geojson ? o.geojson.coordinates : null };
     byTaxon[k].count++;
   });
   const list = Object.values(byTaxon).sort((a, b) => b.count - a.count);
   if (!list.length) { el.innerHTML = '<div class="row-sub">Aucune observation.</div>'; return; }
   el.innerHTML = list.map(t => `<div class="best-card" data-lng="${t.ll ? t.ll[0] : ''}" data-lat="${t.ll ? t.ll[1] : ''}">
-      ${t.photo ? `<img src="${esc(t.photo)}" alt="">` : '<div class="best-noimg"></div>'}
+      <div class="best-ic">${taxonSvg(t.group, 30)}</div>
       <div class="best-name">${esc(t.name)}</div><div class="best-count">${t.count}</div></div>`).join('');
   el.querySelectorAll('.best-card').forEach(c => c.addEventListener('click', () => {
     if (c.dataset.lat) map.flyTo({ center: [+c.dataset.lng, +c.dataset.lat], zoom: 13, duration: 1000 });
