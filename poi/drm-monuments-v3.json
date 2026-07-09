@@ -1,0 +1,8346 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.7 375dc00a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-09T19:18:13Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 347237643,
+  "lat": 45.0469422,
+  "lon": 5.0555219,
+  "tags": {
+    "description": "Monument commémoratif du 11e Régiment de Cuirassiers",
+    "historic": "memorial",
+    "ref:FR:MemorialGenWeb": "132995"
+  }
+},
+{
+  "type": "node",
+  "id": 347237645,
+  "lat": 45.0442414,
+  "lon": 5.0513339,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "stone"
+  }
+},
+{
+  "type": "node",
+  "id": 390367057,
+  "lat": 44.5828261,
+  "lon": 5.0537146,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 428068779,
+  "lat": 44.7564104,
+  "lon": 5.3721802,
+  "tags": {
+    "historic": "ruins",
+    "name": "remparts"
+  }
+},
+{
+  "type": "node",
+  "id": 463750000,
+  "lat": 44.7921784,
+  "lon": 4.9791482,
+  "tags": {
+    "artwork_subject": "religious",
+    "artwork_type": "statue",
+    "denomination": "catholic",
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "statue",
+    "name": "Notre-Dame de Miéry",
+    "religion": "christian",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 618515166,
+  "lat": 44.7101319,
+  "lon": 5.2568538,
+  "tags": {
+    "historic": "hameau",
+    "name": "Peyrache",
+    "name:oc": "Peiracha",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 670040877,
+  "lat": 44.9171340,
+  "lon": 5.1766176,
+  "tags": {
+    "amenity": "tourism",
+    "description": "Calvaire : Croix : Axe à la base - Support en mauvais état, point exploitable en 2001",
+    "historic": "wayside_cross",
+    "man_made": "survey_point",
+    "note": "Ne pas déplacer ce point, cf. - Do not move this node, see - http://wiki.openstreetmap.org/wiki/WikiProject_France/Repères_Géodésiques#Permanence_des_rep.C3.A8res",
+    "ref": "2616301 - 1",
+    "source": "©IGN 2010 dans le cadre de la cartographie réglementaire",
+    "url": "https://fiches-geodesie.ign.fr/fiches/index.php?module=e&action=fichepdf&source=carte&sit_no=2616301"
+  }
+},
+{
+  "type": "node",
+  "id": 1100962753,
+  "lat": 45.0007726,
+  "lon": 4.8728460,
+  "tags": {
+    "artwork_type": "sculpture",
+    "historic": "memorial",
+    "inscription": "Dauphiné; 45° de Latitude Nord; Ici Commence le Midi",
+    "name": "Monument du 45e Parallèle",
+    "source": "Bing",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 1139193160,
+  "lat": 44.8643665,
+  "lon": 4.9391054,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 1282533919,
+  "lat": 44.8914341,
+  "lon": 5.4312301,
+  "tags": {
+    "historic": "memorial",
+    "name": "Grotte de la Luire",
+    "natural": "cave_entrance",
+    "tourism": "attraction",
+    "wikidata": "Q3117196",
+    "wikipedia": "fr:Grotte de la Luire"
+  }
+},
+{
+  "type": "node",
+  "id": 1296646320,
+  "lat": 44.8955133,
+  "lon": 5.3705882,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "name": "Juillet 1944",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 1306904843,
+  "lat": 44.7086746,
+  "lon": 5.4180652,
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "node",
+  "id": 1313335579,
+  "lat": 45.0459258,
+  "lon": 5.4356638,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 1313439570,
+  "lat": 45.0479132,
+  "lon": 5.4474567,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele",
+    "name": "18 mars 1944"
+  }
+},
+{
+  "type": "node",
+  "id": 1332130522,
+  "lat": 44.8360838,
+  "lon": 5.1064820,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 1371307126,
+  "lat": 45.0040417,
+  "lon": 5.3456703,
+  "tags": {
+    "historic": "ruins",
+    "name": "Saint-Mémoire"
+  }
+},
+{
+  "type": "node",
+  "id": 1562931961,
+  "lat": 44.8244358,
+  "lon": 5.0733436,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 1809867952,
+  "lat": 44.5829722,
+  "lon": 5.1324470,
+  "tags": {
+    "historic": "castle",
+    "name": "Château ruiné des Comtes de Poitiers",
+    "ruins": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1814712392,
+  "lat": 44.8232506,
+  "lon": 5.0429491,
+  "tags": {
+    "historic": "castle",
+    "name": "Donjon de La Baume Cornillane"
+  }
+},
+{
+  "type": "node",
+  "id": 1832908580,
+  "lat": 44.8870310,
+  "lon": 5.1848194,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 1844937711,
+  "lat": 44.9281171,
+  "lon": 4.8929174,
+  "tags": {
+    "artwork_type": "statue",
+    "historic": "monument",
+    "material": "metal",
+    "name": "Statue Désiré Bancel",
+    "subject": "François-Désiré Bancel",
+    "subject:wikidata": "Q3045158",
+    "subject:wikipedia": "fr:François-Désiré_Bancel",
+    "tourism": "artwork",
+    "wikimedia_commons": "Category:Statue de Désiré Bancel, Valence"
+  }
+},
+{
+  "type": "node",
+  "id": 1904165284,
+  "lat": 44.5696456,
+  "lon": 5.2742556,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 1914275073,
+  "lat": 44.5873432,
+  "lon": 5.1341582,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Bourdeaux à ses enfants morts pour la patrie 1914-1918",
+    "material": "stone",
+    "memorial": "obelisk",
+    "name": "monument aux morts",
+    "ref:FR:MemorialGenWeb": "13704",
+    "war_memorial": "yes",
+    "wikidata": "Q136047268",
+    "wikimedia_commons": "File:Bourdeaux - MM.jpg"
+  }
+},
+{
+  "type": "node",
+  "id": 2038112589,
+  "lat": 44.9682424,
+  "lon": 5.4151543,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "La Chapelle-en-Vercors à ses enfants morts pour la France",
+    "material": "stone",
+    "memorial": "statue",
+    "name": "Monument aux morts",
+    "ref:FR:MemorialGenWeb": "30892",
+    "war_memorial": "yes",
+    "wikidata": "Q136057847"
+  }
+},
+{
+  "type": "node",
+  "id": 2163083792,
+  "lat": 44.5583753,
+  "lon": 4.9944711,
+  "tags": {
+    "historic": "castle",
+    "name": "Ruine du Chatelard"
+  }
+},
+{
+  "type": "node",
+  "id": 2257967343,
+  "lat": 44.7556517,
+  "lon": 5.3690576,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "3205",
+    "wikidata": "Q136052798"
+  }
+},
+{
+  "type": "node",
+  "id": 2332408966,
+  "lat": 45.0454947,
+  "lon": 5.3922445,
+  "tags": {
+    "historic": "ruins",
+    "ruins": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2355013396,
+  "lat": 44.5518817,
+  "lon": 4.9431969,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 2355013408,
+  "lat": 44.5517938,
+  "lon": 4.9435536,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 2405843688,
+  "lat": 45.0306778,
+  "lon": 5.2397877,
+  "tags": {
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1994-09-06",
+    "name": "Château de Rochechinard",
+    "ref:mhs": "PA00132813",
+    "ruins": "yes",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "website": "http://chateau.rochechinard.free.fr/",
+    "wikidata": "Q2970391",
+    "wikipedia": "fr:Château de Rochechinard"
+  }
+},
+{
+  "type": "node",
+  "id": 2405850514,
+  "lat": 44.9666588,
+  "lon": 5.4170397,
+  "tags": {
+    "alt_name": "Cour des fusillés",
+    "historic": "memorial",
+    "material": "marble",
+    "memorial": "plaque",
+    "name": "Mur des Fusillés",
+    "wikidata": "Q19951176",
+    "wikipedia": "fr:Mur des Fusillés de la Chapelle-en-Vercors"
+  }
+},
+{
+  "type": "node",
+  "id": 2406961223,
+  "lat": 44.6887412,
+  "lon": 5.2267525,
+  "tags": {
+    "historic": "monument",
+    "name": "Mémorial d’Espenel"
+  }
+},
+{
+  "type": "node",
+  "id": 2466650219,
+  "lat": 44.7516085,
+  "lon": 5.3752979,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "note": "plaque commémorative Louisendorf",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 2506378594,
+  "lat": 44.9681652,
+  "lon": 5.1691665,
+  "tags": {
+    "historic": "ruins",
+    "name": "Ruines du Château de Rochefort"
+  }
+},
+{
+  "type": "node",
+  "id": 2519916795,
+  "lat": 44.6781810,
+  "lon": 5.0976522,
+  "tags": {
+    "historic": "castle",
+    "name": "Château de Piégros",
+    "wikidata": "Q78655742"
+  }
+},
+{
+  "type": "node",
+  "id": 2645831741,
+  "lat": 44.6075132,
+  "lon": 5.1671105,
+  "tags": {
+    "historic": "ruins",
+    "name": "Tour de Bezaudun"
+  }
+},
+{
+  "type": "node",
+  "id": 2774711149,
+  "lat": 44.6600065,
+  "lon": 5.3707355,
+  "tags": {
+    "description": "Monuments aux Morts : \"Barnave à ses héroïques enfants morts pour la France\"",
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38353"
+  }
+},
+{
+  "type": "node",
+  "id": 2927508313,
+  "lat": 44.9388803,
+  "lon": 4.8518063,
+  "tags": {
+    "historic": "city_gate"
+  }
+},
+{
+  "type": "node",
+  "id": 2930868387,
+  "lat": 44.9372310,
+  "lon": 5.0347263,
+  "tags": {
+    "historic": "monument",
+    "name": "Statue de la Vierge"
+  }
+},
+{
+  "type": "node",
+  "id": 3013503331,
+  "lat": 44.6451438,
+  "lon": 5.0651274,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 3084944784,
+  "lat": 44.9385411,
+  "lon": 4.8521005,
+  "tags": {
+    "historic": "city_gate",
+    "name": "Poterne"
+  }
+},
+{
+  "type": "node",
+  "id": 3086645195,
+  "lat": 44.7524951,
+  "lon": 5.3711809,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3089348212,
+  "lat": 44.6632250,
+  "lon": 5.2722698,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 3091302644,
+  "lat": 44.6978859,
+  "lon": 5.1983414,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 3091344157,
+  "lat": 44.7374094,
+  "lon": 5.1817055,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 3091391817,
+  "lat": 44.7510503,
+  "lon": 5.1796250,
+  "tags": {
+    "historic": "wayside_shrine"
+  }
+},
+{
+  "type": "node",
+  "id": 3200082984,
+  "lat": 45.0176147,
+  "lon": 4.9203778,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "13334",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3200083008,
+  "lat": 45.0176452,
+  "lon": 4.9201460,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3223726977,
+  "lat": 45.0148026,
+  "lon": 4.9383716,
+  "tags": {
+    "historic": "memorial",
+    "name": "Monument Aux Morts"
+  }
+},
+{
+  "type": "node",
+  "id": 3345465107,
+  "lat": 44.8231550,
+  "lon": 5.0393432,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30966",
+    "wikidata": "Q136057648"
+  }
+},
+{
+  "type": "node",
+  "id": 3385506558,
+  "lat": 44.8768440,
+  "lon": 5.2397865,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 3396998251,
+  "lat": 44.6275094,
+  "lon": 5.0215512,
+  "tags": {
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "2013-12-12",
+    "name": "Château de Soyans",
+    "ref:mhs": "PA00117069",
+    "ruins": "yes",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C10",
+    "wikidata": "Q2970723",
+    "wikipedia": "fr:Château de Soyans"
+  }
+},
+{
+  "type": "node",
+  "id": 3397091454,
+  "lat": 44.6289274,
+  "lon": 5.0149222,
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "node",
+  "id": 3457052420,
+  "lat": 44.7507674,
+  "lon": 5.2631015,
+  "tags": {
+    "historic": "castle",
+    "image": "File:Château-de-Pontaix-4.JPG",
+    "name": "Ruines du château de Pontaix",
+    "name:oc": "Roïnas dau Chastèl de Pontais",
+    "ruins": "yes",
+    "wikidata": "Q2970271",
+    "wikipedia": "fr:Château de Pontaix"
+  }
+},
+{
+  "type": "node",
+  "id": 3527969588,
+  "lat": 44.6116252,
+  "lon": 5.1258787,
+  "tags": {
+    "access": "private",
+    "historic": "ruins",
+    "name": "Tour de Mornans",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 3627069170,
+  "lat": 44.7669047,
+  "lon": 5.1073211,
+  "tags": {
+    "access": "private",
+    "historic": "ruins",
+    "historic:civilization": "medieval",
+    "name": "Château de Suze",
+    "ruins": "castle"
+  }
+},
+{
+  "type": "node",
+  "id": 3746457839,
+  "lat": 44.9385616,
+  "lon": 5.0929401,
+  "tags": {
+    "artwork_type": "statue",
+    "historic": "memorial",
+    "source": "©IGN 2010 dans le cadre de la cartographie réglementaire",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 3746457853,
+  "lat": 44.9473244,
+  "lon": 4.9815164,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "©IGN 2010 dans le cadre de la cartographie réglementaire"
+  }
+},
+{
+  "type": "node",
+  "id": 3797453411,
+  "lat": 45.0166243,
+  "lon": 4.9427276,
+  "tags": {
+    "historic": "wayside_cross",
+    "name": "Croix Saint-Hugues"
+  }
+},
+{
+  "type": "node",
+  "id": 3797458679,
+  "lat": 45.0149833,
+  "lon": 4.9382594,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "local knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 3797458701,
+  "lat": 45.0150872,
+  "lon": 4.9403424,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 3866364596,
+  "lat": 44.8662642,
+  "lon": 5.4158426,
+  "tags": {
+    "historic": "monument",
+    "name": "Stèle du Rousset en Vercors"
+  }
+},
+{
+  "type": "node",
+  "id": 3866365404,
+  "lat": 44.8693243,
+  "lon": 5.4161075,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW2",
+    "ref:FR:MemorialGenWeb": "8006"
+  }
+},
+{
+  "type": "node",
+  "id": 3866365748,
+  "lat": 45.0136638,
+  "lon": 5.4424734,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 4057930235,
+  "lat": 45.0476640,
+  "lon": 5.3406512,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "876"
+  }
+},
+{
+  "type": "node",
+  "id": 4209324644,
+  "lat": 45.0071753,
+  "lon": 5.0915945,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "1952-1962 Hommage aux combattants et victimes de guerre Algérie-Maroc-Tunisie",
+    "material": "stone",
+    "memorial": "stele"
+  }
+},
+{
+  "type": "node",
+  "id": 4360136910,
+  "lat": 44.9844570,
+  "lon": 5.3912722,
+  "tags": {
+    "ele": "1026",
+    "hiking": "yes",
+    "historic": "wayside_cross",
+    "information": "guidepost",
+    "name": "Croix de Châtelard",
+    "operator": "Parc Naturel Régional du Vercors",
+    "ref": "CEV026_01",
+    "tourism": "information"
+  }
+},
+{
+  "type": "node",
+  "id": 4830557103,
+  "lat": 44.5526429,
+  "lon": 5.1122235,
+  "tags": {
+    "historic": "memorial",
+    "inscription:fr": "Comps à ses enfants morts pour la France",
+    "memorial": "plaque",
+    "source": "survey 2017"
+  }
+},
+{
+  "type": "node",
+  "id": 4832612892,
+  "lat": 44.7073707,
+  "lon": 5.0063485,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "survey 2017"
+  }
+},
+{
+  "type": "node",
+  "id": 4833904107,
+  "lat": 44.7264607,
+  "lon": 5.0208452,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "source": "survey 2017"
+  }
+},
+{
+  "type": "node",
+  "id": 4974981266,
+  "lat": 44.7095152,
+  "lon": 5.0912337,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 5069339311,
+  "lat": 44.7216988,
+  "lon": 4.9417509,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 5212668948,
+  "lat": 44.9678419,
+  "lon": 5.2904856,
+  "tags": {
+    "historic": "monastery",
+    "name": "Chartreuse du Val Sainte-Marie",
+    "ruins": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5298094823,
+  "lat": 44.5704334,
+  "lon": 5.1172607,
+  "tags": {
+    "historic": "memorial",
+    "name": "Sheba, chienne et Ange-Gardienne",
+    "name:en": "Resting place of Sheba, exceptional dog"
+  }
+},
+{
+  "type": "node",
+  "id": 5568939045,
+  "lat": 44.9732677,
+  "lon": 5.1518833,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 5649411544,
+  "lat": 44.6038384,
+  "lon": 5.0108818,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 5649411545,
+  "lat": 44.6037692,
+  "lon": 5.0099539,
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "node",
+  "id": 5822521951,
+  "lat": 44.7104271,
+  "lon": 5.0908538,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1",
+    "survey:date": "2023-04-20"
+  }
+},
+{
+  "type": "node",
+  "id": 5834506883,
+  "lat": 44.5942739,
+  "lon": 4.8796678,
+  "tags": {
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "monastery",
+    "mhs:inscription_date": "1999-04-28",
+    "name": "Abbaye Sainte-Anne",
+    "ref:mhs": "PA26000006",
+    "religious_rank": "abbey",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C13",
+    "wikidata": "Q2820458",
+    "wikipedia": "fr:Abbaye Sainte-Anne de Bonlieu-sur-Roubion"
+  }
+},
+{
+  "type": "node",
+  "id": 5922525102,
+  "lat": 44.9337166,
+  "lon": 4.8960818,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue"
+  }
+},
+{
+  "type": "node",
+  "id": 5933984475,
+  "lat": 44.9305900,
+  "lon": 4.8859810,
+  "tags": {
+    "description": "Monument aux morts de Valence",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "mhs:inscription_date": "2022-03-25",
+    "operator:heritage": "mhs",
+    "ref:FR:MemorialGenWeb": "30783;9347",
+    "ref:mhs": "PA26000036",
+    "source:heritage": "Ministère de la Culture - 2025-07",
+    "start_date": "1929-03-24",
+    "wikidata": "Q66759111"
+  }
+},
+{
+  "type": "node",
+  "id": 5967409665,
+  "lat": 44.8864994,
+  "lon": 5.1826970,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38392"
+  }
+},
+{
+  "type": "node",
+  "id": 5968523316,
+  "lat": 44.7249681,
+  "lon": 5.2431785,
+  "tags": {
+    "historic": "castle",
+    "historic:civilization": "medieval",
+    "name": "Château de Barry",
+    "name:oc": "Chastèu de Barri",
+    "ruins": "yes",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 6506018928,
+  "lat": 44.7660798,
+  "lon": 4.9110281,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 6506079905,
+  "lat": 44.7202328,
+  "lon": 5.0268298,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 6549021386,
+  "lat": 44.9334093,
+  "lon": 4.8930320,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Hommage à Missak Manouchian",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 6567338278,
+  "lat": 44.9874794,
+  "lon": 5.3764746,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "name": "Roche des Arnauds",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 6594315749,
+  "lat": 44.8693867,
+  "lon": 5.2216475,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "La commune d'Ombleze, pays de son enfance, en souvenir de Jérôme Cavalli\nAs et virtuose de l'aviation, pilote d'essai et d'acrobatie, engagé au groupe de chasse Lafayette, mort au combat sur le sol tunisien le 3 février 1943",
+    "memorial": "plaque",
+    "memorial:conflict": "WW2",
+    "name": "Mémorial Jérôme Cavalli",
+    "ref:FR:MemorialGenWeb": "59850",
+    "war_memorial": "yes",
+    "website": "https://www.aerosteles.net/stelefr-ombleze-cavalli",
+    "wikipedia": "fr:Jérôme Cavalli"
+  }
+},
+{
+  "type": "node",
+  "id": 6594315752,
+  "lat": 44.8687682,
+  "lon": 5.2216735,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1;WW2",
+    "ref:FR:MemorialGenWeb": "700"
+  }
+},
+{
+  "type": "node",
+  "id": 6595104651,
+  "lat": 44.6439643,
+  "lon": 4.8729618,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 6703996944,
+  "lat": 44.8976278,
+  "lon": 5.3681121,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele",
+    "name": "Stèle Henri Grimaud"
+  }
+},
+{
+  "type": "node",
+  "id": 6708539429,
+  "lat": 44.8962334,
+  "lon": 5.3696637,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele",
+    "name": "Stèle Point dit Payot"
+  }
+},
+{
+  "type": "node",
+  "id": 6723365855,
+  "lat": 44.8954661,
+  "lon": 5.3705443,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Symbole du pacte de l'Amitié",
+    "natural": "stone"
+  }
+},
+{
+  "type": "node",
+  "id": 6795015286,
+  "lat": 44.8012417,
+  "lon": 5.3335732,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "obelisk",
+    "ref:FR:MemorialGenWeb": "17072",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7285259820,
+  "lat": 45.0489671,
+  "lon": 5.0654503,
+  "tags": {
+    "historic": "wayside_cross",
+    "name": "Les Trois Croix"
+  }
+},
+{
+  "type": "node",
+  "id": 7433660911,
+  "lat": 44.7992752,
+  "lon": 4.9798375,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "image": "File:Calvaire (Upie).jpg",
+    "name": "Calvaire",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7596897152,
+  "lat": 44.8762204,
+  "lon": 5.0119241,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 7756439701,
+  "lat": 45.0485957,
+  "lon": 5.3903159,
+  "tags": {
+    "fixme": "position approximative",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "node",
+  "id": 7773723896,
+  "lat": 44.7118017,
+  "lon": 5.0953951,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 7823653172,
+  "lat": 44.5657544,
+  "lon": 5.0799901,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 7827925554,
+  "lat": 44.7200036,
+  "lon": 5.0567956,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 7834449208,
+  "lat": 44.5845994,
+  "lon": 5.1320760,
+  "tags": {
+    "barrier": "wall",
+    "castle_type": "defensive",
+    "historic": "castle",
+    "name": "Château ruiné des Evêques de Die",
+    "wikidata": "Q78661325"
+  }
+},
+{
+  "type": "node",
+  "id": 7913931360,
+  "lat": 45.0444168,
+  "lon": 5.0358890,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7913931361,
+  "lat": 45.0444789,
+  "lon": 5.0358903,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7913931362,
+  "lat": 45.0444472,
+  "lon": 5.0358897,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 7917870020,
+  "lat": 44.8573514,
+  "lon": 4.9418287,
+  "tags": {
+    "artwork_subject": "religious",
+    "artwork_type": "statue",
+    "denomination": "catholic",
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "statue",
+    "name": "Notre-Dame du Vœu",
+    "religion": "christian",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 8218651207,
+  "lat": 45.0451365,
+  "lon": 5.0529969,
+  "tags": {
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "mhs:inscription_date": "2019-03-13",
+    "ref:FR:MemorialGenWeb": "153281",
+    "ref:mhs": "PA26000035",
+    "source:heritage": "Ministère de la Culture - 06/2019",
+    "wikidata": "Q66759110"
+  }
+},
+{
+  "type": "node",
+  "id": 8244705073,
+  "lat": 44.8753078,
+  "lon": 4.8808150,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "obelisk;war_memorial",
+    "name": "Monument aux Morts",
+    "ref:FR:MemorialGenWeb": "23447"
+  }
+},
+{
+  "type": "node",
+  "id": 8247800217,
+  "lat": 44.8697460,
+  "lon": 4.8708118,
+  "tags": {
+    "historic": "monument",
+    "name": "Mur des fusillés"
+  }
+},
+{
+  "type": "node",
+  "id": 8265078987,
+  "lat": 44.8591440,
+  "lon": 4.9448244,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 8265096335,
+  "lat": 44.8565054,
+  "lon": 4.9013729,
+  "tags": {
+    "historic": "wayside_cross",
+    "name": "Croix de Mission"
+  }
+},
+{
+  "type": "node",
+  "id": 8279520442,
+  "lat": 44.8569512,
+  "lon": 4.9019387,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 8279535827,
+  "lat": 44.8589708,
+  "lon": 4.9336705,
+  "tags": {
+    "historic": "monument",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 8279589187,
+  "lat": 44.8575161,
+  "lon": 4.9028606,
+  "tags": {
+    "historic": "monument",
+    "memorial": "war_memorial",
+    "survey:date": "2021-05-14"
+  }
+},
+{
+  "type": "node",
+  "id": 8281428640,
+  "lat": 44.8782952,
+  "lon": 4.8774017,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 8339797733,
+  "lat": 44.7596102,
+  "lon": 5.1129739,
+  "tags": {
+    "historic": "wayside_cross",
+    "inscription": "Mission 1867",
+    "material": "metal"
+  }
+},
+{
+  "type": "node",
+  "id": 8350172106,
+  "lat": 44.9290708,
+  "lon": 4.8891499,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "plaque",
+    "name": "Pierre de Saint-Prix",
+    "wikimedia_commons": "File:Plaque Pierre de Saint-Prix à Valence (Drôme).jpg"
+  }
+},
+{
+  "type": "node",
+  "id": 8354336112,
+  "lat": 44.7932321,
+  "lon": 4.8653072,
+  "tags": {
+    "historic": "memorial",
+    "source": "BDTopo IGN"
+  }
+},
+{
+  "type": "node",
+  "id": 8354373028,
+  "lat": 44.9430899,
+  "lon": 4.9157160,
+  "tags": {
+    "historic": "memorial",
+    "source": "BDTopo IGN"
+  }
+},
+{
+  "type": "node",
+  "id": 8354373032,
+  "lat": 44.9323065,
+  "lon": 4.8717217,
+  "tags": {
+    "historic": "memorial",
+    "source": "BDTopo IGN"
+  }
+},
+{
+  "type": "node",
+  "id": 8354373043,
+  "lat": 44.8367944,
+  "lon": 4.8960359,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "source": "BDTopo IGN"
+  }
+},
+{
+  "type": "node",
+  "id": 8402485464,
+  "lat": 44.9401740,
+  "lon": 4.9767637,
+  "tags": {
+    "artwork_type": "statue",
+    "historic": "wayside_cross",
+    "source": "IGN - 09/2020",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 8435325861,
+  "lat": 44.8538871,
+  "lon": 4.9079040,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 09/2020"
+  }
+},
+{
+  "type": "node",
+  "id": 8480423783,
+  "lat": 44.5713037,
+  "lon": 4.9915183,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 8622425517,
+  "lat": 45.0451754,
+  "lon": 5.0648683,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "survey:date": "2021-04-12"
+  }
+},
+{
+  "type": "node",
+  "id": 8632689434,
+  "lat": 44.9271262,
+  "lon": 4.9127582,
+  "tags": {
+    "description": "M4A1 Sherman, 1er Régiment de Spahis",
+    "historic": "tank",
+    "inscription": "VALENCE",
+    "memorial": "war_memorial",
+    "name": "Char Sherman \"Valence\"",
+    "note": "Vehicule 2e D.B."
+  }
+},
+{
+  "type": "node",
+  "id": 8709562437,
+  "lat": 44.8552834,
+  "lon": 4.9012119,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 8725638172,
+  "lat": 44.8356875,
+  "lon": 4.9760668,
+  "tags": {
+    "artwork_subject": "religious",
+    "artwork_type": "statue",
+    "denomination": "catholic",
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "statue",
+    "name": "Notre-Dame des Foyers",
+    "religion": "christian",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 8725648747,
+  "lat": 44.9163296,
+  "lon": 5.1104339,
+  "tags": {
+    "artwork_subject": "religious",
+    "artwork_type": "statue",
+    "denomination": "catholic",
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "statue",
+    "name": "Notre-Dame des Champs",
+    "religion": "christian",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 8731321643,
+  "lat": 44.8571713,
+  "lon": 4.9035653,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "stone",
+    "name": "Stèle de Lavache"
+  }
+},
+{
+  "type": "node",
+  "id": 8784972619,
+  "lat": 44.8613077,
+  "lon": 4.9413032,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "stele",
+    "name": "Stèle Arnaud Beltrame"
+  }
+},
+{
+  "type": "node",
+  "id": 8812210715,
+  "lat": 44.7560346,
+  "lon": 5.1170756,
+  "tags": {
+    "colour": "white",
+    "historic": "wayside_cross",
+    "man_made": "cross",
+    "material": "metal"
+  }
+},
+{
+  "type": "node",
+  "id": 8812210716,
+  "lat": 44.7680010,
+  "lon": 5.1032877,
+  "tags": {
+    "historic": "wayside_cross",
+    "material": "metal",
+    "name": "Croix de Saint-Pancrace"
+  }
+},
+{
+  "type": "node",
+  "id": 8910456907,
+  "lat": 45.0155264,
+  "lon": 4.9414147,
+  "tags": {
+    "historic": "mine",
+    "name": "Amphore Romaine"
+  }
+},
+{
+  "type": "node",
+  "id": 8930479738,
+  "lat": 45.0023565,
+  "lon": 5.2893054,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 9022291851,
+  "lat": 44.8165069,
+  "lon": 5.1684705,
+  "tags": {
+    "historic": "wayside_cross",
+    "material": "steel",
+    "name": "Croix du Vellan"
+  }
+},
+{
+  "type": "node",
+  "id": 9048109342,
+  "lat": 44.6550596,
+  "lon": 4.9926942,
+  "tags": {
+    "historic": "wayside_cross",
+    "name": "Les Trois Croix"
+  }
+},
+{
+  "type": "node",
+  "id": 9048878106,
+  "lat": 44.6625303,
+  "lon": 5.0153340,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 9087837215,
+  "lat": 44.5697178,
+  "lon": 5.2749527,
+  "tags": {
+    "historic": "monument",
+    "name": "Archange Saint-Michel"
+  }
+},
+{
+  "type": "node",
+  "id": 9087837216,
+  "lat": 44.5706172,
+  "lon": 5.2748791,
+  "tags": {
+    "historic": "wayside_cross",
+    "man_made": "cross",
+    "material": "steel"
+  }
+},
+{
+  "type": "node",
+  "id": 9087861517,
+  "lat": 44.5694213,
+  "lon": 5.2764160,
+  "tags": {
+    "historic": "wayside_cross",
+    "man_made": "cross"
+  }
+},
+{
+  "type": "node",
+  "id": 9119674300,
+  "lat": 44.7789331,
+  "lon": 5.1427851,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "A la mémoire de Georges Budelot, Paul Aubnel morts pour la France en défendant Beaufort-sur-Gervanne le 27 juillet 1944",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "name": "Commune de Beaufort",
+    "ref:FR:MemorialGenWeb": "13155",
+    "wikidata": "Q112338329"
+  }
+},
+{
+  "type": "node",
+  "id": 9124939129,
+  "lat": 44.8389962,
+  "lon": 4.8900833,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2021-06"
+  }
+},
+{
+  "type": "node",
+  "id": 9146673396,
+  "lat": 44.8956630,
+  "lon": 5.1915554,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2021-06"
+  }
+},
+{
+  "type": "node",
+  "id": 9146686212,
+  "lat": 44.8932098,
+  "lon": 5.1901518,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2021-06"
+  }
+},
+{
+  "type": "node",
+  "id": 9207935436,
+  "lat": 44.5521003,
+  "lon": 4.9411165,
+  "tags": {
+    "historic": "wayside_cross",
+    "material": "wood"
+  }
+},
+{
+  "type": "node",
+  "id": 9389443020,
+  "lat": 44.7909477,
+  "lon": 5.1055250,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 9396176725,
+  "lat": 45.0480188,
+  "lon": 5.4474295,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 9410853210,
+  "lat": 44.6490517,
+  "lon": 4.9413859,
+  "tags": {
+    "historic": "ruins",
+    "name": "Vieux Village en ruine"
+  }
+},
+{
+  "type": "node",
+  "id": 9439638356,
+  "lat": 45.0455526,
+  "lon": 5.0561223,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele"
+  }
+},
+{
+  "type": "node",
+  "id": 9611197343,
+  "lat": 44.9409868,
+  "lon": 4.8932702,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "7711"
+  }
+},
+{
+  "type": "node",
+  "id": 9613255912,
+  "lat": 44.8900534,
+  "lon": 5.3440010,
+  "tags": {
+    "description": "Borne peinte en vert",
+    "historic": "boundary_stone",
+    "name": "Borne «33»"
+  }
+},
+{
+  "type": "node",
+  "id": 9783898665,
+  "lat": 44.9873808,
+  "lon": 5.2730732,
+  "tags": {
+    "historic": "wayside_cross",
+    "material": "metal"
+  }
+},
+{
+  "type": "node",
+  "id": 9783898699,
+  "lat": 44.9992844,
+  "lon": 5.2747561,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30503",
+    "wikidata": "Q112255847"
+  }
+},
+{
+  "type": "node",
+  "id": 9799238979,
+  "lat": 44.8132666,
+  "lon": 5.1650488,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "name": "Monument aux morts",
+    "ref:FR:MemorialGenWeb": "746",
+    "wikidata": "Q112256665"
+  }
+},
+{
+  "type": "node",
+  "id": 9799238993,
+  "lat": 44.8119850,
+  "lon": 5.1700489,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele"
+  }
+},
+{
+  "type": "node",
+  "id": 9861987586,
+  "lat": 44.8034342,
+  "lon": 4.9797916,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12258"
+  }
+},
+{
+  "type": "node",
+  "id": 9867786507,
+  "lat": 44.5813320,
+  "lon": 4.8895075,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "10518",
+    "wikimedia_commons": "File:Monument aux morts de Saint-Gervais-sur-Roubion (juillet 2022).JPG"
+  }
+},
+{
+  "type": "node",
+  "id": 9870391158,
+  "lat": 44.8027662,
+  "lon": 5.2243917,
+  "tags": {
+    "historic": "castle",
+    "name": "Château de l'Escoulin"
+  }
+},
+{
+  "type": "node",
+  "id": 9895633517,
+  "lat": 44.7151758,
+  "lon": 5.0769247,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele",
+    "ref:FR:MemorialGenWeb": "72145"
+  }
+},
+{
+  "type": "node",
+  "id": 9940981542,
+  "lat": 44.6226473,
+  "lon": 5.0858645,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Aux morts de Francillon sur Roubion",
+    "memorial": "plaque;war_memorial",
+    "ref:FR:MemorialGenWeb": "16500",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10000715645,
+  "lat": 44.8638680,
+  "lon": 5.4170300,
+  "tags": {
+    "historic": "boundary_stone",
+    "name": "Borne de Sain-Alexis",
+    "website": "http://rando.villard.free.fr/documents/Bornes_et_cadastre.pdf"
+  }
+},
+{
+  "type": "node",
+  "id": 10000731427,
+  "lat": 44.8399270,
+  "lon": 5.4040090,
+  "tags": {
+    "historic": "boundary_stone",
+    "name": "Borne du Col du Rousset",
+    "website": "http://rando.villard.free.fr/documents/Bornes_et_cadastre.pdf"
+  }
+},
+{
+  "type": "node",
+  "id": 10146736736,
+  "lat": 44.5918285,
+  "lon": 4.9532914,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27277",
+    "wikidata": "Q136050269"
+  }
+},
+{
+  "type": "node",
+  "id": 10178467129,
+  "lat": 44.6001893,
+  "lon": 5.0088973,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14996",
+    "wikidata": "Q136069053"
+  }
+},
+{
+  "type": "node",
+  "id": 10287443846,
+  "lat": 45.0356304,
+  "lon": 5.4448690,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "stele"
+  }
+},
+{
+  "type": "node",
+  "id": 10295603733,
+  "lat": 44.5719725,
+  "lon": 5.4039435,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Joncheres à ses glorieux morts",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1;WW2",
+    "ref:FR:MemorialGenWeb": "38931",
+    "wikidata": "Q136057267"
+  }
+},
+{
+  "type": "node",
+  "id": 10295738895,
+  "lat": 44.6004713,
+  "lon": 5.4204234,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Poyols à ses héroïques enfants",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1;WW2",
+    "ref:FR:MemorialGenWeb": "38398",
+    "wikidata": "Q136069528"
+  }
+},
+{
+  "type": "node",
+  "id": 10298002153,
+  "lat": 44.6456282,
+  "lon": 5.0597864,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "obelisk",
+    "name": "monument aux morts",
+    "ref:FR:MemorialGenWeb": "14994",
+    "war_memorial": "yes",
+    "wikidata": "Q136078359"
+  }
+},
+{
+  "type": "node",
+  "id": 10298082025,
+  "lat": 44.7095056,
+  "lon": 5.2559358,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "obelisk",
+    "name": "monument aux morts",
+    "name:oc": "monument daus mòrts",
+    "ref:FR:MemorialGenWeb": "14986",
+    "war_memorial": "yes",
+    "wikidata": "Q136097992"
+  }
+},
+{
+  "type": "node",
+  "id": 10315214967,
+  "lat": 44.9303584,
+  "lon": 4.8596843,
+  "tags": {
+    "description": "ancien monument aux morts",
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "59658"
+  }
+},
+{
+  "type": "node",
+  "id": 10315214968,
+  "lat": 44.9329145,
+  "lon": 4.8715938,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "note": "Nouvel emplacement inauguré le 21 octobre 2021 du monument créé en 2003 à l'entrée du cimetière",
+    "ref:FR:MemorialGenWeb": "30560",
+    "wikidata": "Q136056243"
+  }
+},
+{
+  "type": "node",
+  "id": 10572265068,
+  "lat": 45.0197199,
+  "lon": 5.4421573,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Ici le 17 avril 1891 il ne se passa strictement rien",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 10599294605,
+  "lat": 45.0457812,
+  "lon": 5.4342876,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 10688695857,
+  "lat": 45.0433760,
+  "lon": 5.2712613,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 10688695858,
+  "lat": 45.0463047,
+  "lon": 5.2686149,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 10727707619,
+  "lat": 45.0016144,
+  "lon": 5.4353190,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 10887287503,
+  "lat": 44.7947024,
+  "lon": 4.9077192,
+  "tags": {
+    "historic": "wayside_cross",
+    "material": "stone",
+    "name": "Le Bonil"
+  }
+},
+{
+  "type": "node",
+  "id": 10889917356,
+  "lat": 44.5840942,
+  "lon": 4.8554304,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 10890447063,
+  "lat": 44.6271687,
+  "lon": 4.9710549,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14995",
+    "wikidata": "Q136069923"
+  }
+},
+{
+  "type": "node",
+  "id": 10997898698,
+  "lat": 44.8699772,
+  "lon": 5.2217996,
+  "tags": {
+    "date": "1944-04-23",
+    "historic": "memorial",
+    "inscription": "La commune en souvenir de Casimir EZINGEARD, facteur à Omblèze, fusillé par la milice au service des Allemands à Vassieux le 23 avril 1944",
+    "memorial": "plaque",
+    "memorial:conflict": "WW2",
+    "name": "Plaque Casimir EZINGEARD F.F.I.",
+    "ref:FR:MemorialGenWeb": "155063",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11102198637,
+  "lat": 44.7510850,
+  "lon": 5.3708447,
+  "tags": {
+    "historic": "yes",
+    "name": "Mosaïque des quatres fleuves",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 11188383643,
+  "lat": 44.9251285,
+  "lon": 5.4300986,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 11220380316,
+  "lat": 44.8992230,
+  "lon": 5.0961791,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2022-06"
+  }
+},
+{
+  "type": "node",
+  "id": 11220792278,
+  "lat": 44.8677539,
+  "lon": 5.0512858,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2022-06"
+  }
+},
+{
+  "type": "node",
+  "id": 11220931510,
+  "lat": 44.6822940,
+  "lon": 4.9645109,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2022-06"
+  }
+},
+{
+  "type": "node",
+  "id": 11220931514,
+  "lat": 44.6818020,
+  "lon": 4.9650438,
+  "tags": {
+    "historic": "castle",
+    "image": "File:Chateau d'Autichamp.jpg",
+    "name": "Château d'Autichamp",
+    "wikidata": "Q78651708"
+  }
+},
+{
+  "type": "node",
+  "id": 11229783471,
+  "lat": 44.7317677,
+  "lon": 5.2897071,
+  "tags": {
+    "format": "cylindrical",
+    "format:top": "flat",
+    "historic": "milestone",
+    "image": "File:Borne de Barsac (Drôme).jpg",
+    "wikidata": "Q29331657"
+  }
+},
+{
+  "type": "node",
+  "id": 11229783501,
+  "lat": 44.7306826,
+  "lon": 5.2909671,
+  "tags": {
+    "historic": "memorial",
+    "image": "File:095 (2) barsac (26150).jpg",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 11272553751,
+  "lat": 44.6016704,
+  "lon": 5.1032855,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14999"
+  }
+},
+{
+  "type": "node",
+  "id": 11472755994,
+  "lat": 44.7384886,
+  "lon": 5.0053537,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 11483061473,
+  "lat": 44.9250708,
+  "lon": 5.4405381,
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "node",
+  "id": 11736588869,
+  "lat": 44.8871975,
+  "lon": 5.1155586,
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "node",
+  "id": 11741233831,
+  "lat": 44.9187173,
+  "lon": 5.1844660,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Hommage aux victimes de la catastrophe aérienne du vol Paris-Valence du 10 avril 1989",
+    "material": "granite",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 11806026805,
+  "lat": 44.9465388,
+  "lon": 5.4294128,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2023-12-15"
+  }
+},
+{
+  "type": "node",
+  "id": 11831275457,
+  "lat": 44.7675517,
+  "lon": 5.1189295,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 11834609595,
+  "lat": 44.8885770,
+  "lon": 5.2816618,
+  "tags": {
+    "historic": "memorial",
+    "name": "Monument de Pierre à l'Ours"
+  }
+},
+{
+  "type": "node",
+  "id": 11834609851,
+  "lat": 44.9203990,
+  "lon": 5.2639445,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 11834609854,
+  "lat": 44.9203444,
+  "lon": 5.2637883,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 11835619950,
+  "lat": 44.9551208,
+  "lon": 5.1419307,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "name": "Monument aux morts"
+  }
+},
+{
+  "type": "node",
+  "id": 11835619951,
+  "lat": 44.9549716,
+  "lon": 5.1420105,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 11881079358,
+  "lat": 44.9334107,
+  "lon": 4.8930296,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "A la mémoire des résistants du Groupe Missak Manouchian",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 11998955674,
+  "lat": 44.9399212,
+  "lon": 4.8518949,
+  "tags": {
+    "historic": "city_gate",
+    "name": "Chatelet d'entrée"
+  }
+},
+{
+  "type": "node",
+  "id": 12006384450,
+  "lat": 44.8318526,
+  "lon": 4.9777438,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2024-03-15"
+  }
+},
+{
+  "type": "node",
+  "id": 12006406470,
+  "lat": 44.8352590,
+  "lon": 4.9706909,
+  "tags": {
+    "historic": "wayside_cross",
+    "source": "IGN - 2024-03-15"
+  }
+},
+{
+  "type": "node",
+  "id": 12016402863,
+  "lat": 44.9339889,
+  "lon": 4.8939138,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue"
+  }
+},
+{
+  "type": "node",
+  "id": 12068020498,
+  "lat": 45.0283908,
+  "lon": 5.3259900,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue"
+  }
+},
+{
+  "type": "node",
+  "id": 12085027803,
+  "lat": 44.7284595,
+  "lon": 5.0236076,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "La construction de cet édifice remonte au XVe siècle. Sa façade fut néanmoins refaite au XIXe siècle. En 1419, les rois de France héritèrent de cette maison qui servit alors d'auditoire de justice.",
+    "inscription:en": "The construction of this building can be traced back to the XVth century. Its facade was however renovated during the XIXth century. In 1419, the French Kings inherited this house (hence its name), which then served as a court of justice.",
+    "memorial": "plaque",
+    "name": "Maison Delphinale (XVe s.)",
+    "openplaques:id": "64225"
+  }
+},
+{
+  "type": "node",
+  "id": 12103797626,
+  "lat": 44.6077220,
+  "lon": 4.9404761,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 12168159925,
+  "lat": 44.8416892,
+  "lon": 5.1695239,
+  "tags": {
+    "historic": "wayside_shrine",
+    "name": "Madone"
+  }
+},
+{
+  "type": "node",
+  "id": 12218196737,
+  "lat": 44.5517359,
+  "lon": 4.9396174,
+  "tags": {
+    "historic": "ruins",
+    "ruins": "castle"
+  }
+},
+{
+  "type": "node",
+  "id": 12218273103,
+  "lat": 44.5518164,
+  "lon": 4.9379121,
+  "tags": {
+    "historic": "ruins",
+    "name": "Beffroi",
+    "ruins": "tower"
+  }
+},
+{
+  "type": "node",
+  "id": 12337698723,
+  "lat": 44.5726594,
+  "lon": 5.2767849,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "La commune de St-Nazaire le Désert à ses enfants morts pour la France 1914-1918",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1",
+    "ref:FR:MemorialGenWeb": "45032",
+    "source": "survey",
+    "wikidata": "Q136076682"
+  }
+},
+{
+  "type": "node",
+  "id": 12422258384,
+  "lat": 44.8665383,
+  "lon": 5.2679584,
+  "tags": {
+    "historic": "boundary_stone"
+  }
+},
+{
+  "type": "node",
+  "id": 12684723325,
+  "lat": 44.9892593,
+  "lon": 5.1864280,
+  "tags": {
+    "denomination": "catholic",
+    "historic": "wayside_cross",
+    "name": "croix de Saint-Gervais",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 12760574723,
+  "lat": 44.5611011,
+  "lon": 4.8530838,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "La Batie-Rolland à ses glorieux Morts 1914-1918",
+    "memorial": "plaque",
+    "memorial:conflict": "WW1",
+    "ref:FR:MemorialGenWeb": "1052à",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12786659807,
+  "lat": 44.9334083,
+  "lon": 4.8930347,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Commandant Missak MANOUCHIAN",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 12832297533,
+  "lat": 44.6436343,
+  "lon": 4.8737837,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "10509;10510"
+  }
+},
+{
+  "type": "node",
+  "id": 12925544801,
+  "lat": 45.0434163,
+  "lon": 5.0488894,
+  "tags": {
+    "historic": "monument",
+    "name": "Maison du Mouton"
+  }
+},
+{
+  "type": "node",
+  "id": 12944866776,
+  "lat": 44.8021184,
+  "lon": 4.9391985,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12566",
+    "wikidata": "Q136064248"
+  }
+},
+{
+  "type": "node",
+  "id": 12944866777,
+  "lat": 44.8046138,
+  "lon": 5.0415425,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12573",
+    "wikidata": "Q136067696"
+  }
+},
+{
+  "type": "node",
+  "id": 12944872765,
+  "lat": 44.9015753,
+  "lon": 4.9550563,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "21305",
+    "wikidata": "Q136062041"
+  }
+},
+{
+  "type": "node",
+  "id": 12944872803,
+  "lat": 44.9006829,
+  "lon": 5.0912468,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27377",
+    "wikidata": "Q136050387"
+  }
+},
+{
+  "type": "node",
+  "id": 12944872804,
+  "lat": 44.9384899,
+  "lon": 5.1175243,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27382",
+    "wikidata": "Q136077730"
+  }
+},
+{
+  "type": "node",
+  "id": 12944872919,
+  "lat": 45.0467565,
+  "lon": 5.2958669,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "45745",
+    "wikidata": "Q136077603"
+  }
+},
+{
+  "type": "node",
+  "id": 12944872920,
+  "lat": 45.0496621,
+  "lon": 5.2964897,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "cross",
+    "ref:FR:MemorialGenWeb": "56581",
+    "war_memorial": "yes",
+    "wikidata": "Q136096674"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873220,
+  "lat": 45.0364444,
+  "lon": 5.0767500,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "10375",
+    "wikidata": "Q136068538"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873221,
+  "lat": 44.9974882,
+  "lon": 5.0803736,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873222,
+  "lat": 44.9974796,
+  "lon": 5.0804088,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "66132",
+    "wikidata": "Q136050527"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873267,
+  "lat": 45.0005830,
+  "lon": 5.1425792,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "66065",
+    "wikidata": "Q136075976"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873268,
+  "lat": 44.9722447,
+  "lon": 5.1510081,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "23443",
+    "wikidata": "Q136071122"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873366,
+  "lat": 45.0414272,
+  "lon": 5.0424470,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "ref:FR:MemorialGenWeb": "41871"
+  }
+},
+{
+  "type": "node",
+  "id": 12944873367,
+  "lat": 45.0413888,
+  "lon": 5.0424249,
+  "tags": {
+    "historic": "memorial",
+    "ref:FR:MemorialGenWeb": "136340"
+  }
+},
+{
+  "type": "node",
+  "id": 12945439889,
+  "lat": 44.6119167,
+  "lon": 4.9370201,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "16502",
+    "wikidata": "Q136051170"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450646,
+  "lat": 44.6551596,
+  "lon": 5.0007197,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "19592",
+    "wikidata": "Q136095973"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450647,
+  "lat": 44.6810232,
+  "lon": 4.9410797,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "ref:FR:MemorialGenWeb": "10651",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450650,
+  "lat": 44.5947350,
+  "lon": 4.8801091,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "10517",
+    "wikidata": "Q136046605"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450742,
+  "lat": 44.7133872,
+  "lon": 5.4315708,
+  "tags": {
+    "historic": "memorial",
+    "indoor": "yes",
+    "memorial": "plaque",
+    "ref:FR:MemorialGenWeb": "38377",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450788,
+  "lat": 44.7679991,
+  "lon": 5.2838564,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27196",
+    "wikidata": "Q136077869"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450791,
+  "lat": 44.7180059,
+  "lon": 5.0508738,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1",
+    "ref:FR:MemorialGenWeb": "13153",
+    "wikidata": "Q136097432"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450792,
+  "lat": 44.7141777,
+  "lon": 5.0572569,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "16",
+    "wikidata": "Q136041203"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450936,
+  "lat": 44.7054504,
+  "lon": 5.0068518,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "13149",
+    "wikidata": "Q136052872"
+  }
+},
+{
+  "type": "node",
+  "id": 12945450943,
+  "lat": 44.7661150,
+  "lon": 4.9106258,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12264",
+    "wikidata": "Q136040535"
+  }
+},
+{
+  "type": "node",
+  "id": 12957072083,
+  "lat": 45.0018240,
+  "lon": 5.3318266,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Route construite par / l'administration des eaux et forêts / 1893 - 1896 // Élargie par le service vicinal du département de la Drôme / 1938 1939",
+    "material": "stone",
+    "memorial": "plaque",
+    "subject:wikidata": "Q2985025",
+    "subject:wikipedia": "fr:Combe Laval"
+  }
+},
+{
+  "type": "node",
+  "id": 13037223568,
+  "lat": 44.8867901,
+  "lon": 5.0150243,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "stele",
+    "ref:FR:MemorialGenWeb": "154459",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13048165133,
+  "lat": 44.8600809,
+  "lon": 4.8944641,
+  "tags": {
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "ruins",
+    "mhs:inscription_date": "1990-07-16",
+    "name": "Chapelle Saint-Gervais",
+    "ref:mhs": "PA00117106",
+    "source:heritage": "Ministère de la Culture - 2025-07"
+  }
+},
+{
+  "type": "node",
+  "id": 13048198410,
+  "lat": 44.8717677,
+  "lon": 5.0224043,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12574",
+    "source": "IGN - 2024-03-15"
+  }
+},
+{
+  "type": "node",
+  "id": 13048198411,
+  "lat": 44.8718294,
+  "lon": 5.0224863,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 13048201746,
+  "lat": 44.8333506,
+  "lon": 4.9768801,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "6520",
+    "source": "IGN - 2024-03-15"
+  }
+},
+{
+  "type": "node",
+  "id": 13050315289,
+  "lat": 44.9647090,
+  "lon": 5.2707775,
+  "tags": {
+    "description": "Monument aux morts de Bouvante",
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38405",
+    "source": "IGN - 2024-03-15"
+  }
+},
+{
+  "type": "node",
+  "id": 13085495048,
+  "lat": 44.8696027,
+  "lon": 5.2217124,
+  "tags": {
+    "historic": "wayside_cross",
+    "inscription": "1878"
+  }
+},
+{
+  "type": "node",
+  "id": 13136796579,
+  "lat": 44.6928965,
+  "lon": 5.1544121,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "962",
+    "wikidata": "Q136042153"
+  }
+},
+{
+  "type": "node",
+  "id": 13278504666,
+  "lat": 44.9569217,
+  "lon": 5.4062208,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "En ce lieu sont tombés le 7 août 1945 :\nBOREL Henri 15 ans\nLAMBERTON Maurice 6 ans\nROBA Salvador 10 ans\nROZAND Albert 7 ans\nROZAND Léa 15 ans\n\nTués par une grenade allemande",
+    "material": "stone",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 13288077839,
+  "lat": 44.9660586,
+  "lon": 5.4146633,
+  "tags": {
+    "description": "Sur le mur de la maison 130 rue de Villeneuve",
+    "historic": "memorial",
+    "inscription": "Ici vécut Fabien Rey (1890-1974)\nLe légendaire \"Marseille\"\nGuide et Ravitailleur\n(avec ses fidèles chiens)\ndu maquis du Vercors",
+    "memorial": "plaque",
+    "name": "Ici vécut Fabien Rey (1890-1974)"
+  }
+},
+{
+  "type": "node",
+  "id": 13355037895,
+  "lat": 44.7292106,
+  "lon": 5.0242132,
+  "tags": {
+    "historic": "memorial",
+    "material": "stone",
+    "memorial": "plaque",
+    "name": "Prison des Princes de Monaco",
+    "website": "https://www.valleedeladrome-tourisme.com/patrimoine-culturel/prisons-des-princes-de-monaco/"
+  }
+},
+{
+  "type": "node",
+  "id": 13378514051,
+  "lat": 44.7853987,
+  "lon": 5.3171475,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38354"
+  }
+},
+{
+  "type": "node",
+  "id": 13495791476,
+  "lat": 45.0020839,
+  "lon": 5.4215086,
+  "tags": {
+    "direction": "120",
+    "historic": "memorial",
+    "inscription": "Ici le 22 janvier 1944 après un combat acharné 20 maquisards succombèrent devant 300 allemands.\nCes derniers pillèrent et incendièrent totalement le village.",
+    "material": "stone",
+    "memorial": "plaque",
+    "name": "Combats du 22 janvier 1944"
+  }
+},
+{
+  "type": "node",
+  "id": 13495791477,
+  "lat": 45.0020905,
+  "lon": 5.4215147,
+  "tags": {
+    "direction": "120",
+    "historic": "memorial",
+    "inscription": "Département de la Drome.\n\nRoute des GRANDS GOULETS construite de 1844 à 1851.\n\nAux promoteurs de ce beau travail. Adrien JOUBERT et Ernest JOUBERT son fils, conseillers généraux de LA CHAPELLE-EN-VERCORS.\nLes habitants du Vercors reconnaissants.\n\nPlaque c",
+    "material": "stone",
+    "memorial": "plaque",
+    "name": "Construction de la route des Grands Goulets"
+  }
+},
+{
+  "type": "node",
+  "id": 13503622110,
+  "lat": 44.7501143,
+  "lon": 5.3774037,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "LIBÉRATION\nAu soir du\n20 août 1944\nici est arrivé\nle premier véhicule\naméricain",
+    "material": "stone",
+    "memorial": "plaque"
+  }
+},
+{
+  "type": "node",
+  "id": 13595513630,
+  "lat": 44.8569579,
+  "lon": 4.9306696,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "8709"
+  }
+},
+{
+  "type": "node",
+  "id": 13667046939,
+  "lat": 44.7693616,
+  "lon": 5.0340785,
+  "tags": {
+    "historic": "memorial",
+    "image": "https://www.memorialgenweb.org/photos/26/26-12257.jpg",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1;WW2",
+    "ref:FR:MemorialGenWeb": "12257",
+    "wikidata": "Q136081250"
+  }
+},
+{
+  "type": "node",
+  "id": 13682903159,
+  "lat": 44.5781727,
+  "lon": 5.0878187,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38290"
+  }
+},
+{
+  "type": "node",
+  "id": 13682903160,
+  "lat": 44.7209032,
+  "lon": 4.9507846,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "13150"
+  }
+},
+{
+  "type": "node",
+  "id": 13682903161,
+  "lat": 44.7954657,
+  "lon": 4.9047473,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "13152"
+  }
+},
+{
+  "type": "node",
+  "id": 13682924933,
+  "lat": 44.5826470,
+  "lon": 5.0195382,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14993"
+  }
+},
+{
+  "type": "node",
+  "id": 13682924948,
+  "lat": 44.6989924,
+  "lon": 5.0976631,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "733"
+  }
+},
+{
+  "type": "node",
+  "id": 13682928171,
+  "lat": 44.8416586,
+  "lon": 4.8887978,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "152129"
+  }
+},
+{
+  "type": "node",
+  "id": 13682934026,
+  "lat": 44.5993828,
+  "lon": 4.9779617,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14998"
+  }
+},
+{
+  "type": "node",
+  "id": 13682935823,
+  "lat": 44.6329695,
+  "lon": 5.0244347,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38321"
+  }
+},
+{
+  "type": "node",
+  "id": 13682935824,
+  "lat": 44.7334215,
+  "lon": 4.9194020,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12607"
+  }
+},
+{
+  "type": "node",
+  "id": 13682935853,
+  "lat": 44.8668132,
+  "lon": 5.0531219,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30965"
+  }
+},
+{
+  "type": "node",
+  "id": 13682938436,
+  "lat": 44.6840633,
+  "lon": 4.9707294,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "10641"
+  }
+},
+{
+  "type": "node",
+  "id": 13682939468,
+  "lat": 44.8575085,
+  "lon": 4.9029934,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30554"
+  }
+},
+{
+  "type": "node",
+  "id": 13682951483,
+  "lat": 44.8589791,
+  "lon": 4.9336649,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30553"
+  }
+},
+{
+  "type": "node",
+  "id": 13682951484,
+  "lat": 44.7569924,
+  "lon": 4.9852420,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12609"
+  }
+},
+{
+  "type": "node",
+  "id": 13682980820,
+  "lat": 44.8713862,
+  "lon": 5.0778649,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27378"
+  }
+},
+{
+  "type": "node",
+  "id": 13682984518,
+  "lat": 44.9692432,
+  "lon": 5.0820958,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27374"
+  }
+},
+{
+  "type": "node",
+  "id": 13682985497,
+  "lat": 44.9373410,
+  "lon": 5.0935184,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27375"
+  }
+},
+{
+  "type": "node",
+  "id": 13683005332,
+  "lat": 45.0147325,
+  "lon": 5.1516253,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "66127"
+  }
+},
+{
+  "type": "node",
+  "id": 13683007326,
+  "lat": 45.0282419,
+  "lon": 5.1743543,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "34506"
+  }
+},
+{
+  "type": "node",
+  "id": 13683007327,
+  "lat": 45.0313230,
+  "lon": 5.2462981,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30504"
+  }
+},
+{
+  "type": "node",
+  "id": 13683013052,
+  "lat": 44.9391843,
+  "lon": 5.0317893,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "152153"
+  }
+},
+{
+  "type": "node",
+  "id": 13683018678,
+  "lat": 44.9440983,
+  "lon": 5.0657248,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27376"
+  }
+},
+{
+  "type": "node",
+  "id": 13683025086,
+  "lat": 44.9791411,
+  "lon": 5.1073373,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "23444"
+  }
+},
+{
+  "type": "node",
+  "id": 13683038910,
+  "lat": 45.0389987,
+  "lon": 5.2052463,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30502"
+  }
+},
+{
+  "type": "node",
+  "id": 13683061953,
+  "lat": 44.9793928,
+  "lon": 5.0307515,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27394"
+  }
+},
+{
+  "type": "node",
+  "id": 13683094190,
+  "lat": 44.9713741,
+  "lon": 4.9547925,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27385"
+  }
+},
+{
+  "type": "node",
+  "id": 13683098221,
+  "lat": 45.0127831,
+  "lon": 4.9325775,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27275"
+  }
+},
+{
+  "type": "node",
+  "id": 13683109178,
+  "lat": 45.0151530,
+  "lon": 4.9402026,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "66131"
+  }
+},
+{
+  "type": "node",
+  "id": 13683142589,
+  "lat": 44.9480770,
+  "lon": 4.9781429,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "152152"
+  }
+},
+{
+  "type": "node",
+  "id": 13683157342,
+  "lat": 45.0288051,
+  "lon": 5.0498565,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "34645"
+  }
+},
+{
+  "type": "node",
+  "id": 13684317038,
+  "lat": 44.6152355,
+  "lon": 4.9322318,
+  "tags": {
+    "historic": "wayside_cross",
+    "material": "metal",
+    "source": "IGN - 2025-12-15"
+  }
+},
+{
+  "type": "node",
+  "id": 13684348567,
+  "lat": 44.6085002,
+  "lon": 4.9286168,
+  "tags": {
+    "description": "Croix endommagé entre 2014 et 2018. Non remplacé depuis.",
+    "historic": "wayside_cross",
+    "material": "metal",
+    "source": "IGN - 2025-12-15"
+  }
+},
+{
+  "type": "node",
+  "id": 13687459320,
+  "lat": 44.5880134,
+  "lon": 5.3104888,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38446"
+  }
+},
+{
+  "type": "node",
+  "id": 13687459323,
+  "lat": 44.6908915,
+  "lon": 5.4334044,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "38399"
+  }
+},
+{
+  "type": "node",
+  "id": 13687459325,
+  "lat": 44.7106016,
+  "lon": 5.4021696,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "7790"
+  }
+},
+{
+  "type": "node",
+  "id": 13687459326,
+  "lat": 44.6626769,
+  "lon": 5.2120967,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "ref:FR:MemorialGenWeb": "38313",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13687459327,
+  "lat": 44.7549436,
+  "lon": 5.2616201,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14989"
+  }
+},
+{
+  "type": "node",
+  "id": 13726526599,
+  "lat": 44.6213117,
+  "lon": 4.9745731,
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "node",
+  "id": 13744823823,
+  "lat": 44.8274968,
+  "lon": 5.1080666,
+  "tags": {
+    "historic": "memorial",
+    "material": "concrete",
+    "memorial": "plaque",
+    "name": "Mémorial Jérôme Cavalli",
+    "start_date": "2002-08-31",
+    "subject:wikidata": "Q50531283",
+    "subject:wikipedia": "fr:Jérôme Cavalli"
+  }
+},
+{
+  "type": "node",
+  "id": 13755067402,
+  "lat": 44.7265187,
+  "lon": 5.0211208,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "plaque",
+    "name": "Passant, toi qui aujourd'hui vis libre ! Souviens-toi",
+    "name:etymology:wikidata": "Q139588545"
+  }
+},
+{
+  "type": "node",
+  "id": 13805574867,
+  "lat": 44.9634130,
+  "lon": 4.8515266,
+  "tags": {
+    "historic": "memorial",
+    "historic:date": "1944-08-28",
+    "inscription": "language=fr",
+    "material": "stone",
+    "memorial": "plaque",
+    "name": "Stèle commémorative de l’aviateur américain",
+    "source": "survey",
+    "start_date": "2024-06-08",
+    "subject": "2nd Lt William A. Clark Jr",
+    "war_memorial": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13806214259,
+  "lat": 44.9391077,
+  "lon": 4.8520893,
+  "tags": {
+    "historic": "archaeological_site",
+    "name": "Esplanade"
+  }
+},
+{
+  "type": "node",
+  "id": 13806214260,
+  "lat": 44.9395786,
+  "lon": 4.8527491,
+  "tags": {
+    "historic": "archaeological_site",
+    "name": "Villette"
+  }
+},
+{
+  "type": "node",
+  "id": 13912406422,
+  "lat": 44.8910666,
+  "lon": 5.4286886,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "LE 27.07.44, LES BLESSES REFUGIÉS DANS LA GROTTE DE LA LUiRE, FURENT ACHEVÉS EN CE LIEU PAR UNE HORDE D'ALLEMANDS."
+  }
+},
+{
+  "type": "node",
+  "id": 13912417227,
+  "lat": 44.8904168,
+  "lon": 5.4285198,
+  "tags": {
+    "historic": "memorial",
+    "inscription": "Le 27 Julliet 1944 les geands blessés  soignes a l‘hopital du maquis replie a la grotte de la luire fuerent transporte s ici."
+  }
+},
+{
+  "type": "node",
+  "id": 13982146030,
+  "lat": 44.9417346,
+  "lon": 4.8929689,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "6878"
+  }
+},
+{
+  "type": "node",
+  "id": 13982149702,
+  "lat": 45.0041626,
+  "lon": 4.8705760,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "13332"
+  }
+},
+{
+  "type": "way",
+  "id": 26000416,
+  "center": {
+    "lat": 44.9049530,
+    "lon": 5.0972871
+  },
+  "nodes": [
+    283657867,
+    283657491,
+    4779407753,
+    4779407754,
+    4779407755,
+    4779407756,
+    283657868,
+    283657488,
+    283657867
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "ref:FR:RNB": "A2NQ6HDPJ8ZV",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 41817905,
+  "center": {
+    "lat": 44.9616133,
+    "lon": 5.1568157
+  },
+  "nodes": [
+    516339566,
+    7689186491,
+    7689186492,
+    7689186493,
+    516339567,
+    516339568,
+    7689186515,
+    7689186514,
+    7689186513,
+    7689186512,
+    7689186507,
+    7689186508,
+    7689186509,
+    7689186510,
+    7689186511,
+    7689186506,
+    7689186505,
+    7689186504,
+    516339569,
+    7689186503,
+    7689186502,
+    7689186501,
+    516339570,
+    7689186500,
+    7689186499,
+    516339571,
+    516339572,
+    7689186498,
+    7689186497,
+    516339573,
+    7689186496,
+    7689186495,
+    7689186494,
+    7689186486,
+    7689195260,
+    7689186487,
+    7689186488,
+    7689186489,
+    7689186490,
+    516339566
+  ],
+  "tags": {
+    "CLC:code": "131",
+    "CLC:id": "FR-181442",
+    "CLC:year": "2006",
+    "disused:landuse": "quarry",
+    "historic": "mine",
+    "name": "Carrière de Kaolin",
+    "source": "Union européenne - SOeS, CORINE Land Cover, 2006."
+  }
+},
+{
+  "type": "way",
+  "id": 56401440,
+  "center": {
+    "lat": 44.8381793,
+    "lon": 5.3929097
+  },
+  "nodes": [
+    706997875,
+    2349093060,
+    2349093061,
+    6709798398,
+    2349093062,
+    6709798399,
+    2349124712,
+    706997879,
+    706997869,
+    6709798400,
+    706997856,
+    6709798401,
+    6709798402,
+    2349093064,
+    2349093063,
+    706997935,
+    6709798403,
+    706997850,
+    6709798404,
+    706997929,
+    706997918,
+    6939381498,
+    10702914676,
+    8399762177,
+    706997902,
+    706997911,
+    8399762178,
+    706997884,
+    706997874,
+    706997863,
+    706997854,
+    8399762179,
+    8399762180,
+    8399762181,
+    8399762182,
+    706997932,
+    706997922
+  ],
+  "tags": {
+    "highway": "track",
+    "historic": "roman_road",
+    "surface": "gravel",
+    "tracktype": "grade3",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 61088746,
+  "center": {
+    "lat": 45.0448633,
+    "lon": 5.0496434
+  },
+  "nodes": [
+    764246936,
+    764302881,
+    764186619,
+    764353813,
+    764246936
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "man_made": "tower",
+    "mhs:inscription_date": "1963-03-11",
+    "name": "Tour Jacquemart",
+    "ref:mhs": "PA00117041",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C12",
+    "wikidata": "Q3533100",
+    "wikipedia": "fr:Tour Jacquemart (Romans-sur-Isère)"
+  }
+},
+{
+  "type": "way",
+  "id": 65439750,
+  "center": {
+    "lat": 45.0175721,
+    "lon": 5.0614135
+  },
+  "nodes": [
+    798983642,
+    798983645,
+    798983622,
+    798983552,
+    798983545,
+    798983615,
+    798983617,
+    798983634,
+    798983639,
+    798983628,
+    798983631,
+    798983642
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 66350893,
+  "center": {
+    "lat": 45.0168201,
+    "lon": 5.2917923
+  },
+  "nodes": [
+    804108067,
+    804107975,
+    804107972,
+    804108071,
+    804108067
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "12472",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q136074894"
+  }
+},
+{
+  "type": "way",
+  "id": 66550727,
+  "center": {
+    "lat": 44.9409667,
+    "lon": 5.0246354
+  },
+  "nodes": [
+    805568064,
+    805552717,
+    805563402,
+    805552306,
+    805568495,
+    805533320,
+    805539551,
+    805541718,
+    805562345,
+    805548975,
+    805554086,
+    805559036,
+    805539994,
+    805553803,
+    805564364,
+    805555702,
+    805564120,
+    805542746,
+    805543044,
+    805546548,
+    805554851,
+    805557771,
+    805536703,
+    805569534,
+    805556434,
+    805542315,
+    805534416,
+    805559307,
+    805563310,
+    805544165,
+    805555759,
+    805558307,
+    805567883,
+    805558052,
+    805538683,
+    805560349,
+    805567939,
+    805561363,
+    805544305,
+    805541378,
+    805568064
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Monteynard",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 66606942,
+  "center": {
+    "lat": 45.0378874,
+    "lon": 5.0741328
+  },
+  "nodes": [
+    805853038,
+    805810142,
+    805792992,
+    805769636,
+    805799601,
+    805799155,
+    805794764,
+    805827647,
+    805853038
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1982-10-15",
+    "name": "Château de Pizançon",
+    "ref:mhs": "PA00116914",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "start_date": "C19",
+    "wikidata": "Q22966797"
+  }
+},
+{
+  "type": "way",
+  "id": 67113883,
+  "center": {
+    "lat": 44.9553379,
+    "lon": 4.9412043
+  },
+  "nodes": [
+    810607527,
+    810611615,
+    810597387,
+    810637430,
+    810606642,
+    810634821,
+    810634444,
+    810632391,
+    810607527
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château du Plovier",
+    "ruins": "no",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 68843989,
+  "center": {
+    "lat": 44.9816579,
+    "lon": 4.9057505
+  },
+  "nodes": [
+    4859588950,
+    826883287,
+    826888819,
+    826878387,
+    826878761,
+    826911163,
+    826946066,
+    826916711,
+    826891670,
+    826934759,
+    826959695,
+    826964126,
+    826863868,
+    826863006,
+    826961102,
+    826911237,
+    826931717,
+    826902493,
+    826909910,
+    826912216,
+    826956513,
+    826941267,
+    826899154,
+    826953868,
+    826896965,
+    826964570,
+    4859588955,
+    4859588952,
+    4859588951,
+    4859588950
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château des Chanalets",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 72423178,
+  "center": {
+    "lat": 44.8998002,
+    "lon": 5.0195230
+  },
+  "nodes": [
+    4858496202,
+    860028657,
+    4858496200,
+    4858496201,
+    859971615,
+    860026254,
+    4858496202
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "mhs:inscription_date": "1926-07-13",
+    "name": "Porte de ville",
+    "ref:FR:RNB": "CVK6V6VB1ME6",
+    "ref:mhs": "PA00116901",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015"
+  }
+},
+{
+  "type": "way",
+  "id": 72427935,
+  "center": {
+    "lat": 44.9000597,
+    "lon": 5.0223206
+  },
+  "nodes": [
+    860028114,
+    860025520,
+    860006939,
+    860010772,
+    859972585,
+    860032081,
+    859964830,
+    859983349,
+    860028114
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "ref:FR:RNB": "KA34GWBHNQE1",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 72429264,
+  "center": {
+    "lat": 44.9174027,
+    "lon": 5.0252276
+  },
+  "nodes": [
+    859986470,
+    859991580,
+    859987084,
+    860029898,
+    859992804,
+    860015849,
+    859980734,
+    860010502,
+    859997787,
+    860031868,
+    859986470
+  ],
+  "tags": {
+    "access": "private",
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Rozier",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "tourism": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 72549933,
+  "center": {
+    "lat": 44.7302648,
+    "lon": 5.0235829
+  },
+  "nodes": [
+    4792289943,
+    861116545,
+    3252822665,
+    861180198,
+    5347259079,
+    10183095989,
+    861121076,
+    861110071,
+    861175924,
+    8827478249,
+    861148321,
+    10183095997,
+    861129843,
+    3252822677,
+    861163043,
+    861142722,
+    4792289943
+  ],
+  "tags": {
+    "building": "yes",
+    "contact:phone": "+33 4 75 25 32 53",
+    "fee": "yes",
+    "height": "52",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1877-06-06",
+    "name": "Tour de Crest",
+    "ref:mhs": "PA00116924",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C10",
+    "website": "https://tourdecrest.fr/",
+    "wheelchair": "no",
+    "wikidata": "Q1011395",
+    "wikipedia": "fr:Tour de Crest"
+  }
+},
+{
+  "type": "way",
+  "id": 72549999,
+  "center": {
+    "lat": 44.7275787,
+    "lon": 5.0219189
+  },
+  "nodes": [
+    861113998,
+    4792291632,
+    4792291633,
+    861119284,
+    4792291631,
+    4792291119,
+    4792291624,
+    861142505,
+    861145859,
+    861108505,
+    861108402,
+    861113998
+  ],
+  "tags": {
+    "amenity": "bank",
+    "brand": "Caisse d'Épargne",
+    "brand:wikidata": "Q1547738",
+    "brand:wikipedia": "fr:Groupe Caisse d'épargne",
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "building",
+    "mhs:inscription_date": "1975-07-28",
+    "name": "Caisse d'Épargne",
+    "old_name": "Maison de la Poste",
+    "opening_hours": "Tu,We 08:45-12:15,13:45-17:45; Th 08:45-12:15,14:45-17:45; Fr 08:45-12:15,13:45-18:00; Sa 08:30-12:15",
+    "ref:FR:SIRET": "38368683901828",
+    "ref:mhs": "PA00116929",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "wikidata": "Q22966803"
+  }
+},
+{
+  "type": "way",
+  "id": 72735270,
+  "center": {
+    "lat": 44.7461378,
+    "lon": 5.4321493
+  },
+  "nodes": [
+    784082458,
+    863538287,
+    4858160303,
+    4858160309,
+    863563260,
+    863538029,
+    863499440,
+    863502357,
+    863524382,
+    863554845,
+    4858160308,
+    863475880,
+    863495906,
+    863558953,
+    4858160306,
+    4858160307,
+    863472380,
+    863488344,
+    863520711,
+    863466495,
+    863462009,
+    863537229,
+    784082458
+  ],
+  "tags": {
+    "building": "yes",
+    "denomination": "catholic",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "monastery",
+    "mhs:inscription_date": "1971-10-25",
+    "name": "Abbaye cistercienne du Valcroissant",
+    "operator": "Les amis de Valcroissant",
+    "ref:mhs": "PA00116931",
+    "religion": "christian",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "tourism": "attraction",
+    "website": "https://www.abbayedevalcroissant.eu/",
+    "wikidata": "Q1776201",
+    "wikipedia": "fr:Abbaye de Valcroissant"
+  }
+},
+{
+  "type": "way",
+  "id": 72735291,
+  "center": {
+    "lat": 44.7533396,
+    "lon": 5.3735530
+  },
+  "nodes": [
+    4858159003,
+    4858159013,
+    4858159012,
+    4858159011,
+    4858159010,
+    4858159009,
+    4858163182,
+    4858159000,
+    4858159005,
+    4858159004,
+    4858159003
+  ],
+  "tags": {
+    "building": "yes",
+    "entrance": "yes",
+    "heritage:operator": "mhs",
+    "historic": "city_gate",
+    "mhs:inscription_date": "1862",
+    "name": "Porte Saint-Marcel",
+    "ref:mhs": "PA00116934",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "wall": "no",
+    "wikidata": "Q22966804"
+  }
+},
+{
+  "type": "way",
+  "id": 72736190,
+  "center": {
+    "lat": 44.7699807,
+    "lon": 5.3434201
+  },
+  "nodes": [
+    863478551,
+    863465343,
+    863498614,
+    863462448,
+    4858160245,
+    863485790,
+    863543379,
+    863461232,
+    863465297,
+    863511143,
+    863535528,
+    863461163,
+    5834506881,
+    863469620,
+    863541376,
+    863471732,
+    863484302,
+    863478551
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1989-01-30",
+    "name": "Château Saint-Laurent",
+    "ref:mhs": "PA00117098",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "wikidata": "Q22966917"
+  }
+},
+{
+  "type": "way",
+  "id": 72739906,
+  "center": {
+    "lat": 44.7530268,
+    "lon": 5.3703933
+  },
+  "nodes": [
+    863524252,
+    4858157213,
+    4858157214,
+    863517979,
+    4858157215,
+    4858157833,
+    863470225,
+    863480546,
+    863522189,
+    863474375,
+    863524252
+  ],
+  "tags": {
+    "building": "house",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "building",
+    "mhs:inscription_date": "2004-09-10",
+    "name": "Maison dite du notaire Chambron",
+    "ref:mhs": "PA26000014",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C15",
+    "wikidata": "Q22976391"
+  }
+},
+{
+  "type": "way",
+  "id": 93509762,
+  "center": {
+    "lat": 44.8381726,
+    "lon": 5.3900474
+  },
+  "nodes": [
+    706997906,
+    706997915,
+    706997899,
+    706997878,
+    706997867,
+    706997873,
+    706997859,
+    706997937,
+    706997926,
+    706997931,
+    6939343597,
+    6939343598,
+    706997921,
+    6939343599,
+    6939343661,
+    706997905,
+    706997881,
+    706997887,
+    6939343600,
+    6939343601,
+    706997877,
+    706997866,
+    706997853,
+    706997857,
+    706997936,
+    706997925,
+    706997914,
+    706997919,
+    706997903,
+    706997880,
+    706997871,
+    706997876,
+    706997864,
+    706997851,
+    706997930,
+    706997862,
+    706997846,
+    706997927,
+    706997917,
+    706997923,
+    706997909,
+    706997882
+  ],
+  "tags": {
+    "highway": "path",
+    "historic": "roman_road",
+    "surface": "ground"
+  }
+},
+{
+  "type": "way",
+  "id": 96266215,
+  "center": {
+    "lat": 44.9318367,
+    "lon": 4.8895985
+  },
+  "nodes": [
+    1115895307,
+    1115895232,
+    1115895436,
+    1115895266,
+    1115895307
+  ],
+  "tags": {
+    "addr:street": "Place du Pendentif",
+    "building:levels": "0",
+    "heritage:operator": "mhs",
+    "historic": "monument",
+    "material": "stone",
+    "mhs:inscription_date": "1840",
+    "name": "Le Pendentif",
+    "ref:mhs": "PA00117094",
+    "short_name": "Pendentif",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 08/2011",
+    "start_date": "1548",
+    "tourism": "patrimoine",
+    "wikidata": "Q3374648",
+    "wikimedia_commons": "Category:Pendentif de Valence",
+    "wikipedia": "fr:Pendentif de Valence"
+  }
+},
+{
+  "type": "way",
+  "id": 97082304,
+  "center": {
+    "lat": 44.9349216,
+    "lon": 4.8906674
+  },
+  "nodes": [
+    4863620301,
+    4863620302,
+    4863620303,
+    1124752793,
+    1124752971,
+    1124752803,
+    4863620304,
+    1124752843,
+    1124752837,
+    4198925165,
+    4863620296,
+    1124752845,
+    1124752775,
+    2503404338,
+    4198925162,
+    4198925164,
+    4198925172,
+    4198925169,
+    4198925171,
+    4198925173,
+    1124752834,
+    4863620301
+  ],
+  "tags": {
+    "building": "yes",
+    "contact:phone": "+33 4 75 43 69 73",
+    "contact:website": "http://www.maisondelapra.com",
+    "historic": "yes",
+    "name": "Maison de la Pra",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 97094987,
+  "center": {
+    "lat": 44.9351926,
+    "lon": 4.8921595
+  },
+  "nodes": [
+    1124869936,
+    1124870147,
+    1124869937,
+    1124870050,
+    4863636328,
+    4863636329,
+    4863636330,
+    1124870086,
+    1124869941,
+    4863636331,
+    4863636324,
+    1124869936
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "church",
+    "historic": "yes",
+    "name": "Chapelle des Cordeliers",
+    "religion": "christian",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 97422947,
+  "center": {
+    "lat": 44.9278915,
+    "lon": 4.8829535
+  },
+  "nodes": [
+    1128222915,
+    1128217217,
+    1128212782,
+    1128236092,
+    1128241117,
+    1128251417,
+    1128222915
+  ],
+  "tags": {
+    "building": "ruins",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "abbey",
+    "mhs:inscription_date": "2014-10-14",
+    "name": "Abbaye de Saint-Ruf-hors-les-Murs",
+    "ref:mhs": "PA26000030",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "Ministère de la Culture - 06/2019",
+    "wikidata": "Q59336336"
+  }
+},
+{
+  "type": "way",
+  "id": 98471301,
+  "center": {
+    "lat": 44.8738105,
+    "lon": 4.9640020
+  },
+  "nodes": [
+    1139194982,
+    1139143997,
+    1139155366,
+    1139207143,
+    1139199045,
+    1139184989,
+    1139149458,
+    1139151259,
+    1139194982
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 98473589,
+  "center": {
+    "lat": 44.8669980,
+    "lon": 4.9498255
+  },
+  "nodes": [
+    1139183724,
+    1139208193,
+    1139165359,
+    1139204126,
+    1139200010,
+    1139162095,
+    1139191181,
+    1139152061,
+    1139194951,
+    1139183724
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 98473594,
+  "center": {
+    "lat": 44.8606302,
+    "lon": 4.9414399
+  },
+  "nodes": [
+    1139200185,
+    1139152416,
+    1139163013,
+    1139195755,
+    1139154760,
+    1139162475,
+    1139145851,
+    1139193908,
+    1139182615,
+    1139165242,
+    1139169057,
+    9321316294,
+    1139200185
+  ],
+  "tags": {
+    "addr:street": "Grande Rue",
+    "barrier": "entrance",
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "city_gate",
+    "layer": "1",
+    "mhs:inscription_date": "1969-10-16",
+    "name": "Porte fortifiée",
+    "ref:mhs": "PA00116894",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "Ministère de la Culture - 06/2019",
+    "wikidata": "Q22966780"
+  }
+},
+{
+  "type": "way",
+  "id": 98473919,
+  "center": {
+    "lat": 44.8670455,
+    "lon": 4.9499170
+  },
+  "nodes": [
+    1139204126,
+    1139165359,
+    1139208193,
+    1139183724,
+    1139195210,
+    1139196491,
+    1139168216,
+    1139204126
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 99924630,
+  "center": {
+    "lat": 44.9077693,
+    "lon": 4.8887799
+  },
+  "nodes": [
+    4863642667,
+    1155156619,
+    1155161052,
+    1155158295,
+    1155152374,
+    1155159843,
+    1155125807,
+    1155133021,
+    1155144483,
+    1155163636,
+    4863662655,
+    4863642667
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Murat",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q59337165"
+  }
+},
+{
+  "type": "way",
+  "id": 104165692,
+  "center": {
+    "lat": 44.8215592,
+    "lon": 4.8777833
+  },
+  "nodes": [
+    1201981271,
+    1201967417,
+    1201964158,
+    1201947557,
+    1201911182,
+    1201978584,
+    1201972633,
+    1201960835,
+    1201921171,
+    1201990644,
+    1201938731,
+    1201919273,
+    1201977263,
+    1201981271
+  ],
+  "tags": {
+    "building": "apartments",
+    "building:levels": "2",
+    "historic": "castle",
+    "name": "Château de Clavel",
+    "roof:levels": "1",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 104166416,
+  "center": {
+    "lat": 44.8476370,
+    "lon": 4.8977800
+  },
+  "nodes": [
+    1201964603,
+    1201948449,
+    1201937241,
+    1201918214,
+    1201964603
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 104166679,
+  "center": {
+    "lat": 44.8375719,
+    "lon": 4.8945606
+  },
+  "nodes": [
+    1201978141,
+    1201970627,
+    1201960132,
+    1201920192,
+    1201978141
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 104166848,
+  "center": {
+    "lat": 44.8458820,
+    "lon": 4.8993155
+  },
+  "nodes": [
+    1201932148,
+    1201912822,
+    1201968457,
+    1201956466,
+    1201932148
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 104166869,
+  "center": {
+    "lat": 44.8373478,
+    "lon": 4.8946829
+  },
+  "nodes": [
+    1201916503,
+    1201912586,
+    1201956020,
+    1201931762,
+    1201971399,
+    4805844523,
+    4805844522,
+    1201960352,
+    1201920678,
+    1201968645,
+    1201983565,
+    1201968559,
+    1201935569,
+    1201917179,
+    1201912930,
+    1201979388,
+    1201910522,
+    1201929665,
+    1201916503
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de la Boisse",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q22966816"
+  }
+},
+{
+  "type": "way",
+  "id": 104167105,
+  "center": {
+    "lat": 44.8446515,
+    "lon": 4.8970755
+  },
+  "nodes": [
+    1201985229,
+    1201961280,
+    1201936955,
+    1201933028,
+    1201985229
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 104167352,
+  "center": {
+    "lat": 44.8445655,
+    "lon": 4.8995385
+  },
+  "nodes": [
+    1201977936,
+    1201963098,
+    1201929220,
+    1201909753,
+    1201977936
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 104167925,
+  "center": {
+    "lat": 44.8362391,
+    "lon": 4.8933758
+  },
+  "nodes": [
+    1201959997,
+    1201935147,
+    1201912554,
+    1201968280,
+    4805843768,
+    4805843769,
+    1201971322,
+    1201946935,
+    1201920636,
+    1201917145,
+    1201983516,
+    1201960326,
+    1201959997
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 104168768,
+  "center": {
+    "lat": 44.8374600,
+    "lon": 4.8948195
+  },
+  "nodes": [
+    1201989888,
+    1201983849,
+    4805844522,
+    4805844523,
+    1201989888
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 106076166,
+  "center": {
+    "lat": 44.7969353,
+    "lon": 4.8664186
+  },
+  "nodes": [
+    1221191780,
+    1221185053,
+    1221212203,
+    1221237642,
+    1221200686,
+    1221254561,
+    1221191449,
+    1221182536,
+    1221216143,
+    1221276358,
+    1221198067,
+    1221250775,
+    1221189078,
+    1221231765,
+    1221179964,
+    1221176634,
+    1221269874,
+    1221196045,
+    1221244529,
+    1221187718,
+    1221228438,
+    1221209033,
+    1221261976,
+    1221193806,
+    1221240869,
+    1221222168,
+    1221284844,
+    1221256211,
+    1221238568,
+    1221183562,
+    1221217111,
+    1221278000,
+    1221198733,
+    1221251703,
+    1221189714,
+    1221248144,
+    1221191780
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 106076690,
+  "center": {
+    "lat": 44.7769088,
+    "lon": 4.8757658
+  },
+  "nodes": [
+    1221221005,
+    1221283143,
+    1221200692,
+    1221254582,
+    1221191453,
+    1221237659,
+    1221182540,
+    1221216158,
+    1221276389,
+    1221198077,
+    1221250791,
+    1221189082,
+    1221231769,
+    1221179969,
+    1221212213,
+    1221269892,
+    1221196049,
+    1221244542,
+    1221187722,
+    1221228455,
+    1221176638,
+    1221209045,
+    1221261987,
+    1221193824,
+    1221240901,
+    1221185404,
+    1221222178,
+    1221221005
+  ],
+  "tags": {
+    "building": "castle",
+    "historic": "castle",
+    "name": "Château la Rolière",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q2967902"
+  }
+},
+{
+  "type": "way",
+  "id": 109093838,
+  "center": {
+    "lat": 44.8992642,
+    "lon": 5.1000847
+  },
+  "nodes": [
+    1249980807,
+    1249980809,
+    1249980811,
+    1249980813,
+    1249980807
+  ],
+  "tags": {
+    "access": "yes",
+    "building": "yes",
+    "historic": "ruins",
+    "historic:civilization": "medieval",
+    "name": "Château Rompu",
+    "ruins": "castle"
+  }
+},
+{
+  "type": "way",
+  "id": 111399153,
+  "center": {
+    "lat": 44.8479085,
+    "lon": 4.9002020
+  },
+  "nodes": [
+    1269165696,
+    1269157754,
+    1269170225,
+    1269160356,
+    1269165696
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "way",
+  "id": 111399465,
+  "center": {
+    "lat": 44.8569863,
+    "lon": 4.9025162
+  },
+  "nodes": [
+    4801829092,
+    4801829093,
+    4801829094,
+    1269158990,
+    1269171447,
+    1269163671,
+    1269175498,
+    1269170054,
+    1269162450,
+    1269174860,
+    1269166745,
+    1269157017,
+    1269169536,
+    1269161461,
+    1269174109,
+    1269168117,
+    1269160275,
+    1269172898,
+    1269164987,
+    1269175191,
+    1269167344,
+    1269159663,
+    1269172164,
+    1269166019,
+    1269158257,
+    1269170739,
+    1269163055,
+    1269173430,
+    1269157437,
+    1269169886,
+    1269164290,
+    1269168618,
+    1269160724,
+    1269171312,
+    1269163545,
+    1269175459,
+    1269167971,
+    1269162307,
+    1269174712,
+    1269166552,
+    1269158864,
+    1269169459,
+    1269173982,
+    1269165922,
+    1269160185,
+    1269172792,
+    1269164869,
+    1269156913,
+    4801829095,
+    4801830303,
+    1269171985,
+    1269164163,
+    1269158114,
+    1269170602,
+    4801829092
+  ],
+  "tags": {
+    "addr:street": "Montée du Château",
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Beauvallon"
+  }
+},
+{
+  "type": "way",
+  "id": 111400043,
+  "center": {
+    "lat": 44.8574318,
+    "lon": 4.9019392
+  },
+  "nodes": [
+    1269161562,
+    1269163527,
+    1269167954,
+    1269160174,
+    1269174703,
+    1269166544,
+    1269158857,
+    1269171300,
+    1269161275,
+    1269173963,
+    1269161562
+  ],
+  "tags": {
+    "building": "office",
+    "historic": "building",
+    "name": "Ancienne Mairie de Beauvallon",
+    "phone": "+33 4 75 57 03 26",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "website": "https://www.beauvallon.fr/"
+  }
+},
+{
+  "type": "way",
+  "id": 111404073,
+  "center": {
+    "lat": 44.8540305,
+    "lon": 4.9337150
+  },
+  "nodes": [
+    1269221124,
+    1269205063,
+    1269214552,
+    1269205852,
+    1269215259,
+    1269220656,
+    1269204907,
+    1269203111,
+    1269206571,
+    1269216519,
+    1269202137,
+    4802071258,
+    1269217202,
+    1269202880,
+    1269206388,
+    1269216287,
+    1269214365,
+    1269217990,
+    1269203822,
+    1269204928,
+    1269202334,
+    1269204049,
+    1269218292,
+    1269214573,
+    1269205084,
+    1269212111,
+    1269204722,
+    1269214052,
+    1269217842,
+    1269203647,
+    1269201990,
+    1269205698,
+    1269215103,
+    1269219206,
+    1269215953,
+    1269201843,
+    1269205511,
+    1269214940,
+    1269211760,
+    1269217026,
+    1269202619,
+    1269206238,
+    1269203356,
+    1269206987,
+    1269216804,
+    1269202406,
+    1269218689,
+    8628036556,
+    1269204505,
+    1269213746,
+    1269217632,
+    1269214644,
+    1269218433,
+    1269204202,
+    1269213387,
+    1269206092,
+    1269215546,
+    1269221546,
+    1269205213,
+    1269202242,
+    1269205946,
+    1269215380,
+    1269220936,
+    1269221124
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Montéléger",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 114960959,
+  "center": {
+    "lat": 44.5611358,
+    "lon": 4.8531991
+  },
+  "nodes": [
+    1300773177,
+    1300774333,
+    1300775227,
+    1300771795,
+    1300772889,
+    1300775443,
+    1300775006,
+    1300773136,
+    1300770147,
+    1300771033,
+    1300775647,
+    12760574723,
+    1300773177
+  ],
+  "tags": {
+    "building": "chapel",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "mhs:inscription_date": "1967-12-04",
+    "name": "Chapelle Saint-Andéol",
+    "ref:mhs": "PA00116889",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C12",
+    "wikidata": "Q2956750",
+    "wikipedia": "fr:Chapelle Saint-Andéol de La Bâtie-Rolland"
+  }
+},
+{
+  "type": "way",
+  "id": 124335884,
+  "center": {
+    "lat": 44.9850144,
+    "lon": 5.0122054
+  },
+  "nodes": [
+    1384171171,
+    1384171175,
+    1384171287,
+    1384171278,
+    1384171272,
+    1384171266,
+    802845003,
+    1384171262,
+    1384171238,
+    1384171354,
+    1384171350,
+    1384171439,
+    1384171442,
+    1384171433,
+    1384171415,
+    1384171418,
+    1384171419,
+    1384171395,
+    1384171389,
+    1384171345,
+    1384171337,
+    1384171160,
+    1384171140,
+    1384171330,
+    1384171312,
+    1384171328,
+    1384171237,
+    1384171157,
+    1384171066,
+    1384171137,
+    1384171019,
+    1384171102,
+    1384171348,
+    1384171038,
+    1384171347,
+    1384171163,
+    1384171188,
+    1384171171
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Feraillon",
+    "ruins": "no",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 124338993,
+  "center": {
+    "lat": 44.9749435,
+    "lon": 5.0260573
+  },
+  "nodes": [
+    3237238282,
+    1384119570,
+    1384119697,
+    1384119915,
+    1384119923,
+    1384119942,
+    1384119956,
+    1384120112,
+    1384120097,
+    1384120064,
+    1384120066,
+    1384120210,
+    1384120196,
+    1384120208,
+    1384120043,
+    1384120036,
+    1384120039,
+    1384119905,
+    1384119911,
+    1384119847,
+    1384119805,
+    4805779424,
+    3237238282
+  ],
+  "tags": {
+    "addr:street": "L'esplanade",
+    "amenity": "townhall",
+    "building": "civic",
+    "contact:email": "accueil@mairiealixan.fr",
+    "contact:website": "https://www.mairiealixan.fr/",
+    "historic": "castle",
+    "name": "Mairie d'Alixan",
+    "opening_hours": "Mo 08:00-12:00,13:30-17:30; Tu-Th 08:00-12:00,13:30-16:30; Fr 08:00-16:00",
+    "phone": "+33 4 75 47 02 62",
+    "ref:FR:SIRET": "21260004300013",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017;Service-Public.fr - 03/2025",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 135897168,
+  "center": {
+    "lat": 44.6028051,
+    "lon": 5.0099221
+  },
+  "nodes": [
+    1491704200,
+    4801886758,
+    4801886757,
+    1491704306,
+    1491704469,
+    1491704465,
+    1491704494,
+    1491704226,
+    1491704235,
+    1491704233,
+    1491704207,
+    1491704196,
+    1491704159,
+    1491704136,
+    1491704124,
+    1491704028,
+    1491704014,
+    1491703981,
+    1491703958,
+    1491703997,
+    1491703988,
+    1491704330,
+    1491704200
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1990-06-07",
+    "name": "Château de Saint-Ferréol",
+    "ref:mhs": "PA00117101",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C17",
+    "wikidata": "Q22966919"
+  }
+},
+{
+  "type": "way",
+  "id": 135929617,
+  "center": {
+    "lat": 45.0446900,
+    "lon": 5.0536339
+  },
+  "nodes": [
+    764130069,
+    764303252,
+    764186969,
+    764354321,
+    4772660627,
+    764136164,
+    764309229,
+    764193914,
+    764360354,
+    764146593,
+    764316702,
+    764203039,
+    764367760,
+    764276119,
+    764155005,
+    764325165,
+    764209030,
+    764109907,
+    764283583,
+    764161637,
+    764334944,
+    4772660628,
+    764115868,
+    764169452,
+    764225048,
+    764125239,
+    764297943,
+    764180735,
+    764348536,
+    764236556,
+    764131586,
+    764304784,
+    764188445,
+    764355716,
+    764130069
+  ],
+  "tags": {
+    "amenity": "monastery",
+    "building": "monastery",
+    "community": "OSC",
+    "community:gender": "female",
+    "historic": "monastery",
+    "name": "Monastère Sainte-Claire",
+    "name:oc": "Monestier Senta Clara",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 158414905,
+  "center": {
+    "lat": 44.9280757,
+    "lon": 4.8879715
+  },
+  "nodes": [
+    1706096000,
+    1706095991,
+    1706095987,
+    1706095995,
+    1706096000
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue"
+  }
+},
+{
+  "type": "way",
+  "id": 168177353,
+  "center": {
+    "lat": 44.8107911,
+    "lon": 5.1722680
+  },
+  "nodes": [
+    1794698224,
+    1794698225,
+    1794698285,
+    4776981735,
+    1794698286,
+    1794698278,
+    1794698239,
+    1794698230,
+    4776981736,
+    4776981737,
+    1794698228,
+    1794698264,
+    1794698247,
+    1794698243,
+    1794698250,
+    1794698224
+  ],
+  "tags": {
+    "building": "yes",
+    "castle_type": "manor",
+    "historic": "castle",
+    "name": "Château de Montrond",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q78655094"
+  }
+},
+{
+  "type": "way",
+  "id": 190764390,
+  "center": {
+    "lat": 44.5523625,
+    "lon": 5.1077893
+  },
+  "nodes": [
+    2013872995,
+    2013872986,
+    2013872968,
+    2013872992,
+    2013873016,
+    2013873013,
+    2013873008,
+    2013873007,
+    2013873010,
+    2013873009,
+    2013873023,
+    2013873012,
+    2013873027,
+    2013873031,
+    2013873032,
+    2013873028,
+    2013873011,
+    2013873014,
+    2013873022,
+    2013873018,
+    2013873034,
+    2013873026,
+    2013873025,
+    2013873037,
+    2013873035,
+    2013873033,
+    2013873021,
+    2013873038,
+    2013873020,
+    2013873036,
+    2013872984,
+    2013872983,
+    2013872980,
+    2013872979,
+    2013872975,
+    2013872973,
+    2013872972,
+    4803972617,
+    4803972618,
+    4803972619,
+    2013872965,
+    2013872961,
+    2013872959,
+    2013872960,
+    2013872974,
+    2013872964,
+    2013872971,
+    2013872969,
+    2013872981,
+    2013872966,
+    2013872995
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Le Château",
+    "source": "survey 2017",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "way",
+  "id": 190765583,
+  "center": {
+    "lat": 44.5827142,
+    "lon": 5.0196382
+  },
+  "nodes": [
+    2013885965,
+    2013885950,
+    2013885940,
+    2013885929,
+    2013885924,
+    2013885938,
+    2013885943,
+    2013885949,
+    2013885954,
+    2013885955,
+    2013885957,
+    2013885965
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "chapel",
+    "denomination": "catholic",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "mhs:inscription_date": "1926-07-17",
+    "name": "Église Notre-Dame-de-Sénisse",
+    "ref:mhs": "PA00117021",
+    "religion": "christian",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C12",
+    "wikidata": "Q3580239",
+    "wikipedia": "fr:Église Notre-Dame-de-Sénisse de Rochebaudin"
+  }
+},
+{
+  "type": "way",
+  "id": 190803972,
+  "center": {
+    "lat": 44.5627640,
+    "lon": 4.9642329
+  },
+  "nodes": [
+    2014177622,
+    2014177619,
+    2014177618,
+    2014177621,
+    2014177620,
+    2014177636,
+    2014177638,
+    2014177639,
+    2014177640,
+    2014177647,
+    2014177649,
+    2014177648,
+    2014177641,
+    2014177637,
+    2014177630,
+    2014177631,
+    2014177633,
+    2014177635,
+    2014177650,
+    2014177651,
+    2014177632,
+    2014177634,
+    2014177625,
+    2014177624,
+    2014177628,
+    2014177627,
+    2014177629,
+    2014177626,
+    2014177623,
+    2014177622
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château du Normand",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q112315927"
+  }
+},
+{
+  "type": "way",
+  "id": 198765226,
+  "center": {
+    "lat": 44.8721382,
+    "lon": 5.0227422
+  },
+  "nodes": [
+    2088628015,
+    2088628013,
+    2088628011,
+    2088628009,
+    2088628007,
+    2088628006,
+    2088628004,
+    2088628003,
+    2088628005,
+    2088628008,
+    2088628010,
+    2088628012,
+    2088628014,
+    2088628016,
+    2088628015
+  ],
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "way",
+  "id": 227538955,
+  "center": {
+    "lat": 44.8413213,
+    "lon": 5.0145051
+  },
+  "nodes": [
+    2362073542,
+    2362073533,
+    2362073554,
+    2362073559,
+    2362073542
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 227546504,
+  "center": {
+    "lat": 44.7640304,
+    "lon": 4.8865477
+  },
+  "nodes": [
+    2362125952,
+    2362125936,
+    2362125210,
+    2362125217,
+    2362125002,
+    2362124950,
+    2362125824,
+    2362125670,
+    2362124832,
+    2362124736,
+    2362125827,
+    2362126230,
+    2362125952
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château Pergaud",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wikidata": "Q78655667"
+  }
+},
+{
+  "type": "way",
+  "id": 227546684,
+  "center": {
+    "lat": 44.7594254,
+    "lon": 4.9101434
+  },
+  "nodes": [
+    2362119310,
+    2362119298,
+    2362119328,
+    2362119346,
+    2362119350,
+    2362119308,
+    2362119280,
+    2362119288,
+    2362119276,
+    2362119267,
+    2362119249,
+    2362119257,
+    2362119243,
+    2362119235,
+    2362119215,
+    2362119282,
+    2362119310
+  ],
+  "tags": {
+    "building": "yes",
+    "castle_type": "manor",
+    "historic": "castle",
+    "name": "Château des Ramières",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 233685594,
+  "center": {
+    "lat": 44.6472304,
+    "lon": 4.8735421
+  },
+  "nodes": [
+    2420296539,
+    2420296540,
+    2420296537,
+    2420296538,
+    2420296539
+  ],
+  "tags": {
+    "historic": "castle",
+    "name": "Château de Marsanne"
+  }
+},
+{
+  "type": "way",
+  "id": 259367963,
+  "center": {
+    "lat": 44.6479444,
+    "lon": 5.0705523
+  },
+  "nodes": [
+    2647700063,
+    2647700051,
+    2647700048,
+    2647700041,
+    2647700033,
+    2647700020,
+    2647700018,
+    2647700010,
+    2647700009,
+    13048250851,
+    2647700031,
+    2647700038,
+    2647700067,
+    2647700063
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1926-10-21",
+    "name": "Donjon de Lastic",
+    "ref:mhs": "PA00117065",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "Ministère de la Culture - 2025-07",
+    "website": "https://www.donjondelastic.fr/",
+    "wikidata": "Q13516806",
+    "wikimedia_commons": "File:Donjon de Lastic, Saou, Drôme, France 02.jpg",
+    "wikipedia": "fr:Donjon de Lastic"
+  }
+},
+{
+  "type": "way",
+  "id": 259368230,
+  "center": {
+    "lat": 44.6459806,
+    "lon": 5.0627161
+  },
+  "nodes": [
+    4847267522,
+    2647698942,
+    2647698948,
+    4847267523,
+    4847267522
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "man_made": "tower",
+    "mhs:inscription_date": "1926-07-17",
+    "ref:mhs": "PA00117064",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "tower:type": "bell_tower",
+    "wikidata": "Q22966902"
+  }
+},
+{
+  "type": "way",
+  "id": 261898769,
+  "center": {
+    "lat": 44.8827344,
+    "lon": 5.2463629
+  },
+  "nodes": [
+    2675314954,
+    2675314952,
+    2675314957,
+    2675314959,
+    2675314954
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 262066490,
+  "center": {
+    "lat": 44.9776282,
+    "lon": 5.4440498
+  },
+  "nodes": [
+    2677078719,
+    2677078721,
+    2677078720,
+    2677078718,
+    2677078719
+  ],
+  "tags": {
+    "historic": "ruins",
+    "ruins": "house",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 264501800,
+  "center": {
+    "lat": 44.6718837,
+    "lon": 5.3660781
+  },
+  "nodes": [
+    2701753127,
+    2701753128,
+    2701753129,
+    2701753131,
+    2701753127
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 264501801,
+  "center": {
+    "lat": 44.6837662,
+    "lon": 5.3790194
+  },
+  "nodes": [
+    2701753132,
+    2701753134,
+    2701753136,
+    2701753138,
+    2701753132
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 264501802,
+  "center": {
+    "lat": 44.6838951,
+    "lon": 5.3790760
+  },
+  "nodes": [
+    2701753139,
+    2701753140,
+    2701753141,
+    2701753142,
+    2701753139
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 264576563,
+  "center": {
+    "lat": 44.6837483,
+    "lon": 5.3772361
+  },
+  "nodes": [
+    2702402133,
+    2702402134,
+    2702402135,
+    2702402136,
+    2702402133
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 265571040,
+  "center": {
+    "lat": 44.6749905,
+    "lon": 5.3719799
+  },
+  "nodes": [
+    2712169749,
+    2712169750,
+    2712169751,
+    2712169752,
+    2712169749
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 265626152,
+  "center": {
+    "lat": 44.6833440,
+    "lon": 5.3789022
+  },
+  "nodes": [
+    2712618381,
+    2712618383,
+    2712618385,
+    2712618386,
+    2712618381
+  ],
+  "tags": {
+    "historic": "ruins",
+    "name": "Porte médiévale"
+  }
+},
+{
+  "type": "way",
+  "id": 306657692,
+  "center": {
+    "lat": 44.8234699,
+    "lon": 5.1261919
+  },
+  "nodes": [
+    3116297123,
+    3116297127,
+    3116297128,
+    3116297132,
+    3116297133,
+    3116297131,
+    3116297129,
+    3116297130,
+    3116297125,
+    3116297126,
+    3116297122,
+    3116297121,
+    3116297124,
+    3116297123
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 318109991,
+  "center": {
+    "lat": 44.9051257,
+    "lon": 5.0964383
+  },
+  "nodes": [
+    3244832928,
+    3244832924,
+    3244832930,
+    3244832937,
+    3244832918,
+    3244832935,
+    3244832914,
+    3244832931,
+    3244832926,
+    3244832920,
+    3244832925,
+    3244832917,
+    3244832919,
+    3244832923,
+    3244832915,
+    3244832922,
+    3244832916,
+    3244832933,
+    3244832921,
+    3244832936,
+    3244832932,
+    3244832913,
+    3244832934,
+    3244832912,
+    3244832929,
+    3244832927,
+    3244832928
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1959-06-19",
+    "name": "Château du Bourg",
+    "ref:mhs": "PA00116910",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "start_date": "C16",
+    "wikidata": "Q22966794"
+  }
+},
+{
+  "type": "way",
+  "id": 325905020,
+  "center": {
+    "lat": 44.8723928,
+    "lon": 5.0231422
+  },
+  "nodes": [
+    4813819957,
+    3325258874,
+    4813819960,
+    4813819958,
+    4813819959,
+    3325258912,
+    4813819957
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "layer": "1",
+    "mhs:inscription_date": "1926-07-13",
+    "name": "Porte de Montvendre",
+    "ref:mhs": "PA00116999",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "start_date": "C13"
+  }
+},
+{
+  "type": "way",
+  "id": 326369252,
+  "center": {
+    "lat": 44.9805585,
+    "lon": 5.3020433
+  },
+  "nodes": [
+    3330007429,
+    3330007430,
+    3330007431,
+    3330007432,
+    3330007429
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 331474803,
+  "center": {
+    "lat": 44.8880009,
+    "lon": 5.2769779
+  },
+  "nodes": [
+    3385520512,
+    3385520509,
+    3385520511,
+    3385520513,
+    3385520512
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 332421245,
+  "center": {
+    "lat": 44.9881733,
+    "lon": 5.3134852
+  },
+  "nodes": [
+    3395476143,
+    3395476144,
+    3395476145,
+    3395476146,
+    3395476143
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 332540593,
+  "center": {
+    "lat": 44.6024297,
+    "lon": 5.1030937
+  },
+  "nodes": [
+    4817676055,
+    3396881630,
+    3396881633,
+    3396881635,
+    3396881641,
+    3396881640,
+    3396881644,
+    3396881639,
+    3396881642,
+    3396881636,
+    3396881632,
+    3396881617,
+    2883917757,
+    3396880676,
+    3396880673,
+    3396880675,
+    3396880677,
+    3396880678,
+    3396880692,
+    2883917766,
+    3396881605,
+    4817676057,
+    4817676056,
+    4817676058,
+    4817676055
+  ],
+  "tags": {
+    "historic": "castle",
+    "name": "Château du Poët-Célard",
+    "wikidata": "Q78660190"
+  }
+},
+{
+  "type": "way",
+  "id": 337687850,
+  "center": {
+    "lat": 44.9189913,
+    "lon": 5.1067265
+  },
+  "nodes": [
+    3447531505,
+    3447531509,
+    3447531514,
+    3447531519,
+    3447531521,
+    3447531517,
+    3447531522,
+    3447531513,
+    3447531501,
+    3447531503,
+    3447531502,
+    3447531504,
+    3447531505
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "chapel",
+    "denomination": "catholic",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "mhs:inscription_date": "1964-01-08",
+    "name": "Chapelle Saint-Pierre",
+    "ref:mhs": "PA00117007",
+    "religion": "christian",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "source:name": "www.clochers.org:2015",
+    "start_date": "C12",
+    "wikidata": "Q22966863"
+  }
+},
+{
+  "type": "way",
+  "id": 347421770,
+  "center": {
+    "lat": 44.6179626,
+    "lon": 4.9262422
+  },
+  "nodes": [
+    3537427010,
+    3537427014,
+    3537427015,
+    4813899271,
+    3537417120,
+    3537417119,
+    3537417122,
+    3537426748,
+    3537426761,
+    3537426759,
+    3537426756,
+    3537426755,
+    3537426758,
+    3537426757,
+    3537417132,
+    3537427021,
+    3537427023,
+    3537427022,
+    3537427020,
+    3537427017,
+    3537427018,
+    3537427025,
+    3537427024,
+    3537426771,
+    3537426773,
+    3537426769,
+    3537417115,
+    3537426775,
+    4813899275,
+    4813901481,
+    3537426751,
+    3537417117,
+    3537426752,
+    4813899272,
+    3537417113,
+    3537427016,
+    3537427013,
+    3537427010
+  ],
+  "tags": {
+    "building": "yes",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1989-07-31",
+    "name": "Château de Genas",
+    "ref:mhs": "PA00116918",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C17",
+    "wikidata": "Q15944509",
+    "wikipedia": "fr:Château de Genas"
+  }
+},
+{
+  "type": "way",
+  "id": 367761993,
+  "center": {
+    "lat": 45.0114262,
+    "lon": 5.4084507
+  },
+  "nodes": [
+    278357086,
+    3716464163,
+    3716464166,
+    3716464179,
+    3716464210,
+    3716464207
+  ],
+  "tags": {
+    "access": "designated",
+    "cycleway:both": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "lane_markings": "no",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 367761995,
+  "center": {
+    "lat": 45.0022090,
+    "lon": 5.4215652
+  },
+  "nodes": [
+    1296548273,
+    5864414460,
+    3716476423
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762470,
+  "center": {
+    "lat": 45.0088682,
+    "lon": 5.4121780
+  },
+  "nodes": [
+    3716464200,
+    3716464173,
+    3716464213,
+    3716468027,
+    3716464171,
+    5864392622,
+    5864392623,
+    5864392624,
+    3716464160,
+    3716464190,
+    5864392625,
+    5864392627,
+    5864392626,
+    3716464201,
+    3716464188,
+    3716464206,
+    3716464212,
+    3716464217,
+    3716464218,
+    3716464168,
+    3716464189,
+    3716464172,
+    5864392628,
+    5864392629,
+    3716468026,
+    3716464199,
+    3716464165,
+    3716464204,
+    3716464176,
+    3716464224,
+    3716469558,
+    3716469560
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 367762471,
+  "center": {
+    "lat": 45.0106062,
+    "lon": 5.4089537
+  },
+  "nodes": [
+    3716464207,
+    3716464200
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762791,
+  "center": {
+    "lat": 45.0030359,
+    "lon": 5.4209685
+  },
+  "nodes": [
+    3716476420,
+    3716476419
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762792,
+  "center": {
+    "lat": 45.0071734,
+    "lon": 5.4154585
+  },
+  "nodes": [
+    3716469564,
+    3716469560
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762793,
+  "center": {
+    "lat": 45.0026167,
+    "lon": 5.4211505
+  },
+  "nodes": [
+    3716476422,
+    3716476417
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762794,
+  "center": {
+    "lat": 45.0060606,
+    "lon": 5.4170691
+  },
+  "nodes": [
+    3716464221,
+    3716464211,
+    3716464198,
+    5864392632,
+    3716469562,
+    5864392631,
+    5864392630,
+    3716469563,
+    3716469559,
+    3716469561,
+    3716469564
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762795,
+  "center": {
+    "lat": 45.0035441,
+    "lon": 5.4207440
+  },
+  "nodes": [
+    3716476421,
+    3716468035
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762796,
+  "center": {
+    "lat": 45.0024987,
+    "lon": 5.4212036
+  },
+  "nodes": [
+    3716464195,
+    3716476422
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762797,
+  "center": {
+    "lat": 45.0023439,
+    "lon": 5.4214638
+  },
+  "nodes": [
+    3716476423,
+    3716464170
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762798,
+  "center": {
+    "lat": 45.0044406,
+    "lon": 5.4193665
+  },
+  "nodes": [
+    3716464181,
+    3716476418
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "maxheight": "below_default",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762799,
+  "center": {
+    "lat": 45.0033844,
+    "lon": 5.4208165
+  },
+  "nodes": [
+    3716464202,
+    3716476421
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762800,
+  "center": {
+    "lat": 45.0027348,
+    "lon": 5.4210924
+  },
+  "nodes": [
+    3716476417,
+    3716464167
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762801,
+  "center": {
+    "lat": 45.0032020,
+    "lon": 5.4208955
+  },
+  "nodes": [
+    3716476419,
+    3716464202
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762802,
+  "center": {
+    "lat": 45.0050736,
+    "lon": 5.4185551
+  },
+  "nodes": [
+    3716476424,
+    3716464221
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "maxheight": "below_default",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets",
+    "tunnel": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 367762803,
+  "center": {
+    "lat": 45.0047639,
+    "lon": 5.4189399
+  },
+  "nodes": [
+    3716476418,
+    3716464180,
+    3716464192,
+    3716476424
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762804,
+  "center": {
+    "lat": 45.0028754,
+    "lon": 5.4210321
+  },
+  "nodes": [
+    3716464167,
+    3716476420
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762805,
+  "center": {
+    "lat": 45.0024155,
+    "lon": 5.4213156
+  },
+  "nodes": [
+    3716464170,
+    3716464195
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762806,
+  "center": {
+    "lat": 45.0036894,
+    "lon": 5.4207003
+  },
+  "nodes": [
+    3716468035,
+    3716464184
+  ],
+  "tags": {
+    "access": "no",
+    "bridge": "yes",
+    "highway": "unclassified",
+    "historic": "yes",
+    "layer": "1",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 367762808,
+  "center": {
+    "lat": 45.0040724,
+    "lon": 5.4200735
+  },
+  "nodes": [
+    3716464184,
+    3716464186,
+    3716464222,
+    3716468031,
+    3716464181
+  ],
+  "tags": {
+    "access": "no",
+    "highway": "unclassified",
+    "historic": "yes",
+    "motor_vehicle": "no",
+    "name": "Route des Grand Goulets"
+  }
+},
+{
+  "type": "way",
+  "id": 372285465,
+  "center": {
+    "lat": 44.7598296,
+    "lon": 5.1125469
+  },
+  "nodes": [
+    3758344369,
+    3758344372,
+    3758344373,
+    3758344370,
+    3758344369
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "7177",
+    "wikidata": "Q128144090",
+    "wikimedia_commons": "File:Les Jaux (Suze) - Monument aux morts 1 (juin 2021).jpg"
+  }
+},
+{
+  "type": "way",
+  "id": 378951601,
+  "center": {
+    "lat": 44.7394133,
+    "lon": 5.1264004
+  },
+  "nodes": [
+    4396777172,
+    4396777171,
+    4396777173,
+    4396777174,
+    4396777175,
+    4396777176,
+    4396777177,
+    4396777180,
+    4396777184,
+    4396777182,
+    4396777178,
+    3823162092,
+    3823162093,
+    4396777179,
+    4396777187,
+    3823162094,
+    3823162087,
+    4396777292,
+    4396777293,
+    4396777294,
+    4396777295,
+    4396777298,
+    4396777300,
+    4396777302,
+    4396777304,
+    4396777305,
+    4396777303,
+    4396777301,
+    4396777299,
+    4396777297,
+    4396777296,
+    4396777290,
+    4396777291,
+    4396777289,
+    4396777188,
+    4396777186,
+    4396777183,
+    4396777181,
+    4396777185,
+    4396777170,
+    4396777167,
+    4396777165,
+    4396777163,
+    4396777161,
+    4396777159,
+    4396777160,
+    4396777162,
+    4396777164,
+    4396777166,
+    4396777168,
+    4396777169,
+    4396777172
+  ],
+  "tags": {
+    "building": "house",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1987-08-21",
+    "name": "Château de Vachères",
+    "ref:mhs": "PA00116986",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "wikidata": "Q22966845"
+  }
+},
+{
+  "type": "way",
+  "id": 419325420,
+  "center": {
+    "lat": 44.9177947,
+    "lon": 4.8792737
+  },
+  "nodes": [
+    4194145380,
+    4194145381,
+    4194145889,
+    4194145387,
+    4194145893,
+    4194145895,
+    4194145896,
+    4194145900,
+    4194145901,
+    4194145902,
+    4194145903,
+    4194145907,
+    4194145909,
+    4194145911,
+    4194145913,
+    4194145914,
+    4194145916,
+    4194145915,
+    4194145917,
+    4194145912,
+    4194145910,
+    4194145905,
+    4194145904,
+    4194145898,
+    4194145899,
+    4194145894,
+    4194145386,
+    4194145892,
+    4194145891,
+    4194145890,
+    4194145388,
+    4194145384,
+    4194145385,
+    4194145382,
+    4194145376,
+    4194145380
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de Valensolles",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "tourism": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 431870004,
+  "center": {
+    "lat": 44.6783782,
+    "lon": 5.0978798
+  },
+  "nodes": [
+    4311009847,
+    4311009849,
+    4311009852,
+    4311009848,
+    4311009847
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 470221702,
+  "center": {
+    "lat": 44.7558695,
+    "lon": 5.3728280
+  },
+  "nodes": [
+    4644296647,
+    4644296646,
+    4644296645,
+    4644296644,
+    4644296643,
+    4644296642,
+    4644296641,
+    4644296640,
+    4644296639,
+    4644296638,
+    4644296637,
+    4644296636,
+    4644296635,
+    4644296634,
+    4644296633,
+    4644296632,
+    4644296631,
+    4644296630,
+    4644296629,
+    4644296628,
+    4644296627,
+    4644296626,
+    4644296625,
+    4644296624,
+    4644296623,
+    4644296622,
+    4644296621,
+    6454244938,
+    4644296620,
+    4644296619,
+    4644296618,
+    4644296617,
+    4644296616,
+    4644296615,
+    4644296614,
+    6454244931,
+    4644296613,
+    4644296612,
+    4644296611,
+    4644296610,
+    4644296609,
+    4644296608,
+    4644296607,
+    4644296606,
+    4644296605,
+    4644296604,
+    4644296603,
+    4644296602,
+    4644296601,
+    4644296600,
+    4644296599,
+    4644296598,
+    4644296597,
+    4644296596,
+    4644296595,
+    4644296594,
+    4644296593,
+    4644296592,
+    4644296591,
+    4644296590,
+    4644296589,
+    4644294988,
+    4644294987,
+    4644294986
+  ],
+  "tags": {
+    "barrier": "city_wall",
+    "height": "4",
+    "historic": "citywalls"
+  }
+},
+{
+  "type": "way",
+  "id": 481670311,
+  "center": {
+    "lat": 44.9389149,
+    "lon": 4.9478613
+  },
+  "nodes": [
+    4863625762,
+    4745818116,
+    4745818117,
+    4863625761,
+    4863625762
+  ],
+  "tags": {
+    "area": "yes",
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wall": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 481671116,
+  "center": {
+    "lat": 44.9387758,
+    "lon": 4.9478557
+  },
+  "nodes": [
+    4863625761,
+    4745812694,
+    4745812695,
+    4745812696,
+    4745812697,
+    4863625762,
+    4863625761
+  ],
+  "tags": {
+    "area": "yes",
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 481671191,
+  "center": {
+    "lat": 44.9318367,
+    "lon": 4.8895991
+  },
+  "nodes": [
+    4745813876,
+    4745813877,
+    4745813878,
+    4745813879,
+    4745813876
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 492623466,
+  "center": {
+    "lat": 44.5876724,
+    "lon": 5.1364608
+  },
+  "nodes": [
+    4846126510,
+    4846126511,
+    4846126512,
+    4846126513,
+    4846126510
+  ],
+  "tags": {
+    "historic": "yes",
+    "image": "https://web.archive.org/web/20221102152518/https://westnordost.de/p/102559.jpg",
+    "natural": "stone",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 494263739,
+  "center": {
+    "lat": 44.8669982,
+    "lon": 4.9498254
+  },
+  "nodes": [
+    4860446097,
+    4860446098,
+    1139165359,
+    4860446099,
+    4860446100,
+    4860446101,
+    4860445706,
+    4860445707,
+    4860445708,
+    4860446097
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 508177531,
+  "center": {
+    "lat": 44.7104196,
+    "lon": 5.1319386
+  },
+  "nodes": [
+    4975268554,
+    4975268555,
+    4975268556,
+    4975268557,
+    4975268554
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "way",
+  "id": 533160004,
+  "center": {
+    "lat": 45.0445082,
+    "lon": 5.0359437
+  },
+  "nodes": [
+    5172938239,
+    5172938253,
+    5172938252,
+    5172938251,
+    5172938250,
+    5172938249,
+    5172938248,
+    5172938247,
+    5172938246,
+    5172938245,
+    5172938244,
+    5172938240,
+    5172938241,
+    5172938242,
+    5172938243,
+    5172938254,
+    5172938255,
+    5172938256,
+    5172938257,
+    5172938258,
+    5172938259,
+    5172938239
+  ],
+  "tags": {
+    "alt_name": "Cimetière des Récollets",
+    "heritage": "2",
+    "heritage:operator": "mhs",
+    "historic": "cemetery",
+    "mhs:inscription_date": "1986-07-24",
+    "name": "Calvaire des Récollets",
+    "name:oc": "Cementèri daus Recolets",
+    "ref:mhs": "PA00117027",
+    "source:heritage": "data.gouv.fr:Ministère de la Culture - 04/2015",
+    "wikidata": "Q2934498",
+    "wikipedia": "fr:Calvaire des Récollets"
+  }
+},
+{
+  "type": "way",
+  "id": 533468912,
+  "center": {
+    "lat": 45.0442031,
+    "lon": 5.0561377
+  },
+  "nodes": [
+    5175433590,
+    5175433591,
+    5175433592,
+    5175433593,
+    5175433590
+  ],
+  "tags": {
+    "historic": "ruins",
+    "name": "Rempart",
+    "ruins": "wall"
+  }
+},
+{
+  "type": "way",
+  "id": 552447990,
+  "center": {
+    "lat": 44.8452139,
+    "lon": 5.3879840
+  },
+  "nodes": [
+    3866364630,
+    5333826911,
+    5333826912,
+    5333826913,
+    5333826914,
+    5333826915,
+    5333826916,
+    5333826917,
+    5333826918,
+    5333826919,
+    5333826920,
+    5333826921,
+    5333826922,
+    5333826923,
+    5333826924,
+    5333826925,
+    5333826926,
+    1423409393
+  ],
+  "tags": {
+    "highway": "track",
+    "historic": "roman_road",
+    "tracktype": "grade3",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 560513597,
+  "center": {
+    "lat": 44.6976973,
+    "lon": 5.1973695
+  },
+  "nodes": [
+    5405451045,
+    5405456136,
+    5405447740,
+    5405453941,
+    5405451045
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14988",
+    "wikidata": "Q136071798"
+  }
+},
+{
+  "type": "way",
+  "id": 582890323,
+  "center": {
+    "lat": 44.9131470,
+    "lon": 5.1053541
+  },
+  "nodes": [
+    5573446199,
+    5573446200,
+    5573446201,
+    5573446202,
+    5573446199
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "27381"
+  }
+},
+{
+  "type": "way",
+  "id": 594533274,
+  "center": {
+    "lat": 44.7660934,
+    "lon": 5.1076847
+  },
+  "nodes": [
+    5669029574,
+    5669029575,
+    5669029576,
+    5669029577,
+    5669029578,
+    5669029574
+  ],
+  "tags": {
+    "historic": "church",
+    "name": "Église Saint-Martin",
+    "ruins": "yes",
+    "wikidata": "Q60388939"
+  }
+},
+{
+  "type": "way",
+  "id": 603728606,
+  "center": {
+    "lat": 44.8376017,
+    "lon": 5.0180587
+  },
+  "nodes": [
+    5730402295,
+    5730402296,
+    5730402297,
+    5730402298,
+    5730402295
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 621623207,
+  "center": {
+    "lat": 45.0208393,
+    "lon": 5.4425552
+  },
+  "nodes": [
+    5872336424,
+    5872336425,
+    5872336426,
+    5872335431,
+    5872336424
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Monument aux morts",
+    "ref:FR:MemorialGenWeb": "8004",
+    "war_memorial": "yes",
+    "wikidata": "Q136076405",
+    "wikimedia_commons": "File:Monument aux morts de Saint-Martin-en-Vercors.jpg"
+  }
+},
+{
+  "type": "way",
+  "id": 625243596,
+  "center": {
+    "lat": 44.9764977,
+    "lon": 5.1076448
+  },
+  "nodes": [
+    5903531277,
+    5903531278,
+    5903531279,
+    5903531280,
+    5903531277
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "yes",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 634001330,
+  "center": {
+    "lat": 44.6838133,
+    "lon": 5.3793011
+  },
+  "nodes": [
+    5984056702,
+    5984056703,
+    5984056704,
+    5984056705,
+    5984056706,
+    5984056707,
+    5984056702
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2018"
+  }
+},
+{
+  "type": "way",
+  "id": 662666136,
+  "center": {
+    "lat": 44.9551254,
+    "lon": 5.1472189
+  },
+  "nodes": [
+    6203615399,
+    6203615400,
+    9611266787,
+    6203615401,
+    6203615402,
+    6203615403,
+    6203615404,
+    6203615405,
+    6203615406,
+    6203615399
+  ],
+  "tags": {
+    "building": "ruins",
+    "historic": "castle",
+    "name": "Château de Pelafol",
+    "wikidata": "Q78661064"
+  }
+},
+{
+  "type": "way",
+  "id": 685461238,
+  "center": {
+    "lat": 44.5831014,
+    "lon": 5.1322675
+  },
+  "nodes": [
+    6423624084,
+    6423624083,
+    6423624082,
+    6423624081,
+    6423624080,
+    6423624079,
+    6423624084
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 685461240,
+  "center": {
+    "lat": 44.5829652,
+    "lon": 5.1324471
+  },
+  "nodes": [
+    6423625288,
+    6423625287,
+    6423625286,
+    6423625285,
+    6423625288
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 695452787,
+  "center": {
+    "lat": 44.8093727,
+    "lon": 4.9830279
+  },
+  "nodes": [
+    6530209351,
+    6530209349,
+    6530209350,
+    4789436991,
+    6530209351
+  ],
+  "tags": {
+    "building": "chapel",
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "yes",
+    "mhs:inscription_date": "1926-07-17",
+    "name": "Chapelle Sainte-Baudille",
+    "ref:mhs": "PA00117082",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "start_date": "C12",
+    "wikidata": "Q22966913"
+  }
+},
+{
+  "type": "way",
+  "id": 695474315,
+  "center": {
+    "lat": 44.7241902,
+    "lon": 4.9417260
+  },
+  "nodes": [
+    6530305193,
+    4790645225,
+    6530305192,
+    6530305191,
+    6530305190,
+    6530305189,
+    6530305193
+  ],
+  "tags": {
+    "heritage": "3",
+    "heritage:operator": "mhs",
+    "historic": "castle",
+    "mhs:inscription_date": "1926-10-21",
+    "name": "Château",
+    "ref:mhs": "PA00116902",
+    "ruins": "yes",
+    "source:heritage": "data.gouv.fr, Ministère de la Culture - 2016",
+    "wikidata": "Q5118755"
+  }
+},
+{
+  "type": "way",
+  "id": 713493864,
+  "center": {
+    "lat": 44.8951730,
+    "lon": 5.3713513
+  },
+  "nodes": [
+    6708539405,
+    6708539406,
+    6708539407,
+    6708539408,
+    6708539405
+  ],
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "way",
+  "id": 713646472,
+  "center": {
+    "lat": 44.8383879,
+    "lon": 5.3958800
+  },
+  "nodes": [
+    706997924,
+    6709831429,
+    8399762118,
+    1479299562,
+    706997912,
+    706997885,
+    706997875
+  ],
+  "tags": {
+    "highway": "track",
+    "historic": "roman_road",
+    "tracktype": "grade3",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 713646473,
+  "center": {
+    "lat": 44.8423576,
+    "lon": 5.3876945
+  },
+  "nodes": [
+    1423409393,
+    5333826927,
+    8399762190,
+    905188668
+  ],
+  "tags": {
+    "highway": "track",
+    "historic": "roman_road",
+    "surface": "grass",
+    "tracktype": "grade3",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 746786542,
+  "center": {
+    "lat": 44.6948490,
+    "lon": 5.2966094
+  },
+  "nodes": [
+    6988354042,
+    6988354043,
+    6988354044,
+    6988354045,
+    6988354042
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "14992",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2019",
+    "wikidata": "Q136042589"
+  }
+},
+{
+  "type": "way",
+  "id": 805285424,
+  "center": {
+    "lat": 44.8658854,
+    "lon": 5.3395312
+  },
+  "nodes": [
+    7531523537,
+    7531523536,
+    7531523535,
+    7531523534,
+    7531523537
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 807815883,
+  "center": {
+    "lat": 45.0306111,
+    "lon": 5.2529968
+  },
+  "nodes": [
+    7554189208,
+    7554189209,
+    7554189210,
+    7554189211,
+    7554189208
+  ],
+  "tags": {
+    "historic": "wayside_shrine",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 839588543,
+  "center": {
+    "lat": 44.5829185,
+    "lon": 5.1322330
+  },
+  "nodes": [
+    7834449207,
+    7834449206,
+    7834449205,
+    7834449204,
+    7834449203,
+    6421933910,
+    7834449207
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 840620801,
+  "center": {
+    "lat": 44.5878533,
+    "lon": 5.3105067
+  },
+  "nodes": [
+    7844039440,
+    7844039441,
+    7844039442,
+    7844039443,
+    7844039440
+  ],
+  "tags": {
+    "historic": "wayside_cross"
+  }
+},
+{
+  "type": "way",
+  "id": 840626135,
+  "center": {
+    "lat": 44.5907943,
+    "lon": 5.3035340
+  },
+  "nodes": [
+    7844095697,
+    7844095698,
+    7844095699,
+    7844095697
+  ],
+  "tags": {
+    "historic": "ruins",
+    "name": "Ruines de la Batie"
+  }
+},
+{
+  "type": "way",
+  "id": 878639800,
+  "center": {
+    "lat": 44.7593119,
+    "lon": 4.9889603
+  },
+  "nodes": [
+    2362708354,
+    2362708404,
+    2362708432,
+    2362708439,
+    2362708451,
+    2362708438,
+    2362708448,
+    4778573898,
+    4778573899,
+    4778573900,
+    4778573901,
+    4778573902,
+    4778573903,
+    4778573897,
+    2362708340,
+    2362708436,
+    2362708225,
+    2362708235,
+    2362708197,
+    2362708202,
+    2362708153,
+    2362708134,
+    2362708154,
+    2362708139,
+    2362708120,
+    2362708118,
+    2362708130,
+    2362708145,
+    2362708187,
+    2362708180,
+    2362708255,
+    2362708244,
+    2362708335,
+    2362708329,
+    2362708354
+  ],
+  "tags": {
+    "historic": "castle",
+    "name": "Château d'Eurre"
+  }
+},
+{
+  "type": "way",
+  "id": 889351010,
+  "center": {
+    "lat": 44.8432676,
+    "lon": 4.8954616
+  },
+  "nodes": [
+    8268086370,
+    8268086371,
+    8268086372,
+    8268086373,
+    8268086370
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "yes",
+    "name": "Télégraphe de Chappe",
+    "website": "https://www.etoilesurrhone.fr/sortir-bouger/tourisme/telegraphe-de-chappe"
+  }
+},
+{
+  "type": "way",
+  "id": 906361717,
+  "center": {
+    "lat": 44.7843849,
+    "lon": 5.1079796
+  },
+  "nodes": [
+    8416471872,
+    8416471873,
+    8416471874,
+    8416471876,
+    8416471877,
+    8416471875,
+    8416471872
+  ],
+  "tags": {
+    "historic": "ruins",
+    "historic:civilization": "modern"
+  }
+},
+{
+  "type": "way",
+  "id": 906361718,
+  "center": {
+    "lat": 44.7634449,
+    "lon": 5.1018330
+  },
+  "nodes": [
+    8416471878,
+    8416471879,
+    8416471880,
+    8416471881,
+    8416471882,
+    8416471883,
+    8416471878
+  ],
+  "tags": {
+    "historic": "ruins",
+    "historic:civilization": "medieval",
+    "name": "Les Châteaux"
+  }
+},
+{
+  "type": "way",
+  "id": 935461356,
+  "center": {
+    "lat": 44.8555971,
+    "lon": 4.9023025
+  },
+  "nodes": [
+    8668966111,
+    8668966112,
+    8668966113,
+    8668966114,
+    8668966115,
+    8668966116,
+    8668978117,
+    8668978118,
+    8668978119,
+    8668978120,
+    8668978121,
+    8668978122,
+    8668978123,
+    8668978124,
+    8668978125,
+    8668978126,
+    8668978127
+  ],
+  "tags": {
+    "barrier": "city_wall",
+    "historic": "citywalls",
+    "material": "stone"
+  }
+},
+{
+  "type": "way",
+  "id": 935540279,
+  "center": {
+    "lat": 44.8588075,
+    "lon": 4.9486169
+  },
+  "nodes": [
+    8669620028,
+    8669620027
+  ],
+  "tags": {
+    "historic": "citywalls",
+    "material": "stone"
+  }
+},
+{
+  "type": "way",
+  "id": 935971303,
+  "center": {
+    "lat": 44.9014374,
+    "lon": 5.0220512
+  },
+  "nodes": [
+    8673042856,
+    8673042857,
+    8673042858,
+    8673042859,
+    8673042860,
+    8673042861,
+    8673042836,
+    8673042837,
+    8673042838,
+    8673042850,
+    8673042851,
+    8673042852,
+    8673042853,
+    8673042854,
+    8673042855,
+    8673042839,
+    8673042840,
+    8673042841,
+    8673042842,
+    8673042856
+  ],
+  "tags": {
+    "historic": "ruins",
+    "historic:civilization": "medieval",
+    "ruins": "tower"
+  }
+},
+{
+  "type": "way",
+  "id": 948985872,
+  "center": {
+    "lat": 44.8613081,
+    "lon": 4.9412988
+  },
+  "nodes": [
+    8784972621,
+    8784972620,
+    8784972618,
+    4874165209,
+    4874165208,
+    8784972623,
+    8784972622,
+    8784972621
+  ],
+  "tags": {
+    "historic": "memorial",
+    "name": "Espace Arnaud Beltrame"
+  }
+},
+{
+  "type": "way",
+  "id": 953001113,
+  "center": {
+    "lat": 44.8682881,
+    "lon": 5.0612639
+  },
+  "nodes": [
+    8820946252,
+    8820946251,
+    8820946250,
+    8820946249,
+    8820946248,
+    9871691046,
+    9871691047,
+    8820946247,
+    8820946246,
+    8820946245,
+    8820946244
+  ],
+  "tags": {
+    "barrier": "city_wall",
+    "historic": "rampart",
+    "wall": "castle_wall"
+  }
+},
+{
+  "type": "way",
+  "id": 953001114,
+  "center": {
+    "lat": 44.8687132,
+    "lon": 5.0610803
+  },
+  "nodes": [
+    8820946259,
+    8820946258,
+    8820946257,
+    8820946256,
+    8820946255,
+    8820946254,
+    8820946253
+  ],
+  "tags": {
+    "barrier": "wall",
+    "historic": "rampart",
+    "wall": "castle_wall"
+  }
+},
+{
+  "type": "way",
+  "id": 955767355,
+  "center": {
+    "lat": 44.7101213,
+    "lon": 5.1322430
+  },
+  "nodes": [
+    8845688612,
+    8845688613,
+    8845688614,
+    8845688615,
+    8845688612
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 1005589303,
+  "center": {
+    "lat": 44.8652169,
+    "lon": 4.9290037
+  },
+  "nodes": [
+    9277909196,
+    9277909197,
+    9277909198,
+    9277909199,
+    9277909196
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 1042441797,
+  "center": {
+    "lat": 44.9681783,
+    "lon": 5.1690875
+  },
+  "nodes": [
+    9595893186,
+    9595893185,
+    9595893184,
+    9595893183,
+    9595893182,
+    9865885214,
+    9595893186
+  ],
+  "tags": {
+    "historic": "ruins",
+    "ruins": "castle"
+  }
+},
+{
+  "type": "way",
+  "id": 1044763322,
+  "center": {
+    "lat": 45.0210038,
+    "lon": 5.2687976
+  },
+  "nodes": [
+    9613186568,
+    9613186569,
+    9613186570,
+    9613186571,
+    9613186568
+  ],
+  "tags": {
+    "amenity": "lavoir",
+    "building": "yes",
+    "historic": "lavoir"
+  }
+},
+{
+  "type": "way",
+  "id": 1065141967,
+  "center": {
+    "lat": 44.9835103,
+    "lon": 5.2649375
+  },
+  "nodes": [
+    9781633737,
+    9781633738,
+    9781633739,
+    9781633740,
+    9781633737
+  ],
+  "tags": {
+    "historic": "ruins",
+    "name": "Château de Flandaines"
+  }
+},
+{
+  "type": "way",
+  "id": 1076350695,
+  "center": {
+    "lat": 44.8027700,
+    "lon": 5.2243877
+  },
+  "nodes": [
+    9870391150,
+    9870391151,
+    9870391152,
+    9870391153,
+    9870391154,
+    9870391155,
+    9870391156,
+    9870391157,
+    9870391150
+  ],
+  "tags": {
+    "building": "yes",
+    "historic": "castle",
+    "name": "Château de l'Escoulin"
+  }
+},
+{
+  "type": "way",
+  "id": 1112892777,
+  "center": {
+    "lat": 44.8923642,
+    "lon": 5.2533375
+  },
+  "nodes": [
+    10182346189,
+    10182346188,
+    10182346187,
+    10182346186,
+    10182346189
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW2"
+  }
+},
+{
+  "type": "way",
+  "id": 1113755718,
+  "center": {
+    "lat": 44.7284552,
+    "lon": 5.0258329
+  },
+  "nodes": [
+    10189314032,
+    10189314033,
+    10189314034,
+    10189314035,
+    10189314036,
+    10189314037,
+    10189314032
+  ],
+  "tags": {
+    "description": "Monuments aux morts de Crest",
+    "historic": "memorial",
+    "inscription": "1914-1918 Aux enfants de Crest morts pour la France 1939-1945 Extrême Orient - Afrique",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "13151",
+    "wikidata": "Q112123327"
+  }
+},
+{
+  "type": "way",
+  "id": 1119785038,
+  "center": {
+    "lat": 44.6648735,
+    "lon": 5.1096645
+  },
+  "nodes": [
+    10241826091,
+    10241826092,
+    10241826093,
+    10241826099,
+    10241826094,
+    10241826095,
+    10241826096,
+    10241826097,
+    10241826098,
+    10241826103,
+    10241826100,
+    10241826101,
+    10241826102,
+    10241826091
+  ],
+  "tags": {
+    "building": "ruins",
+    "historic": "church",
+    "historic:civilization": "medieval",
+    "name": "Monastère Saint-Médard",
+    "ruins": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1184943443,
+  "center": {
+    "lat": 44.8391016,
+    "lon": 5.3875144
+  },
+  "nodes": [
+    5875617178,
+    905187643,
+    905188508,
+    905187924,
+    8883778487,
+    905187720,
+    8399762189,
+    905189056,
+    905188126,
+    905187553,
+    905189209,
+    5333826928,
+    905188668
+  ],
+  "tags": {
+    "highway": "track",
+    "historic": "roman_road",
+    "surface": "grass",
+    "tracktype": "grade3",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 1184943444,
+  "center": {
+    "lat": 44.8357683,
+    "lon": 5.3889034
+  },
+  "nodes": [
+    706997922,
+    8399762183,
+    706997906,
+    8399762184,
+    3866364609,
+    8399762185,
+    6709798413,
+    905188528,
+    905187578,
+    6709798412,
+    6709798411,
+    905188838,
+    8399762186,
+    6709798409,
+    8399762187,
+    905188691,
+    6709798410,
+    905188152,
+    905187523,
+    6709798408,
+    905188788,
+    6709798407,
+    905188628,
+    905188102,
+    6709798406,
+    6709798405,
+    8399762188,
+    905188913,
+    905188370,
+    905188242,
+    5875617178
+  ],
+  "tags": {
+    "highway": "track",
+    "historic": "roman_road",
+    "surface": "dirt",
+    "tracktype": "grade3",
+    "width": "3"
+  }
+},
+{
+  "type": "way",
+  "id": 1186570070,
+  "center": {
+    "lat": 45.0421756,
+    "lon": 5.0537581
+  },
+  "nodes": [
+    11020771677,
+    764218207,
+    4772665437,
+    11020771678,
+    11020771677
+  ],
+  "tags": {
+    "historic": "ruins",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017;local knowledge;streetlevel imagery;aerial imagery"
+  }
+},
+{
+  "type": "way",
+  "id": 1220473762,
+  "center": {
+    "lat": 44.9386830,
+    "lon": 4.9084224
+  },
+  "nodes": [
+    11309275382,
+    11309275383,
+    11309275384,
+    11309275385,
+    11309275387,
+    11309275382
+  ],
+  "tags": {
+    "historic": "memorial",
+    "memorial": "war_memorial"
+  }
+},
+{
+  "type": "way",
+  "id": 1237330054,
+  "center": {
+    "lat": 44.5942330,
+    "lon": 5.3265905
+  },
+  "nodes": [
+    11492264628,
+    11492264629,
+    11492264630,
+    11492264631,
+    11492264628
+  ],
+  "tags": {
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 1274579536,
+  "center": {
+    "lat": 44.9012139,
+    "lon": 5.2554916
+  },
+  "nodes": [
+    11834609954,
+    11834609953,
+    11834609952,
+    11834609951,
+    11834609950,
+    11834609949,
+    11834609948,
+    11834609947,
+    11834609946,
+    11834609945,
+    11834609944,
+    11834609943,
+    11834609942,
+    11834609941,
+    11834609940,
+    11834609939,
+    11834609938
+  ],
+  "tags": {
+    "barrier": "wall",
+    "historic": "yes",
+    "name": "Mur des Chartreux",
+    "wall": "dry_stone"
+  }
+},
+{
+  "type": "way",
+  "id": 1319718205,
+  "center": {
+    "lat": 44.9112138,
+    "lon": 4.8723514
+  },
+  "nodes": [
+    12212627269,
+    12212627270,
+    12212627271,
+    12212627272,
+    12212627273,
+    12212627274,
+    12212627275,
+    12212627269
+  ],
+  "tags": {
+    "historic": "wreck",
+    "seamark:type": "wreck",
+    "wikidata": "Q130388064"
+  }
+},
+{
+  "type": "way",
+  "id": 1334313957,
+  "center": {
+    "lat": 44.8664359,
+    "lon": 5.1897785
+  },
+  "nodes": [
+    12344486916,
+    12344486917,
+    12344486918,
+    12344486919,
+    12344486916
+  ],
+  "tags": {
+    "area": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 1358125466,
+  "center": {
+    "lat": 44.7892957,
+    "lon": 5.1716188
+  },
+  "nodes": [
+    12568470936,
+    12568470937,
+    12568470938,
+    12568470939,
+    12568470940,
+    12568470941,
+    12568470942,
+    12568470943,
+    12568470944,
+    12568470945,
+    12568470936
+  ],
+  "tags": {
+    "area": "yes",
+    "historic": "ruins"
+  }
+},
+{
+  "type": "way",
+  "id": 1360957129,
+  "center": {
+    "lat": 45.0307270,
+    "lon": 5.2399046
+  },
+  "nodes": [
+    12598900800,
+    12598917501,
+    12598917502,
+    12598917503,
+    12598917504,
+    12598917505,
+    12598917506,
+    12598917507,
+    12598917508,
+    12598917509,
+    12598917510,
+    12598917511,
+    12598917512,
+    12598917513,
+    12598900800
+  ],
+  "tags": {
+    "building": "ruins",
+    "historic": "castle",
+    "name": "Château de Rochechinard"
+  }
+},
+{
+  "type": "way",
+  "id": 1378162336,
+  "center": {
+    "lat": 44.5542751,
+    "lon": 4.8624100
+  },
+  "nodes": [
+    12760614816,
+    12760614817,
+    12760614818,
+    12760614819,
+    12760614816
+  ],
+  "tags": {
+    "historic": "memorial",
+    "inscription": "La Batie-Rolland à ses Enfants Morts pour la France 1914-1918 et 1939-1945",
+    "memorial": "war_memorial",
+    "memorial:conflict": "WW1;WW2",
+    "ref:FR:MemorialGenWeb": "10519",
+    "wikidata": "Q136057645"
+  }
+},
+{
+  "type": "way",
+  "id": 1419969475,
+  "center": {
+    "lat": 44.9954071,
+    "lon": 5.1870637
+  },
+  "nodes": [
+    13048245272,
+    13048245273,
+    13048245274,
+    13048245275,
+    13048245272
+  ],
+  "tags": {
+    "area": "yes",
+    "historic": "memorial",
+    "inscription": "La section de Beauregard-Baret à ses enfants morts glorieux",
+    "material": "stone",
+    "memorial": "war_memorial",
+    "ref:FR:MemorialGenWeb": "30501",
+    "source": "IGN - 2024-03-15"
+  }
+},
+{
+  "type": "way",
+  "id": 1475626828,
+  "center": {
+    "lat": 45.0296437,
+    "lon": 5.0163736
+  },
+  "nodes": [
+    925391148,
+    13537120621,
+    13537176665,
+    13537176664,
+    13537120623,
+    13537120624,
+    925391148
+  ],
+  "tags": {
+    "area": "yes",
+    "historic": "ruins"
+  }
+}
+
+  ]
+}

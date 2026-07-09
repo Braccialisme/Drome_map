@@ -1,0 +1,1900 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-06-12T12:14:17Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 522785507,
+  "lat": 45.0465882,
+  "lon": 5.0538775,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Le petit Resto"
+  }
+},
+{
+  "type": "node",
+  "id": 618515165,
+  "lat": 44.7049457,
+  "lon": 5.2586609,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Café de la Clairette"
+  }
+},
+{
+  "type": "node",
+  "id": 672113213,
+  "lat": 44.9283150,
+  "lon": 4.8926869,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2025-05-26",
+    "indoor_seating": "yes",
+    "name": "Le Continental",
+    "outdoor_seating": "yes",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 672113344,
+  "lat": 44.9288367,
+  "lon": 4.8905853,
+  "tags": {
+    "amenity": "bar",
+    "check_date": "2024-03-16",
+    "indoor_seating": "yes",
+    "name": "Le Globe",
+    "outdoor_seating": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 907886701,
+  "lat": 45.0408681,
+  "lon": 5.0490461,
+  "tags": {
+    "amenity": "bar",
+    "name": "L'espérance",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 907895917,
+  "lat": 45.0386582,
+  "lon": 5.0472977,
+  "tags": {
+    "amenity": "bar",
+    "name": "Bar du Midi"
+  }
+},
+{
+  "type": "node",
+  "id": 908355967,
+  "lat": 45.0404419,
+  "lon": 5.0519866,
+  "tags": {
+    "amenity": "bar"
+  }
+},
+{
+  "type": "node",
+  "id": 915560798,
+  "lat": 45.0339604,
+  "lon": 5.0528262,
+  "tags": {
+    "amenity": "bar"
+  }
+},
+{
+  "type": "node",
+  "id": 936746800,
+  "lat": 45.0455716,
+  "lon": 5.0503167,
+  "tags": {
+    "amenity": "cafe"
+  }
+},
+{
+  "type": "node",
+  "id": 936746803,
+  "lat": 45.0456291,
+  "lon": 5.0497126,
+  "tags": {
+    "amenity": "cafe",
+    "cuisine": "french",
+    "internet_access": "wlan",
+    "name": "Le Central"
+  }
+},
+{
+  "type": "node",
+  "id": 1332169357,
+  "lat": 44.9010228,
+  "lon": 5.0077357,
+  "tags": {
+    "amenity": "bar",
+    "contact:facebook": "https://www.facebook.com/LoungeBarChabeuil/",
+    "contact:instagram": "https://www.instagram.com/loungebar_chabeuil/",
+    "name": "Lounge Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 1371292594,
+  "lat": 45.0278040,
+  "lon": 5.3267171,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Bar des Sports",
+    "opening_hours": "Tu-Th 06:30-14:00,16:00-21:00; Fr,Sa 06:30-14:00,16:00-23:30; Su 07:00-17:00"
+  }
+},
+{
+  "type": "node",
+  "id": 1680160460,
+  "lat": 44.9467646,
+  "lon": 4.8928083,
+  "tags": {
+    "amenity": "bar",
+    "name": "La Barra Escriua",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"
+  }
+},
+{
+  "type": "node",
+  "id": 1739088916,
+  "lat": 44.9316757,
+  "lon": 4.8945157,
+  "tags": {
+    "amenity": "bar",
+    "check_date": "2023-10-06",
+    "name": "Le Plaza",
+    "opening_hours": "Mo-We 06:45-24:00, Th,Fr 06:45-01:00, Sa 07:30-02:00, Su 09:30-02:00",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"
+  }
+},
+{
+  "type": "node",
+  "id": 1804119124,
+  "lat": 44.7117670,
+  "lon": 5.4020730,
+  "tags": {
+    "amenity": "bar",
+    "name": "Chez Béa"
+  }
+},
+{
+  "type": "node",
+  "id": 2018193916,
+  "lat": 44.7266045,
+  "lon": 5.0203965,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Place de la Liberté",
+    "amenity": "bar",
+    "contact:facebook": "lebardupont",
+    "cuisine": "french",
+    "internet_access": "wlan",
+    "level": "0",
+    "name": "Bar du pont",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "outdoor_seating": "yes",
+    "phone": "+33475251584",
+    "ref:FR:SIRET": "43857197800016"
+  }
+},
+{
+  "type": "node",
+  "id": 2018205759,
+  "lat": 44.7289217,
+  "lon": 5.0266269,
+  "tags": {
+    "addr:housenumber": "44",
+    "addr:street": "Rue Archinard",
+    "amenity": "bar",
+    "name": "Bar Tabac des Moulins",
+    "opening_hours": "Th-Tu 07:30-20:00",
+    "phone": "+33475258224",
+    "website": "https://bar-des-moulins.eatbu.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 2158800945,
+  "lat": 44.7525033,
+  "lon": 5.3715343,
+  "tags": {
+    "addr:postcode": "26150",
+    "amenity": "cafe",
+    "cuisine": "breakfast;cake;sandwich",
+    "name": "Fournil de Sylvain",
+    "opening_hours": "Mo-Fr 06:45-19:00; Sa 06:45-17:30",
+    "outdoor_seating": "yes",
+    "shop": "bakery",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2159788551,
+  "lat": 45.0366097,
+  "lon": 5.0816890,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Tabac Presse Café des Allobroges",
+    "shop": "newsagent"
+  }
+},
+{
+  "type": "node",
+  "id": 2257914778,
+  "lat": 44.7526917,
+  "lon": 5.3712104,
+  "tags": {
+    "addr:postcode": "26150",
+    "addr:street": "Place de la République",
+    "amenity": "cafe",
+    "name": "Café de Paris",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2257914803,
+  "lat": 44.7532955,
+  "lon": 5.3701120,
+  "tags": {
+    "addr:housenumber": "57",
+    "addr:street": "Rue Émile Laurens",
+    "amenity": "cafe",
+    "email": "andarta@outlook.fr",
+    "name": "Café-Théâtre Andarta",
+    "old_name": "Baradie",
+    "operator": "KaleiDiescope",
+    "phone": "+33 4 75 22 00 81",
+    "website": "https://cafetheatreandarta.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 2258082553,
+  "lat": 44.7552007,
+  "lon": 5.3691632,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Bar de l'Étape",
+    "opening_hours": "Mo-Su 06:30-20:00"
+  }
+},
+{
+  "type": "node",
+  "id": 2357017049,
+  "lat": 44.8393800,
+  "lon": 5.4056707,
+  "tags": {
+    "amenity": "cafe",
+    "cuisine": "french",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Le Rustic",
+    "opening_hours": "Mo-Su,PH 09:00-18:00",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2357017066,
+  "lat": 44.8394827,
+  "lon": 5.4065077,
+  "tags": {
+    "amenity": "cafe",
+    "cuisine": "french",
+    "diet:vegetarian": "yes",
+    "name": "Les Runes"
+  }
+},
+{
+  "type": "node",
+  "id": 2357017085,
+  "lat": 44.8397071,
+  "lon": 5.4066470,
+  "tags": {
+    "amenity": "cafe",
+    "cuisine": "french",
+    "name": "Sur le Pouce"
+  }
+},
+{
+  "type": "node",
+  "id": 2406980599,
+  "lat": 44.6966422,
+  "lon": 5.1969405,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Café des Sports",
+    "opening_hours": "Mo-Fr 07:00-13:30,16:00-00:00; Sa 07:00-15:00,17:45-23:00",
+    "survey:date": "2024-12-02",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 2420118123,
+  "lat": 45.0429962,
+  "lon": 5.0488798,
+  "tags": {
+    "amenity": "pub",
+    "contact:housenumber": "2",
+    "contact:phone": "+33475483570",
+    "contact:street": "Rue de l'Ecosserie",
+    "microbrewery": "yes",
+    "name": "Le Jakadi",
+    "outdoor_seating": "terrace",
+    "ref:FR:SIRET": "89805839100019",
+    "website": "https://lejakadi.fr",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 2425350352,
+  "lat": 44.6452200,
+  "lon": 5.0615196,
+  "tags": {
+    "amenity": "pub",
+    "check_date": "2025-11-27",
+    "microbrewery": "yes",
+    "name": "Gasoline Palace",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2456531052,
+  "lat": 44.9308837,
+  "lon": 4.8952202,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:street": "Avenue Félix Faure",
+    "amenity": "bar",
+    "check_date": "2024-03-12",
+    "name": "Le Cham's"
+  }
+},
+{
+  "type": "node",
+  "id": 2456531053,
+  "lat": 44.9331372,
+  "lon": 4.8928089,
+  "tags": {
+    "amenity": "cafe",
+    "contact:city": "Valence",
+    "contact:housenumber": "23",
+    "contact:postcode": "26000",
+    "contact:street": "Rue Madier de Montjau",
+    "indoor_seating": "yes",
+    "name": "Le Doff'inné",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2456531054,
+  "lat": 44.9316885,
+  "lon": 4.8900239,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2025-05-27",
+    "contact:city": "Valence",
+    "contact:housenumber": "6",
+    "contact:postcode": "26000",
+    "contact:street": "Place des Clercs",
+    "cuisine": "pizza",
+    "name": "Le marché"
+  }
+},
+{
+  "type": "node",
+  "id": 2466650216,
+  "lat": 44.7520551,
+  "lon": 5.3732525,
+  "tags": {
+    "amenity": "pub",
+    "cuisine": "french",
+    "internet_access": "wlan",
+    "name": "Meyro's Irish Pub",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 2503577815,
+  "lat": 44.9335190,
+  "lon": 4.8909136,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Grande Rue",
+    "amenity": "bar",
+    "check_date": "2024-03-16",
+    "name": "La Bastille"
+  }
+},
+{
+  "type": "node",
+  "id": 2857563290,
+  "lat": 44.7531931,
+  "lon": 5.3701546,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Bar du Marché",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 2885051375,
+  "lat": 44.9383934,
+  "lon": 4.8884305,
+  "tags": {
+    "amenity": "bar",
+    "name": "Vacarme Exquis | VEX",
+    "opening_hours": "We-Fr 12:00-14:00, We 17:00-23:00,17:00-01:00, Fr,Sa 17:00-02:00",
+    "website": "http://www.vacarmeexquis.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 2916275568,
+  "lat": 44.9006046,
+  "lon": 5.0189670,
+  "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "Café de la Poste",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2968815785,
+  "lat": 44.9333795,
+  "lon": 4.9039985,
+  "tags": {
+    "amenity": "bar",
+    "contact:housenumber": "5",
+    "contact:street": "Place Latour-Maubourg",
+    "name": "Le Partiel - Café étudiant",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 2977383212,
+  "lat": 44.9307809,
+  "lon": 4.8939465,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Boulevard Bancel",
+    "amenity": "bar",
+    "check_date": "2024-03-16",
+    "internet_access": "wlan",
+    "name": "Le Grand Café",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 56 56 96"
+  }
+},
+{
+  "type": "node",
+  "id": 3143491368,
+  "lat": 44.9222145,
+  "lon": 4.8929228,
+  "tags": {
+    "amenity": "bar"
+  }
+},
+{
+  "type": "node",
+  "id": 3214484558,
+  "lat": 45.0152963,
+  "lon": 4.9382984,
+  "tags": {
+    "amenity": "bar",
+    "name": "L'Estanco"
+  }
+},
+{
+  "type": "node",
+  "id": 3368757179,
+  "lat": 44.9338860,
+  "lon": 4.8906187,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Rue Gaston Rey",
+    "air_conditioning": "no",
+    "amenity": "cafe",
+    "brewery": "Grihète;Pleine Lune",
+    "contact:city": "Valence",
+    "contact:housenumber": "8",
+    "contact:postcode": "26000",
+    "contact:street": "Rue Gaston Rey",
+    "description": "Café associatif",
+    "diet:halal": "no",
+    "diet:kosher": "no",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "freebox_causetoujours",
+    "level": "0",
+    "name": "Le Cause Toujours",
+    "opening_hours": "Tu 11:00-15:00,17:00-22:00; We 11:00-18:00; Th-Fr 11:00-15:00,17:00-22:00; Sa 11:00-22:00",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "no",
+    "payment:debit_cards": "yes",
+    "phone": "+33 9 73 11 85 75",
+    "smoking": "outside",
+    "start_date": "2015-04-25",
+    "website": "https://lecausetoujours.fr/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3665830166,
+  "lat": 44.6526204,
+  "lon": 5.4131505,
+  "tags": {
+    "amenity": "bar",
+    "name": "Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 3732004389,
+  "lat": 44.5923993,
+  "lon": 4.9512265,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Le Tim's Kfé"
+  }
+},
+{
+  "type": "node",
+  "id": 3777673658,
+  "lat": 45.0140731,
+  "lon": 5.2912099,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Kiosque",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3797453408,
+  "lat": 45.0033871,
+  "lon": 4.8716754,
+  "tags": {
+    "amenity": "cafe",
+    "description": "Bar - Déjeuner - Sandwichs",
+    "name": "Café \"Casse-Croûte\"",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 3797458718,
+  "lat": 45.0152070,
+  "lon": 4.9390761,
+  "tags": {
+    "amenity": "bar"
+  }
+},
+{
+  "type": "node",
+  "id": 3803960985,
+  "lat": 44.9273195,
+  "lon": 4.8923643,
+  "tags": {
+    "amenity": "cafe",
+    "cuisine": "french",
+    "name": "La Petite Vitesse",
+    "survey:date": "2024-03-28"
+  }
+},
+{
+  "type": "node",
+  "id": 4217926046,
+  "lat": 44.7284254,
+  "lon": 5.0231953,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Rue de la République",
+    "amenity": "cafe",
+    "internet_access": "wlan",
+    "name": "L'Hydre",
+    "opening_hours": "Tu,Sa 10:00-15:00, Sa 18:00-22:00; We,Su 14:00-18:00; Fr 08:30-22:00",
+    "website": "https://hydre.casa/"
+  }
+},
+{
+  "type": "node",
+  "id": 4285821901,
+  "lat": 44.9279373,
+  "lon": 4.8906999,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Rue Chevandier",
+    "amenity": "cafe",
+    "check_date": "2025-05-27",
+    "name": "L'Ambassade",
+    "opening_hours": "Tu-Fr 11:00-19:00; Su[3] 11:00-16:00",
+    "phone": "+33 4 82 39 11 04",
+    "smoking": "no",
+    "website": "http://lambassa.de/",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 4286666956,
+  "lat": 44.9291101,
+  "lon": 4.8903315,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:street": "Avenue Victor Hugo",
+    "amenity": "cafe",
+    "check_date": "2025-08-28",
+    "cuisine": "french",
+    "indoor_seating": "yes",
+    "name": "Le Victor Hugo",
+    "opening_hours": "Mo-Su 06:30-23:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 40 18 11",
+    "smoking": "outside",
+    "website": "https://www.cafe-victor-hugo-valence.fr/contact"
+  }
+},
+{
+  "type": "node",
+  "id": 4288342322,
+  "lat": 44.9318402,
+  "lon": 4.8901427,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Place des Clercs",
+    "amenity": "cafe",
+    "check_date": "2024-08-04",
+    "indoor_seating": "yes",
+    "name": "Le Derby",
+    "opening_hours": "Mo-Sa",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 43 30 43",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 4289331981,
+  "lat": 44.9315889,
+  "lon": 4.8907606,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Place de l'Université",
+    "amenity": "bar",
+    "check_date": "2025-05-26",
+    "name": "Le Crystal Bar",
+    "opening_hours": "Mo-Sa 08:00-22:00",
+    "phone": "+33 4 75 43 08 12",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 4289338632,
+  "lat": 44.9306152,
+  "lon": 4.8896945,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Avenue Léon Gambetta",
+    "amenity": "bar",
+    "brewery": "Guinness",
+    "check_date": "2025-05-27",
+    "indoor_seating": "yes",
+    "name": "Penny Kenny's Irish Pub",
+    "outdoor_seating": "yes",
+    "phone": "+33 6 63 21 70 96",
+    "smoking": "outside",
+    "website": "https://fr-fr.facebook.com/pages/Penny-Kennys-Irish-Pub/221228901305501"
+  }
+},
+{
+  "type": "node",
+  "id": 4289432691,
+  "lat": 44.9320515,
+  "lon": 4.8957163,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Avenue Félix Faure",
+    "amenity": "bar",
+    "description": "Bar à cocktails, large choix de bière et de whisky.",
+    "indoor_seating": "yes",
+    "name": "Ginger Man Café",
+    "opening_hours": "Mo-Sa 08:00-02:00;Su 09:00-02:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 43 01 14",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 4294525610,
+  "lat": 44.9306949,
+  "lon": 4.8905618,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Place de la République",
+    "amenity": "cafe",
+    "cuisine": "french",
+    "description": "Café et lieu culturel (soirées à thèmes, expositions, DJ).",
+    "diet:vegetarian": "yes",
+    "name": "Café du Louvre",
+    "note:opening_hours": "Du mardi au samedi de 9h à 02h, le dimanche de 9h à 21h.",
+    "opening_hours": "Tu-Sa 09:00-24:00; Su 09:00-21:00",
+    "phone": "+33 4 75 44 21 62",
+    "smoking": "outside",
+    "website": "https://fr-fr.facebook.com/cafedulouvre"
+  }
+},
+{
+  "type": "node",
+  "id": 4363707020,
+  "lat": 44.9189400,
+  "lon": 4.8787245,
+  "tags": {
+    "amenity": "pub",
+    "name": "L’Eperviere",
+    "opening_hours": "Mo-Su 06:30-24:00",
+    "operator": "Accor"
+  }
+},
+{
+  "type": "node",
+  "id": 4366792367,
+  "lat": 44.9277387,
+  "lon": 4.8964530,
+  "tags": {
+    "amenity": "bar",
+    "check_date:opening_hours": "2024-05-09",
+    "name": "Bar du Carrefour",
+    "opening_hours:signed": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4366803703,
+  "lat": 44.9293866,
+  "lon": 4.8959100,
+  "tags": {
+    "amenity": "bar",
+    "name": "Bar alpin"
+  }
+},
+{
+  "type": "node",
+  "id": 4367353305,
+  "lat": 44.9245780,
+  "lon": 4.8944712,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Bienvenue"
+  }
+},
+{
+  "type": "node",
+  "id": 4400501089,
+  "lat": 44.7277190,
+  "lon": 5.0211956,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Quai Maurice Faure",
+    "amenity": "cafe",
+    "contact:phone": "+33 9 54 90 14 40",
+    "cuisine": "french",
+    "internet_access": "no",
+    "name": "Sur les Quais",
+    "opening_hours": "Mo-Sa 09:00-21:30; Su 10:00-21:30",
+    "ref:FR:SIRET": "53019536100023",
+    "website": "https://reservation.laddition.com/booking/surlesquais#/date"
+  }
+},
+{
+  "type": "node",
+  "id": 4444321592,
+  "lat": 44.8604385,
+  "lon": 4.9424919,
+  "tags": {
+    "addr:housenumber": "9",
+    "amenity": "bar",
+    "name": "Café du commerce",
+    "source": "Survey;Cadastre"
+  }
+},
+{
+  "type": "node",
+  "id": 4523333054,
+  "lat": 44.8754484,
+  "lon": 4.8768353,
+  "tags": {
+    "amenity": "bar",
+    "check_date:opening_hours": "2024-08-20",
+    "name": "Lo ri po mi",
+    "opening_hours:signed": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4665592829,
+  "lat": 44.9147282,
+  "lon": 4.9136820,
+  "tags": {
+    "addr:housenumber": "79",
+    "addr:street": "Rue Barthélemy de Laffemas",
+    "amenity": "pub",
+    "brewery": "yes;various",
+    "email": "pascale.rubio@gmail.com",
+    "name": "The Place 2 Beer",
+    "opening_hours": "Mo 15:00-21:00; Tu 11:30-23:00; We 11:30-23:00; Th 11:30-01:00; Fr 11:30-01:00; Sa 16:00-24:00",
+    "phone": "+33 4 75 59 63 90",
+    "smoking": "outside",
+    "source": "local knowledge",
+    "website": "https://www.theplace2beer-cave.com"
+  }
+},
+{
+  "type": "node",
+  "id": 4795471831,
+  "lat": 44.9720417,
+  "lon": 4.9568624,
+  "tags": {
+    "amenity": "bar",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 4795471832,
+  "lat": 44.9721226,
+  "lon": 4.9569915,
+  "tags": {
+    "amenity": "bar",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 4858155275,
+  "lat": 44.7528948,
+  "lon": 5.3724269,
+  "tags": {
+    "amenity": "bar",
+    "name": "Chez Annie",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4859582844,
+  "lat": 44.9474876,
+  "lon": 4.8978491,
+  "tags": {
+    "amenity": "bar",
+    "name": "Bar PMU Le Cyrano",
+    "outdoor_seating": "yes",
+    "smoking": "no",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 4859583575,
+  "lat": 44.9391329,
+  "lon": 4.8931359,
+  "tags": {
+    "amenity": "bar",
+    "name": "Bar PMU",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 4863574768,
+  "lat": 44.9331561,
+  "lon": 4.8915283,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Rue du Dauphiné",
+    "air_conditioning": "yes",
+    "amenity": "cafe",
+    "check_date": "2025-05-27",
+    "cuisine": "coffee_shop;salad",
+    "internet_access": "wlan",
+    "name": "Tamper & Yummy",
+    "opening_hours": "Tu-Fr 08:30-18:00; Sa 09:00-18:00",
+    "outdoor_seating": "yes",
+    "phone": "+33980482537",
+    "ref:FR:SIRET": "88048886100019",
+    "ref:vatin": "FR37880488861",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+    "website": "https://www.tamper-and-yummy.fr/",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 4863584721,
+  "lat": 44.9125585,
+  "lon": 4.8846058,
+  "tags": {
+    "amenity": "bar",
+    "name": "Bar Tabac",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 4863589994,
+  "lat": 44.9333053,
+  "lon": 4.8924606,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "17",
+    "addr:postcode": "26000",
+    "addr:street": "Rue Madier de Montjau",
+    "amenity": "cafe",
+    "brand:website": "https://emiliescookies.com/",
+    "contact:website": "https://emiliescookies.com/",
+    "cuisine": "dessert;coffee_shop;cake",
+    "email": "valence@emilieandthecoolkids.com",
+    "indoor_seating": "yes",
+    "name": "Émilie and the Cool Kids",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 44 17 01",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2013;local knowledge;survey",
+    "survey:date": "2024-02-25"
+  }
+},
+{
+  "type": "node",
+  "id": 4863594836,
+  "lat": 44.9453849,
+  "lon": 4.9120394,
+  "tags": {
+    "amenity": "bar",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 5201471226,
+  "lat": 45.0179219,
+  "lon": 5.2927480,
+  "tags": {
+    "amenity": "bar",
+    "check_date": "2024-02-28",
+    "name": "Le Bistrot - Le Saint-Jean"
+  }
+},
+{
+  "type": "node",
+  "id": 5201471227,
+  "lat": 45.0180801,
+  "lon": 5.2927392,
+  "tags": {
+    "amenity": "bar",
+    "name": "Chez Gilles"
+  }
+},
+{
+  "type": "node",
+  "id": 5201471228,
+  "lat": 45.0187023,
+  "lon": 5.2929135,
+  "tags": {
+    "amenity": "bar",
+    "check_date": "2024-02-28",
+    "name": "Le People (Music-Bar)"
+  }
+},
+{
+  "type": "node",
+  "id": 5201471230,
+  "lat": 45.0167409,
+  "lon": 5.2920816,
+  "tags": {
+    "amenity": "bar",
+    "internet_access": "wlan",
+    "name": "Café de la mairie"
+  }
+},
+{
+  "type": "node",
+  "id": 5229106947,
+  "lat": 44.8993867,
+  "lon": 5.0190781,
+  "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "Café du Commerce",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5449186289,
+  "lat": 44.7289196,
+  "lon": 5.0253080,
+  "tags": {
+    "amenity": "cafe",
+    "internet_access": "wlan",
+    "name": "Archijeux",
+    "opening_hours": "Tu,Th-Sa 20:00-24:00, Tu 10:00-12:00, We 10:00-18:00, Sa 10:00-13:00",
+    "phone": "+33 4 75 84 65 09",
+    "website": "https://archijeux.org/"
+  }
+},
+{
+  "type": "node",
+  "id": 5470083995,
+  "lat": 44.7619215,
+  "lon": 4.9193510,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Dauphinois"
+  }
+},
+{
+  "type": "node",
+  "id": 5723570511,
+  "lat": 44.9209587,
+  "lon": 4.8861428,
+  "tags": {
+    "amenity": "bar",
+    "name": "Estaminet"
+  }
+},
+{
+  "type": "node",
+  "id": 5725767016,
+  "lat": 44.9176921,
+  "lon": 4.9004594,
+  "tags": {
+    "addr:postcode": "26000",
+    "amenity": "cafe",
+    "name": "Biscuithé",
+    "opening_hours": "Mo-Sa 10:00-19:00",
+    "phone": "+33475834502",
+    "website": "https://biscuithe.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 5809295302,
+  "lat": 44.9283985,
+  "lon": 4.8929420,
+  "tags": {
+    "addr:housenumber": "27",
+    "addr:street": "Rue Denis Papin",
+    "amenity": "pub",
+    "brewery": "Guinness;various",
+    "check_date": "2025-05-26",
+    "cuisine": "french",
+    "indoor_seating": "yes",
+    "name": "Le Malvern",
+    "opening_hours": "Mo-We 08:30-00:00; Th-Fr 08:30-01:00; Sa 09:00-01:00; Su 09:00-00:00",
+    "outdoor_seating": "yes",
+    "smoking": "outside",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 5828022457,
+  "lat": 44.7999641,
+  "lon": 4.9387059,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Place de la Poste",
+    "amenity": "bar",
+    "name": "La Cave de Marie",
+    "phone": "+33 4 75 80 43 51",
+    "shop": "convenience"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077688,
+  "lat": 44.9683607,
+  "lon": 5.4154063,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Avenue des Acacias",
+    "amenity": "cafe",
+    "brewery": "various",
+    "check_date:opening_hours": "2025-02-07",
+    "cuisine": "regional",
+    "name": "Le Café des Loisirs",
+    "opening_hours": "Mo,Tu,Th-Sa 09:00-13:00, Fr,Sa 15:00-18:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 977759762",
+    "takeaway": "yes",
+    "website": "https://lecafedesloisirs.fr/",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077690,
+  "lat": 44.9675113,
+  "lon": 5.4151228,
+  "tags": {
+    "amenity": "bar",
+    "name": "Côté terrasse",
+    "opening_hours": "May-Sep: Mo-Su,PH 07:00-22:00",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5923671577,
+  "lat": 45.0215436,
+  "lon": 5.4426997,
+  "tags": {
+    "amenity": "bar",
+    "name": "L'Ancolie",
+    "shop": "tobacco"
+  }
+},
+{
+  "type": "node",
+  "id": 6007270573,
+  "lat": 44.9281037,
+  "lon": 4.8925143,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2025-05-27",
+    "cuisine": "sandwich;salad",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "name": "Alix Cofee",
+    "opening_hours": "Tu-Fr 07:30-18:30; Sa 09:00-18:30",
+    "outdoor_seating": "yes",
+    "phone": "+33634873969",
+    "source": "survey",
+    "website": "https://www.instagram.com/alixcoffee/"
+  }
+},
+{
+  "type": "node",
+  "id": 6125547805,
+  "lat": 45.0427459,
+  "lon": 5.0494779,
+  "tags": {
+    "amenity": "cafe",
+    "diet:vegetarian": "yes",
+    "name": "Aux galets de l'Isère"
+  }
+},
+{
+  "type": "node",
+  "id": 6416242085,
+  "lat": 44.6895040,
+  "lon": 5.4337413,
+  "tags": {
+    "amenity": "cafe",
+    "name": "café des voyageurs"
+  }
+},
+{
+  "type": "node",
+  "id": 6416768874,
+  "lat": 44.8524563,
+  "lon": 4.8707521,
+  "tags": {
+    "addr:place": "ZA des Basseaux",
+    "amenity": "bar",
+    "brewery": "yes",
+    "indoor_seating": "yes",
+    "name": "My Beers",
+    "opening_hours": "Mo 16:00-21:00; Tu 11:00-21:00; We 11:00-21:00; Th 11:00-23:00; Fr 11:00-23:30; Sa 11:00-23:30; Su 16:00-21:00",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+339 67 89 95 19",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6418882874,
+  "lat": 44.9294369,
+  "lon": 4.9081955,
+  "tags": {
+    "amenity": "bar",
+    "check_date:opening_hours": "2023-09-04",
+    "indoor_seating": "no",
+    "name": "Le Montplaisir",
+    "opening_hours:signed": "no",
+    "outdoor_seating": "no",
+    "smoking": "no",
+    "takeaway": "only",
+    "tobacco": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6418904389,
+  "lat": 44.9304664,
+  "lon": 4.9044944,
+  "tags": {
+    "amenity": "bar",
+    "name": "L'Alambic"
+  }
+},
+{
+  "type": "node",
+  "id": 6476527497,
+  "lat": 44.9307199,
+  "lon": 4.8927335,
+  "tags": {
+    "amenity": "bar",
+    "check_date": "2024-03-16",
+    "name": "Café Bancel"
+  }
+},
+{
+  "type": "node",
+  "id": 6512197235,
+  "lat": 44.8533874,
+  "lon": 4.9334030,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Flore"
+  }
+},
+{
+  "type": "node",
+  "id": 6531937038,
+  "lat": 45.0460079,
+  "lon": 5.0543449,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Place Jean Jaurès",
+    "amenity": "bar",
+    "name": "Café de L'alhambra",
+    "outdoor_seating": "sidewalk",
+    "phone": "+33 4 75 05 05 59"
+  }
+},
+{
+  "type": "node",
+  "id": 6708539411,
+  "lat": 44.8961681,
+  "lon": 5.3708075,
+  "tags": {
+    "amenity": "bar",
+    "name": "Perce-Neige"
+  }
+},
+{
+  "type": "node",
+  "id": 6810791189,
+  "lat": 44.9341073,
+  "lon": 4.8912876,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Place Saint-Jean",
+    "amenity": "bar",
+    "check_date": "2024-03-16",
+    "description": "Bar à salades",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Alegria",
+    "opening_hours": "Mo-Fr 11:30-14:30; Th-Sa 19:00-22:00; Sa, Su 10:30-15:00",
+    "phone": "+33 4 69 30 63 25",
+    "website": "https://www.greenbox-valence.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6813658248,
+  "lat": 44.7302603,
+  "lon": 5.0185492,
+  "tags": {
+    "amenity": "cafe",
+    "description": "Café, repas le midi, dépôt-vente arts et déco",
+    "name": "Le Bon Temps",
+    "opening_hours": "Fr 09:00-15:00, 18:00-22:00; Sa 10:00-16:00",
+    "organic": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6827921859,
+  "lat": 44.8333369,
+  "lon": 4.9744557,
+  "tags": {
+    "amenity": "bar",
+    "name": "Café du Centre"
+  }
+},
+{
+  "type": "node",
+  "id": 6857731863,
+  "lat": 44.9423641,
+  "lon": 4.8945541,
+  "tags": {
+    "amenity": "bar",
+    "name": "La Casa Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 7096158364,
+  "lat": 44.8335614,
+  "lon": 4.9744490,
+  "tags": {
+    "amenity": "cafe",
+    "gambling": "PMU",
+    "name": "Le Cesar"
+  }
+},
+{
+  "type": "node",
+  "id": 7192027819,
+  "lat": 44.9416350,
+  "lon": 4.8992350,
+  "tags": {
+    "addr:housenumber": "34",
+    "addr:street": "Rue de Chony",
+    "amenity": "cafe",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "L’Art des Choix de Chony",
+    "phone": "+33 6 37 54 02 79",
+    "website": "https://artdeschoixchony.wixsite.com/art-des-choix"
+  }
+},
+{
+  "type": "node",
+  "id": 7208857104,
+  "lat": 45.0456933,
+  "lon": 5.0590434,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "Columbus Café & Co",
+    "brand:wikidata": "Q2984582",
+    "cuisine": "coffee_shop",
+    "name": "Columbus Café & Co",
+    "opening_hours": "Mo-Sa 10:00-19:00",
+    "phone": "+33 4 75 05 10 86",
+    "takeaway": "yes",
+    "website": "https://www.columbuscafe.com/boutique/romans-sur-isere-centre-commercial-marque-avenue/"
+  }
+},
+{
+  "type": "node",
+  "id": 7687016552,
+  "lat": 44.7533080,
+  "lon": 5.3730852,
+  "tags": {
+    "amenity": "bar",
+    "name": "Café des Dauphins"
+  }
+},
+{
+  "type": "node",
+  "id": 7865533433,
+  "lat": 44.8381391,
+  "lon": 4.8922450,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Place de la République",
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "Le piano zebre",
+    "opening_hours": "Tu-Sa 09:00-15:00; Su,Mo,PH off, Fr 18:00-23:00",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "toilets": "yes",
+    "toilets:wheelchair": "limited",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 8146547090,
+  "lat": 44.8846010,
+  "lon": 4.8793574,
+  "tags": {
+    "amenity": "bar",
+    "contact:city": "Portes-lès-Valence",
+    "contact:housenumber": "991",
+    "contact:phone": "+33 6 09 67 70 69",
+    "contact:postcode": "26800",
+    "contact:street": "B Avenue Du Président Salvador Allende",
+    "name": "Capsules Et Bouchons"
+  }
+},
+{
+  "type": "node",
+  "id": 8231762318,
+  "lat": 45.0063494,
+  "lon": 5.0909964,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Café de la Mairie",
+    "survey:date": "2020-12-14"
+  }
+},
+{
+  "type": "node",
+  "id": 8345264650,
+  "lat": 44.9312023,
+  "lon": 4.8869261,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Avenue Léon Gambetta",
+    "amenity": "bar",
+    "name": "Le Parc",
+    "shop": "tobacco"
+  }
+},
+{
+  "type": "node",
+  "id": 8458990195,
+  "lat": 44.7538155,
+  "lon": 5.3719765,
+  "tags": {
+    "addr:housenumber": "81",
+    "addr:postcode": "26150",
+    "addr:street": "Rue Camille Buffardel",
+    "amenity": "cafe",
+    "cuisine": "local",
+    "name": "Baraquilles",
+    "opening_hours": "Tu-Sa 18:00-24:00",
+    "tobacco": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8549849817,
+  "lat": 45.0446151,
+  "lon": 5.0491216,
+  "tags": {
+    "amenity": "bar",
+    "name": "Café de Romans",
+    "survey:date": "2021-03-22"
+  }
+},
+{
+  "type": "node",
+  "id": 8589924032,
+  "lat": 44.9474473,
+  "lon": 4.8886208,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Rue Jean Bart",
+    "amenity": "bar",
+    "name": "Bar Tabac L'Estaminet"
+  }
+},
+{
+  "type": "node",
+  "id": 9090677793,
+  "lat": 44.7895892,
+  "lon": 5.1951286,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Place de la Fontaine aux Crapauds",
+    "amenity": "cafe",
+    "contact:facebook": "https://m.facebook.com/Eygluy/",
+    "delivery": "no",
+    "description": "\"Eté comme hiver, vous êtes les bienvenus chaque jour de l’année. Notre buvette, c’est tout d’abord une association pour la vie de notre village, contribuer a l’embellir, le faire grandir, et vous faire partager notre vie au plus près de la nature.\"",
+    "name": "La Clandestine",
+    "opening_hours": "09:30-20:30",
+    "outdoor_seating": "yes",
+    "source": "survey 2021",
+    "website": "https://laclandestineeygluy.wordpress.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 9280893771,
+  "lat": 44.7287997,
+  "lon": 5.0245356,
+  "tags": {
+    "addr:housenumber": "33",
+    "addr:street": "Rue de la République",
+    "amenity": "bar",
+    "name": "Lagardère",
+    "opening_hours": "Tu-Sa 16:00-24:00, Sa 08:30-13:30, Su 16:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 9530421415,
+  "lat": 44.9328601,
+  "lon": 4.9027859,
+  "tags": {
+    "amenity": "bar",
+    "contact:street": "Place Latour-Maubourg",
+    "description": "Bar à tapas",
+    "microbrewery": "yes",
+    "name": "Barrio Latino",
+    "smoking": "outside",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9754838185,
+  "lat": 44.8951632,
+  "lon": 4.8857758,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:street": "Allée Eugène Ducretet",
+    "amenity": "bar",
+    "name": "Les Zythonautes",
+    "opening_hours": "We 16:00-20:00; Th 16:00-22:00; Fr 16:00-24:00; Sa 18:00-24:00"
+  }
+},
+{
+  "type": "node",
+  "id": 9859998025,
+  "lat": 44.6025947,
+  "lon": 5.0116633,
+  "tags": {
+    "amenity": "bar",
+    "name": "La Cantine",
+    "shop": "newsagent",
+    "tobacco": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10024624533,
+  "lat": 44.9323069,
+  "lon": 4.8961921,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Champagne"
+  }
+},
+{
+  "type": "node",
+  "id": 10678081012,
+  "lat": 44.8957710,
+  "lon": 5.3673685,
+  "tags": {
+    "amenity": "cafe",
+    "email": "gitelesespelines@hotmail.com",
+    "name": "Les Espelines",
+    "opening_hours": "We,Su 14:00-19:00; Fr 17:00-21:00; Sa 14:00-21:00",
+    "phone": "+33 6 40 67 72 04",
+    "shop": "wine",
+    "website": "https://www.espelines.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10757478173,
+  "lat": 44.7280149,
+  "lon": 5.0215631,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:postcode": "26400",
+    "addr:street": "Place Général Digonnet",
+    "amenity": "bar",
+    "brewery": "no",
+    "check_date": "2024-10-23",
+    "contact:facebook": "100082907285445",
+    "internet_access": "wlan",
+    "name": "Au Tribouli",
+    "opening_hours": "Mo-Sa 07:00-00:00; Su 07:00-13:00",
+    "outdoor_seating": "yes",
+    "website": "https://autribouli.wordpress.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 10876273246,
+  "lat": 44.9298762,
+  "lon": 4.8978938,
+  "tags": {
+    "amenity": "bar",
+    "name": "La réserve",
+    "opening_hours": "We,Th 17:00-01:00, Fr,Sa 18:00-02:00"
+  }
+},
+{
+  "type": "node",
+  "id": 10882937730,
+  "lat": 44.9334656,
+  "lon": 4.8948943,
+  "tags": {
+    "amenity": "bar",
+    "leisure": "amusement_arcade",
+    "name": "Pixel pub"
+  }
+},
+{
+  "type": "node",
+  "id": 10931774205,
+  "lat": 44.9409832,
+  "lon": 4.8594278,
+  "tags": {
+    "amenity": "bar",
+    "name": "Barr Avel"
+  }
+},
+{
+  "type": "node",
+  "id": 11225502197,
+  "lat": 44.8709186,
+  "lon": 4.8757169,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Jean Jaurès",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11281298438,
+  "lat": 44.8997482,
+  "lon": 5.0191485,
+  "tags": {
+    "amenity": "cafe",
+    "indoor_seating": "yes",
+    "name": "Café les negociants",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11896789406,
+  "lat": 44.7642221,
+  "lon": 4.9157541,
+  "tags": {
+    "amenity": "bar",
+    "name": "Le Phare"
+  }
+},
+{
+  "type": "node",
+  "id": 12068021527,
+  "lat": 45.0281095,
+  "lon": 5.3266378,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Café Le Zola",
+    "opening_hours": "Mo-Su 07:30-12:00, Mo-Sa 15:00-19:00"
+  }
+},
+{
+  "type": "node",
+  "id": 12085027802,
+  "lat": 44.7283389,
+  "lon": 5.0229623,
+  "tags": {
+    "amenity": "cafe",
+    "contact:phone": "+33475856435",
+    "cuisine": "french",
+    "facebook": "https://www.facebook.com/people/Caf%C3%A9-de-Paris/100091509502730/",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Café de Paris",
+    "opening_hours": "Mo,Tu,Th,Fr 08:00-19:00; Sa 07:00-19:00; Su 09:00-16:00",
+    "outdoor_seating": "yes",
+    "ref:FR:SIRET": "92275305800028"
+  }
+},
+{
+  "type": "node",
+  "id": 12148116601,
+  "lat": 44.7273887,
+  "lon": 5.0228757,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "8",
+    "addr:postcode": "26400",
+    "addr:street": "Quai de Verdun",
+    "amenity": "bar",
+    "contact:facebook": "https://facebook.com/p/Le-Central-Vapeur-100093815120521",
+    "contact:instagram": "lecentralvapeur",
+    "cuisine": "tapas;french",
+    "description": "Bar à facettes & Cuisine du coin",
+    "internet_access": "wlan",
+    "name": "Le Central Vapeur",
+    "opening_hours": "Tu-We 10:00-23:00; Th-Sa 10:00-00:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 7 75 78 96 99",
+    "ref:FR:SIRET": "98540340100039",
+    "website": "https://lecentralvapeur.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 12471242181,
+  "lat": 45.0484514,
+  "lon": 5.0492660,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Café l'hôtel de la gare"
+  }
+},
+{
+  "type": "node",
+  "id": 12790503401,
+  "lat": 44.7320106,
+  "lon": 4.9249526,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Route de Crest",
+    "amenity": "cafe",
+    "contact:facebook": "https://www.facebook.com/people/Le-Beffroi-Tabac-Presse-%C3%A0-Grane/61556484238762/",
+    "contact:housenumber": "1",
+    "contact:street": "Route de Crest",
+    "name": "Café du Beffroi",
+    "phone": "+33 4 75 62 29 19"
+  }
+},
+{
+  "type": "node",
+  "id": 12937149289,
+  "lat": 44.8841443,
+  "lon": 4.8800018,
+  "tags": {
+    "amenity": "bar",
+    "name": "Fafa Tiki"
+  }
+},
+{
+  "type": "node",
+  "id": 13061511960,
+  "lat": 45.0434090,
+  "lon": 5.0502256,
+  "tags": {
+    "amenity": "cafe",
+    "contact:housenumber": "8",
+    "name": "Le PasSage",
+    "opening_hours": "Fr-Sa 19:00-23:00; Su 10:00-13:00",
+    "ref:FR:SIRET": "89431713000017",
+    "website": "https://cafelepassage.org"
+  }
+},
+{
+  "type": "node",
+  "id": 13061580430,
+  "lat": 45.0429775,
+  "lon": 5.0497367,
+  "tags": {
+    "amenity": "cafe",
+    "contact:phone": "+33475025826",
+    "name": "Au Petit Maxime",
+    "opening_hours": "Tu,We,Sa 09:00-15:00; Th,Fr 09:00-15:00,18:30-23:00; Su 08:00-16:00",
+    "outdoor_seating": "terrace",
+    "ref:FR:SIRET": "43297978900018"
+  }
+},
+{
+  "type": "node",
+  "id": 13328114769,
+  "lat": 44.6458381,
+  "lon": 5.0629409,
+  "tags": {
+    "amenity": "bar",
+    "check_date": "2025-11-27",
+    "name": "Au Poney Fringant",
+    "outdoor_seating": "yes",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 13328114771,
+  "lat": 44.6459952,
+  "lon": 5.0626029,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2025-11-24",
+    "cuisine": "cake;pastry",
+    "name": "Le Saint Thiers",
+    "opening_hours": "Th-Su 10:00-18:30",
+    "outdoor_seating": "yes",
+    "website": "https://lesaintthiers.com",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13516321638,
+  "lat": 44.9320410,
+  "lon": 4.8947577,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "27",
+    "addr:postcode": "26000",
+    "addr:street": "Boulevard Maurice Clerc",
+    "amenity": "bar",
+    "name": "Le Comptoir Général",
+    "opening_hours": "Tu-Sa 18:00-02:00",
+    "website": "https://www.lecomptoirgeneral.eu/"
+  }
+},
+{
+  "type": "node",
+  "id": 13638523292,
+  "lat": 44.9325677,
+  "lon": 4.8908876,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "36",
+    "addr:postcode": "26000",
+    "addr:street": "Grande Rue",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;crepe;brunch;dessert;tea;cake",
+    "delivery": "no",
+    "name": "Stella Café",
+    "opening_hours": "We-Sa 10:00-18:00; Su 10:00-12:30,15:30-17:45",
+    "phone": "+33475612643",
+    "takeaway": "yes",
+    "website": "https://www.facebook.com/Stella-caf%C3%A9-230145357467129/"
+  }
+},
+{
+  "type": "node",
+  "id": 13663489442,
+  "lat": 44.5870717,
+  "lon": 5.1341819,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Place Louis Chancel",
+    "amenity": "cafe",
+    "building": "yes",
+    "mobile": "+33 6 86 21 64 27",
+    "name": "Café de l'Univers",
+    "phone": "+33 4 75 53 34 70"
+  }
+},
+{
+  "type": "node",
+  "id": 13687467345,
+  "lat": 45.0484018,
+  "lon": 5.2949511,
+  "tags": {
+    "amenity": "cafe",
+    "cuisine": "tea;french",
+    "name": "Jaco'Pain",
+    "note": "Les horaires sont tirées du site et sont inprécises",
+    "opening_hours": "12:00-14:00 open \"Restauration le midi\", 14:00-18:00 open \"Salon de thé\"",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 47 59 82",
+    "source:opening_hours": "https://www.jacopain.fr/",
+    "website": "https://www.jacopain.fr/"
+  }
+}
+
+  ]
+}

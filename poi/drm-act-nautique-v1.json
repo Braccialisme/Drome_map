@@ -1,0 +1,147 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-02T16:51:45Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 2406978453,
+  "lat": 44.6935692,
+  "lon": 5.1877703,
+  "tags": {
+    "amenity": "boat_rental",
+    "name": "Canoë Drôme",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013",
+    "sport": "canoe"
+  }
+},
+{
+  "type": "node",
+  "id": 6594482782,
+  "lat": 44.9166768,
+  "lon": 4.8746547,
+  "tags": {
+    "addr:postcode": "26000",
+    "addr:street": "Chemin de l'Epervière",
+    "email": "michel.vidalenche@gmail.com",
+    "leisure": "sports_centre",
+    "name": "Canoe club Valentinois",
+    "phone": "+33 4 75 40 42 03",
+    "short_name": "CCV",
+    "sport": "canoe",
+    "website": "http://ccvalence.free.fr/wordpress/"
+  }
+},
+{
+  "type": "node",
+  "id": 8998964089,
+  "lat": 44.7164682,
+  "lon": 5.0429972,
+  "tags": {
+    "boat_rental": "canoe",
+    "name": "Canoë Drôme",
+    "sport": "canoe"
+  }
+},
+{
+  "type": "way",
+  "id": 273241534,
+  "center": {
+    "lat": 44.6589870,
+    "lon": 5.4076356
+  },
+  "nodes": [
+    2781158716,
+    2781158714,
+    7829353243,
+    2781158733,
+    2781158735,
+    2781158740,
+    7832521510,
+    7832521507,
+    7832521509,
+    7832521508,
+    7832521504,
+    7832521506,
+    7832521505,
+    7832521503,
+    7832521502,
+    7832521501,
+    7832521500,
+    7832521499,
+    7832521498,
+    2781158797,
+    7832521497,
+    7832521496,
+    2781158802,
+    7832521494,
+    7832521495,
+    2781158804,
+    7832521493,
+    2781158808,
+    2781158814,
+    7832521492,
+    7832521491,
+    7832521490,
+    7832521489,
+    2781158820,
+    2781158816,
+    2781158812,
+    2781158810,
+    2781158806,
+    2781158800,
+    2781158795,
+    2781158767,
+    7832521488,
+    7832521487,
+    2781158725,
+    2781158723,
+    2781158716
+  ],
+  "tags": {
+    "leisure": "water_park"
+  }
+},
+{
+  "type": "way",
+  "id": 593798561,
+  "center": {
+    "lat": 44.5961506,
+    "lon": 5.1118190
+  },
+  "nodes": [
+    5663865006,
+    5663865007,
+    5663865008,
+    12921642879,
+    12921642881,
+    12921642880,
+    5663865009,
+    5663865010,
+    5663865011,
+    5663865012,
+    5663865013,
+    5663865823,
+    5663865824,
+    5663865825,
+    5663865826,
+    5663865827,
+    5663865828,
+    5663865829,
+    5663865830,
+    5663865831,
+    5663865832,
+    5663865006
+  ],
+  "tags": {
+    "leisure": "water_park",
+    "sport": "swimming"
+  }
+}
+
+  ]
+}

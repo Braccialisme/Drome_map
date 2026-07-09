@@ -1,0 +1,7637 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.7 375dc00a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-09T19:19:13Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 26691972,
+  "lat": 44.9528222,
+  "lon": 4.8953847,
+  "tags": {
+    "addr:postcode": "26500",
+    "name": "Bourg-lès-Valence",
+    "name:oc": "Lo Borg de Valença",
+    "place": "town",
+    "population": "19581",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.bourg-les-valence.fr/",
+    "wikidata": "Q269430",
+    "wikipedia": "fr:Bourg-lès-Valence"
+  }
+},
+{
+  "type": "node",
+  "id": 26692008,
+  "lat": 45.0458886,
+  "lon": 5.0528681,
+  "tags": {
+    "addr:postcode": "26100",
+    "loc_name": "Romans",
+    "name": "Romans-sur-Isère",
+    "name:ca": "Romans d'Isèra",
+    "name:fr": "Romans-sur-Isère",
+    "name:hy": "Ռոման սյուր Իզեր",
+    "name:ja": "ロマン＝シュル＝イゼール",
+    "name:ko": "로망쉬르이제르",
+    "name:oc": "Romans d'Isèra",
+    "name:ru": "Роман-сюр-Изер",
+    "name:uk": "Роман-сюр-Ізер",
+    "name:zh": "伊泽尔河畔罗芒",
+    "place": "town",
+    "population": "32911",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602817",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q239078"
+  }
+},
+{
+  "type": "node",
+  "id": 26692598,
+  "lat": 44.9325450,
+  "lon": 4.8708275,
+  "tags": {
+    "addr:postcode": "07500",
+    "name": "Guilherand-Granges",
+    "name:oc": "Guilharand e Las Granjas",
+    "place": "town",
+    "population": "11203",
+    "population:date": "2021",
+    "ref:FR:SIREN": "210701025",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q274292",
+    "wikipedia": "fr:Guilherand-Granges"
+  }
+},
+{
+  "type": "node",
+  "id": 26694320,
+  "lat": 44.7282675,
+  "lon": 5.0236641,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Crest",
+    "name:ja": "クレ",
+    "name:oc": "Crest",
+    "place": "village",
+    "population": "8756",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.mairie-crest.fr/",
+    "wikidata": "Q327259",
+    "wikipedia": "fr:Crest (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 26694382,
+  "lat": 44.8753434,
+  "lon": 4.8774936,
+  "tags": {
+    "addr:postcode": "26800",
+    "name": "Portes-lès-Valence",
+    "name:fr": "Portes-lès-Valence",
+    "name:ja": "ポルト=レ=ヴァロンス",
+    "name:oc": "Pòrtas de Valença",
+    "name:uk": "Порт-ле-Валанс",
+    "name:zh": "波特莱瓦朗斯",
+    "place": "town",
+    "population": "10422",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q864138",
+    "wikipedia": "fr:Portes-lès-Valence"
+  }
+},
+{
+  "type": "node",
+  "id": 26694685,
+  "lat": 45.0043310,
+  "lon": 4.8714601,
+  "tags": {
+    "addr:postcode": "26600",
+    "name": "Pont-de-l'Isère",
+    "name:oc": "Lo Pònt d'Isèra",
+    "place": "village",
+    "population": "3648",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602502",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Pont-de-l'Isère"
+  }
+},
+{
+  "type": "node",
+  "id": 26695009,
+  "lat": 44.8326866,
+  "lon": 4.9772114,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Montmeyran",
+    "name:oc": "Montmairan",
+    "place": "village",
+    "population": "2960",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 26695324,
+  "lat": 45.0161452,
+  "lon": 5.2906770,
+  "tags": {
+    "addr:country": "FR",
+    "addr:postcode": "26190",
+    "name": "Saint-Jean-en-Royans",
+    "name:oc": "Sent Joan de Roians",
+    "place": "village",
+    "population": "2783",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603070",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.saint-jean-en-royans.fr/",
+    "wikidata": "Q524056",
+    "wikipedia": "fr:Saint-Jean-en-Royans"
+  }
+},
+{
+  "type": "node",
+  "id": 26695487,
+  "lat": 44.8624984,
+  "lon": 4.9420179,
+  "tags": {
+    "addr:postcode": "26760",
+    "name": "Beaumont-lès-Valence",
+    "name:oc": "Beumont de Valença",
+    "place": "village",
+    "population": "4201",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q863804",
+    "wikipedia": "fr:Beaumont-lès-Valence"
+  }
+},
+{
+  "type": "node",
+  "id": 26695764,
+  "lat": 44.8363656,
+  "lon": 4.8934402,
+  "tags": {
+    "addr:postcode": "26800",
+    "name": "Étoile-sur-Rhône",
+    "name:oc": "Estiala",
+    "place": "village",
+    "population": "5526",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601249",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q859997",
+    "wikipedia": "fr:Étoile-sur-Rhône"
+  }
+},
+{
+  "type": "node",
+  "id": 26696164,
+  "lat": 44.9711965,
+  "lon": 4.9542484,
+  "tags": {
+    "addr:postcode": "26320",
+    "name": "Saint-Marcel-lès-Valence",
+    "name:oc": "Sent Marcèl de Valença",
+    "place": "village",
+    "population": "6252",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 26696555,
+  "lat": 44.9006599,
+  "lon": 4.9591496,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Malissard",
+    "name:oc": "Maleissart",
+    "place": "village",
+    "population": "3271",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Malissard"
+  }
+},
+{
+  "type": "node",
+  "id": 26696765,
+  "lat": 44.9383292,
+  "lon": 5.0284008,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Montélier",
+    "name:oc": "Montelhes",
+    "place": "village",
+    "population": "4306",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 26697306,
+  "lat": 44.9003613,
+  "lon": 5.0187071,
+  "tags": {
+    "addr:country": "FR",
+    "addr:postcode": "26120",
+    "name": "Chabeuil",
+    "name:oc": "Chabuelh",
+    "place": "village",
+    "population": "6873",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Chabeuil"
+  }
+},
+{
+  "type": "node",
+  "id": 26697464,
+  "lat": 45.0061626,
+  "lon": 5.0899218,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Chatuzange-le-Goubet",
+    "name:oc": "Chatusange e Los Gobets",
+    "place": "village",
+    "population": "6227",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600886",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q381502",
+    "wikipedia": "fr:Chatuzange-le-Goubet"
+  }
+},
+{
+  "type": "node",
+  "id": 26697976,
+  "lat": 45.0148392,
+  "lon": 4.9391394,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Châteauneuf-sur-Isère",
+    "name:oc": "Chastèunòu d'Isèra",
+    "place": "village",
+    "population": "4038",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600845",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 26698404,
+  "lat": 45.0354375,
+  "lon": 5.0520015,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Bourg-de-Péage",
+    "name:oc": "Lo Peatge",
+    "place": "town",
+    "population": "9578",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600571",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.bourgdepeage.com/",
+    "wikidata": "Q240363",
+    "wikipedia": "fr:Bourg-de-Péage"
+  }
+},
+{
+  "type": "node",
+  "id": 33155867,
+  "lat": 44.5524955,
+  "lon": 5.1118133,
+  "tags": {
+    "addr:postcode": "26220",
+    "name": "Comps",
+    "name:oc": "Combs",
+    "place": "village",
+    "population": "137",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601017",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Comps (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 33155869,
+  "lat": 44.5537168,
+  "lon": 4.8638139,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "La Bâtie-Rolland",
+    "name:oc": "La Bastiá Rotland",
+    "place": "village",
+    "population": "1049",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600316",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:La Bâtie-Rolland"
+  }
+},
+{
+  "type": "node",
+  "id": 33155870,
+  "lat": 44.5545000,
+  "lon": 5.1717900,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Crupies",
+    "name:oc": "Crúpia",
+    "place": "village",
+    "population": "99",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601116",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155871,
+  "lat": 44.5648914,
+  "lon": 5.0112867,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "Eyzahut",
+    "name:oc": "Eisaüc",
+    "place": "village",
+    "population": "152",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601314",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155872,
+  "lat": 44.5662000,
+  "lon": 4.9664500,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "Salettes",
+    "name:oc": "Salèta",
+    "place": "village",
+    "population": "137",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603344",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155873,
+  "lat": 44.5690000,
+  "lon": 5.2761800,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Saint-Nazaire-le-Désert",
+    "name:oc": "Sant Nazari dau Desert",
+    "place": "village",
+    "population": "206",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603211",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155876,
+  "lat": 44.5712455,
+  "lon": 5.4041760,
+  "tags": {
+    "addr:postcode": "26310",
+    "name": "Jonchères",
+    "name:oc": "Junchèras",
+    "place": "village",
+    "population": "25",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601520",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Jonchères"
+  }
+},
+{
+  "type": "node",
+  "id": 33155877,
+  "lat": 44.5780000,
+  "lon": 5.0872764,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Truinas",
+    "name:oc": "Truinac",
+    "place": "village",
+    "population": "135",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603567",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155878,
+  "lat": 44.5801000,
+  "lon": 5.0313300,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "Rochebaudin",
+    "name:oc": "La Ròchabaudin",
+    "place": "village",
+    "population": "121",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602684",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155879,
+  "lat": 44.5834475,
+  "lon": 4.8910652,
+  "tags": {
+    "name": "Saint-Gervais-sur-Roubion",
+    "name:oc": "Sant Gervais de Robion",
+    "place": "village",
+    "population": "1084",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603054",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155881,
+  "lat": 44.5846512,
+  "lon": 5.0530911,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "Félines-sur-Rimandoule",
+    "name:oc": "Felines de Rimandola",
+    "place": "village",
+    "population": "85",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601348",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155882,
+  "lat": 44.5867879,
+  "lon": 5.1342966,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Bourdeaux",
+    "name:oc": "Bordèu",
+    "place": "village",
+    "population": "693",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600563",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q383079",
+    "wikipedia": "fr:Bourdeaux"
+  }
+},
+{
+  "type": "node",
+  "id": 33155883,
+  "lat": 44.5916000,
+  "lon": 4.9530500,
+  "tags": {
+    "name": "Charols",
+    "name:oc": "Charòus",
+    "place": "village",
+    "population": "948",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600787",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155886,
+  "lat": 44.5993510,
+  "lon": 5.4194632,
+  "tags": {
+    "addr:postcode": "26310",
+    "name": "Poyols",
+    "name:oc": "Poiòu",
+    "place": "village",
+    "population": "80",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602536",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Poyols"
+  }
+},
+{
+  "type": "node",
+  "id": 33155887,
+  "lat": 44.5991511,
+  "lon": 4.9833755,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "Manas",
+    "name:oc": "Manàs",
+    "place": "village",
+    "population": "183",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601710",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155888,
+  "lat": 44.6009000,
+  "lon": 5.0094100,
+  "tags": {
+    "addr:postcode": "26160",
+    "name": "Pont-de-Barret",
+    "name:oc": "Lo Pònt de Barret",
+    "place": "village",
+    "population": "662",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602494",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155889,
+  "lat": 44.6016000,
+  "lon": 5.1036700,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Le Poët-Célard",
+    "name:oc": "Lo Poet Selar",
+    "place": "village",
+    "population": "142",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602411",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Le Poët-Célard"
+  }
+},
+{
+  "type": "node",
+  "id": 33155893,
+  "lat": 44.6111199,
+  "lon": 4.9358296,
+  "tags": {
+    "name": "Cléon-d'Andran",
+    "name:oc": "Cleu d'Andrans",
+    "place": "village",
+    "population": "974",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600951",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155895,
+  "lat": 44.6196000,
+  "lon": 5.1246200,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Mornans",
+    "name:oc": "Mornanç",
+    "place": "village",
+    "population": "80",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602148",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Mornans"
+  }
+},
+{
+  "type": "node",
+  "id": 33155896,
+  "lat": 44.6238046,
+  "lon": 5.0858842,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Francillon-sur-Roubion",
+    "name:oc": "Francilhon",
+    "place": "village",
+    "population": "188",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601371",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q1015135",
+    "wikipedia": "fr:Francillon-sur-Roubion"
+  }
+},
+{
+  "type": "node",
+  "id": 33155897,
+  "lat": 44.6284279,
+  "lon": 4.9733306,
+  "tags": {
+    "addr:postcode": "26450",
+    "admin_level": "8",
+    "name": "Puy-Saint-Martin",
+    "name:oc": "Lo Pueg de Sant Martin",
+    "place": "village",
+    "population": "852",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602585",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.puysaintmartin.fr/",
+    "wikidata": "Q1075960",
+    "wikipedia": "fr:Puy-Saint-Martin"
+  }
+},
+{
+  "type": "node",
+  "id": 33155898,
+  "lat": 44.6289371,
+  "lon": 5.0218304,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Soyans",
+    "name:oc": "Soians",
+    "place": "village",
+    "population": "398",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603443",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155899,
+  "lat": 44.6328210,
+  "lon": 5.4291316,
+  "tags": {
+    "addr:postcode": "26310",
+    "name": "Montlaur-en-Diois",
+    "name:oc": "Montlaur de Diés",
+    "place": "village",
+    "population": "145",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602049",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q672159",
+    "wikipedia": "fr:Montlaur-en-Diois"
+  }
+},
+{
+  "type": "node",
+  "id": 33155901,
+  "lat": 44.6425000,
+  "lon": 4.9404200,
+  "tags": {
+    "addr:postcode": "26450",
+    "name": "Roynac",
+    "name:oc": "Roenac",
+    "place": "village",
+    "population": "481",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602874",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Roynac"
+  }
+},
+{
+  "type": "node",
+  "id": 33155902,
+  "lat": 44.6433772,
+  "lon": 4.8730928,
+  "tags": {
+    "addr:postcode": "26740",
+    "name": "Marsanne",
+    "name:oc": "Marsana",
+    "place": "village",
+    "population": "1276",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601769",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155903,
+  "lat": 44.6459054,
+  "lon": 5.0626491,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Saou",
+    "name:oc": "Saon",
+    "place": "village",
+    "population": "575",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603369",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q48901",
+    "wikipedia": "fr:Saou (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 33155906,
+  "lat": 44.6532854,
+  "lon": 5.4137102,
+  "tags": {
+    "addr:postcode": "26310",
+    "name": "Recoubeau",
+    "place": "village",
+    "population": "307",
+    "population:date": "2021",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Recoubeau-Jansac"
+  }
+},
+{
+  "type": "node",
+  "id": 33155907,
+  "lat": 44.6589000,
+  "lon": 4.9866500,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "La Répara-Auriples",
+    "name:oc": "La Reparaa e Auriple",
+    "place": "village",
+    "population": "250",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600209",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.larepara-auriples.fr/",
+    "wikidata": "Q678075",
+    "wikipedia": "fr:La Répara-Auriples"
+  }
+},
+{
+  "type": "node",
+  "id": 33155908,
+  "lat": 44.6599571,
+  "lon": 5.3706616,
+  "tags": {
+    "addr:postcode": "26310",
+    "name": "Barnave",
+    "name:oc": "Barnava",
+    "place": "village",
+    "population": "213",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600258",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q1009463",
+    "wikipedia": "fr:Barnave"
+  }
+},
+{
+  "type": "node",
+  "id": 33155913,
+  "lat": 44.6825148,
+  "lon": 4.9401246,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "alt_name": "La Roche-sur-Grâne",
+    "name": "La Roche-sur-Grane",
+    "name:oc": "La Ròcha de Grana",
+    "place": "village",
+    "population": "181",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602775",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q48887",
+    "wikipedia": "fr:La Roche-sur-Grane"
+  }
+},
+{
+  "type": "node",
+  "id": 33155914,
+  "lat": 44.6817613,
+  "lon": 4.9647501,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Autichamp",
+    "name:oc": "Autichamp",
+    "place": "village",
+    "population": "143",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600217",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q531872",
+    "wikipedia": "fr:Autichamp"
+  }
+},
+{
+  "type": "node",
+  "id": 33155915,
+  "lat": 44.6838000,
+  "lon": 5.2348738,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Espenel",
+    "name:oc": "Espenèl",
+    "place": "village",
+    "population": "185",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601223",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155917,
+  "lat": 44.6909372,
+  "lon": 5.4334873,
+  "tags": {
+    "addr:postcode": "26410",
+    "name": "Saint-Roman",
+    "name:oc": "Sant Roman",
+    "place": "village",
+    "population": "226",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603278",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q219553",
+    "wikipedia": "fr:Saint-Roman"
+  }
+},
+{
+  "type": "node",
+  "id": 33155919,
+  "lat": 44.6949567,
+  "lon": 5.2985800,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Aurel",
+    "name:oc": "Aurèl",
+    "place": "village",
+    "population": "253",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600191",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Aurel (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 33155922,
+  "lat": 44.7002809,
+  "lon": 5.0975290,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Piégros-la-Clastre",
+    "name:oc": "Pueigròs e la Clastra",
+    "place": "village",
+    "population": "889",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602346",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.mairie-piegroslaclastre.fr/",
+    "wikidata": "Q1009442",
+    "wikipedia": "fr:Piégros-la-Clastre",
+    "wikipedia:oc": "oc:Pueigròs e la Clastra"
+  }
+},
+{
+  "type": "node",
+  "id": 33155924,
+  "lat": 44.7036668,
+  "lon": 5.0162875,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Divajeu",
+    "name:oc": "Divájue",
+    "place": "village",
+    "population": "679",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601157",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q859879",
+    "wikipedia": "fr:Divajeu"
+  }
+},
+{
+  "type": "node",
+  "id": 33155925,
+  "lat": 44.7082454,
+  "lon": 5.4171121,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Aix-en-Diois",
+    "name:oc": "Ais de Diés",
+    "place": "village",
+    "population": "427",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600019",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q328210",
+    "wikipedia": "fr:Aix-en-Diois"
+  }
+},
+{
+  "type": "node",
+  "id": 33155926,
+  "lat": 44.7096000,
+  "lon": 5.0913800,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Mirabel-et-Blacons",
+    "name:oc": "Mirabèl e Blacons",
+    "place": "village",
+    "population": "1192",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601835",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Mirabel-et-Blacons"
+  }
+},
+{
+  "type": "node",
+  "id": 33155927,
+  "lat": 44.7102992,
+  "lon": 5.2540026,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Vercheny",
+    "name:oc": "Vercheini",
+    "place": "village",
+    "population": "455",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603682",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155928,
+  "lat": 44.7154707,
+  "lon": 5.0569017,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Aouste-sur-Sye",
+    "name:oc": "Aosta",
+    "place": "village",
+    "population": "2659",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600118",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q863614"
+  }
+},
+{
+  "type": "node",
+  "id": 33155930,
+  "lat": 44.7168000,
+  "lon": 5.4333200,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Laval-d'Aix",
+    "name:oc": "Lavau d'Ai",
+    "place": "village",
+    "population": "114",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601595",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Laval-d'Aix"
+  }
+},
+{
+  "type": "node",
+  "id": 33155931,
+  "lat": 44.7240000,
+  "lon": 4.9434400,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Chabrillan",
+    "name:oc": "Chabrelha",
+    "place": "village",
+    "population": "760",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600654",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155932,
+  "lat": 44.7253463,
+  "lon": 5.4000928,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Molières-Glandaz",
+    "name:oc": "Molèiras de Glandàs",
+    "place": "village",
+    "ref:FR:SIREN": "212601876",
+    "source:name:oc": "ieo-bdtopoc",
+    "wikidata": "Q1009339",
+    "wikipedia": "fr:Molières-Glandaz"
+  }
+},
+{
+  "type": "node",
+  "id": 33155933,
+  "lat": 44.7307245,
+  "lon": 5.2916892,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Barsac",
+    "name:oc": "Barçac",
+    "place": "village",
+    "population": "148",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600274",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Barsac (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 33155934,
+  "lat": 44.7317020,
+  "lon": 4.9250194,
+  "tags": {
+    "addr:postcode": "26400",
+    "admin_level": "8",
+    "name": "Grane",
+    "name:oc": "Grana",
+    "place": "village",
+    "population": "2068",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601447",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "http://www.grane.org/",
+    "wikidata": "Q1158310",
+    "wikipedia": "fr:Grane"
+  }
+},
+{
+  "type": "node",
+  "id": 33155936,
+  "lat": 44.7472495,
+  "lon": 5.1434767,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Montclar-sur-Gervanne",
+    "name:oc": "Montclar de Gervana",
+    "place": "village",
+    "population": "194",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601959",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155937,
+  "lat": 44.7506476,
+  "lon": 5.2640338,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Pontaix",
+    "name:oc": "Pontais",
+    "place": "village",
+    "population": "178",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602486",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Pontaix"
+  }
+},
+{
+  "type": "node",
+  "id": 33155938,
+  "lat": 44.7588510,
+  "lon": 4.9892054,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Eurre",
+    "name:oc": "Uèrre",
+    "place": "village",
+    "population": "1426",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601256",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q385700",
+    "wikipedia": "fr:Eurre"
+  }
+},
+{
+  "type": "node",
+  "id": 33155939,
+  "lat": 44.7596424,
+  "lon": 5.1127985,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Suze",
+    "name:oc": "Seusa",
+    "place": "village",
+    "population": "242",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603468",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155940,
+  "lat": 44.7604000,
+  "lon": 5.0760800,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Cobonne",
+    "name:oc": "Cobòna",
+    "place": "village",
+    "population": "170",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600985",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155941,
+  "lat": 44.7643000,
+  "lon": 4.9134500,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Allex",
+    "name:oc": "Alés",
+    "place": "village",
+    "population": "2567",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600068",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q863591",
+    "wikipedia": "fr:Allex"
+  }
+},
+{
+  "type": "node",
+  "id": 33155942,
+  "lat": 44.7686623,
+  "lon": 5.2828346,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Sainte-Croix",
+    "name:oc": "Santa Crotz",
+    "place": "village",
+    "population": "103",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602999",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155943,
+  "lat": 44.7682000,
+  "lon": 5.0336400,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Vaunaveys-la-Rochette",
+    "name:oc": "Vaunaveis e La Rochèta",
+    "place": "village",
+    "population": "597",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603658",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q1075904",
+    "wikipedia": "fr:Vaunaveys-la-Rochette"
+  }
+},
+{
+  "type": "node",
+  "id": 33155944,
+  "lat": 44.7772000,
+  "lon": 5.1420700,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Beaufort-sur-Gervanne",
+    "name:oc": "Beufòrt de Gervana",
+    "place": "village",
+    "population": "476",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600357",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q383127",
+    "wikipedia": "fr:Beaufort-sur-Gervanne"
+  }
+},
+{
+  "type": "node",
+  "id": 33155945,
+  "lat": 44.7789044,
+  "lon": 5.4085829,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Romeyer",
+    "name:oc": "Romeier",
+    "place": "village",
+    "population": "216",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602825",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Romeyer"
+  }
+},
+{
+  "type": "node",
+  "id": 33155946,
+  "lat": 44.7870000,
+  "lon": 5.3164800,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Ponet-et-Saint-Auban",
+    "name:oc": "Paonet e Sant Auban",
+    "place": "village",
+    "population": "138",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602460",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q657001",
+    "wikipedia": "fr:Ponet-et-Saint-Auban"
+  }
+},
+{
+  "type": "node",
+  "id": 33155947,
+  "lat": 44.7933000,
+  "lon": 5.1073600,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Gigors-et-Lozeron",
+    "name:oc": "Gigòrn e Lauseron",
+    "place": "village",
+    "population": "214",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601413",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q860045",
+    "wikipedia": "fr:Gigors-et-Lozeron"
+  }
+},
+{
+  "type": "node",
+  "id": 33155948,
+  "lat": 44.7947952,
+  "lon": 4.9077893,
+  "tags": {
+    "addr:postcode": "26800",
+    "name": "Ambonil",
+    "name:oc": "Ambonil",
+    "place": "village",
+    "population": "99",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600076",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155949,
+  "lat": 44.7959000,
+  "lon": 4.9429200,
+  "tags": {
+    "addr:postcode": "26800",
+    "name": "Montoison",
+    "name:oc": "Montaison",
+    "place": "village",
+    "population": "1948",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602080",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155950,
+  "lat": 44.7987000,
+  "lon": 5.3840100,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Chamaloc",
+    "name:fr": "Chamaloc",
+    "name:oc": "Chamalòsc",
+    "name:uk": "Шамалок",
+    "name:zh": "沙马洛克",
+    "place": "village",
+    "population": "124",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600696",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q776266",
+    "wikipedia": "fr:Chamaloc"
+  }
+},
+{
+  "type": "node",
+  "id": 33155951,
+  "lat": 44.8018000,
+  "lon": 5.3335800,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Marignac-en-Diois",
+    "name:oc": "Marinhac de Diés",
+    "place": "village",
+    "population": "225",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601751",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q763873",
+    "wikipedia": "fr:Marignac-en-Diois"
+  }
+},
+{
+  "type": "node",
+  "id": 33155952,
+  "lat": 44.8043371,
+  "lon": 4.9795087,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Upie",
+    "name:oc": "Úpia",
+    "place": "village",
+    "population": "1524",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155953,
+  "lat": 44.8043000,
+  "lon": 5.0459300,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Ourches",
+    "name:oc": "Orcha",
+    "place": "village",
+    "population": "282",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Ourches"
+  }
+},
+{
+  "type": "node",
+  "id": 33155954,
+  "lat": 44.8126115,
+  "lon": 5.1656783,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Plan-de-Baix",
+    "name:oc": "Lo Plan de Bais",
+    "place": "village",
+    "population": "159",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602403",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q1015068",
+    "wikipedia": "fr:Plan-de-Baix"
+  }
+},
+{
+  "type": "node",
+  "id": 33155955,
+  "lat": 44.8227000,
+  "lon": 5.0396600,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "La Baume-Cornillane",
+    "name:oc": "La Bauma Cornilhana",
+    "place": "village",
+    "population": "453",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:La Baume-Cornillane"
+  }
+},
+{
+  "type": "node",
+  "id": 33155956,
+  "lat": 44.8371000,
+  "lon": 5.2925000,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Saint-Julien-en-Quint",
+    "name:oc": "Sant Julian de Quint",
+    "place": "village",
+    "population": "155",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603088",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q949689",
+    "wikipedia": "fr:Saint-Julien-en-Quint"
+  }
+},
+{
+  "type": "node",
+  "id": 33155957,
+  "lat": 44.8534000,
+  "lon": 4.9329600,
+  "tags": {
+    "addr:postcode": "26760",
+    "name": "Montéléger",
+    "name:oc": "Montalagier",
+    "place": "village",
+    "population": "1707",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q1015093",
+    "wikipedia": "fr:Montéléger"
+  }
+},
+{
+  "type": "node",
+  "id": 33155958,
+  "lat": 44.8571562,
+  "lon": 4.9031348,
+  "tags": {
+    "addr:postcode": "26800",
+    "name": "Beauvallon",
+    "name:oc": "Beuvalon",
+    "place": "village",
+    "population": "1616",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600423",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q47012216",
+    "wikipedia": "fr:Beauvallon (Rhône)"
+  }
+},
+{
+  "type": "node",
+  "id": 33155959,
+  "lat": 44.8631080,
+  "lon": 5.2200831,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Omblèze",
+    "name:oc": "Omblèsas",
+    "place": "village",
+    "population": "65",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602213",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Omblèze"
+  }
+},
+{
+  "type": "node",
+  "id": 33155960,
+  "lat": 44.8687011,
+  "lon": 5.0508246,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Barcelonne",
+    "name:oc": "Barcilona",
+    "place": "village",
+    "population": "348",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Barcelonne"
+  }
+},
+{
+  "type": "node",
+  "id": 33155961,
+  "lat": 44.8724056,
+  "lon": 5.0227408,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Montvendre",
+    "name:oc": "Montvendre",
+    "place": "village",
+    "population": "1255",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Montvendre"
+  }
+},
+{
+  "type": "node",
+  "id": 33155962,
+  "lat": 44.8754043,
+  "lon": 5.0766768,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Combovin",
+    "name:oc": "Combauvin",
+    "place": "village",
+    "population": "465",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Combovin"
+  }
+},
+{
+  "type": "node",
+  "id": 33155963,
+  "lat": 44.8954252,
+  "lon": 5.3707565,
+  "tags": {
+    "addr:postcode": "26420",
+    "name": "Vassieux-en-Vercors",
+    "name:oc": "Vaciu",
+    "place": "village",
+    "population": "334",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603641",
+    "short_name": "Vassieux",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q266211",
+    "wikipedia": "fr:Vassieux-en-Vercors"
+  }
+},
+{
+  "type": "node",
+  "id": 33155964,
+  "lat": 44.8994708,
+  "lon": 5.0959084,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Châteaudouble",
+    "name:oc": "Chastèudoble",
+    "place": "village",
+    "population": "594",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Châteaudouble (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 33155965,
+  "lat": 44.9113442,
+  "lon": 5.1928340,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Léoncel",
+    "name:oc": "Lioncèl",
+    "place": "village",
+    "population": "46",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601637",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Léoncel"
+  }
+},
+{
+  "type": "node",
+  "id": 33155966,
+  "lat": 44.9122149,
+  "lon": 5.1102280,
+  "tags": {
+    "addr:postcode": "26120",
+    "name": "Peyrus",
+    "name:oc": "Peirús",
+    "place": "village",
+    "population": "575",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.peyrus.fr/",
+    "wikipedia": "fr:Peyrus"
+  }
+},
+{
+  "type": "node",
+  "id": 33155967,
+  "lat": 44.9354489,
+  "lon": 5.4316198,
+  "tags": {
+    "addr:postcode": "26420",
+    "name": "Saint-Agnan-en-Vercors",
+    "name:oc": "Sent Anhan de Vercòrs",
+    "place": "village",
+    "population": "345",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602908",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saint-Agnan-en-Vercors"
+  }
+},
+{
+  "type": "node",
+  "id": 33155968,
+  "lat": 44.9387472,
+  "lon": 5.0929503,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Charpey",
+    "name:oc": "Charpei",
+    "place": "village",
+    "population": "1531",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600795",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.charpey.fr/",
+    "wikipedia": "fr:Charpey"
+  }
+},
+{
+  "type": "node",
+  "id": 33155969,
+  "lat": 44.9385285,
+  "lon": 5.1178412,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Saint-Vincent-la-Commanderie",
+    "name:oc": "Sent Vincenç de Charpei",
+    "place": "village",
+    "population": "595",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603823",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saint-Vincent-la-Commanderie"
+  }
+},
+{
+  "type": "node",
+  "id": 33155970,
+  "lat": 44.9562000,
+  "lon": 5.1401700,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Barbières",
+    "name:oc": "Barbèira",
+    "place": "village",
+    "population": "1133",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600233",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Barbières"
+  }
+},
+{
+  "type": "node",
+  "id": 33155971,
+  "lat": 44.9644657,
+  "lon": 5.0786251,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Bésayes",
+    "name:oc": "Baisaias",
+    "place": "village",
+    "population": "1249",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600498",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Bésayes"
+  }
+},
+{
+  "type": "node",
+  "id": 33155972,
+  "lat": 44.9650000,
+  "lon": 5.2709400,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Bouvante",
+    "name:oc": "Bovanti",
+    "place": "village",
+    "population": "209",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q139566566",
+    "wikipedia": "fr:Bouvante"
+  }
+},
+{
+  "type": "node",
+  "id": 33155973,
+  "lat": 44.9681874,
+  "lon": 5.4161361,
+  "tags": {
+    "addr:postcode": "26420",
+    "name": "La Chapelle-en-Vercors",
+    "name:oc": "La Chapèla de Vercòrs",
+    "place": "village",
+    "population": "748",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600746",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:La Chapelle-en-Vercors"
+  }
+},
+{
+  "type": "node",
+  "id": 33155974,
+  "lat": 44.9716981,
+  "lon": 5.1499676,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Rochefort-Samson",
+    "name:oc": "Ròchafòrt e Sant Sol",
+    "place": "village",
+    "population": "1038",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602734",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Rochefort-Samson"
+  }
+},
+{
+  "type": "node",
+  "id": 33155977,
+  "lat": 44.9868000,
+  "lon": 5.2730000,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Saint-Martin-le-Colonel",
+    "name:oc": "Sent Martin de Coronèl",
+    "place": "village",
+    "population": "215",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603161",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saint-Martin-le-Colonel"
+  }
+},
+{
+  "type": "node",
+  "id": 33155978,
+  "lat": 44.9962791,
+  "lon": 5.1862300,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Beauregard-Baret",
+    "name:oc": "Bèlregard de Barret",
+    "place": "village",
+    "population": "899",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600399",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Beauregard-Baret"
+  }
+},
+{
+  "type": "node",
+  "id": 33155979,
+  "lat": 44.9968000,
+  "lon": 5.2739400,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Oriol-en-Royans",
+    "name:oc": "Auriòl de Roians",
+    "place": "village",
+    "population": "519",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602239",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Oriol-en-Royans"
+  }
+},
+{
+  "type": "node",
+  "id": 33155980,
+  "lat": 45.0185542,
+  "lon": 4.9224726,
+  "tags": {
+    "addr:postcode": "26600",
+    "name": "Beaumont-Monteux",
+    "name:oc": "Beumont e Monteus",
+    "place": "village",
+    "population": "1358",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600381",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155981,
+  "lat": 45.0216044,
+  "lon": 5.4428431,
+  "tags": {
+    "addr:postcode": "26420",
+    "name": "Saint-Martin-en-Vercors",
+    "name:oc": "Sent Martin de Vercòrs",
+    "place": "village",
+    "population": "409",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603153",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155982,
+  "lat": 45.0281475,
+  "lon": 5.1742071,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Jaillans",
+    "name:oc": "Jalhans",
+    "place": "village",
+    "population": "943",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603815",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Jaillans"
+  }
+},
+{
+  "type": "node",
+  "id": 33155983,
+  "lat": 45.0280551,
+  "lon": 5.3260927,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Saint-Laurent-en-Royans",
+    "name:oc": "Sent Laurenç de Roians",
+    "place": "village",
+    "population": "1396",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603112",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q529993",
+    "wikipedia": "fr:Saint-Laurent-en-Royans"
+  }
+},
+{
+  "type": "node",
+  "id": 33155984,
+  "lat": 45.0340293,
+  "lon": 5.2529082,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Rochechinard",
+    "name:oc": "Ròchachinard",
+    "place": "village",
+    "population": "129",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602700",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 33155985,
+  "lat": 45.0385950,
+  "lon": 5.1998461,
+  "tags": {
+    "addr:postcode": "26730",
+    "name": "Hostun",
+    "name:oc": "Ostun",
+    "place": "village",
+    "population": "1029",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601496",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Hostun"
+  }
+},
+{
+  "type": "node",
+  "id": 33155986,
+  "lat": 45.0482826,
+  "lon": 5.3390411,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Sainte-Eulalie-en-Royans",
+    "name:oc": "Senta Aulària de Roians",
+    "place": "village",
+    "population": "543",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Sainte-Eulalie-en-Royans"
+  }
+},
+{
+  "type": "node",
+  "id": 33155988,
+  "lat": 45.0489000,
+  "lon": 5.2950800,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Saint-Thomas-en-Royans",
+    "name:oc": "Sent Tomàs de Roians",
+    "place": "village",
+    "population": "595",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603310",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q219371",
+    "wikipedia": "fr:Saint-Thomas-en-Royans"
+  }
+},
+{
+  "type": "node",
+  "id": 33155990,
+  "lat": 45.0494773,
+  "lon": 4.9841778,
+  "tags": {
+    "addr:postcode": "26600",
+    "name": "Granges-les-Beaumont",
+    "name:oc": "Las Granjas",
+    "place": "village",
+    "population": "917",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603799",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Granges-les-Beaumont"
+  }
+},
+{
+  "type": "node",
+  "id": 33207407,
+  "lat": 44.8885322,
+  "lon": 4.8506753,
+  "tags": {
+    "addr:postcode": "07130",
+    "name": "Soyons",
+    "name:oc": "Soion",
+    "place": "village",
+    "population": "2295",
+    "population:date": "2021",
+    "ref:FR:SIREN": "210703161",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 250991523,
+  "lat": 44.8989095,
+  "lon": 5.3217674,
+  "tags": {
+    "name": "Font d'Urle",
+    "place": "hamlet",
+    "wikidata": "Q138754786"
+  }
+},
+{
+  "type": "node",
+  "id": 264288005,
+  "lat": 45.0411787,
+  "lon": 5.4400509,
+  "tags": {
+    "name": "La Matrassière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 276413310,
+  "lat": 44.8962512,
+  "lon": 5.0788294,
+  "tags": {
+    "name": "Les Chomérats",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 276413536,
+  "lat": 44.8976496,
+  "lon": 5.0706754,
+  "tags": {
+    "name": "Les Peris",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 276413590,
+  "lat": 44.9047361,
+  "lon": 5.0755120,
+  "tags": {
+    "name": "Les Berards",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 276418750,
+  "lat": 44.8944442,
+  "lon": 5.0764664,
+  "tags": {
+    "name": "Les Marets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 276507890,
+  "lat": 44.9107835,
+  "lon": 5.0537062,
+  "tags": {
+    "name": "Les Faucons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 283422546,
+  "lat": 44.8855486,
+  "lon": 5.0637383,
+  "tags": {
+    "name": "Les Breytons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 283423842,
+  "lat": 44.8867648,
+  "lon": 5.0674290,
+  "tags": {
+    "name": "Les Drilles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 283656584,
+  "lat": 44.8946156,
+  "lon": 5.0879957,
+  "tags": {
+    "name": "Les Combes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 283656803,
+  "lat": 44.8946361,
+  "lon": 5.0924581,
+  "tags": {
+    "name": "La Richardiere",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 283656838,
+  "lat": 44.8947448,
+  "lon": 5.0814404,
+  "tags": {
+    "name": "Trompette",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 283656878,
+  "lat": 44.9057012,
+  "lon": 5.0676036,
+  "tags": {
+    "name": "La Tube",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 289358209,
+  "lat": 44.9217933,
+  "lon": 5.4242375,
+  "tags": {
+    "name": "Les Revoux",
+    "name:oc": "Los Revols",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 291977638,
+  "lat": 44.8870017,
+  "lon": 5.1828571,
+  "tags": {
+    "name": "La Vacherie",
+    "name:oc": "La Vachariá",
+    "place": "village",
+    "population": "39",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 348198972,
+  "lat": 44.7997453,
+  "lon": 5.2597931,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Saint-Andéol",
+    "name:oc": "Sant Andeòu",
+    "place": "village",
+    "population": "84",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602916",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saint-Andéol (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 348198973,
+  "lat": 44.7895494,
+  "lon": 5.2600338,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Vachères-en-Quint",
+    "name:oc": "Vachèiras",
+    "place": "village",
+    "population": "35",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603591",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 348198974,
+  "lat": 44.7994128,
+  "lon": 5.2152869,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Eygluy-Escoulin",
+    "name:oc": "Aiglui e l'Escolin",
+    "place": "village",
+    "population": "65",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212601280",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 349014867,
+  "lat": 44.7357062,
+  "lon": 5.2088714,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Véronne",
+    "name:oc": "Verona",
+    "place": "village",
+    "population": "41",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603716",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Véronne"
+  }
+},
+{
+  "type": "node",
+  "id": 354399537,
+  "lat": 44.6857867,
+  "lon": 5.1401012,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Aubenasson",
+    "name:oc": "Aubenasson",
+    "place": "village",
+    "population": "78",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600159",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 354399539,
+  "lat": 44.6809924,
+  "lon": 5.1565105,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Saint-Sauveur-en-Diois",
+    "name:oc": "Sant Sauvaor de Diés",
+    "place": "village",
+    "population": "52",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603286",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saint-Sauveur-en-Diois"
+  }
+},
+{
+  "type": "node",
+  "id": 354400612,
+  "lat": 44.6649286,
+  "lon": 5.2009574,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Chastel-Arnaud",
+    "name:oc": "Chastèl Arnaud",
+    "place": "village",
+    "population": "45",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600803",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 416540201,
+  "lat": 44.6633032,
+  "lon": 5.3083946,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Rimon-et-Savel",
+    "name:oc": "Rimont e Savèl",
+    "place": "village",
+    "population": "23",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602668",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Rimon-et-Savel"
+  }
+},
+{
+  "type": "node",
+  "id": 418956287,
+  "lat": 44.6502942,
+  "lon": 5.2942017,
+  "tags": {
+    "name": "Savel",
+    "name:oc": "Savèl",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 418956288,
+  "lat": 44.6375861,
+  "lon": 5.3169726,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Pennes-le-Sec",
+    "name:oc": "Penas lo Sec",
+    "place": "hamlet",
+    "population": "28",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Pennes-le-Sec"
+  }
+},
+{
+  "type": "node",
+  "id": 419274213,
+  "lat": 44.6081944,
+  "lon": 5.2911188,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Pradelle",
+    "name:oc": "Pradèla",
+    "place": "village",
+    "population": "23",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Pradelle"
+  }
+},
+{
+  "type": "node",
+  "id": 419284702,
+  "lat": 44.6628706,
+  "lon": 5.2732557,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Saint-Benoit-en-Diois",
+    "name:oc": "Sant Benest de Diés",
+    "place": "village",
+    "population": "33",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602965",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saint-Benoit-en-Diois"
+  }
+},
+{
+  "type": "node",
+  "id": 421894935,
+  "lat": 44.6382992,
+  "lon": 5.2805714,
+  "tags": {
+    "name": "Les Gleizolles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 423218010,
+  "lat": 44.6246850,
+  "lon": 5.3454372,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Aucelon",
+    "name:oc": "Aucelon",
+    "place": "village",
+    "population": "16",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 423218012,
+  "lat": 44.5960388,
+  "lon": 5.3162376,
+  "tags": {
+    "name": "Les Raynauds",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 424264121,
+  "lat": 44.7929786,
+  "lon": 5.4056635,
+  "tags": {
+    "name": "Les Planeaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 470366771,
+  "lat": 44.9442404,
+  "lon": 5.0659553,
+  "tags": {
+    "addr:postcode": "35220",
+    "name": "Saint-Didier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 472341423,
+  "lat": 44.5586056,
+  "lon": 5.3452350,
+  "tags": {
+    "addr:postcode": "26470",
+    "name": "Volvent",
+    "name:oc": "Vouvent",
+    "place": "village",
+    "population": "35",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212603781",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Volvent"
+  }
+},
+{
+  "type": "node",
+  "id": 618515166,
+  "lat": 44.7101319,
+  "lon": 5.2568538,
+  "tags": {
+    "historic": "hameau",
+    "name": "Peyrache",
+    "name:oc": "Peiracha",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 618515167,
+  "lat": 44.7042318,
+  "lon": 5.2592349,
+  "tags": {
+    "name": "Vercheny La Plaine",
+    "name:oc": "La Plana",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 650301898,
+  "lat": 44.5507449,
+  "lon": 5.1351443,
+  "tags": {
+    "addr:postcode": "26220",
+    "name": "Orcinas",
+    "name:oc": "Orcinàs",
+    "place": "village",
+    "population": "38",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602221",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Orcinas"
+  }
+},
+{
+  "type": "node",
+  "id": 1005270504,
+  "lat": 44.9508372,
+  "lon": 5.2372938,
+  "tags": {
+    "name": "Val-Fanjouse",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1005270540,
+  "lat": 44.9680468,
+  "lon": 5.2371856,
+  "tags": {
+    "name": "Les Fogès",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1005270725,
+  "lat": 44.9715011,
+  "lon": 5.2521744,
+  "tags": {
+    "name": "Les Traverses",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1014794977,
+  "lat": 44.9215114,
+  "lon": 5.2637866,
+  "tags": {
+    "name": "Bouvante le Haut",
+    "place": "hamlet",
+    "wikidata": "Q49346909"
+  }
+},
+{
+  "type": "node",
+  "id": 1014795209,
+  "lat": 44.9136033,
+  "lon": 5.2081528,
+  "tags": {
+    "name": "Le Grand Échaillon",
+    "name:oc": "Lo Grand Eschalhon",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1064217639,
+  "lat": 44.7104602,
+  "lon": 5.0904397,
+  "tags": {
+    "name": "Les Cités",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1064217641,
+  "lat": 44.7122026,
+  "lon": 5.0926642,
+  "tags": {
+    "name": "Le Moulin",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1074565778,
+  "lat": 45.0433538,
+  "lon": 4.8746128,
+  "tags": {
+    "name": "Les Chassis-Sud",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 1074565797,
+  "lat": 45.0466852,
+  "lon": 4.8585060,
+  "tags": {
+    "name": "La Garenne",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 1074565821,
+  "lat": 45.0493589,
+  "lon": 4.8696838,
+  "tags": {
+    "name": "Les Chassis-Ouest",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 1117795652,
+  "lat": 44.6320884,
+  "lon": 5.2158667,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "La Chaudière",
+    "name:oc": "La Chaudèira",
+    "official_name": "La Chaudière",
+    "place": "village",
+    "population": "36",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q236180",
+    "wikipedia": "fr:La Chaudière"
+  }
+},
+{
+  "type": "node",
+  "id": 1269179376,
+  "lat": 44.5819998,
+  "lon": 5.1992890,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Les Tonils",
+    "name:oc": "Los Tonils",
+    "place": "village",
+    "population": "28",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 1273988611,
+  "lat": 44.8032525,
+  "lon": 5.2578197,
+  "tags": {
+    "name": "Ribière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1275881526,
+  "lat": 45.0185248,
+  "lon": 5.0101286,
+  "tags": {
+    "name": "Bonlieu",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1276668535,
+  "lat": 44.8104602,
+  "lon": 5.2680992,
+  "tags": {
+    "name": "Saint-Étienne",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1282526614,
+  "lat": 44.9553317,
+  "lon": 5.4383173,
+  "tags": {
+    "name": "Chabotte",
+    "name:oc": "Chabòta",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26290B018F",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1282533918,
+  "lat": 44.9630826,
+  "lon": 5.4379203,
+  "tags": {
+    "name": "Les Bérards",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1282533977,
+  "lat": 44.9297546,
+  "lon": 5.4333176,
+  "tags": {
+    "name": "Le Château",
+    "name:oc": "Lo Chastel",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1282535552,
+  "lat": 44.8699301,
+  "lon": 5.4212819,
+  "tags": {
+    "name": "Les Liotards",
+    "name:oc": "Los Liotards",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1282535568,
+  "lat": 44.8691532,
+  "lon": 5.4156318,
+  "tags": {
+    "name": "Rousset",
+    "name:oc": "Riusec",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1283857734,
+  "lat": 44.8237721,
+  "lon": 5.2581479,
+  "tags": {
+    "name": "Lallet",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1283859958,
+  "lat": 44.8420879,
+  "lon": 5.2992649,
+  "tags": {
+    "name": "Les Bayles",
+    "name:oc": "Los Bailes",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1283866341,
+  "lat": 44.8603398,
+  "lon": 5.3184176,
+  "tags": {
+    "name": "Les Bonnets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1284288814,
+  "lat": 44.9570739,
+  "lon": 5.4069099,
+  "tags": {
+    "name": "Gagnaire",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1284294335,
+  "lat": 44.9681952,
+  "lon": 5.4307815,
+  "tags": {
+    "name": "Les Chaberts",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1284301668,
+  "lat": 44.9486991,
+  "lon": 5.4315218,
+  "tags": {
+    "name": "Les Trucs",
+    "name:oc": "Lo Truc",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1284349941,
+  "lat": 44.9539459,
+  "lon": 5.3255458,
+  "tags": {
+    "name": "Lente",
+    "place": "hamlet",
+    "wikidata": "Q134243859"
+  }
+},
+{
+  "type": "node",
+  "id": 1284353708,
+  "lat": 44.9467857,
+  "lon": 5.3246553,
+  "tags": {
+    "fixme": "place+tourism = 2 nodes",
+    "name": "Ferme du Mandement",
+    "place": "hamlet",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 1284462401,
+  "lat": 44.9065339,
+  "lon": 5.3858740,
+  "tags": {
+    "name": "Le Château",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1293903933,
+  "lat": 44.5882340,
+  "lon": 5.3109891,
+  "tags": {
+    "addr:postcode": "26340",
+    "alt_name": "Le Monestier",
+    "name": "Brette",
+    "name:oc": "Breta",
+    "place": "village",
+    "population": "32",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Brette"
+  }
+},
+{
+  "type": "node",
+  "id": 1295684889,
+  "lat": 45.0303942,
+  "lon": 4.9845576,
+  "tags": {
+    "name": "La Vanelle",
+    "name:oc": "La Vanèla",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1296585303,
+  "lat": 44.9401935,
+  "lon": 5.3897795,
+  "tags": {
+    "name": "Les Croix",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1296597981,
+  "lat": 44.9752869,
+  "lon": 5.4046991,
+  "tags": {
+    "name": "Les Aubanneaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1296597987,
+  "lat": 44.9503355,
+  "lon": 5.3978261,
+  "tags": {
+    "name": "La Cime du Mas",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1309185400,
+  "lat": 44.7743822,
+  "lon": 5.4098725,
+  "tags": {
+    "name": "Le Moulin",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1309185401,
+  "lat": 44.7746869,
+  "lon": 5.4068684,
+  "tags": {
+    "name": "Les Liotards",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1312775609,
+  "lat": 44.5511273,
+  "lon": 4.9384179,
+  "tags": {
+    "name": "Chateauneuf de Mazenc",
+    "name:oc": "Chastèunòu de Masenc",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1313313809,
+  "lat": 45.0374824,
+  "lon": 5.4348186,
+  "tags": {
+    "name": "Les Domarières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1394230491,
+  "lat": 44.5983241,
+  "lon": 5.2468373,
+  "tags": {
+    "name": "Rochefourchat",
+    "name:oc": "Ròchaforchaa",
+    "place": "village",
+    "population": "1",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Rochefourchat"
+  }
+},
+{
+  "type": "node",
+  "id": 1430593250,
+  "lat": 44.7533712,
+  "lon": 5.3689136,
+  "tags": {
+    "addr:postcode": "26150",
+    "capital": "7",
+    "name": "Die",
+    "name:ca": "Diá",
+    "name:fr": "Die",
+    "name:ja": "ディー",
+    "name:la": "Dea",
+    "name:oc": "Diá",
+    "name:ru": "Ди",
+    "name:sr": "Дје",
+    "name:uk": "Ді",
+    "name:zh": "迪耶",
+    "place": "village",
+    "population": "4803",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "website": "https://www.mairie-die.fr/",
+    "wikidata": "Q209773",
+    "wikipedia": "fr:Die (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 1490264689,
+  "lat": 44.5726597,
+  "lon": 4.8639774,
+  "tags": {
+    "name": "Le Sauvetas",
+    "place": "hamlet",
+    "source": "Cadastre Bonlieu ZH - 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 1492758013,
+  "lat": 44.5940741,
+  "lon": 4.8814213,
+  "tags": {
+    "name": "Bonlieu-sur-Roubion",
+    "name:oc": "Bonluòc",
+    "place": "village",
+    "population": "464",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212600522",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024"
+  }
+},
+{
+  "type": "node",
+  "id": 1523614842,
+  "lat": 45.0056035,
+  "lon": 5.0468700,
+  "tags": {
+    "name": "Mondy",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1523621488,
+  "lat": 45.0243036,
+  "lon": 5.0618986,
+  "tags": {
+    "name": "Les Bayannins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1648356740,
+  "lat": 44.8089964,
+  "lon": 4.8555626,
+  "tags": {
+    "name": "Fiancey",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1648509690,
+  "lat": 45.0488702,
+  "lon": 5.1581233,
+  "tags": {
+    "name": "L'Écancière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1672151661,
+  "lat": 44.7022587,
+  "lon": 5.0305299,
+  "tags": {
+    "name": "Courton",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1699548105,
+  "lat": 44.9750131,
+  "lon": 5.0264482,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Alixan",
+    "name:oc": "Aleissan",
+    "place": "village",
+    "population": "2645",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q326786",
+    "wikipedia": "fr:Alixan"
+  }
+},
+{
+  "type": "node",
+  "id": 1699548123,
+  "lat": 44.5959031,
+  "lon": 5.1635267,
+  "tags": {
+    "addr:postcode": "26460",
+    "name": "Bézaudun-sur-Bîne",
+    "name:oc": "Besaudun",
+    "place": "village",
+    "population": "70",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikidata": "Q381855",
+    "wikipedia": "fr:Bézaudun-sur-Bîne"
+  }
+},
+{
+  "type": "node",
+  "id": 1699548197,
+  "lat": 45.0266616,
+  "lon": 5.3844084,
+  "tags": {
+    "addr:postcode": "26190",
+    "name": "Échevis",
+    "name:oc": "Eschavís",
+    "place": "village",
+    "population": "56",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Échevis"
+  }
+},
+{
+  "type": "node",
+  "id": 1819934023,
+  "lat": 45.0327735,
+  "lon": 5.3782834,
+  "tags": {
+    "name": "Les Clots",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826440556,
+  "lat": 44.5533365,
+  "lon": 5.2385108,
+  "tags": {
+    "name": "La Font",
+    "name:oc": "La Fònt",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1826677503,
+  "lat": 44.5585747,
+  "lon": 5.2871992,
+  "tags": {
+    "name": "Bertrane",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826799897,
+  "lat": 44.5550348,
+  "lon": 5.2548404,
+  "tags": {
+    "name": "Les Figaniers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826799914,
+  "lat": 44.5581730,
+  "lon": 5.2518954,
+  "tags": {
+    "name": "Monge",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826799922,
+  "lat": 44.5618615,
+  "lon": 5.2528556,
+  "tags": {
+    "name": "Majal",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826818741,
+  "lat": 44.5542167,
+  "lon": 5.2792807,
+  "tags": {
+    "name": "L'Armanier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832167,
+  "lat": 44.5940577,
+  "lon": 5.2623291,
+  "tags": {
+    "name": "Giry",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832176,
+  "lat": 44.5608218,
+  "lon": 5.3232904,
+  "tags": {
+    "name": "Le Gap",
+    "name:oc": "Lo Gap",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832227,
+  "lat": 44.5900618,
+  "lon": 5.2762552,
+  "tags": {
+    "name": "Les Graves",
+    "name:oc": "Las Gravas",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832243,
+  "lat": 44.5758028,
+  "lon": 5.3022190,
+  "tags": {
+    "name": "Les Guillens",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832247,
+  "lat": 44.5735101,
+  "lon": 5.3061886,
+  "tags": {
+    "name": "Les Gaurys",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832258,
+  "lat": 44.5932478,
+  "lon": 5.2596362,
+  "tags": {
+    "name": "Les Chauvins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1826832267,
+  "lat": 44.5553023,
+  "lon": 5.3065105,
+  "tags": {
+    "name": "Fébie",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 1863489089,
+  "lat": 44.9180340,
+  "lon": 4.8577930,
+  "tags": {
+    "name": "Les Croisières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2180131613,
+  "lat": 44.8354751,
+  "lon": 4.8654618,
+  "tags": {
+    "name": "La Paillasse",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2198525540,
+  "lat": 44.6095752,
+  "lon": 5.0979300,
+  "tags": {
+    "name": "Les Goix",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 2198525550,
+  "lat": 44.5917678,
+  "lon": 5.1002318,
+  "tags": {
+    "name": "Les Magnats",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 2240364591,
+  "lat": 45.0018896,
+  "lon": 5.1424573,
+  "tags": {
+    "name": "Saint-Mamans",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 2276785106,
+  "lat": 44.7612729,
+  "lon": 5.1536721,
+  "tags": {
+    "name": "Vaugelas",
+    "name:oc": "Vaujalat",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2291944610,
+  "lat": 44.9762685,
+  "lon": 5.1080902,
+  "tags": {
+    "addr:postcode": "26300",
+    "name": "Marches",
+    "name:oc": "Marchas",
+    "place": "village",
+    "population": "869",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Marches (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 2341520682,
+  "lat": 44.6975415,
+  "lon": 5.1972501,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Saillans",
+    "name:oc": "Salhens",
+    "place": "village",
+    "population": "1405",
+    "population:date": "2021",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Saillans (Drôme)"
+  }
+},
+{
+  "type": "node",
+  "id": 2348355129,
+  "lat": 45.0159857,
+  "lon": 5.1504835,
+  "tags": {
+    "name": "Meymans",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 2506243607,
+  "lat": 44.9622973,
+  "lon": 5.1926146,
+  "tags": {
+    "name": "Saint-Genis",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2506243608,
+  "lat": 44.9692812,
+  "lon": 5.1988771,
+  "tags": {
+    "name": "Les Pignes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2535414997,
+  "lat": 44.9867466,
+  "lon": 4.9130975,
+  "tags": {
+    "name": "Hameau du Prat",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 2638999011,
+  "lat": 44.6912103,
+  "lon": 5.2657381,
+  "tags": {
+    "name": "Roanne",
+    "name:oc": "Roana",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2639063300,
+  "lat": 44.6921948,
+  "lon": 5.2938876,
+  "tags": {
+    "name": "Serre-Cornat",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640778316,
+  "lat": 44.6969033,
+  "lon": 5.2942858,
+  "tags": {
+    "name": "La Brunetie",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790924,
+  "lat": 44.6989662,
+  "lon": 5.2753386,
+  "tags": {
+    "name": "La Pigne",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790925,
+  "lat": 44.7159358,
+  "lon": 5.3044674,
+  "tags": {
+    "name": "Le Petit Viopis",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790926,
+  "lat": 44.7363377,
+  "lon": 5.2989689,
+  "tags": {
+    "name": "Les Meyries",
+    "name:oc": "Las Mèirias",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790928,
+  "lat": 44.7142966,
+  "lon": 5.3082279,
+  "tags": {
+    "name": "L'Hopital",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790931,
+  "lat": 44.6956106,
+  "lon": 5.2740941,
+  "tags": {
+    "name": "Le Prieuré",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790933,
+  "lat": 44.7296421,
+  "lon": 5.2931753,
+  "tags": {
+    "name": "Le Château",
+    "name:oc": "Lo Chastèl",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790949,
+  "lat": 44.7320315,
+  "lon": 5.2902249,
+  "tags": {
+    "name": "Les Roux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790952,
+  "lat": 44.6890056,
+  "lon": 5.2949939,
+  "tags": {
+    "name": "Le Villard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790953,
+  "lat": 44.7329195,
+  "lon": 5.2896133,
+  "tags": {
+    "name": "Les Bruneaux",
+    "name:oc": "Los Brunèus",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790961,
+  "lat": 44.7271457,
+  "lon": 5.2745436,
+  "tags": {
+    "craft": "winery",
+    "name": "Domaine de Magord",
+    "name:oc": "Magòr",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc",
+    "website": "https://www.cavevincent.com/domaines/domaine-de-magord/2451"
+  }
+},
+{
+  "type": "node",
+  "id": 2640790962,
+  "lat": 44.6929717,
+  "lon": 5.2994141,
+  "tags": {
+    "name": "Saint-Pierre",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640793282,
+  "lat": 44.6899512,
+  "lon": 5.2847072,
+  "tags": {
+    "name": "Prémol",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640818126,
+  "lat": 44.6815414,
+  "lon": 5.2869388,
+  "tags": {
+    "name": "L'Auberet",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2640826220,
+  "lat": 44.7118861,
+  "lon": 5.2639574,
+  "tags": {
+    "name": "Le Gap",
+    "name:oc": "Lo Ga",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640826227,
+  "lat": 44.7095072,
+  "lon": 5.2621657,
+  "tags": {
+    "name": "Le Moulin",
+    "name:oc": "Lo Molin",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640826231,
+  "lat": 44.7172115,
+  "lon": 5.2647245,
+  "tags": {
+    "name": "Les Tuilières",
+    "name:oc": "Las Teulièras",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640826233,
+  "lat": 44.7124808,
+  "lon": 5.2461905,
+  "tags": {
+    "name": "Le Serre",
+    "name:oc": "Lo Serre",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640826235,
+  "lat": 44.6999903,
+  "lon": 5.2531755,
+  "tags": {
+    "name": "Saint-Pierre",
+    "name:oc": "Sant Pèire",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640836809,
+  "lat": 44.6852615,
+  "lon": 5.2269873,
+  "tags": {
+    "name": "Le Prieurè",
+    "name:oc": "Lo Priorat",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640836903,
+  "lat": 44.6795200,
+  "lon": 5.2313088,
+  "tags": {
+    "name": "Le Colombier",
+    "name:oc": "Lo Colombier",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2640837016,
+  "lat": 44.6836203,
+  "lon": 5.2293025,
+  "tags": {
+    "name": "Les Granges",
+    "name:oc": "Las Granjas",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2641012169,
+  "lat": 44.7247290,
+  "lon": 5.2057024,
+  "tags": {
+    "name": "Messages",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2641019616,
+  "lat": 44.7461318,
+  "lon": 5.2170965,
+  "tags": {
+    "name": "Château Vieux",
+    "name:oc": "Chastèu Vielh",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2641373853,
+  "lat": 44.7353320,
+  "lon": 5.4037035,
+  "tags": {
+    "name": "Sallières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2641418019,
+  "lat": 44.7650601,
+  "lon": 5.3136292,
+  "tags": {
+    "name": "Saint-Auban",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2644663854,
+  "lat": 45.0160493,
+  "lon": 5.0618826,
+  "tags": {
+    "name": "Le Pit",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2644663856,
+  "lat": 45.0089272,
+  "lon": 5.0244014,
+  "tags": {
+    "name": "Les Drets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2644663861,
+  "lat": 45.0117337,
+  "lon": 5.0613301,
+  "tags": {
+    "name": "Tépier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2645826794,
+  "lat": 44.6259825,
+  "lon": 5.1876337,
+  "tags": {
+    "name": "La Combe",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2645933421,
+  "lat": 44.5905735,
+  "lon": 5.1498015,
+  "tags": {
+    "name": "Les Junchas",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2645938110,
+  "lat": 44.5803902,
+  "lon": 5.1550560,
+  "tags": {
+    "name": "Crovens",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2645945423,
+  "lat": 44.5896446,
+  "lon": 5.1632556,
+  "tags": {
+    "name": "Le Bourreau",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2645975359,
+  "lat": 44.5730670,
+  "lon": 5.1567167,
+  "tags": {
+    "name": "Sibourgs",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2667820302,
+  "lat": 44.8829667,
+  "lon": 4.9100553,
+  "tags": {
+    "name": "Bressac",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2667820323,
+  "lat": 44.8719021,
+  "lon": 4.9053913,
+  "tags": {
+    "name": "La Houppe",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2701468917,
+  "lat": 44.6632848,
+  "lon": 5.3076837,
+  "tags": {
+    "addr:postcode": "26340",
+    "name": "Rimon",
+    "name:oc": "Rimont",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2766971511,
+  "lat": 44.7110755,
+  "lon": 5.2497309,
+  "tags": {
+    "name": "Le Temple",
+    "name:oc": "Lo Temple",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2811425185,
+  "lat": 45.0352896,
+  "lon": 5.2087412,
+  "tags": {
+    "name": "Saint-Martin",
+    "name:oc": "Sent Martin",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2811425938,
+  "lat": 45.0399597,
+  "lon": 5.1974974,
+  "tags": {
+    "name": "Saint-Maurice",
+    "name:oc": "Sent Maurise",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2812234545,
+  "lat": 44.9089454,
+  "lon": 4.8592613,
+  "tags": {
+    "name": "Guérimbet",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 2881809233,
+  "lat": 44.9630520,
+  "lon": 4.9688656,
+  "tags": {
+    "name": "Les Petits Eynards",
+    "name:oc": "Los Petits Einards",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 2958415113,
+  "lat": 44.9746556,
+  "lon": 5.3824940,
+  "tags": {
+    "name": "L'Halle",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2958415114,
+  "lat": 44.9741918,
+  "lon": 5.4003929,
+  "tags": {
+    "name": "Les Drevets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2958415115,
+  "lat": 44.9791768,
+  "lon": 5.3850079,
+  "tags": {
+    "name": "Les Gabriels",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2958415116,
+  "lat": 44.9816371,
+  "lon": 5.3861754,
+  "tags": {
+    "name": "Les Patins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 2958415117,
+  "lat": 44.9705298,
+  "lon": 5.3834666,
+  "tags": {
+    "name": "Les Ronnins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3078832027,
+  "lat": 44.7561625,
+  "lon": 5.3768637,
+  "tags": {
+    "name": "Les Fondeaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3084377606,
+  "lat": 44.5661274,
+  "lon": 5.1834263,
+  "tags": {
+    "name": "La Combe",
+    "name:oc": "La Comba",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 3084377607,
+  "lat": 44.5555318,
+  "lon": 5.1808258,
+  "tags": {
+    "name": "La Vialle",
+    "name:oc": "La Viala",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 3084377608,
+  "lat": 44.5590885,
+  "lon": 5.1676697,
+  "tags": {
+    "name": "Les Augiers",
+    "name:oc": "Los Augiers",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 3085161532,
+  "lat": 44.5794269,
+  "lon": 5.1053164,
+  "tags": {
+    "name": "Boutière",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3085162233,
+  "lat": 44.5769985,
+  "lon": 5.0990581,
+  "tags": {
+    "name": "Bruzon",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3085162234,
+  "lat": 44.5786167,
+  "lon": 5.0868962,
+  "tags": {
+    "name": "Le Banchet",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3086094934,
+  "lat": 44.6877815,
+  "lon": 4.9251792,
+  "tags": {
+    "name": "Les Micouleaux",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3092210830,
+  "lat": 44.8492846,
+  "lon": 5.0420833,
+  "tags": {
+    "name": "Les Pialoux",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3109221629,
+  "lat": 44.7713694,
+  "lon": 5.3595239,
+  "tags": {
+    "name": "Cougnes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3116289914,
+  "lat": 44.7924802,
+  "lon": 5.1041099,
+  "tags": {
+    "name": "Les Bérangers",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3116308476,
+  "lat": 44.7873323,
+  "lon": 5.1285920,
+  "tags": {
+    "name": "Les Fonds",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3121775067,
+  "lat": 44.7362799,
+  "lon": 5.0925963,
+  "tags": {
+    "name": "Chosséon",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3121775070,
+  "lat": 44.7368716,
+  "lon": 5.0976139,
+  "tags": {
+    "name": "Les Reyniers",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3121775074,
+  "lat": 44.7659564,
+  "lon": 5.1077710,
+  "tags": {
+    "name": "Vieux-Village",
+    "place": "hamlet",
+    "population": "30",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3123699969,
+  "lat": 44.9577343,
+  "lon": 5.0363777,
+  "tags": {
+    "name": "Bernardin",
+    "name:oc": "Los Bernardins",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 3123699970,
+  "lat": 44.9617030,
+  "lon": 5.0173069,
+  "tags": {
+    "alt_name": "Fianceyon",
+    "name": "Franceyon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3172158706,
+  "lat": 44.7675664,
+  "lon": 5.2966314,
+  "tags": {
+    "name": "Le Bourg",
+    "name:oc": "Lo Borg",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3172223284,
+  "lat": 44.7758556,
+  "lon": 5.2843261,
+  "tags": {
+    "name": "L'Eguillot",
+    "name:oc": "Los Guilhòts",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3172223342,
+  "lat": 44.7734469,
+  "lon": 5.2863779,
+  "tags": {
+    "name": "Les Morins",
+    "name:oc": "Los Morins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3187696563,
+  "lat": 44.9537566,
+  "lon": 5.1399416,
+  "tags": {
+    "name": "Les Chovets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892095,
+  "lat": 45.0210906,
+  "lon": 4.9126780,
+  "tags": {
+    "name": "Bruas et Plantas",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B003K",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892096,
+  "lat": 45.0245436,
+  "lon": 4.9302322,
+  "tags": {
+    "name": "Bruyères",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B004L",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892102,
+  "lat": 45.0375483,
+  "lon": 4.8944335,
+  "tags": {
+    "name": "Chasselieres",
+    "name:fr": "Chasselieres voie romaine",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B011U",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892105,
+  "lat": 45.0406652,
+  "lon": 4.9279260,
+  "tags": {
+    "name": "Colombier",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B015Y",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892106,
+  "lat": 45.0408415,
+  "lon": 4.9063767,
+  "tags": {
+    "name": "Combe Tourtes",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B016Z",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892119,
+  "lat": 45.0409403,
+  "lon": 4.9422131,
+  "tags": {
+    "name": "Les Clermonts",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B014X",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892123,
+  "lat": 45.0450361,
+  "lon": 4.9151195,
+  "tags": {
+    "name": "Maufruit",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B026K",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892124,
+  "lat": 45.0462027,
+  "lon": 4.9226630,
+  "tags": {
+    "name": "Murinais",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B027L",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892129,
+  "lat": 45.0348265,
+  "lon": 4.9040715,
+  "tags": {
+    "name": "Pichères",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B032S",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892130,
+  "lat": 45.0278601,
+  "lon": 4.9183172,
+  "tags": {
+    "name": "Poulon",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B035V",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3201892136,
+  "lat": 45.0261377,
+  "lon": 4.9115061,
+  "tags": {
+    "name": "Vignes Vieilles",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26038B042C",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3237237725,
+  "lat": 44.9716599,
+  "lon": 5.0255339,
+  "tags": {
+    "name": "Romarins",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3247936607,
+  "lat": 44.7748502,
+  "lon": 4.8877760,
+  "tags": {
+    "name": "Les Moutiers",
+    "name:oc": "Los Mostièrs",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3396859368,
+  "lat": 44.6358078,
+  "lon": 5.0255890,
+  "tags": {
+    "name": "Le Talon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719710705,
+  "lat": 45.0415303,
+  "lon": 5.2669895,
+  "tags": {
+    "name": "Les Marronnières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719712397,
+  "lat": 45.0437140,
+  "lon": 5.2647869,
+  "tags": {
+    "name": "Les Robins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719712400,
+  "lat": 45.0434411,
+  "lon": 5.2572928,
+  "tags": {
+    "name": "La Fayolle",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719715423,
+  "lat": 45.0488231,
+  "lon": 5.2628557,
+  "tags": {
+    "name": "Le Béchat",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719715424,
+  "lat": 45.0492779,
+  "lon": 5.2736758,
+  "tags": {
+    "name": "Les Hauvets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719715491,
+  "lat": 45.0418605,
+  "lon": 5.2743839,
+  "tags": {
+    "name": "Les Blancs",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719719328,
+  "lat": 45.0428725,
+  "lon": 5.2782623,
+  "tags": {
+    "name": "Les Ferlondières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719719329,
+  "lat": 45.0381230,
+  "lon": 5.2726941,
+  "tags": {
+    "name": "Les Chuiles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719719331,
+  "lat": 45.0406248,
+  "lon": 5.2746467,
+  "tags": {
+    "name": "Les Barbets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719719344,
+  "lat": 45.0409091,
+  "lon": 5.2769588,
+  "tags": {
+    "name": "Le Mas des Combes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3719719359,
+  "lat": 45.0452566,
+  "lon": 5.2802579,
+  "tags": {
+    "name": "Pichardon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3723625925,
+  "lat": 45.0358433,
+  "lon": 5.2704083,
+  "tags": {
+    "name": "Les Pousterles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3723626192,
+  "lat": 45.0367834,
+  "lon": 5.2635740,
+  "tags": {
+    "name": "Les Aillauds",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3749739347,
+  "lat": 45.0495725,
+  "lon": 5.2236069,
+  "tags": {
+    "name": "Les Paillonières",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26034B019V",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3756061481,
+  "lat": 44.7617717,
+  "lon": 5.1173412,
+  "tags": {
+    "name": "Les Perriers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3758344337,
+  "lat": 44.7594259,
+  "lon": 5.1132763,
+  "tags": {
+    "name": "Les Jaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3811111941,
+  "lat": 45.0374902,
+  "lon": 5.1655797,
+  "tags": {
+    "name": "Pouyet",
+    "name:oc": "Poiet",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 3821596916,
+  "lat": 44.7269024,
+  "lon": 5.1067528,
+  "tags": {
+    "name": "Les Berthalais",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3822253213,
+  "lat": 44.7134697,
+  "lon": 5.1069996,
+  "tags": {
+    "name": "Mirabel",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 3860805020,
+  "lat": 45.0140650,
+  "lon": 5.0473750,
+  "tags": {
+    "name": "La Planette",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3860805021,
+  "lat": 45.0105896,
+  "lon": 5.0765341,
+  "tags": {
+    "name": "Les Vidaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 3860805022,
+  "lat": 45.0172655,
+  "lon": 5.0676095,
+  "tags": {
+    "name": "Malataverne",
+    "name:oc": "Malataverna",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 3992422925,
+  "lat": 45.0297590,
+  "lon": 5.3849501,
+  "tags": {
+    "name": "Binla",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4030940558,
+  "lat": 44.6622556,
+  "lon": 5.4333609,
+  "tags": {
+    "name": "Vallieu",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4030946040,
+  "lat": 44.6658688,
+  "lon": 5.4299813,
+  "tags": {
+    "name": "Carteron",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4064817789,
+  "lat": 44.8988520,
+  "lon": 5.3637960,
+  "tags": {
+    "name": "Moulin Allard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4064827104,
+  "lat": 44.9060508,
+  "lon": 5.3676587,
+  "tags": {
+    "name": "Jossaud",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4139120482,
+  "lat": 45.0441385,
+  "lon": 5.3422926,
+  "tags": {
+    "name": "Lotissement les Portes du Vercors",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26302A020U"
+  }
+},
+{
+  "type": "node",
+  "id": 4144846560,
+  "lat": 44.7792610,
+  "lon": 5.4087040,
+  "tags": {
+    "name": "Les Vignons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4144846574,
+  "lat": 44.7776820,
+  "lon": 5.4074913,
+  "tags": {
+    "name": "Les Faugiers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4147010308,
+  "lat": 44.7263754,
+  "lon": 5.4075266,
+  "tags": {
+    "name": "Les Tiogaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4179760027,
+  "lat": 44.6993828,
+  "lon": 4.9505257,
+  "tags": {
+    "name": "Les Gilles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4186857424,
+  "lat": 44.8175946,
+  "lon": 5.1743534,
+  "tags": {
+    "name": "Le Vialaret",
+    "name:oc": "Lo Vialaret",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 4192215265,
+  "lat": 44.8293410,
+  "lon": 5.1977901,
+  "tags": {
+    "name": "Ansage",
+    "name:oc": "Ensage",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 4192229117,
+  "lat": 44.8098128,
+  "lon": 5.1674591,
+  "tags": {
+    "name": "La Combe",
+    "name:oc": "La Comba",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 4192441807,
+  "lat": 44.8279468,
+  "lon": 5.1509478,
+  "tags": {
+    "name": "La Blache",
+    "name:oc": "La Blacha",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 4260402169,
+  "lat": 44.9571617,
+  "lon": 5.1423901,
+  "tags": {
+    "name": "Les Jardins du Pélafol",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26023A028R"
+  }
+},
+{
+  "type": "node",
+  "id": 4295006154,
+  "lat": 44.7886958,
+  "lon": 5.0458479,
+  "tags": {
+    "name": "La Rochette",
+    "name:oc": "La Rocheta",
+    "place": "village",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 4321203428,
+  "lat": 44.6571489,
+  "lon": 5.0014366,
+  "tags": {
+    "name": "Les Lombards",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4396390411,
+  "lat": 44.8117032,
+  "lon": 5.3494462,
+  "tags": {
+    "name": "L'Ermite",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4396570912,
+  "lat": 44.8053304,
+  "lon": 5.3467368,
+  "tags": {
+    "name": "La Rollandière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4396570913,
+  "lat": 44.8088471,
+  "lon": 5.3486788,
+  "tags": {
+    "name": "Les Chambards",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4559094788,
+  "lat": 44.6641857,
+  "lon": 5.1927768,
+  "tags": {
+    "name": "Les Auberts",
+    "name:oc": "Los Auberts",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 4559117500,
+  "lat": 44.6578938,
+  "lon": 5.2242384,
+  "tags": {
+    "name": "Saint-Moirans",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4562101760,
+  "lat": 44.8377325,
+  "lon": 4.9876401,
+  "tags": {
+    "name": "Les Dorelons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4562101761,
+  "lat": 44.8354026,
+  "lon": 4.9982590,
+  "tags": {
+    "name": "Les Dinas",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4562146015,
+  "lat": 44.8362566,
+  "lon": 5.0038353,
+  "tags": {
+    "name": "Les Pétiots",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4562149412,
+  "lat": 44.8403972,
+  "lon": 4.9936617,
+  "tags": {
+    "name": "La Peyrière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4579613444,
+  "lat": 44.6280479,
+  "lon": 5.1279551,
+  "tags": {
+    "name": "Les Andrivets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 4705651962,
+  "lat": 44.8059878,
+  "lon": 4.8655705,
+  "tags": {
+    "name": "Saint-Genys",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "node",
+  "id": 5085385741,
+  "lat": 44.8004628,
+  "lon": 5.1408988,
+  "tags": {
+    "name": "Lozeron",
+    "name:oc": "Lauseron",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5085425966,
+  "lat": 44.8342005,
+  "lon": 5.0893038,
+  "tags": {
+    "name": "Mourrat",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017"
+  }
+},
+{
+  "type": "node",
+  "id": 5441095192,
+  "lat": 44.5777310,
+  "lon": 5.2605709,
+  "tags": {
+    "name": "Hameau des Boutary",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5442495357,
+  "lat": 44.8728323,
+  "lon": 5.3075525,
+  "tags": {
+    "name": "La Cime",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5442496069,
+  "lat": 44.8306130,
+  "lon": 5.2615660,
+  "tags": {
+    "name": "Glovin",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5599701094,
+  "lat": 44.8526789,
+  "lon": 5.2182194,
+  "tags": {
+    "name": "Les Arbods",
+    "name:oc": "Los Arboç",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5599701095,
+  "lat": 44.8497460,
+  "lon": 5.2161414,
+  "tags": {
+    "name": "Les Blaches",
+    "name:oc": "Las Blachas",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5599701096,
+  "lat": 44.8547359,
+  "lon": 5.2216214,
+  "tags": {
+    "name": "Les Grangers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5599701097,
+  "lat": 44.8501368,
+  "lon": 5.2121881,
+  "tags": {
+    "name": "La Pastorale",
+    "name:oc": "La Pastorala",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640290224,
+  "lat": 44.6478498,
+  "lon": 5.0591327,
+  "tags": {
+    "name": "Brianche",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640290226,
+  "lat": 44.6455147,
+  "lon": 5.0554587,
+  "tags": {
+    "name": "L'Abbaye",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640296989,
+  "lat": 44.6408385,
+  "lon": 5.0534590,
+  "tags": {
+    "name": "Souvionne",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323276,
+  "lat": 44.6628810,
+  "lon": 5.0765838,
+  "tags": {
+    "name": "Paturel",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323277,
+  "lat": 44.6537015,
+  "lon": 5.0463297,
+  "tags": {
+    "name": "Les Blaches",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323278,
+  "lat": 44.6501111,
+  "lon": 5.0363619,
+  "tags": {
+    "name": "Charrière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323481,
+  "lat": 44.6594041,
+  "lon": 5.0219271,
+  "tags": {
+    "name": "Vache",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323566,
+  "lat": 44.6467851,
+  "lon": 5.0212749,
+  "tags": {
+    "name": "Olivier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323591,
+  "lat": 44.6481057,
+  "lon": 5.0261635,
+  "tags": {
+    "name": "Notre-Dame",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323592,
+  "lat": 44.6460955,
+  "lon": 5.0265373,
+  "tags": {
+    "name": "Viret",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640323593,
+  "lat": 44.6423317,
+  "lon": 5.0311938,
+  "tags": {
+    "name": "Les Marais",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640350218,
+  "lat": 44.6389959,
+  "lon": 5.0324140,
+  "tags": {
+    "name": "Le Châtelard",
+    "name:oc": "Lo Chastelar",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640350219,
+  "lat": 44.6355950,
+  "lon": 5.0332175,
+  "tags": {
+    "name": "Eygar",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640350220,
+  "lat": 44.6349564,
+  "lon": 5.0211855,
+  "tags": {
+    "name": "Besson",
+    "name:oc": "Beçon",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640351021,
+  "lat": 44.6362719,
+  "lon": 5.0216820,
+  "tags": {
+    "name": "Les Thuiles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640351062,
+  "lat": 44.6341809,
+  "lon": 5.0275641,
+  "tags": {
+    "name": "Oryant",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640365989,
+  "lat": 44.6374820,
+  "lon": 5.0458696,
+  "tags": {
+    "name": "Les Crotes",
+    "name:oc": "Las Cròtas",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640365998,
+  "lat": 44.6333618,
+  "lon": 5.0401086,
+  "tags": {
+    "name": "Gontard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640365999,
+  "lat": 44.6390207,
+  "lon": 5.0449243,
+  "tags": {
+    "name": "Le Veyou",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640366000,
+  "lat": 44.6382285,
+  "lon": 5.0561728,
+  "tags": {
+    "name": "Les Foulons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640367442,
+  "lat": 44.6404334,
+  "lon": 5.0613250,
+  "tags": {
+    "name": "Le Colombier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503512,
+  "lat": 44.6366160,
+  "lon": 5.1121786,
+  "tags": {
+    "name": "Les Cosmes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503748,
+  "lat": 44.6341043,
+  "lon": 5.1280639,
+  "tags": {
+    "name": "Tavau",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503749,
+  "lat": 44.6349442,
+  "lon": 5.1270286,
+  "tags": {
+    "name": "Jossaud",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503762,
+  "lat": 44.6367114,
+  "lon": 5.1308747,
+  "tags": {
+    "name": "Le Cagnard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503763,
+  "lat": 44.6281848,
+  "lon": 5.1236315,
+  "tags": {
+    "name": "La Cure",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503782,
+  "lat": 44.6277255,
+  "lon": 5.1092978,
+  "tags": {
+    "name": "Brouty",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503783,
+  "lat": 44.6284028,
+  "lon": 5.0994300,
+  "tags": {
+    "name": "Le Planas",
+    "name:oc": "Lo Planàs",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503797,
+  "lat": 44.6245811,
+  "lon": 5.0964816,
+  "tags": {
+    "name": "Legat",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503809,
+  "lat": 44.6305309,
+  "lon": 5.0955062,
+  "tags": {
+    "name": "Quartier de Celas Ferme Bleue",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640503810,
+  "lat": 44.6359138,
+  "lon": 5.0945560,
+  "tags": {
+    "name": "La Beaume",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640514103,
+  "lat": 44.6381445,
+  "lon": 5.0916781,
+  "tags": {
+    "name": "Les Granges",
+    "name:oc": "Las Granjas",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640514329,
+  "lat": 44.6348497,
+  "lon": 5.0864745,
+  "tags": {
+    "name": "La Grange Rouge",
+    "name:oc": "La Granja Roja",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5640514330,
+  "lat": 44.6354034,
+  "lon": 5.0804216,
+  "tags": {
+    "name": "Aux Rouzes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5640514331,
+  "lat": 44.6314049,
+  "lon": 5.0835041,
+  "tags": {
+    "name": "La Croisière de Francillon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5810813044,
+  "lat": 44.6919088,
+  "lon": 5.0958659,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Brette",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077378,
+  "lat": 44.8949377,
+  "lon": 5.4241512,
+  "tags": {
+    "name": "Les Chaberts",
+    "name:oc": "Los Chaberts",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077379,
+  "lat": 44.9044716,
+  "lon": 5.4280010,
+  "tags": {
+    "name": "Les Faures",
+    "name:oc": "Los Faures",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077380,
+  "lat": 44.9108736,
+  "lon": 5.4286919,
+  "tags": {
+    "name": "La Britière",
+    "name:oc": "La Bretèira",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077381,
+  "lat": 44.9157632,
+  "lon": 5.4330794,
+  "tags": {
+    "name": "Les Pourets",
+    "name:oc": "Los Porrets",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077382,
+  "lat": 44.9242216,
+  "lon": 5.4364134,
+  "tags": {
+    "name": "Les Brunets",
+    "name:oc": "Los Brunets",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077383,
+  "lat": 44.9609214,
+  "lon": 5.4225470,
+  "tags": {
+    "name": "Les Finets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077384,
+  "lat": 44.9259267,
+  "lon": 5.4248215,
+  "tags": {
+    "name": "Les Rochas",
+    "name:oc": "Los Rochàs",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077685,
+  "lat": 44.9156861,
+  "lon": 5.4247571,
+  "tags": {
+    "name": "Les Berts",
+    "name:oc": "Los Berts",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077699,
+  "lat": 44.9920030,
+  "lon": 5.4038674,
+  "tags": {
+    "name": "Les Revoux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077700,
+  "lat": 44.9890748,
+  "lon": 5.4173630,
+  "tags": {
+    "name": "Les Poudreaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077701,
+  "lat": 44.9974088,
+  "lon": 5.4155630,
+  "tags": {
+    "name": "Les Appaix",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077702,
+  "lat": 44.9916970,
+  "lon": 5.4168861,
+  "tags": {
+    "name": "Saluce",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077703,
+  "lat": 45.0003243,
+  "lon": 5.4169322,
+  "tags": {
+    "name": "Les Barnoux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5910403601,
+  "lat": 44.9235179,
+  "lon": 5.4318729,
+  "tags": {
+    "name": "Les Grands Prés",
+    "name:oc": "Los Grands Prats",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5910403602,
+  "lat": 44.9203729,
+  "lon": 5.4331925,
+  "tags": {
+    "name": "Les Girodets",
+    "name:oc": "Los Giraudets",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5910403603,
+  "lat": 44.9124335,
+  "lon": 5.4291263,
+  "tags": {
+    "name": "Les Ruilliers",
+    "name:oc": "Los Ruilars",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 5914572161,
+  "lat": 45.0105916,
+  "lon": 5.4267160,
+  "tags": {
+    "name": "Le Bard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5919234668,
+  "lat": 45.0453896,
+  "lon": 5.4352144,
+  "tags": {
+    "name": "Les Alberts",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5919234679,
+  "lat": 45.0035996,
+  "lon": 5.4477658,
+  "tags": {
+    "name": "Les Moreaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5919280140,
+  "lat": 45.0192517,
+  "lon": 5.4224906,
+  "tags": {
+    "name": "Le Viouzou",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 5984056427,
+  "lat": 44.6759507,
+  "lon": 5.3797073,
+  "tags": {
+    "addr:postcode": "26150",
+    "name": "Montmaur-en-Diois",
+    "name:oc": "Montmaur de Diés",
+    "place": "village",
+    "population": "85",
+    "population:date": "2021",
+    "ref:FR:SIREN": "212602056",
+    "source:name:oc": "ieo-bdtopoc",
+    "source:population": "INSEE 2024",
+    "wikipedia": "fr:Montmaur-en-Diois"
+  }
+},
+{
+  "type": "node",
+  "id": 6110499817,
+  "lat": 44.8143622,
+  "lon": 5.1639745,
+  "tags": {
+    "name": "Fonchet",
+    "name:oc": "Fònt-Chais",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 6110578716,
+  "lat": 44.8529293,
+  "lon": 5.2226107,
+  "tags": {
+    "name": "Les Tonils",
+    "name:oc": "Los Tonils",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 6176368805,
+  "lat": 44.9938682,
+  "lon": 4.8769695,
+  "tags": {
+    "name": "Le Saut des Chèvres-Bas",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6251416797,
+  "lat": 44.9889836,
+  "lon": 5.4442834,
+  "tags": {
+    "name": "La Chabertière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6251421479,
+  "lat": 44.9826041,
+  "lon": 5.4439408,
+  "tags": {
+    "name": "Les Merciers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6251423538,
+  "lat": 44.9811039,
+  "lon": 5.4399670,
+  "tags": {
+    "name": "La Rivière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6251428198,
+  "lat": 44.9961668,
+  "lon": 5.4450958,
+  "tags": {
+    "name": "Les Pélaillons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6324964752,
+  "lat": 44.6608505,
+  "lon": 5.3728911,
+  "tags": {
+    "name": "La Rouyère",
+    "name:oc": "La Roièira",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458695,
+  "lat": 44.9997706,
+  "lon": 5.2560013,
+  "tags": {
+    "name": "Les Sibeuds",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458696,
+  "lat": 45.0033441,
+  "lon": 5.2566562,
+  "tags": {
+    "name": "Les Jacots",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458697,
+  "lat": 45.0050017,
+  "lon": 5.2592081,
+  "tags": {
+    "name": "Les Merles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458698,
+  "lat": 45.0085996,
+  "lon": 5.2620132,
+  "tags": {
+    "name": "Les Belles",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458699,
+  "lat": 45.0134433,
+  "lon": 5.2633874,
+  "tags": {
+    "name": "Les Ducs",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458700,
+  "lat": 45.0158282,
+  "lon": 5.2659905,
+  "tags": {
+    "name": "Les Ducs",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6375458701,
+  "lat": 45.0140362,
+  "lon": 5.2703907,
+  "tags": {
+    "name": "Les Brudes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6491574296,
+  "lat": 45.0405203,
+  "lon": 5.3827831,
+  "tags": {
+    "name": "Les Saffrières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6497900985,
+  "lat": 44.9325913,
+  "lon": 4.8563151,
+  "tags": {
+    "name": "Les Fourniers",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2019"
+  }
+},
+{
+  "type": "node",
+  "id": 6497900986,
+  "lat": 44.9302329,
+  "lon": 4.8554555,
+  "tags": {
+    "name": "Les Chalands",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2019"
+  }
+},
+{
+  "type": "node",
+  "id": 6594315747,
+  "lat": 44.8631240,
+  "lon": 5.2189484,
+  "tags": {
+    "name": "Les Bouaches",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6594315751,
+  "lat": 44.8696388,
+  "lon": 5.2217782,
+  "tags": {
+    "name": "Les Boutons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6594315753,
+  "lat": 44.8707889,
+  "lon": 5.2196002,
+  "tags": {
+    "name": "Les Bertrands",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6594370918,
+  "lat": 44.8384743,
+  "lon": 5.0048679,
+  "tags": {
+    "name": "La Rollande",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6595104556,
+  "lat": 44.6483874,
+  "lon": 4.8684722,
+  "tags": {
+    "name": "Fresneau",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6595104590,
+  "lat": 44.6548597,
+  "lon": 4.8940229,
+  "tags": {
+    "name": "Les Bastets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6715875594,
+  "lat": 44.9278544,
+  "lon": 5.2408272,
+  "tags": {
+    "name": "Hameau de la Charge",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6872789186,
+  "lat": 44.7223749,
+  "lon": 4.8926496,
+  "tags": {
+    "name": "Les Roberts",
+    "name:oc": "Los Robèrts",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6960856114,
+  "lat": 44.6268253,
+  "lon": 4.9926735,
+  "tags": {
+    "addr:postcode": "26400",
+    "name": "Saudon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 6976774502,
+  "lat": 44.6960883,
+  "lon": 5.0012497,
+  "tags": {
+    "name": "Les Berthoins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7000963972,
+  "lat": 45.0212149,
+  "lon": 5.2633899,
+  "tags": {
+    "name": "Les Téziers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7000963973,
+  "lat": 45.0176626,
+  "lon": 5.2665079,
+  "tags": {
+    "name": "L'Ale",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7157632299,
+  "lat": 44.7068009,
+  "lon": 4.9966753,
+  "tags": {
+    "name": "Les Noyeries",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7387514479,
+  "lat": 44.6475707,
+  "lon": 5.3918892,
+  "tags": {
+    "name": "Jansac",
+    "name:oc": "Gensac",
+    "place": "village",
+    "wikipedia": "fr:Recoubeau-Jansac"
+  }
+},
+{
+  "type": "node",
+  "id": 7387572321,
+  "lat": 44.7152545,
+  "lon": 4.9867523,
+  "tags": {
+    "name": "Les Porteronds",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26115B029D"
+  }
+},
+{
+  "type": "node",
+  "id": 7398793087,
+  "lat": 44.8919988,
+  "lon": 5.0662047,
+  "tags": {
+    "name": "Le Peyrerot",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7419067586,
+  "lat": 44.7641735,
+  "lon": 5.0777462,
+  "tags": {
+    "name": "Le Village",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7448080801,
+  "lat": 44.6104824,
+  "lon": 5.2582550,
+  "tags": {
+    "name": "L'Aribat",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7590634207,
+  "lat": 44.9600153,
+  "lon": 5.4364487,
+  "tags": {
+    "name": "Le Serre",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7590634282,
+  "lat": 44.9653521,
+  "lon": 5.4420197,
+  "tags": {
+    "name": "Les Valets",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2020"
+  }
+},
+{
+  "type": "node",
+  "id": 7747652387,
+  "lat": 45.0020685,
+  "lon": 5.4217891,
+  "tags": {
+    "name": "Les-Barraques-en-Vercors",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7791065518,
+  "lat": 44.8380388,
+  "lon": 5.0097254,
+  "tags": {
+    "name": "La Paillette",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7835081205,
+  "lat": 44.6079920,
+  "lon": 5.0852849,
+  "tags": {
+    "name": "Lagier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 7844039449,
+  "lat": 44.5878247,
+  "lon": 5.3104365,
+  "tags": {
+    "name": "Le Monestier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 8033582185,
+  "lat": 45.0431755,
+  "lon": 5.2142438,
+  "tags": {
+    "name": "Les Guerbys",
+    "name:oc": "Los Guebeis",
+    "place": "hamlet",
+    "source:name:oc": "ieo-bdtopoc"
+  }
+},
+{
+  "type": "node",
+  "id": 8069202797,
+  "lat": 44.7049364,
+  "lon": 5.0053641,
+  "tags": {
+    "name": "Lambres",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 8121577551,
+  "lat": 45.0314185,
+  "lon": 5.3167230,
+  "tags": {
+    "name": "Les Chaux",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2020"
+  }
+},
+{
+  "type": "node",
+  "id": 8299442834,
+  "lat": 44.8632286,
+  "lon": 5.3018823,
+  "tags": {
+    "name": "Merclan",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 8299442923,
+  "lat": 44.8395489,
+  "lon": 5.2932376,
+  "tags": {
+    "name": "Villeneuve",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 8300206482,
+  "lat": 44.8909062,
+  "lon": 5.4231584,
+  "tags": {
+    "name": "Le Passage",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 8480379604,
+  "lat": 44.7073050,
+  "lon": 5.3920045,
+  "tags": {
+    "name": "La Salle",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 8555404406,
+  "lat": 44.9169104,
+  "lon": 5.1000246,
+  "tags": {
+    "name": "La Martinette",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9024567149,
+  "lat": 44.6958427,
+  "lon": 5.2557504,
+  "tags": {
+    "name": "Allard",
+    "name:oc": "Allard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9066289773,
+  "lat": 44.6593801,
+  "lon": 4.9863478,
+  "tags": {
+    "name": "Le Péage",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9090752087,
+  "lat": 44.7270839,
+  "lon": 5.0641420,
+  "tags": {
+    "name": "Les Chiprons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9219904349,
+  "lat": 44.8200208,
+  "lon": 5.1637061,
+  "tags": {
+    "name": "Le fond de Baix",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9222502190,
+  "lat": 44.7982036,
+  "lon": 5.0929689,
+  "tags": {
+    "name": "La Rivière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9320872536,
+  "lat": 44.8870060,
+  "lon": 5.1588878,
+  "tags": {
+    "name": "Les Limouches",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9330867291,
+  "lat": 44.9734241,
+  "lon": 5.4464553,
+  "tags": {
+    "name": "Les Mondains",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9434138130,
+  "lat": 44.7905196,
+  "lon": 5.0162512,
+  "tags": {
+    "name": "La Pichatte",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9434138131,
+  "lat": 44.7899181,
+  "lon": 5.0264811,
+  "tags": {
+    "name": "Festeille",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9448451039,
+  "lat": 44.7318660,
+  "lon": 4.8808182,
+  "tags": {
+    "name": "Saint-Denis",
+    "name:oc": "Sant Danís",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9529335668,
+  "lat": 44.8617598,
+  "lon": 4.9005405,
+  "tags": {
+    "name": "Les Mernes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9682173968,
+  "lat": 44.7730247,
+  "lon": 5.0249566,
+  "tags": {
+    "name": "La Condamine",
+    "name:oc": "La Condamina",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9737953962,
+  "lat": 44.5917126,
+  "lon": 5.4498303,
+  "tags": {
+    "name": "Les Grangiers",
+    "name:oc": "Los Grangiers",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737953963,
+  "lat": 44.5925243,
+  "lon": 5.4433206,
+  "tags": {
+    "name": "Salles",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954596,
+  "lat": 44.6370477,
+  "lon": 5.4192692,
+  "tags": {
+    "name": "La Bâtie",
+    "name:oc": "La Bastiá",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954600,
+  "lat": 44.6353147,
+  "lon": 5.4261786,
+  "tags": {
+    "name": "La Plaine",
+    "name:oc": "La Plana",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954601,
+  "lat": 44.6295388,
+  "lon": 5.4319829,
+  "tags": {
+    "name": "L'Hermiton",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954612,
+  "lat": 44.6196016,
+  "lon": 5.4346383,
+  "tags": {
+    "name": "Le Miral",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954709,
+  "lat": 44.6250720,
+  "lon": 5.4266399,
+  "tags": {
+    "name": "Les Galandons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954710,
+  "lat": 44.6264426,
+  "lon": 5.4289252,
+  "tags": {
+    "name": "Les Gabeliers",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9737954753,
+  "lat": 44.6156638,
+  "lon": 5.4245746,
+  "tags": {
+    "name": "La Basse Vière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 9745075741,
+  "lat": 44.6804537,
+  "lon": 5.3901163,
+  "tags": {
+    "name": "Grange Neuve",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9755522387,
+  "lat": 44.6971675,
+  "lon": 5.3094220,
+  "tags": {
+    "name": "La Roche",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9767987237,
+  "lat": 44.6087479,
+  "lon": 5.1300037,
+  "tags": {
+    "name": "La Tour",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9767987304,
+  "lat": 44.6239877,
+  "lon": 5.1217371,
+  "tags": {
+    "name": "Les Plaines",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9773631271,
+  "lat": 44.6123912,
+  "lon": 4.9810231,
+  "tags": {
+    "name": "Les Vialats",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9773631323,
+  "lat": 44.6212997,
+  "lon": 4.9793279,
+  "tags": {
+    "name": "La Garenne",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9773631392,
+  "lat": 44.6067238,
+  "lon": 4.9496412,
+  "tags": {
+    "name": "Miomeye",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9773631441,
+  "lat": 44.6087938,
+  "lon": 4.9576342,
+  "tags": {
+    "name": "Saint-Didier",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 9773631459,
+  "lat": 44.6191348,
+  "lon": 4.9695647,
+  "tags": {
+    "name": "Le Grand Pré",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 10096283024,
+  "lat": 44.7994579,
+  "lon": 5.3296378,
+  "tags": {
+    "name": "Le Moulin",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 10096283025,
+  "lat": 44.8024307,
+  "lon": 5.3265023,
+  "tags": {
+    "name": "Les Martins",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 10096283447,
+  "lat": 44.8100484,
+  "lon": 5.3119352,
+  "tags": {
+    "name": "La Croix",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 10106794506,
+  "lat": 44.5537929,
+  "lon": 5.0882417,
+  "tags": {
+    "name": "La Patte",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10106794509,
+  "lat": 44.5646749,
+  "lon": 5.1122045,
+  "tags": {
+    "name": "Grimolle",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2022"
+  }
+},
+{
+  "type": "node",
+  "id": 10186958482,
+  "lat": 44.7476895,
+  "lon": 5.1254547,
+  "tags": {
+    "name": "Le Dérot Moulinage",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10186987038,
+  "lat": 44.7598227,
+  "lon": 5.1375192,
+  "tags": {
+    "name": "Moulin du roi",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10251084450,
+  "lat": 44.8129264,
+  "lon": 5.0078082,
+  "tags": {
+    "name": "Les Trois Fonds-Est",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10850759884,
+  "lat": 44.7885089,
+  "lon": 5.1333410,
+  "tags": {
+    "name": "Les trois près",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10864338615,
+  "lat": 44.8779490,
+  "lon": 5.1035115,
+  "tags": {
+    "name": "Hameau des Caires",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10940280900,
+  "lat": 44.7370552,
+  "lon": 4.9085927,
+  "tags": {
+    "name": "Saint-Roch",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940292980,
+  "lat": 44.7464513,
+  "lon": 4.8842597,
+  "tags": {
+    "name": "Favier",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940292991,
+  "lat": 44.7563411,
+  "lon": 4.8621046,
+  "tags": {
+    "name": "Guerby",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293052,
+  "lat": 44.7207550,
+  "lon": 4.9082172,
+  "tags": {
+    "name": "Malaire",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293159,
+  "lat": 44.7309122,
+  "lon": 4.8957503,
+  "tags": {
+    "name": "Bichet",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293160,
+  "lat": 44.7360492,
+  "lon": 4.8952782,
+  "tags": {
+    "name": "Godemard",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293163,
+  "lat": 44.7144502,
+  "lon": 4.9396688,
+  "tags": {
+    "name": "Les Jacamons",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293223,
+  "lat": 44.7439062,
+  "lon": 4.8913729,
+  "tags": {
+    "name": "Saint-Bardoux",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293224,
+  "lat": 44.7494306,
+  "lon": 4.8862231,
+  "tags": {
+    "name": "Dartaise",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293225,
+  "lat": 44.7395015,
+  "lon": 4.8637783,
+  "tags": {
+    "name": "Grand-Brian",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293253,
+  "lat": 44.7339952,
+  "lon": 4.8769319,
+  "tags": {
+    "name": "Ladret",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293385,
+  "lat": 44.7344410,
+  "lon": 4.8847800,
+  "tags": {
+    "name": "Condon",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293450,
+  "lat": 44.7157996,
+  "lon": 4.8828381,
+  "tags": {
+    "name": "Besse",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293514,
+  "lat": 44.6955011,
+  "lon": 4.8851073,
+  "tags": {
+    "name": "Rouveyre",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 10940293772,
+  "lat": 44.6842850,
+  "lon": 4.9007499,
+  "tags": {
+    "name": "Combemaure",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 11006096090,
+  "lat": 44.7074012,
+  "lon": 4.8626411,
+  "tags": {
+    "name": "Les Petits Rigauds",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 11006096091,
+  "lat": 44.7064366,
+  "lon": 4.8687190,
+  "tags": {
+    "name": "Espenel",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 11216071299,
+  "lat": 44.7681717,
+  "lon": 5.0902533,
+  "tags": {
+    "name": "Beaume Rousse",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 11216071342,
+  "lat": 44.7556593,
+  "lon": 5.0732374,
+  "tags": {
+    "name": "Marianne",
+    "place": "hamlet",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2023"
+  }
+},
+{
+  "type": "node",
+  "id": 11216071343,
+  "lat": 44.7476705,
+  "lon": 5.0691068,
+  "tags": {
+    "alt_name": "Tramelat",
+    "name": "Tramelas",
+    "place": "hamlet",
+    "ref:FR:FANTOIR": "26098B033G"
+  }
+},
+{
+  "type": "node",
+  "id": 11409780403,
+  "lat": 44.8473129,
+  "lon": 4.8610962,
+  "tags": {
+    "name": "Le Chiez",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11409780404,
+  "lat": 44.8504291,
+  "lon": 4.8726188,
+  "tags": {
+    "name": "Les Basseaux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11409780405,
+  "lat": 44.8575781,
+  "lon": 4.8700814,
+  "tags": {
+    "name": "Pont du Maroc",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11663149399,
+  "lat": 44.6623367,
+  "lon": 5.2092824,
+  "tags": {
+    "name": "Les Bellieux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11734382879,
+  "lat": 44.8421922,
+  "lon": 4.8810872,
+  "tags": {
+    "name": "Marson",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11780301444,
+  "lat": 44.8248045,
+  "lon": 4.8816823,
+  "tags": {
+    "name": "Les Pécolets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11787226784,
+  "lat": 44.8235265,
+  "lon": 4.9041849,
+  "tags": {
+    "name": "Arce",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11818652381,
+  "lat": 44.8069804,
+  "lon": 4.9022710,
+  "tags": {
+    "name": "Bermont",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11822048805,
+  "lat": 44.8053003,
+  "lon": 4.9221114,
+  "tags": {
+    "name": "Les Peyres",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11834936277,
+  "lat": 44.7907523,
+  "lon": 4.9307515,
+  "tags": {
+    "name": "Les Richauds",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11834936383,
+  "lat": 44.7843956,
+  "lon": 4.9252505,
+  "tags": {
+    "name": "Les Vallons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11868796888,
+  "lat": 44.8106008,
+  "lon": 4.9406999,
+  "tags": {
+    "name": "Les Serres",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11868959363,
+  "lat": 44.8174385,
+  "lon": 4.9335874,
+  "tags": {
+    "name": "Les Bois",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11874232125,
+  "lat": 44.7837514,
+  "lon": 4.8912142,
+  "tags": {
+    "name": "Chabanne",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11877395295,
+  "lat": 44.7726678,
+  "lon": 4.9099429,
+  "tags": {
+    "name": "Les Fanges",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11900397556,
+  "lat": 44.7556422,
+  "lon": 4.9206514,
+  "tags": {
+    "name": "La Garde",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11900397557,
+  "lat": 44.7496873,
+  "lon": 4.9195471,
+  "tags": {
+    "name": "La Gare des Ramières",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11901186084,
+  "lat": 44.7573679,
+  "lon": 4.9259563,
+  "tags": {
+    "name": "Les Burdins",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11904098585,
+  "lat": 44.7655824,
+  "lon": 4.9311904,
+  "tags": {
+    "name": "Les Aures",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11904098586,
+  "lat": 44.7656602,
+  "lon": 4.9389393,
+  "tags": {
+    "name": "Petite Aiguebonne",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11904098587,
+  "lat": 44.7616570,
+  "lon": 4.9381624,
+  "tags": {
+    "name": "Le Pontillard",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11909952701,
+  "lat": 44.7734154,
+  "lon": 4.9340513,
+  "tags": {
+    "name": "Les Astiers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 11928215572,
+  "lat": 44.7444983,
+  "lon": 4.9894023,
+  "tags": {
+    "name": "Bourbousson",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12133945015,
+  "lat": 44.7893101,
+  "lon": 5.1956295,
+  "tags": {
+    "name": "Les Faucons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12133987933,
+  "lat": 44.7911560,
+  "lon": 5.1970532,
+  "tags": {
+    "name": "Les Lançons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12134279406,
+  "lat": 44.7795135,
+  "lon": 5.1883809,
+  "tags": {
+    "name": "Chafalier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12134279407,
+  "lat": 44.7683746,
+  "lon": 5.1889491,
+  "tags": {
+    "name": "La Grande Morouse",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12163212524,
+  "lat": 44.8015390,
+  "lon": 5.2061696,
+  "tags": {
+    "name": "Les Gentons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12163212525,
+  "lat": 44.8194407,
+  "lon": 5.2230703,
+  "tags": {
+    "name": "Les Maillets",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12163212526,
+  "lat": 44.8193924,
+  "lon": 5.2250710,
+  "tags": {
+    "name": "Capoue",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12163212527,
+  "lat": 44.8165020,
+  "lon": 5.2225675,
+  "tags": {
+    "name": "La Grange",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12163212528,
+  "lat": 44.8054835,
+  "lon": 5.2287381,
+  "tags": {
+    "name": "Les Bruns",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12163217758,
+  "lat": 44.8055890,
+  "lon": 5.1925052,
+  "tags": {
+    "name": "Le Moulin",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12169984350,
+  "lat": 44.7860390,
+  "lon": 5.2055436,
+  "tags": {
+    "name": "Chaffois",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12172475252,
+  "lat": 44.8004412,
+  "lon": 5.2267032,
+  "tags": {
+    "name": "Granjon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12350770979,
+  "lat": 44.7525970,
+  "lon": 5.1312026,
+  "tags": {
+    "name": "Le Moulin",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12350770980,
+  "lat": 44.7473031,
+  "lon": 5.1309856,
+  "tags": {
+    "name": "Le Plantier",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12373207460,
+  "lat": 44.7662987,
+  "lon": 5.1352442,
+  "tags": {
+    "name": "Les Granges",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12375836742,
+  "lat": 44.7401957,
+  "lon": 5.1276276,
+  "tags": {
+    "name": "Vachères",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12438518588,
+  "lat": 44.8451054,
+  "lon": 4.8523374,
+  "tags": {
+    "name": "Champfort",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12471110658,
+  "lat": 44.8002893,
+  "lon": 4.8827265,
+  "tags": {
+    "name": "Les Julliens",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12475529241,
+  "lat": 44.7942281,
+  "lon": 4.8613161,
+  "tags": {
+    "name": "La Croix",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12477924318,
+  "lat": 44.7964032,
+  "lon": 4.8668799,
+  "tags": {
+    "name": "Fontgrand",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12522997048,
+  "lat": 44.7848265,
+  "lon": 4.8663424,
+  "tags": {
+    "name": "Les Massons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12522997052,
+  "lat": 44.7955717,
+  "lon": 4.8732022,
+  "tags": {
+    "name": "Les Davids",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12573548755,
+  "lat": 44.8299297,
+  "lon": 5.2061078,
+  "tags": {
+    "name": "Le Frachet",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12573573309,
+  "lat": 44.8036813,
+  "lon": 5.2041147,
+  "tags": {
+    "name": "La Rivière",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12573573311,
+  "lat": 44.8064516,
+  "lon": 5.2098380,
+  "tags": {
+    "name": "Marroux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12675771462,
+  "lat": 44.7485600,
+  "lon": 4.9795322,
+  "tags": {
+    "name": "Seigneur Dieu",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648707,
+  "lat": 44.7568274,
+  "lon": 4.8545011,
+  "tags": {
+    "name": "La Garenne",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648709,
+  "lat": 44.7539319,
+  "lon": 4.8713597,
+  "tags": {
+    "name": "Les Pentes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648717,
+  "lat": 44.7448870,
+  "lon": 4.8929682,
+  "tags": {
+    "name": "Gronlaton",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648726,
+  "lat": 44.7399252,
+  "lon": 4.9389223,
+  "tags": {
+    "name": "Les Mattes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648731,
+  "lat": 44.7332969,
+  "lon": 4.9391500,
+  "tags": {
+    "name": "Les Plots",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648732,
+  "lat": 44.7324294,
+  "lon": 4.9331335,
+  "tags": {
+    "name": "Buffieres",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648738,
+  "lat": 44.7185379,
+  "lon": 4.9343790,
+  "tags": {
+    "name": "Crouzon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709648741,
+  "lat": 44.7152897,
+  "lon": 4.9272584,
+  "tags": {
+    "name": "Les Cotes",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709756623,
+  "lat": 44.7386485,
+  "lon": 4.8834676,
+  "tags": {
+    "name": "Lessartaire",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709756624,
+  "lat": 44.7414642,
+  "lon": 4.8898768,
+  "tags": {
+    "name": "Le Bret",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709756625,
+  "lat": 44.7419761,
+  "lon": 4.8950504,
+  "tags": {
+    "name": "Serre Chaloup",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709756631,
+  "lat": 44.7260969,
+  "lon": 4.8996822,
+  "tags": {
+    "name": "Rialle",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709756632,
+  "lat": 44.7233266,
+  "lon": 4.9047575,
+  "tags": {
+    "name": "Les Gours",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12709756645,
+  "lat": 44.7224560,
+  "lon": 4.9207198,
+  "tags": {
+    "name": "Plaisance",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12710835375,
+  "lat": 44.9870029,
+  "lon": 5.2521936,
+  "tags": {
+    "name": "Tamée",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12725559237,
+  "lat": 44.7892528,
+  "lon": 4.9139711,
+  "tags": {
+    "name": "Deves",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12725559240,
+  "lat": 44.7970476,
+  "lon": 4.9058546,
+  "tags": {
+    "name": "Pierre Blanche",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12725559241,
+  "lat": 44.7969251,
+  "lon": 4.9101662,
+  "tags": {
+    "name": "Serony",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12782164629,
+  "lat": 44.6825862,
+  "lon": 4.9403464,
+  "tags": {
+    "name": "Le Village",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12782164631,
+  "lat": 44.6803417,
+  "lon": 4.9413656,
+  "tags": {
+    "name": "Le Terron",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12791525538,
+  "lat": 44.6814883,
+  "lon": 4.9653816,
+  "tags": {
+    "name": "Le Village",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12793471377,
+  "lat": 44.6550474,
+  "lon": 4.9264675,
+  "tags": {
+    "name": "Les Bessons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13038896207,
+  "lat": 44.8959730,
+  "lon": 4.8577878,
+  "tags": {
+    "name": "La Motte",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13087179080,
+  "lat": 44.7645513,
+  "lon": 5.1177438,
+  "tags": {
+    "name": "Les Brus",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13108954819,
+  "lat": 44.6907857,
+  "lon": 5.1368514,
+  "tags": {
+    "name": "Les Cassoux",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13265194797,
+  "lat": 44.7895701,
+  "lon": 5.1954400,
+  "tags": {
+    "name": "Eygluy",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13273604599,
+  "lat": 44.8032572,
+  "lon": 5.2208757,
+  "tags": {
+    "name": "Escoulin",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13291167676,
+  "lat": 44.7674959,
+  "lon": 5.1533359,
+  "tags": {
+    "name": "Fontaine des Buis",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13291167677,
+  "lat": 44.7716135,
+  "lon": 5.1483434,
+  "tags": {
+    "name": "Les Berangers",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13291167678,
+  "lat": 44.7685286,
+  "lon": 5.1698254,
+  "tags": {
+    "name": "Le Gaure",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13299560690,
+  "lat": 44.9962498,
+  "lon": 5.3898390,
+  "tags": {
+    "name": "Hameau de Revoulat",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13301459634,
+  "lat": 45.0159954,
+  "lon": 5.4433776,
+  "tags": {
+    "name": "Pré Jaillon",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13301459642,
+  "lat": 45.0073004,
+  "lon": 5.4415009,
+  "tags": {
+    "name": "Chavari",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13301459643,
+  "lat": 45.0071033,
+  "lon": 5.4368379,
+  "tags": {
+    "name": "L'Emalichère",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13301459645,
+  "lat": 45.0116482,
+  "lon": 5.4420387,
+  "tags": {
+    "name": "Versane",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13301459662,
+  "lat": 45.0306210,
+  "lon": 5.4473841,
+  "tags": {
+    "name": "Les Françons",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 13301459663,
+  "lat": 45.0341207,
+  "lon": 5.4492289,
+  "tags": {
+    "name": "La Berthuinière et la Combe",
+    "place": "hamlet"
+  }
+}
+
+  ]
+}

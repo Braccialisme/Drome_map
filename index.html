@@ -1615,23 +1615,18 @@ function reapplyCurvature() {
   if (state.layers.curvature) applyCurvature();
 }
 
-// ── LIGNES DE TRANSPORT (bus / car / train) via OSM ─────────────────────────
+// ── TRANSPORT : arrêts de bus + gares (OSM). Les lignes = trop lourdes en
+// statique (géométries TER hors bbox), on garde juste les arrêts. ────────────
 async function applyTransport(gen) {
-  const q = `[out:json][timeout:25];(relation["route"~"^(bus|train|tram|light_rail|trolleybus)$"](${bboxStr});way(r);node["highway"="bus_stop"](${bboxStr});node["railway"="station"](${bboxStr}););out geom;`;
+  const q = `[out:json][timeout:60];(node["highway"="bus_stop"](${bboxStr});node["railway"="station"](${bboxStr});node["railway"="halt"](${bboxStr}););out;`;
   try {
-    const osm = await overpassFetch('drm-transport-v2', q);
-    const lines = osmToGeoJSON(osm, 'line');
+    const osm = await overpassFetch('drm-transport-v3', q);
     const stops = osmToGeoJSON(osm, 'point');
-    if (stale(gen) || map.getSource('transport-src')) return;
-    map.addSource('transport-src', { type: 'geojson', data: lines });
-    map.addLayer({ id: 'transport-lines', type: 'line', source: 'transport-src',
-      layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': '#7a3ea8', 'line-opacity': 0.75, 'line-dasharray': [2, 1.5],
-        'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1, 14, 3] } });
+    if (stale(gen) || map.getSource('transport-stops-src')) return;
     map.addSource('transport-stops-src', { type: 'geojson', data: stops });
     map.addLayer({ id: 'transport-stops', type: 'circle', source: 'transport-stops-src',
-      minzoom: 12,
-      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 2.5, 15, 5],
+      minzoom: 11,
+      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 15, 5],
         'circle-color': '#7a3ea8', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
     if (!boundEvents.has('transport-stops')) {
       boundEvents.add('transport-stops');
@@ -1988,7 +1983,7 @@ const PANELS = {
     </div>
     <div class="row ${state.layers.transport ? 'active' : ''}" data-layer="transport" style="border-top:1px solid var(--greige-2); margin-top:6px;">
       <div class="checkbox"></div>
-      <div class="row-label">Lignes de transport<div class="row-sub">bus · car · train (OSM)</div></div>
+      <div class="row-label">Arrêts de transport<div class="row-sub">arrêts de bus · gares (OSM)</div></div>
     </div>
   `,
   patri: () => `

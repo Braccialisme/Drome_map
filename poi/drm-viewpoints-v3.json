@@ -1,0 +1,1766 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.7 375dc00a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-09T19:19:13Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 18273826,
+  "lat": 44.9992791,
+  "lon": 5.3340440,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 105865846,
+  "lat": 44.8493486,
+  "lon": 5.0913017,
+  "tags": {
+    "created_by": "Editop",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 105969768,
+  "lat": 44.8057953,
+  "lon": 5.1100047,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 291979303,
+  "lat": 44.9020630,
+  "lon": 5.2486138,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 428070138,
+  "lat": 44.7441738,
+  "lon": 5.3502174,
+  "tags": {
+    "name": "La Croix de Justin",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 455094656,
+  "lat": 44.9385761,
+  "lon": 4.8526237,
+  "tags": {
+    "direction": "60",
+    "name": "Vue sur le Vercors et Valence",
+    "source": "Bing Maps",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 886743205,
+  "lat": 45.0436181,
+  "lon": 5.3995808,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1275394308,
+  "lat": 44.6699963,
+  "lon": 5.2951627,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1286483266,
+  "lat": 45.0278643,
+  "lon": 5.0381554,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1287462078,
+  "lat": 44.9799628,
+  "lon": 5.3326824,
+  "tags": {
+    "name": "Combe laval",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1430821797,
+  "lat": 44.9490911,
+  "lon": 5.4093935,
+  "tags": {
+    "direction": "225-45",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1748929099,
+  "lat": 44.6484770,
+  "lon": 5.3307703,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1751715473,
+  "lat": 44.9774161,
+  "lon": 5.3332297,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 1907098242,
+  "lat": 44.9549557,
+  "lon": 5.1470359,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2012401847,
+  "lat": 45.0088138,
+  "lon": 5.3186128,
+  "tags": {
+    "name": "Jourdan",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2038154658,
+  "lat": 44.9644281,
+  "lon": 5.4201899,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2161266269,
+  "lat": 44.5680807,
+  "lon": 5.0117895,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2301164670,
+  "lat": 44.9122173,
+  "lon": 4.8716902,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2332408499,
+  "lat": 45.0331389,
+  "lon": 5.3999322,
+  "tags": {
+    "name": "Pas de l'Allier",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2332408508,
+  "lat": 45.0466283,
+  "lon": 5.3904552,
+  "tags": {
+    "name": "Pas des Voûtes",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2332408918,
+  "lat": 45.0446300,
+  "lon": 5.4121951,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2332408944,
+  "lat": 45.0452863,
+  "lon": 5.4098264,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2332408978,
+  "lat": 45.0469496,
+  "lon": 5.3912661,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2348339886,
+  "lat": 44.7234501,
+  "lon": 4.9412953,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 2348339889,
+  "lat": 44.7242467,
+  "lon": 4.9422072,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3008447860,
+  "lat": 45.0281535,
+  "lon": 5.1746731,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3013506573,
+  "lat": 44.6567258,
+  "lon": 5.0499905,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3092798832,
+  "lat": 44.9009345,
+  "lon": 5.2673741,
+  "tags": {
+    "name": "Belvédère du pas de l'Aubasse",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3092804095,
+  "lat": 44.9021547,
+  "lon": 5.2609325,
+  "tags": {
+    "direction": "0",
+    "name": "Belvédère de l'Arche",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3545025045,
+  "lat": 44.6567232,
+  "lon": 5.0502054,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3646992698,
+  "lat": 45.0057595,
+  "lon": 5.3974884,
+  "tags": {
+    "ele": "1168",
+    "name": "Le Belvédère de Revoulat",
+    "tourism": "viewpoint",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3658782336,
+  "lat": 44.7891387,
+  "lon": 5.1987019,
+  "tags": {
+    "name": "La Quoite",
+    "survey:date": "2025-03-01",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3658782337,
+  "lat": 44.7838660,
+  "lon": 5.2166609,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3731504240,
+  "lat": 44.5582963,
+  "lon": 5.0147645,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3745140956,
+  "lat": 44.9171651,
+  "lon": 5.1766165,
+  "tags": {
+    "comment": "Par temps clair, ont peux voir le Mont-Blanc",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3771927043,
+  "lat": 44.8897801,
+  "lon": 5.2666372,
+  "tags": {
+    "name": "Observatoire de la faune Serrou",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3771927044,
+  "lat": 44.8934699,
+  "lon": 5.2699170,
+  "tags": {
+    "name": "Observatoire de la faune Palissade",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 3797458790,
+  "lat": 45.0172902,
+  "lon": 4.9437022,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4090419426,
+  "lat": 44.9685077,
+  "lon": 5.1691722,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4316724539,
+  "lat": 45.0419675,
+  "lon": 5.2322425,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4371663072,
+  "lat": 44.9550769,
+  "lon": 5.2027312,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4566838930,
+  "lat": 45.0342694,
+  "lon": 5.3470755,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4566839064,
+  "lat": 45.0181204,
+  "lon": 5.3379184,
+  "tags": {
+    "man_made": "cross",
+    "name": "Croix de Saint-Laurent",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4621859839,
+  "lat": 44.9035284,
+  "lon": 5.2516974,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4786661430,
+  "lat": 45.0067834,
+  "lon": 4.9518548,
+  "tags": {
+    "map_type": "toposcope",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4807792359,
+  "lat": 45.0439732,
+  "lon": 5.4012648,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4810429132,
+  "lat": 44.9731535,
+  "lon": 5.2108730,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4810429133,
+  "lat": 44.9732116,
+  "lon": 5.1862676,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4842318248,
+  "lat": 44.9839109,
+  "lon": 5.2222345,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4842318390,
+  "lat": 44.9745231,
+  "lon": 5.2127019,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4902655508,
+  "lat": 44.6091782,
+  "lon": 5.0007058,
+  "tags": {
+    "direction": "200",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 4902655516,
+  "lat": 44.6095732,
+  "lon": 4.9988270,
+  "tags": {
+    "direction": "210",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5240844359,
+  "lat": 44.7581463,
+  "lon": 5.4021026,
+  "tags": {
+    "name": "Belvédère",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5263533980,
+  "lat": 44.7747397,
+  "lon": 5.3928319,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5263533982,
+  "lat": 44.7743221,
+  "lon": 5.3939635,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5284149490,
+  "lat": 44.7823000,
+  "lon": 5.3876676,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5284149491,
+  "lat": 44.7814696,
+  "lon": 5.3788447,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5284149492,
+  "lat": 44.7831975,
+  "lon": 5.3891223,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5323876506,
+  "lat": 44.7475060,
+  "lon": 5.4124541,
+  "tags": {
+    "direction": "E",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5323876508,
+  "lat": 44.7475642,
+  "lon": 5.4088641,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5335196948,
+  "lat": 44.7655149,
+  "lon": 5.3737320,
+  "tags": {
+    "direction": "NE",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5418716345,
+  "lat": 44.7793824,
+  "lon": 5.4499750,
+  "tags": {
+    "direction": "SW",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5435067821,
+  "lat": 44.8333945,
+  "lon": 5.2407139,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5435200621,
+  "lat": 44.8338657,
+  "lon": 5.2406534,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5696810368,
+  "lat": 44.6095544,
+  "lon": 5.0013095,
+  "tags": {
+    "direction": "10",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5696810372,
+  "lat": 44.6115729,
+  "lon": 4.9978206,
+  "tags": {
+    "name": "Belvédère des Fours",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5884263167,
+  "lat": 44.7667201,
+  "lon": 4.8538091,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5884391103,
+  "lat": 44.9332953,
+  "lon": 4.8505007,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5887617322,
+  "lat": 44.9590903,
+  "lon": 5.1318023,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5887617323,
+  "lat": 44.9209084,
+  "lon": 5.1872134,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5887617324,
+  "lat": 44.9765516,
+  "lon": 5.1075785,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5887617325,
+  "lat": 45.0414118,
+  "lon": 5.0434328,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6349827746,
+  "lat": 44.8978833,
+  "lon": 5.2337375,
+  "tags": {
+    "name": "Belvédère du col de la Bataille",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6421947909,
+  "lat": 44.6815789,
+  "lon": 4.9648400,
+  "tags": {
+    "direction": "SSE",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6680092023,
+  "lat": 45.0181826,
+  "lon": 5.2945095,
+  "tags": {
+    "name": "Table d'orientation",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6742879304,
+  "lat": 44.9381063,
+  "lon": 4.8847037,
+  "tags": {
+    "direction": "90",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 6779232688,
+  "lat": 44.8282446,
+  "lon": 5.4366516,
+  "tags": {
+    "name": "Superbe vue",
+    "name:en": "Very nice view",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 7439237573,
+  "lat": 44.7969858,
+  "lon": 5.0720293,
+  "tags": {
+    "lwn_name": "Col d'Ourches",
+    "network:type": "node_network",
+    "network:wikidata": "Q3333858",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8372290415,
+  "lat": 44.9885749,
+  "lon": 5.3331676,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8372300318,
+  "lat": 44.9879859,
+  "lon": 5.3338207,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8372300320,
+  "lat": 44.9860320,
+  "lon": 5.3329262,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8735917775,
+  "lat": 44.9423952,
+  "lon": 4.9001896,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8767860222,
+  "lat": 44.9007028,
+  "lon": 5.1485538,
+  "tags": {
+    "direction": "112-0",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8913021360,
+  "lat": 45.0170229,
+  "lon": 5.3684569,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8987918416,
+  "lat": 44.6146597,
+  "lon": 5.0177770,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 8987927238,
+  "lat": 44.6083874,
+  "lon": 5.0196942,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9050366931,
+  "lat": 45.0461711,
+  "lon": 5.3933677,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9051705876,
+  "lat": 44.8706882,
+  "lon": 5.3436393,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9060844489,
+  "lat": 44.6550557,
+  "lon": 4.9927234,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9119674297,
+  "lat": 44.7765965,
+  "lon": 5.1438721,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9200233490,
+  "lat": 45.0051464,
+  "lon": 5.4075202,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9200233491,
+  "lat": 45.0052570,
+  "lon": 5.4090655,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9408012995,
+  "lat": 44.6481790,
+  "lon": 4.9403025,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9442863726,
+  "lat": 44.6582910,
+  "lon": 5.0461160,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611243314,
+  "lat": 44.9558037,
+  "lon": 5.1612085,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611260985,
+  "lat": 44.9594251,
+  "lon": 5.1536977,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611360457,
+  "lat": 44.9618117,
+  "lon": 5.1597226,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611440959,
+  "lat": 44.9719213,
+  "lon": 5.1763670,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611440971,
+  "lat": 44.9714203,
+  "lon": 5.1754410,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611441005,
+  "lat": 44.9738695,
+  "lon": 5.1771194,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611441006,
+  "lat": 44.9724464,
+  "lon": 5.1765159,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611452693,
+  "lat": 44.9713444,
+  "lon": 5.1775975,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611456233,
+  "lat": 44.9721788,
+  "lon": 5.1771891,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611630689,
+  "lat": 44.9745123,
+  "lon": 5.1797020,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611630740,
+  "lat": 44.9728477,
+  "lon": 5.1782955,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611660963,
+  "lat": 44.9925594,
+  "lon": 5.1883209,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611660966,
+  "lat": 44.9933153,
+  "lon": 5.1886448,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611661012,
+  "lat": 44.9892645,
+  "lon": 5.1864240,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611661014,
+  "lat": 44.9789138,
+  "lon": 5.1816555,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9611661017,
+  "lat": 44.9871142,
+  "lon": 5.1853980,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9613244621,
+  "lat": 44.8789548,
+  "lon": 5.3424757,
+  "tags": {
+    "description": "Vue du Grand Veymont, du Glandasse, Moucherotte, et de la plaine de Vassieux-en-vercors",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9676940898,
+  "lat": 44.8930919,
+  "lon": 5.4324628,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9676989181,
+  "lat": 44.9039509,
+  "lon": 5.4423590,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9757482217,
+  "lat": 44.8379632,
+  "lon": 5.3975189,
+  "tags": {
+    "name": "Point de Vue du Col du Rousset",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9939891180,
+  "lat": 44.5848931,
+  "lon": 5.1327183,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 9984029740,
+  "lat": 44.8381387,
+  "lon": 4.8939647,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10101256064,
+  "lat": 44.8821265,
+  "lon": 5.1192507,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10217025944,
+  "lat": 44.6491734,
+  "lon": 4.8740514,
+  "tags": {
+    "information": "map",
+    "map_type": "toposcope",
+    "source": "IGN - 2024-03-15",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10579983222,
+  "lat": 44.9008516,
+  "lon": 5.2100837,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10579998906,
+  "lat": 44.8996338,
+  "lon": 5.2108632,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10674643201,
+  "lat": 44.8337316,
+  "lon": 5.4399202,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10837055812,
+  "lat": 45.0408355,
+  "lon": 5.0429217,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10887283940,
+  "lat": 44.6516952,
+  "lon": 5.1908509,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 10926826715,
+  "lat": 44.8599319,
+  "lon": 5.2390874,
+  "tags": {
+    "direction": "260",
+    "name": "Pierre Plate",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11013607414,
+  "lat": 44.9297900,
+  "lon": 4.8681711,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11086836383,
+  "lat": 44.8289826,
+  "lon": 5.0736798,
+  "tags": {
+    "direction": "SW-NW;N-SE",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11086836384,
+  "lat": 44.8182993,
+  "lon": 5.0738993,
+  "tags": {
+    "direction": "SW-NW",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11086836385,
+  "lat": 44.8186136,
+  "lon": 5.0740530,
+  "tags": {
+    "direction": "SW-NW",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11086836386,
+  "lat": 44.8188635,
+  "lon": 5.0741936,
+  "tags": {
+    "direction": "SW-NW",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11086836388,
+  "lat": 44.8168454,
+  "lon": 5.0735008,
+  "tags": {
+    "direction": "0-360",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11157782792,
+  "lat": 44.6650991,
+  "lon": 5.0579939,
+  "tags": {
+    "direction": "290-60",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11159696628,
+  "lat": 44.6682401,
+  "lon": 5.1005386,
+  "tags": {
+    "direction": "337-112",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11159696629,
+  "lat": 44.6681610,
+  "lon": 5.1004461,
+  "tags": {
+    "direction": "135-225",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11159696630,
+  "lat": 44.6682955,
+  "lon": 5.0985342,
+  "tags": {
+    "direction": "160-200",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11159696632,
+  "lat": 44.6680356,
+  "lon": 5.0950228,
+  "tags": {
+    "direction": "90-180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11159763932,
+  "lat": 44.6642453,
+  "lon": 5.1103361,
+  "tags": {
+    "direction": "70-290",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11159763933,
+  "lat": 44.6644176,
+  "lon": 5.1102247,
+  "tags": {
+    "direction": "180-360",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11251757886,
+  "lat": 44.9728022,
+  "lon": 5.2110426,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11266873856,
+  "lat": 44.9085856,
+  "lon": 5.2036903,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11266907582,
+  "lat": 44.8421750,
+  "lon": 5.1886351,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11351550294,
+  "lat": 44.9798535,
+  "lon": 5.3450696,
+  "tags": {
+    "description:de": "Blick auf die Straße D76",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11405575273,
+  "lat": 44.6095538,
+  "lon": 4.9954969,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11405576604,
+  "lat": 44.6070992,
+  "lon": 5.0075011,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11460824622,
+  "lat": 44.7908074,
+  "lon": 5.3679393,
+  "tags": {
+    "direction": "0",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11487115833,
+  "lat": 44.9474648,
+  "lon": 5.1998256,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11646934465,
+  "lat": 44.5608813,
+  "lon": 5.0428460,
+  "tags": {
+    "ele": "971",
+    "name": "Serre Gros",
+    "natural": "peak",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11827355369,
+  "lat": 44.9412693,
+  "lon": 4.8863848,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 11884047203,
+  "lat": 44.6151030,
+  "lon": 5.0013876,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12042213366,
+  "lat": 44.9773663,
+  "lon": 5.2162078,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12042213367,
+  "lat": 44.9767639,
+  "lon": 5.2158701,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12169444975,
+  "lat": 44.8449361,
+  "lon": 5.0909070,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12218196740,
+  "lat": 44.5516115,
+  "lon": 4.9390977,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12312603889,
+  "lat": 44.8245853,
+  "lon": 5.3846147,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12312616952,
+  "lat": 44.9846705,
+  "lon": 5.3505887,
+  "tags": {
+    "tourism": "viewpoint",
+    "wikimedia_commons": "File:Parc Naturel Régional du Vercors D2 viewpoint.jpg"
+  }
+},
+{
+  "type": "node",
+  "id": 12349049538,
+  "lat": 44.6791995,
+  "lon": 5.2180080,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12364296330,
+  "lat": 44.7931553,
+  "lon": 5.1742437,
+  "tags": {
+    "name": "Serre de Veraut",
+    "survey:date": "2025-03-01",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12390056047,
+  "lat": 44.6510867,
+  "lon": 5.0942322,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12476036764,
+  "lat": 44.6180462,
+  "lon": 5.0273504,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12476069009,
+  "lat": 44.6172204,
+  "lon": 5.0271026,
+  "tags": {
+    "direction": "180",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12690608038,
+  "lat": 44.9865065,
+  "lon": 5.1927653,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12690608088,
+  "lat": 44.9853775,
+  "lon": 5.1934701,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12731567256,
+  "lat": 44.7944554,
+  "lon": 5.1799203,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12768897460,
+  "lat": 44.6194409,
+  "lon": 5.0186029,
+  "tags": {
+    "direction": "290",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 12876200510,
+  "lat": 44.9679422,
+  "lon": 5.1690684,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13064018602,
+  "lat": 44.9651645,
+  "lon": 5.2636456,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13118959373,
+  "lat": 44.7948309,
+  "lon": 5.1055728,
+  "tags": {
+    "direction": "ENE-SW",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13148244562,
+  "lat": 44.9910938,
+  "lon": 4.9787460,
+  "tags": {
+    "direction": "180",
+    "level": "1",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13158286184,
+  "lat": 44.8876079,
+  "lon": 5.2393538,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13261772301,
+  "lat": 44.7422666,
+  "lon": 4.9452514,
+  "tags": {
+    "bench": "yes",
+    "surface": "wood",
+    "tourism": "viewpoint",
+    "viewpoint": "platform",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 13280680101,
+  "lat": 44.7838263,
+  "lon": 5.1835062,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13280682301,
+  "lat": 44.7838503,
+  "lon": 5.1954334,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13463951848,
+  "lat": 44.7067309,
+  "lon": 5.1446438,
+  "tags": {
+    "direction": "S",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13512549200,
+  "lat": 45.0394942,
+  "lon": 5.0691407,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13676139043,
+  "lat": 44.6026239,
+  "lon": 5.1035692,
+  "tags": {
+    "official_name": "Table d'orientation château",
+    "source": "data.gouv.fr:DATAtourisme - 05/2020",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13752905676,
+  "lat": 44.8724164,
+  "lon": 5.2074552,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13898485101,
+  "lat": 44.8868367,
+  "lon": 5.3489800,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13898497201,
+  "lat": 44.8906713,
+  "lon": 5.3500728,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13911267402,
+  "lat": 44.8821491,
+  "lon": 5.4413008,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13920866400,
+  "lat": 44.9350130,
+  "lon": 4.8509420,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13920957601,
+  "lat": 44.9347754,
+  "lon": 4.8506054,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13921010968,
+  "lat": 44.9024643,
+  "lon": 5.2492510,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 13946297439,
+  "lat": 44.9317612,
+  "lon": 4.8888339,
+  "tags": {
+    "direction": "295",
+    "name": "Escalier monumental",
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "way",
+  "id": 94822201,
+  "center": {
+    "lat": 44.8686684,
+    "lon": 5.0611140
+  },
+  "nodes": [
+    1100664333,
+    1100664328,
+    1100664218,
+    1100664031,
+    1100664333
+  ],
+  "tags": {
+    "height": "8",
+    "image": "File:Donjon du château de Barcelonne(Drôme).jpg",
+    "man_made": "tower",
+    "name": "Tour de Barcelone",
+    "tourism": "viewpoint",
+    "tower:construction": "stone",
+    "tower:type": "defensive",
+    "wheelchair": "no",
+    "wikidata": "Q106482823"
+  }
+}
+
+  ]
+}

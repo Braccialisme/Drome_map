@@ -1,0 +1,5292 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.7 375dc00a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-09T19:18:13Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 358321717,
+  "lat": 45.0145763,
+  "lon": 5.0326322,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Triple Five",
+    "survey:date": "2020-09-03"
+  }
+},
+{
+  "type": "node",
+  "id": 476277291,
+  "lat": 44.9132023,
+  "lon": 5.2082606,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Auberge du Grand-Échaillon",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 510491910,
+  "lat": 44.9250391,
+  "lon": 4.9013776,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "restaurant universitaire",
+    "name": "Derodon"
+  }
+},
+{
+  "type": "node",
+  "id": 666818246,
+  "lat": 45.0426089,
+  "lon": 5.0498964,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Chevet de Saint-Barnard"
+  }
+},
+{
+  "type": "node",
+  "id": 672113316,
+  "lat": 44.9290375,
+  "lon": 4.8901288,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "29",
+    "addr:postcode": "26000",
+    "addr:street": "Place Aristide Briand",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/LaTerrasseValence",
+    "contact:instagram": "https://www.tripadvisor.com/Restaurant_Review-g187272-d5567651-Reviews-La_Terrasse_Valence-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "tapas;fine_dining",
+    "delivery": "no",
+    "email": "valence.laterrasse@gmail.com",
+    "name": "La Terrasse du Champs de Mars",
+    "opening_hours": "Tu-Sa 11:00-14:30,18:30-23:00",
+    "phone": "+33 4 75 62 35 22",
+    "reservation": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 718571575,
+  "lat": 45.0438298,
+  "lon": 5.0519983,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Place Jules Nadi",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "cuisine": "french",
+    "name": "Le Bar à Vins",
+    "opening_hours": "Mo-Fr 09:30-21:30; Sa-Su 09:30-22:30",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 70 47 32",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+    "website": "https://lebaravin.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 826792273,
+  "lat": 44.9425066,
+  "lon": 4.8587514,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Chez François",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 907886705,
+  "lat": 45.0408456,
+  "lon": 5.0482838,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizzeria du Midi",
+    "toilets": "yes",
+    "toilets:wheelchair": "no",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 907886727,
+  "lat": 45.0410678,
+  "lon": 5.0487650,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Place du Président Doumer",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "La Comedia",
+    "phone": "+33 4 75 02 85 25",
+    "reservation": "recommended"
+  }
+},
+{
+  "type": "node",
+  "id": 907895225,
+  "lat": 45.0391833,
+  "lon": 5.0477397,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "L'en K Papilles"
+  }
+},
+{
+  "type": "node",
+  "id": 915560801,
+  "lat": 45.0339623,
+  "lon": 5.0529442,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 934656231,
+  "lat": 45.0446876,
+  "lon": 5.0499342,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "La Charette",
+    "opening_hours": "Tu-Sa 12:00-01:00",
+    "phone": "+33 4 75 02 04 25"
+  }
+},
+{
+  "type": "node",
+  "id": 936746798,
+  "lat": 45.0455235,
+  "lon": 5.0502182,
+  "tags": {
+    "amenity": "restaurant",
+    "bar": "yes",
+    "contact:facebook": "https://www.facebook.com/lejeanjaures26100/",
+    "name": "Le Jean Jaurès",
+    "opening_hours": "Mo-Su 06:00-20:00",
+    "phone": "+33 4 75 47 70 82"
+  }
+},
+{
+  "type": "node",
+  "id": 936746802,
+  "lat": 45.0450892,
+  "lon": 5.0497467,
+  "tags": {
+    "amenity": "restaurant",
+    "bar": "yes",
+    "contact:facebook": "https://www.facebook.com/people/C-Lentracte/61580977175134/",
+    "cuisine": "crepe;salad;soup",
+    "name": "C'Lentracte",
+    "opening_hours": "Su-Th 10:00-20:30; Fr-Sa 10:00-21:30",
+    "phone": "+33 4 75 02 69 09",
+    "survey:date": "2021-03-22"
+  }
+},
+{
+  "type": "node",
+  "id": 1129764115,
+  "lat": 44.7284917,
+  "lon": 5.0219422,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "12",
+    "addr:postcode": "26400",
+    "addr:street": "Rue de l'Hôtel de Ville",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/p/La-Source-Bar-%C3%A0-vin-restaurant-100087561885335/",
+    "internet_access": "yes",
+    "internet_access:fee": "customers",
+    "name": "La Source",
+    "opening_hours": "Mo,Fr,Su 11:00-13:30,18:00-22:00; Th 18:00-22:00; We 09:00-13:30; Sa 10:30-13:30,18:00-22:00",
+    "outdoor_seating": "no",
+    "phone": "+336 37 87 15 60"
+  }
+},
+{
+  "type": "node",
+  "id": 1274095278,
+  "lat": 45.0039225,
+  "lon": 4.8710496,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Michel Chabran",
+    "website": "http://michelchabran.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 1274647549,
+  "lat": 45.0375675,
+  "lon": 5.0469865,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Chez Mireille et Lionel"
+  }
+},
+{
+  "type": "node",
+  "id": 1275933598,
+  "lat": 45.0427209,
+  "lon": 5.0480492,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Rue Folquet",
+    "amenity": "restaurant",
+    "cuisine": "french;burger",
+    "name": "Panzo",
+    "opening_hours": "Tu,Su 12:00-14:00; We-Sa 12:00-14:00,19:00-21:30",
+    "phone": "+33 9 51 82 73 83",
+    "website": "https://panzo.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 1296625080,
+  "lat": 44.8951480,
+  "lon": 5.3707964,
+  "tags": {
+    "amenity": "restaurant",
+    "beverage": "yes",
+    "cuisine": "regional",
+    "name": "Bistrot de la Poste"
+  }
+},
+{
+  "type": "node",
+  "id": 1332068565,
+  "lat": 44.6277636,
+  "lon": 4.9729804,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"
+  }
+},
+{
+  "type": "node",
+  "id": 1369389770,
+  "lat": 44.9551029,
+  "lon": 5.1424780,
+  "tags": {
+    "amenity": "restaurant",
+    "bar": "yes",
+    "indoor_seating": "yes",
+    "name": "Le Bar'Bières",
+    "opening_hours": "Mo-Th 07:30-14:30,16:30-19:00; We 07:30-14:30; Fr 07:30-14:30,16:30-22:00; Sa 08:30-12:00",
+    "outdoor_seating": "yes",
+    "phone": "+33475484503"
+  }
+},
+{
+  "type": "node",
+  "id": 1371292925,
+  "lat": 45.0274637,
+  "lon": 5.3274941,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 1643031053,
+  "lat": 45.0355239,
+  "lon": 5.1213349,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Auberge Grill De L'Enclume"
+  }
+},
+{
+  "type": "node",
+  "id": 1687577789,
+  "lat": 44.9033296,
+  "lon": 4.8794147,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Courtepaille",
+    "brand:website": "http://www.courtepaille.com",
+    "brand:wikidata": "Q3116688",
+    "brand:wikipedia": "fr:Grill Courtepaille",
+    "cuisine": "french",
+    "diet:vegetarian": "yes",
+    "name": "Courtepaille",
+    "opening_hours": "Mo-Th 12:00-14:30, 18:30-22:00; Fr 12:00-14:30,18:30-23:00; Sa 12:00-15:00,18:30-23:00; Su 12:00-15:00,18:30-22:00",
+    "phone": "+33 4 75 40 74 74",
+    "ref:FR:SIRET": "33844680000025",
+    "website": "https://www.courtepaille.com/restaurant/courtepaille-valence-sud/"
+  }
+},
+{
+  "type": "node",
+  "id": 1785423618,
+  "lat": 44.9108066,
+  "lon": 5.1922491,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "microbrewery": "yes",
+    "name": "Auberge de Léoncel",
+    "opening_hours": "May-Sep PH,Mo-Su 09:00-18:00; Apr Sa,Su 09:00-18:00",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1814705080,
+  "lat": 44.8230123,
+  "lon": 5.0388843,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "La Pangée",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"
+  }
+},
+{
+  "type": "node",
+  "id": 1843569224,
+  "lat": 44.9308793,
+  "lon": 4.9132815,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "description:fr": "Indiqué comme définitivement fermé sur RestaurantGuru",
+    "name": "Pizza du coin"
+  }
+},
+{
+  "type": "node",
+  "id": 1843789888,
+  "lat": 44.9360329,
+  "lon": 5.4315754,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Bistrot De Saint-Agnan",
+    "opening_hours": "Fr,Sa 19:00-21:00; Su-Tu 12:00-13:00"
+  }
+},
+{
+  "type": "node",
+  "id": 1863451540,
+  "lat": 44.9175660,
+  "lon": 4.8576914,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 1871520137,
+  "lat": 44.5854481,
+  "lon": 5.1329399,
+  "tags": {
+    "addr:city": "Bourdeaux",
+    "addr:housenumber": "1",
+    "addr:postcode": "26460",
+    "addr:street": "Place du Grand Quai",
+    "amenity": "restaurant",
+    "cuisine": "french;local",
+    "name": "Le P'tit Roubion",
+    "opening_hours": "Tu-Sa 12:00-14:00; 18:00-23:00",
+    "phone": "+33 9 71 53 89 88",
+    "website": "https://www.instagram.com/leptitroubion/"
+  }
+},
+{
+  "type": "node",
+  "id": 1871548615,
+  "lat": 44.5862629,
+  "lon": 5.1341911,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french;pizza",
+    "name": "Café du centre",
+    "outdoor_seating": "yes",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1872016685,
+  "lat": 44.9347055,
+  "lon": 4.9076972,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "116",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue de Romans",
+    "amenity": "restaurant",
+    "check_date": "2025-03-30",
+    "contact:tripadvisor": "https://www.tripadvisor.fr/Restaurant_Review-g187272-d3859231-Reviews-Santa_Maria-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "cuisine": "italian;pizza",
+    "delivery": "no",
+    "description:fr": "Indiqué comme temporairement fermé sur certains sites.",
+    "name": "Santa Maria",
+    "payment:credit_cards": "yes",
+    "phone": "+33 4 75 41 04 99",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "803882067",
+    "ref:FR:SIRET": "80388206700017",
+    "reservation": "yes",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 1880871344,
+  "lat": 45.0431005,
+  "lon": 5.0519496,
+  "tags": {
+    "addr:housenumber": "76",
+    "addr:street": "Rue Saint-Nicolas",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Comptoir des Loges",
+    "opening_hours": "Th-Sa 08:00-18:00; Su 9:00-13:00",
+    "outdoor_seating": "yes",
+    "website": "https://comptoirdesloges.wordpress.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 1880872357,
+  "lat": 45.0438313,
+  "lon": 5.0521278,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Place Jules Nadi",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "cuisine": "tapas;brunch",
+    "description": "Un Bar à Tapas Andalou qui mêle convivialité, authenticité et qualité",
+    "name": "El Seneca",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 02 79 16"
+  }
+},
+{
+  "type": "node",
+  "id": 2018193915,
+  "lat": 44.7262502,
+  "lon": 5.0201234,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:housenumber": "4",
+    "contact:phone": "+33 4 75 25 41 71",
+    "contact:street": "Avenue Agirond",
+    "cuisine": "crepe",
+    "name": "La Tour de Crêpes",
+    "opening_hours": "Tu-Sa 09:00-12:00,14:00-19:00; Su,PH 09:00-12:00",
+    "outdoor_seating": "yes",
+    "ref:FR:SIRET": "45245568600025"
+  }
+},
+{
+  "type": "node",
+  "id": 2018193919,
+  "lat": 44.7263877,
+  "lon": 5.0202304,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bistro Nomade",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2036285996,
+  "lat": 45.0479783,
+  "lon": 5.0486268,
+  "tags": {
+    "addr:housenumber": "53",
+    "addr:postcode": "26100",
+    "addr:street": "Rue Jacquemart",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "La raviole gourmande",
+    "source": "http://www.laraviolegourmande.com/restaurant.htm",
+    "website": "http://www.laraviolegourmande.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 2042934575,
+  "lat": 44.8458553,
+  "lon": 4.9618189,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Auberge de Montalivet",
+    "website": "http://aubergedemontalivet.com"
+  }
+},
+{
+  "type": "node",
+  "id": 2083781738,
+  "lat": 44.7109545,
+  "lon": 5.0908569,
+  "tags": {
+    "addr:housenumber": "50",
+    "addr:postcode": "26400",
+    "addr:street": "Chemin du Canal",
+    "amenity": "restaurant",
+    "contact:facebook": "https://facebook.com/p/Restaurant-LAmi-Rabel-100049125944472",
+    "contact:phone": "+33 4 75 40 07 49",
+    "cuisine": "french",
+    "email": "lamirabel26@gmail.com",
+    "name": "L'ami Rabel",
+    "opening_hours": "Th-Sa 12:00-13:30, 19:30-21:00; Mo-We 12:00-13:30"
+  }
+},
+{
+  "type": "node",
+  "id": 2158800953,
+  "lat": 44.7552377,
+  "lon": 5.3694216,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "thai; vietnamese"
+  }
+},
+{
+  "type": "node",
+  "id": 2161266286,
+  "lat": 44.5682030,
+  "lon": 5.0117949,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Auberge du Furet"
+  }
+},
+{
+  "type": "node",
+  "id": 2246014977,
+  "lat": 44.9330713,
+  "lon": 4.8934325,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Rue Bayard",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/Levertmisel/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d3609412-Reviews-Le_Vert_mi_Sel-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "french",
+    "delivery": "no",
+    "diet:vegetarian": "yes",
+    "email": "restaurantlevertmisel@gmail.com",
+    "mobile": "+33 6 36 41 08 32",
+    "name": "Le Vert mi sel",
+    "opening_hours": "Tu-Fr 11:30-13:30,18:30-20:30;Sa 18:30-20:30;Su 11:00-15:30",
+    "payment:cards": "yes",
+    "payment:cash": "yes",
+    "phone": "+33 4 75 42 41 94",
+    "reservation": "yes",
+    "smoking": "no",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2317270001,
+  "lat": 44.9149660,
+  "lon": 4.8752203,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "L'Escale de Fonfon"
+  }
+},
+{
+  "type": "node",
+  "id": 2411187341,
+  "lat": 44.7125207,
+  "lon": 5.0851694,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Bee's Café",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2420118124,
+  "lat": 45.0430122,
+  "lon": 5.0490167,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:housenumber": "16",
+    "contact:street": "Place Maurice Faure",
+    "name": "Le Dandy",
+    "opening_hours": "We 12:00-15:00; Th-Sa 12:00-15:00,19:00-22:00; Su 07:00-15:00",
+    "outdoor_seating": "terrace",
+    "ref:FR:SIRET": "84153944800016",
+    "website": "https://www.ledandyromans.fr"
+  }
+},
+{
+  "type": "node",
+  "id": 2456531051,
+  "lat": 44.9279192,
+  "lon": 4.8983162,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La base",
+    "opening_hours": "Mo-Th 07:00-23:00; Fr,Sa 07:00-02:00"
+  }
+},
+{
+  "type": "node",
+  "id": 2469850436,
+  "lat": 44.7534486,
+  "lon": 5.3731046,
+  "tags": {
+    "amenity": "restaurant",
+    "brewery": "yes",
+    "name": "Le Café des Lys",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 2469917711,
+  "lat": 44.7523786,
+  "lon": 5.3705433,
+  "tags": {
+    "addr:street": "Place de l'Horloge",
+    "amenity": "restaurant",
+    "name": "Le Repère",
+    "opening_hours": "Fr-Tu,PH 12:00-14:00+,19:00-21:00+"
+  }
+},
+{
+  "type": "node",
+  "id": 2503404083,
+  "lat": 44.9326075,
+  "lon": 4.8900126,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Place de la Pierre",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/table10restovalence",
+    "contact:instagram": "https://www.instagram.com/table10restovalence",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d15104375-Reviews-Table_10-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "delivery": "no",
+    "description:fr": "Une empreinte bancaire vous est demander pour palier à tout NoShow. Changement de carte tous les 3 mois, à chaque saisons. Voir sur le site et les réseau sociaux.",
+    "email": "table10valence@outlook.fr",
+    "name": "Table 10",
+    "phone": "+33 4 75 43 12 77",
+    "reservation": "yes",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2013",
+    "takeaway": "no",
+    "website": "https://table10valence.wixsite.com/table-10",
+    "website:menu": "https://table10valence.wixsite.com/table-10/menus"
+  }
+},
+{
+  "type": "node",
+  "id": 2503578615,
+  "lat": 44.9333632,
+  "lon": 4.8911896,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Rue de l'Hôtel de Ville",
+    "amenity": "restaurant",
+    "capacity": "70",
+    "check_date": "2025-07-23",
+    "contact:instagram": "https://www.instagram.com/la_fabrique_26000",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d4162869-Reviews-La_Fabrique_Restaurant-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "traditional",
+    "description:fr": "Capacité de 30 couverts en intérieur et 40 couverts en terrasse",
+    "diet:vegetarian": "no",
+    "email": "lafabrique26@gmail.com",
+    "name": "La Petite Fabrique",
+    "note": "Website avec informations similaires : https://restaurantlapetitefabrique.eatbu.com/?lang=fr",
+    "opening_hours": "Mo-Tu 12:00-14:00,19:30-21:30; We-Th 12:00-14:00,19:30-22:00; Fr-Sa 12:00-14:00,19:30-22:30; Su 12:00-15:00",
+    "phone": "+33 4 26 60 40 22",
+    "website": "https://www.lafabrique-restaurant.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 2503584802,
+  "lat": 44.9343761,
+  "lon": 4.8915244,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:postcode": "26000",
+    "addr:street": "Place Saint-Jean",
+    "amenity": "restaurant",
+    "name": "Bistro Chez Jean-Phi",
+    "opening_hours": "Mo-Fr 12:00-14:00"
+  }
+},
+{
+  "type": "node",
+  "id": 2505614847,
+  "lat": 44.9334427,
+  "lon": 4.8974285,
+  "tags": {
+    "addr:housenumber": "11",
+    "addr:street": "Rue Alphonse Baudin",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=100088905413319",
+    "contact:instagram": "https://www.instagram.com/le_petit_naples",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d969649-Reviews-Le_Petit_Naples-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "pizza",
+    "description:fr": "Fermeture exceptionnelle du 11/08/2025 à 31/08/2025",
+    "email": "lepetitnaples@yahoo.com",
+    "internet_access": "wlan",
+    "name": "Le Petit Naples",
+    "opening_hours": "\"Ouvert du lundi au vendredi midi et soir et le samedi soir\"",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:mastercard": "yes",
+    "payment:meal_voucher": "yes",
+    "phone": "+33 4 75 81 10 47",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "921269429",
+    "ref:FR:SIRET": "92126942900020",
+    "website": "https://le-petit-naples.eatbu.com/?lang=fr",
+    "website:menu": "https://cdn.website.dish.co/media/ee/14/7147829/pizzas-salades-sugg.pdf%20%20%20https://cdn.website.dish.co/media/b1/52/7147830/Carte-plats-desserts.pdf"
+  }
+},
+{
+  "type": "node",
+  "id": 2530756876,
+  "lat": 44.9310335,
+  "lon": 4.8952511,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "33",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue Félix Faure",
+    "amenity": "restaurant",
+    "check_date": "2025-06-15",
+    "contact:city": "Valence",
+    "contact:facebook": "https://www.facebook.com/La-Mamounia-649474241733167/",
+    "contact:petitfute": "https://www.petitfute.com/v34804-valence-26000/c1165-restaurants/c1031-cuisines-du-monde/c1033-cuisine-du-maghreb/c23-restaurant-marocain/457238-la-mamounia.html",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d1329757-Reviews-La_Mamounia-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "moroccan",
+    "description:fr": "Indiqué comme temporairement fermé sur RestaurantGuru",
+    "diet:vegetarian": "yes",
+    "name": "Mamounia",
+    "phone": "+33 4 75 56 94 21",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "400700464",
+    "ref:FR:SIRET": "40070046400011"
+  }
+},
+{
+  "type": "node",
+  "id": 2530756878,
+  "lat": 44.9340707,
+  "lon": 4.8906774,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Cause Toujours"
+  }
+},
+{
+  "type": "node",
+  "id": 2639143263,
+  "lat": 44.8724186,
+  "lon": 4.8758922,
+  "tags": {
+    "addr:housenumber": "108",
+    "amenity": "restaurant",
+    "name": "La Table",
+    "official_name": "Hôtel-Restaurant Le Nouvel Hôtel",
+    "ref:FR:SIRET": "53477756000010",
+    "source": "INSEE - 2021-01;data.gouv.fr:DATAtourisme - 05/2020",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2675935241,
+  "lat": 45.0354056,
+  "lon": 5.0526930,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Basics 4"
+  }
+},
+{
+  "type": "node",
+  "id": 2683393234,
+  "lat": 44.9334703,
+  "lon": 4.9039573,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "200",
+    "contact:street": "Avenue de Romans",
+    "name": "Restaurant universitaire Brasserie Latour-Maubourg",
+    "opening_hours": "Mo-Fr 07:45-14:00",
+    "operator": "CROUS",
+    "ref:FR:SIRET": "18380156201002",
+    "website": "https://www.crous-grenoble.fr/restaurant/brasserie-latour-maubourg-2/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2723372284,
+  "lat": 44.7534996,
+  "lon": 5.3729356,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Casa Pizzas",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2774711135,
+  "lat": 44.6599180,
+  "lon": 5.3691681,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "L'Aubergerie"
+  }
+},
+{
+  "type": "node",
+  "id": 2777354251,
+  "lat": 44.7316239,
+  "lon": 5.0165469,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Charleston"
+  }
+},
+{
+  "type": "node",
+  "id": 2781158730,
+  "lat": 44.6588457,
+  "lon": 5.4070541,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 2916230748,
+  "lat": 44.9374722,
+  "lon": 5.0292775,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Avenue du Vercors",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Restaurant Le Clocher"
+  }
+},
+{
+  "type": "node",
+  "id": 2916490180,
+  "lat": 44.9246296,
+  "lon": 4.8942416,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Rue Jean Joseph Génissieu",
+    "amenity": "restaurant",
+    "contact:instagram": "@chezchristianpino.26",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d5943852-Reviews-Chez_Christian_Pino-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "contact:youtube": "https://www.youtube.com/watch?v=yUcFPMhBC-k",
+    "cuisine": "italian_pizza;pizza",
+    "delivery": "yes",
+    "diet:halal": "yes",
+    "name": "Chez Christian Pino",
+    "opening_hours": "Tu-Su 17:45-21:45",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:meal_voucher": "yes",
+    "phone": "+33 4 75 41 65 95",
+    "takeaway": "yes",
+    "toilets": "no",
+    "website": "https://chezchristianpino.com/",
+    "website:menu": "https://chezchristianpino.com/la-carte/",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 2949472386,
+  "lat": 45.0452627,
+  "lon": 5.0543301,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Place Jean Jaurès",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "",
+    "opening_hours": "Su-Th 11:30-22:00; Fr-Sa 11:30-22:30",
+    "oven": "electric",
+    "phone": "+33 4 75 71 74 58",
+    "website": "https://basilic-and-co.com/restaurants/pizzeria-romans-sur-isere/"
+  }
+},
+{
+  "type": "node",
+  "id": 2966637946,
+  "lat": 44.9175731,
+  "lon": 4.8855564,
+  "tags": {
+    "amenity": "restaurant",
+    "award:GaultMillau": "4 toques",
+    "award:michelin": "3",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d719830-Reviews-Restaurant_Pic-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "fine_dining",
+    "name": "Maison Pic",
+    "phone": "+33 4 75 44 15 32",
+    "ref:FR:SIRET": "43628057200013",
+    "stars": "3",
+    "website": "https://anne-sophie-pic.com/restaurant-anne-sophie-pic/",
+    "website:menu": "https://anne-sophie-pic.com/valence-practical-information-new/",
+    "wikidata": "Q6737046"
+  }
+},
+{
+  "type": "node",
+  "id": 2976070171,
+  "lat": 44.9385493,
+  "lon": 4.8643777,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Flunch",
+    "brand:wikidata": "Q629326",
+    "brand:wikipedia": "en:Flunch",
+    "cuisine": "french",
+    "fast_food": "cafeteria",
+    "name": "Flunch",
+    "opening_hours": "Mo-Sa 11:30-14:00",
+    "phone": "+33 4 75 41 11 55",
+    "ref:FR:SIRET": "32077251001590",
+    "website": "https://www.flunch.fr/restaurant/guilherand-granges/flunch-valence-guilherand-grange/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2976100036,
+  "lat": 45.0444957,
+  "lon": 5.0291128,
+  "tags": {
+    "addr:street": "Avenue Louis Saillant",
+    "amenity": "restaurant",
+    "brand": "Flunch",
+    "brand:wikidata": "Q629326",
+    "brand:wikipedia": "en:Flunch",
+    "cuisine": "french",
+    "fast_food": "cafeteria",
+    "name": "Flunch",
+    "opening_hours": "Mo-Su 8:30-21:00",
+    "phone": "+33 4 75 02 51 40",
+    "website": "https://restaurant.flunch.fr/romans/flunch-romans/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3006698929,
+  "lat": 44.7988141,
+  "lon": 5.3841936,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Touron",
+    "survey:date": "2024-05-18",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 3020144776,
+  "lat": 45.0350227,
+  "lon": 5.2088206,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Le Chat Vert"
+  }
+},
+{
+  "type": "node",
+  "id": 3033105704,
+  "lat": 44.7644075,
+  "lon": 4.9161847,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "l'Auberge d'Allex",
+    "ref:FR:SIRET": "91962626700018"
+  }
+},
+{
+  "type": "node",
+  "id": 3143490645,
+  "lat": 44.9183856,
+  "lon": 4.8988881,
+  "tags": {
+    "amenity": "restaurant",
+    "description:fr": "Indiqué comme temporairement fermé en ligne",
+    "name": "Le Clos Fuzier"
+  }
+},
+{
+  "type": "node",
+  "id": 3143508649,
+  "lat": 44.9146172,
+  "lon": 4.8938991,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 3143515627,
+  "lat": 44.9179697,
+  "lon": 4.9342719,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Pélican",
+    "website": "http://restaurantlepelican.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3143515628,
+  "lat": 44.9193732,
+  "lon": 4.9302377,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 3143517472,
+  "lat": 44.9131205,
+  "lon": 4.8843505,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 3214484559,
+  "lat": 45.0193341,
+  "lon": 4.9326656,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Tonelle"
+  }
+},
+{
+  "type": "node",
+  "id": 3216726052,
+  "lat": 45.0151248,
+  "lon": 4.9387127,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "Hôtel-Restaurant",
+    "indoor_seating": "yes",
+    "name": "Archimbaud",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 71 81 18",
+    "stars": "2",
+    "tourism": "hotel",
+    "website": "http://www.hotel-archimbaud.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 3290587961,
+  "lat": 44.7153498,
+  "lon": 5.0595019,
+  "tags": {
+    "addr:city": "Aouste-sur-Sye",
+    "addr:housenumber": "9",
+    "addr:postcode": "26400",
+    "addr:street": "Rue Pasteur Boegner",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/elabodepaulette/",
+    "contact:mastodon": "https://mastouille.fr/@lelabodepaulette",
+    "name": "L'élabo de Paulette",
+    "phone": "+33 6 28 63 96 77"
+  }
+},
+{
+  "type": "node",
+  "id": 3320044034,
+  "lat": 44.9316967,
+  "lon": 4.8998210,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:city": "Valence",
+    "contact:housenumber": "2",
+    "contact:postcode": "26000",
+    "contact:street": "Rue Marius Villard",
+    "name": "Chez Enzo"
+  }
+},
+{
+  "type": "node",
+  "id": 3382400153,
+  "lat": 44.8981093,
+  "lon": 5.3197854,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "50",
+    "cuisine": "french",
+    "name": "Les Dryades",
+    "phone": "+33 4 75 48 26 40"
+  }
+},
+{
+  "type": "node",
+  "id": 3644584388,
+  "lat": 44.7541509,
+  "lon": 5.3701268,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Aux saveurs dioises"
+  }
+},
+{
+  "type": "node",
+  "id": 3659068170,
+  "lat": 45.0478991,
+  "lon": 5.0491677,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Rue Chevalier",
+    "amenity": "restaurant",
+    "capacity": "30",
+    "name": "Le 5 Chevalier",
+    "phone": "+33 4 75 72 08 33",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3729641894,
+  "lat": 44.5823617,
+  "lon": 4.8904750,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Provence"
+  }
+},
+{
+  "type": "node",
+  "id": 3731504239,
+  "lat": 44.5801744,
+  "lon": 5.0323885,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Smile"
+  }
+},
+{
+  "type": "node",
+  "id": 3732030925,
+  "lat": 44.5544686,
+  "lon": 4.8639061,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Avenue du Lieutenant Cheynis",
+    "amenity": "restaurant",
+    "check_date": "2025-08-06",
+    "name": "La Bâti Kréol",
+    "phone": "+33 4 75 00 44 88",
+    "ref:FR:SIRET": "90810053000017",
+    "start_date": "2021-12-10"
+  }
+},
+{
+  "type": "node",
+  "id": 3745975779,
+  "lat": 44.6995287,
+  "lon": 5.0977875,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bistro Le Solaure",
+    "opening_hours": "PH,Tu-Su 07:30-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 3783574311,
+  "lat": 45.0299340,
+  "lon": 5.0476301,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Au N'importe Où",
+    "source": "knowledge"
+  }
+},
+{
+  "type": "node",
+  "id": 3810987762,
+  "lat": 44.9084841,
+  "lon": 4.8784305,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Crescendo",
+    "opening_hours": "Mo-Th,Su 11:30-14:30, 18:30-21:00; Fr-Sa 11:30-14:30,18:30-21:30",
+    "phone": "+33 4 81 59 02 92",
+    "ref:FR:SIRET": "41282455900584",
+    "takeaway": "yes",
+    "website": "https://www.crescendo-restauration.fr/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3862882685,
+  "lat": 44.6114935,
+  "lon": 4.9371286,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Route de Puy-Saint-Martin",
+    "amenity": "restaurant",
+    "check_date": "2026-03-26",
+    "name": "Pizzeria Grill Crêperie \"Chez Rose\"",
+    "phone": "+33 4 75 01 36 41",
+    "ref:FR:SIRET": "98027214000016",
+    "start_date": "2023-10-01"
+  }
+},
+{
+  "type": "node",
+  "id": 3869435962,
+  "lat": 44.9358466,
+  "lon": 4.8967415,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Place de la Dragonne",
+    "amenity": "restaurant",
+    "capacity": "32",
+    "check_date": "2026-01-17",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g1778307-d5028576-Reviews-Un_Air_de_Famille-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "brunch",
+    "name": "Fludo",
+    "opening_hours": "We-Su 09:00-16:00",
+    "phone": "+33 4 75 43 44 90",
+    "reservation": "yes",
+    "website": "https://www.fludo.fr/",
+    "website:menu": "https://go.nordqr.com/fludo/"
+  }
+},
+{
+  "type": "node",
+  "id": 3883072775,
+  "lat": 44.8995605,
+  "lon": 5.0202650,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pasta;argentinian;italian",
+    "name": "la main à la pâte",
+    "opening_hours": "Tu-Su 11:30-14:30, 19:00-23:00",
+    "phone": "+33 7 67 59 14 63",
+    "website": "https://www.instagram.com/lamainalapate.restaurant/"
+  }
+},
+{
+  "type": "node",
+  "id": 3956547086,
+  "lat": 44.7278832,
+  "lon": 5.0215045,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2024-10-23",
+    "cuisine": "french",
+    "name": "Le Globe",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4104822673,
+  "lat": 44.9591774,
+  "lon": 4.9408930,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "email": "Pandahappypanda26@gmail.com",
+    "name": "Happy Panda",
+    "opening_hours": "Mo-Su 12:00-15:00,19:00-22:00",
+    "phone": "+33 4 75 85 03 59",
+    "ref:FR:SIRET": "80264536600013",
+    "takeaway": "yes",
+    "website": "https://www.happypanda26320.com",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4184962672,
+  "lat": 44.9013196,
+  "lon": 4.8838075,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "32",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue des Auréats",
+    "amenity": "restaurant",
+    "cuisine": "regional;french",
+    "diet:vegetarian": "yes",
+    "name": "L'Art Terre",
+    "opening_hours": "Mo-Sa 12:00-15:00,18:30-22:30; Su 18:30-22:30",
+    "phone": "+33 4 75 84 62 46",
+    "website": "https://www.l-art-terre.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4288095257,
+  "lat": 44.9318059,
+  "lon": 4.8905998,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "7",
+    "addr:postcode": "26000",
+    "addr:street": "Place des Clercs",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/chezsam.restaurant/",
+    "contact:instagram": "https://www.instagram.com/chezsam_valence",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d28729990-Reviews-Chez_Sam-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "delivery": "no",
+    "description:fr": "Restaurant / bar à cocktail",
+    "diet:vegetarian": "yes",
+    "lgbtq": "welcome",
+    "name": "Chez Sam",
+    "opening_hours": "Mo 15:00-23:00; Tu-We 10:00-23:00; Th-Fr 10:00-00:00; Sa 11:00-00:00",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+33 4 75 83 40 55",
+    "ref:FR:NAF": "56.10A",
+    "ref:FR:SIRET": "87906132300025",
+    "reservation": "yes",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4288152650,
+  "lat": 44.9328040,
+  "lon": 4.8902928,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:postcode": "26000",
+    "addr:street": "Place de la Pierre",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/pages/Pizzeria-de-La-Pierre/130605120339020",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g1778307-d8464786-Reviews-Pizzeria_de_la_Pierre-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "pizza",
+    "name": "Pizzeria de la Pierre",
+    "opening_hours": "Tu-Sa 12:00-13:30,19:00-21:30",
+    "phone": "+33 4 75 56 47 00"
+  }
+},
+{
+  "type": "node",
+  "id": 4288222242,
+  "lat": 44.9311300,
+  "lon": 4.8907891,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Rue Ferdinand Marie",
+    "amenity": "restaurant",
+    "capacity": "120",
+    "check_date": "2025-05-27",
+    "contact:facebook": "https://www.facebook.com/people/La-Strada/100067534232090/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d1329758-Reviews-La_Strada-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "italian",
+    "delivery": "yes",
+    "description:fr": "Tous les jours, sauf le dimanche en hiver.",
+    "name": "La Strada",
+    "opening_hours": "Mo-Th 12:00-14:15,19:00-22:00; Fr 12:00-14:15,19:00-23:00; Sa 19:00-23:00",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+33 4 75 56 60 68; +33 9 70 35 31 50",
+    "reservation": "yes",
+    "takeaway": "yes",
+    "website": "https://www.lastrada-restaurant.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4288291857,
+  "lat": 44.9317699,
+  "lon": 4.8900462,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Place des Clercs",
+    "amenity": "restaurant",
+    "capacity": "70 couverts, 100 en terrasse.",
+    "contact:facebook": "https://www.facebook.com/brasserie.letage/",
+    "cuisine": "regional",
+    "diet:vegetarian": "yes",
+    "highchair": "yes",
+    "name": "L'Étage",
+    "opening_hours": "Midi et soir, tous les jours, fermé le dimanche du 1er octobre au 31 mars.",
+    "payment:american_express": "yes",
+    "payment:cash": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+33 4 75 62 75 59",
+    "reservation": "yes",
+    "smoking": "outside",
+    "takeaway": "no",
+    "website": "https://www.brasserie-letage.fr/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4288409097,
+  "lat": 44.9337623,
+  "lon": 4.8908245,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "check_date": "2025-08-11",
+    "check_date:opening_hours": "2025-05-27",
+    "contact:facebook": "http://facebook.com/lelievreetlescargot",
+    "contact:instagram": "https://www.instagram.com/lelievreetlescargot",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g1778307-d5613095-Reviews-Le_Lievre_et_l_Escargot-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "french;regional,_organic",
+    "delivery": "no",
+    "name": "Le Lièvre et l'Escargot",
+    "opening_hours": "Tu-Th 10:00-18:00;Fr-Sa 10:00-23:00",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+33 6 70 65 58 70",
+    "reservation": "yes",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4289412534,
+  "lat": 44.9328557,
+  "lon": 4.8901474,
+  "tags": {
+    "addr:housenumber": "3 - 5",
+    "addr:street": "Place de la Pierre",
+    "amenity": "restaurant",
+    "contact:phone": "+33 4 75 62 09 98",
+    "cuisine": "french;regional",
+    "delivery": "yes",
+    "description": "Chez Grand-Mère.",
+    "name": "Chez Grand-Mère",
+    "opening_hours": "Mo-Su 12:00-14:00, 19:30-22:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 43 76 65",
+    "survey:date": "2024-08-25",
+    "website": "https://www.chezgrandmere.com/",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 4289474667,
+  "lat": 44.9322891,
+  "lon": 4.8908027,
+  "tags": {
+    "addr:housenumber": "42",
+    "addr:postcode": "26000",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "diet:vegetarian": "yes",
+    "name": "Petit Clerc",
+    "opening_hours": "We-Sa 12:00-14:30,19:00-21:00;Su 12:00-14:30",
+    "phone": "+33 4 26 50 05 76",
+    "website": "https://chabran.com/pages/le-petit-clerc",
+    "website:menu": "https://menus.chabran.com/CHA5_MENU.pdf?ttt=3bbdfa8617f603e16645ee56dfc8e413&noc=1754947968"
+  }
+},
+{
+  "type": "node",
+  "id": 4289475945,
+  "lat": 44.9321270,
+  "lon": 4.8906753,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "diet:vegetarian": "yes",
+    "name": "Le Bistrot des Clercs",
+    "opening_hours": "Mo-Su 12:00-14:00,19:00-23:00",
+    "phone": "+33 4 75 55 55 15",
+    "website": "http://michelchabran.com/le-bistrot-des-clercs-restaurant-valence/"
+  }
+},
+{
+  "type": "node",
+  "id": 4289488641,
+  "lat": 44.9327740,
+  "lon": 4.8924751,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "7",
+    "addr:postcode": "26000",
+    "addr:street": "Rue Émile Augier",
+    "amenity": "restaurant",
+    "check_date": "2025-08-11",
+    "contact:instagram": "https://instagram.com/margheritagroup",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d25467544-Reviews-Margherita_Valence-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "italian;pizza",
+    "delivery": "no",
+    "diet:vegetarian": "yes",
+    "email": "adgroupemargherita@gmail.com",
+    "name": "Margherita",
+    "opening_hours": "\"Du 01/01 au 31/12 Ouverture de 11h30 à 14h30 et de 18h30 à 22h30\"",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 44 01 70",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4290553174,
+  "lat": 44.9318814,
+  "lon": 4.8904548,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Place des Clercs",
+    "amenity": "restaurant",
+    "check_date": "2025-05-27",
+    "cuisine": "french",
+    "name": "La Cuisine",
+    "opening_hours": "Mo-Su 12:00-14:30, 17:00-22:30",
+    "phone": "+33 4 75 86 09 68",
+    "website": "https://www.lacuisinerestaurant.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4290971435,
+  "lat": 44.9338495,
+  "lon": 4.8909815,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "9",
+    "addr:postcode": "26000",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "check_date": "2025-07-21",
+    "contact:instagram": "https://instagram.com/anhsang.valence",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d11846057-Reviews-Anh_Sang-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "chinese, vietnamese",
+    "delivery": "yes",
+    "diet:vegetarian": "no",
+    "indoor_seating": "yes",
+    "name": "Anh-Sang",
+    "opening_hours": "Tu-Sa 11:00-14:00, 17:00-20:30",
+    "outdoor_seating": "yes",
+    "payment:coins": "yes",
+    "payment:meal_voucher": "yes",
+    "payment:notes": "yes",
+    "phone": "+33 4 75 43 06 64",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4290981312,
+  "lat": 44.9326674,
+  "lon": 4.8898985,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Place de la Pierre",
+    "amenity": "restaurant",
+    "check_date": "2025-07-21",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=100085709276062&sk=about",
+    "contact:phone": "+33 4 75 56 63 35",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d4606056-Reviews-Autour_de_la_Pierre-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "italian;european;french",
+    "description:fr": "Fermeture 1h + tôt le matin et l'après-midi selon les informations disponible en ligne",
+    "diet:vegetarian": "yes",
+    "name": "Autour de la Pierre",
+    "opening_hours": "Tu-Sa 12:00-14:00, 19:00-22:00",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "reservation": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4290989482,
+  "lat": 44.9326951,
+  "lon": 4.8903524,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Rue Pelleterie",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/people/Restaurant-subtil-et-th%C3%A9/100057494708009/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d2093440-Reviews-Restaurant_Subtil_et_The-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "french",
+    "description:fr": "Restaurant & Salon de Thé. Patrick et Bénédicte sont des passionnés de cuisine, de celle qui prend du temps, qui se partage & qui rassemble ...",
+    "diet:vegetarian": "yes",
+    "name": "Subtil et Thé",
+    "opening_hours": "Mo-Sa 12:00-17:00",
+    "panoramax": "dc2ddd1d-558e-4517-a505-dc10d92aac03",
+    "phone": "+33 4 75 56 75 06"
+  }
+},
+{
+  "type": "node",
+  "id": 4291018936,
+  "lat": 44.9289587,
+  "lon": 4.8913287,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Rue Louis Pasteur",
+    "amenity": "restaurant",
+    "check_date": "2025-07-21",
+    "contact:facebook": "https://www.facebook.com/people/Dolce-Vita/100058971919053/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d3159171-Reviews-Dolce_Vita-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "italian;pizza",
+    "diet:vegetarian": "yes",
+    "email": "paulkdv@hotmail.fr",
+    "indoor_seating": "yes",
+    "name": "Dolce Vita",
+    "opening_hours": "Mo-Sa 12:00-14:30, 19:00-22:30",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:meal_voucher": "yes",
+    "payment:visa": "yes",
+    "phone": "+33 4 75 41 30 02",
+    "reservation": "recommended",
+    "smoking": "no",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "website": "http://dolce-vita-valence.com/index.html",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4291527533,
+  "lat": 44.9321824,
+  "lon": 4.8910067,
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "check_date": "2025-08-07",
+    "contact:facebook": "https://fr-fr.facebook.com/laregalade/",
+    "contact:instagram": "https://www.instagram.com/la_regalade",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d26873477-Reviews-Almacita-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "arepa;argentinian;chili;latin_american",
+    "diet:vegetarian": "no",
+    "name": "Almacita",
+    "opening_hours": "Tu 19:00-22:30;We-Sa 12:00-14:00,19:00-23:00; \"Cocktails & Tapas 14h00 à 19h00\"",
+    "phone": "+33 4 75 55 06 47",
+    "website": "https://chabran.com/pages/almacita-restaurant-valence",
+    "website:menu": "https://menus.chabran.com/CHA6_MENU.pdf"
+  }
+},
+{
+  "type": "node",
+  "id": 4291567781,
+  "lat": 44.9348705,
+  "lon": 4.8913238,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Place Saint-Jean",
+    "amenity": "restaurant",
+    "capacity": "60",
+    "check_date": "2025-08-11",
+    "contact:facebook": "https://www.facebook.com/Les5N/",
+    "contact:instagram": "https://www.instagram.com/restaurant_shalimar_valence",
+    "contact:tripadvisor": "https://www.tripadvisor.fr/Restaurant_Review-g187272-d4756541-Reviews-Le_Shalimar-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "cuisine": "indian",
+    "description:fr": "Livraison UberEats ou à partir du 30 €. Frais de livraison 5€ jusqu'à 5km, 7,5€ jusqu'à 10km et 10€ jusqu'à 15km. À partir du 60 € frais de livraison gratuit.",
+    "diet:halal": "yes",
+    "lgbtq": "welcome",
+    "name": "Le Shalimar",
+    "opening_hours": "Mo-Th,Su 11:45-13:45,18:45-21:45;Fr-Sa 11:45-13:45,18:45-22:15",
+    "phone": "+33 9 70 35 17 74",
+    "reservation": "recommended",
+    "website": "https://www.restaurant-indien-valence.fr/",
+    "website:menu": "https://www.restaurant-indien-valence.fr/carte.php"
+  }
+},
+{
+  "type": "node",
+  "id": 4291582787,
+  "lat": 44.9290572,
+  "lon": 4.8915136,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Rue Louis Pasteur",
+    "amenity": "restaurant",
+    "description:fr": "Indiqué comme définitivement fermé sur RestaurantGuru",
+    "name": "Le Klassic"
+  }
+},
+{
+  "type": "node",
+  "id": 4298533209,
+  "lat": 45.0145897,
+  "lon": 5.2913359,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Taverne",
+    "phone": "+33 4 69285004",
+    "website": "http://lataverneduroyans.blogspot.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4326914820,
+  "lat": 44.8605586,
+  "lon": 4.9415765,
+  "tags": {
+    "addr:housenumber": "2",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "name": "Damiany",
+    "opening_hours": "Mo,Tu,Th,Fr 18:00-21:00;Fr-Su 18:00-21:30; We off",
+    "phone": "+33 4 75 59 51 97",
+    "reservation": "required",
+    "source": "Survey",
+    "takeaway": "only"
+  }
+},
+{
+  "type": "node",
+  "id": 4326914825,
+  "lat": 44.8605165,
+  "lon": 4.9417213,
+  "tags": {
+    "addr:housenumber": "3",
+    "amenity": "restaurant",
+    "name": "Le Bellimontis",
+    "ref:FR:SIRET": "77939514400016",
+    "source": "INSEE - 2024-03"
+  }
+},
+{
+  "type": "node",
+  "id": 4336091276,
+  "lat": 44.9144291,
+  "lon": 4.8922726,
+  "tags": {
+    "addr:housenumber": "46",
+    "addr:street": "Rue de l'Ancien Vélodrome",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "contact:facebook": "https://www.facebook.com/people/LOrigan-Squash-Club/100055656656356/",
+    "contact:instagram": "https://www.instagram.com/squashlorigan/",
+    "cuisine": "pizza;burger;french",
+    "delivery": "no",
+    "level": "-1",
+    "mobile": "+33 6 30 20 80 63",
+    "name": "L'origan",
+    "opening_hours": "Mo 10:00-14:00; Tu-Sa 10:00-22:00",
+    "outdoor_seating": "yes",
+    "ref:FR:SIRET": "89214362900020",
+    "ref:vatin": "FR12892143629",
+    "reservation": "yes",
+    "takeaway": "no",
+    "toilets": "yes",
+    "toilets:wheelchair": "no",
+    "website": "https://www.restaurant-lorigan-valence.fr/",
+    "website:menu": "https://www.restaurant-lorigan-valence.fr/la-carte-l-origan-restaurant-valence",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4343746959,
+  "lat": 44.9332497,
+  "lon": 4.8946315,
+  "tags": {
+    "addr:housenumber": "42",
+    "addr:street": "Rue André-François Bouffier",
+    "amenity": "restaurant",
+    "capacity": "35",
+    "cuisine": "lebanese;armenian;regional;pizza",
+    "diet:vegetarian": "yes",
+    "name": "La Cuisine de Léna",
+    "opening_hours": "Tu-Sa 12:00-14:00, Th 19:00-21:30, Sa 19:00-22:30",
+    "payment:cash": "yes",
+    "payment:cheque": "yes",
+    "payment:credit_cards": "yes",
+    "payment:meal_voucher": "yes",
+    "phone": "+33 4 75 56 30 36",
+    "takeaway": "yes",
+    "website": "http://www.restaurant-libanais-lena.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4363707019,
+  "lat": 44.9189133,
+  "lon": 4.8784846,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "120",
+    "cuisine": "french",
+    "email": "contact@mathuzar.com",
+    "name": "Mathuzar",
+    "opening_hours": "Mo-Sa 12:00-14:30,19:00-22:30; Su 19:00-22:30",
+    "operator": "Accor",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 82 07 70",
+    "ref:FR:SIRET": "43728128000010",
+    "smoking": "no",
+    "website": "https://all.accor.com/hotel/0455/index.fr.shtml",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4375062192,
+  "lat": 44.7287086,
+  "lon": 5.0243008,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "27",
+    "addr:postcode": "26400",
+    "addr:street": "Rue de la République",
+    "amenity": "restaurant",
+    "cuisine": "kebab",
+    "name": "La Fabrik",
+    "opening_hours": "Mo-Sa 11:00-14:00,18:00-22:00; Su 11:00-14:00,18:00-23:00"
+  }
+},
+{
+  "type": "node",
+  "id": 4375062791,
+  "lat": 44.7276867,
+  "lon": 5.0246578,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2024-07-27",
+    "cuisine": "french",
+    "diet:vegetarian": "no",
+    "name": "Esprit Gourmande",
+    "name:en": "Esprit Gourmande",
+    "name:fr": "Esprit Gourmande",
+    "opening_hours:signed": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4375062792,
+  "lat": 44.7251515,
+  "lon": 5.0217812,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "+33952155276",
+    "cuisine": "french",
+    "name": "La Salle a Manger",
+    "opening_hours": "Mo-Su 12:00-13:30,19:00-21:30",
+    "ref:FR:SIRET": "44965764200012",
+    "reservation": "yes",
+    "website": "https://lasalleamangercrest.fr",
+    "website:menu": "https://lasalleamangercrest.fr/la-carte"
+  }
+},
+{
+  "type": "node",
+  "id": 4375084489,
+  "lat": 44.7285186,
+  "lon": 5.0237994,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Rue de la République",
+    "amenity": "restaurant",
+    "contact:mobile": "+33680631847",
+    "contact:phone": "+33 9 86 25 37 12",
+    "cuisine": "chinese",
+    "diet:vegan": "limited",
+    "name": "Les Copains de Nankin",
+    "opening_hours": "Mo-We, Fr 12:00-14:00",
+    "ref:FR:SIRET": "81980770200017",
+    "reservation": "yes",
+    "website": "https://www.foodbooking.com/api/res/0y_w3_d"
+  }
+},
+{
+  "type": "node",
+  "id": 4398568117,
+  "lat": 44.9090969,
+  "lon": 4.8794532,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "80",
+    "cuisine": "french",
+    "email": "H0644-SB@accor.com",
+    "name": "Baieta",
+    "opening_hours": "Mo-Sa 12:00-14:00,19:00-22:00",
+    "phone": "+33 4 75 44 01 80",
+    "ref:FR:SIRET": "31004645300026",
+    "website": "https://all.accor.com/hotel/0644/index.fr.shtml",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4415278589,
+  "lat": 45.0452794,
+  "lon": 5.0541540,
+  "tags": {
+    "addr:housenumber": "25",
+    "addr:street": "Place Jean Jaurès",
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "email": "info@achau.com",
+    "name": "A-Chau",
+    "phone": "+33 9 50 34 15 49",
+    "website": "https://www.a-chau.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4416228603,
+  "lat": 44.9505471,
+  "lon": 4.9812739,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "alsatian",
+    "name": "Le Stamm"
+  }
+},
+{
+  "type": "node",
+  "id": 4455222023,
+  "lat": 44.8605540,
+  "lon": 4.9403869,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Rue des Remparts",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Beaumont Pizz'",
+    "opening_hours": "Tu-Sa 11:00-14:00,18:00-23:00;Su 18:00-23:00",
+    "phone": "+33 4 75 80 20 63",
+    "source": "Survey;Cadastre",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4458184298,
+  "lat": 44.8660408,
+  "lon": 4.9404797,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Allée des Pins",
+    "amenity": "restaurant",
+    "cuisine": "kebab",
+    "name": "Mak'Kebab",
+    "opening_hours": "Mo 11:00-14:00; Tu-Sa 11:00-14:00,17:30-22:00; Su 17:30-22:00",
+    "source": "Survey;Cadastre"
+  }
+},
+{
+  "type": "node",
+  "id": 4466878524,
+  "lat": 44.8603937,
+  "lon": 4.9421558,
+  "tags": {
+    "addr:housenumber": "7",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Mak Pizza",
+    "opening_hours": "Tu-Su 18:30-22:00",
+    "phone": "+33 4 75 83 20 19",
+    "source": "Survey;Cadastre",
+    "takeaway": "only"
+  }
+},
+{
+  "type": "node",
+  "id": 4490767030,
+  "lat": 44.9655601,
+  "lon": 5.2714274,
+  "tags": {
+    "addr:housenumber": "80",
+    "addr:street": "Rue des Cruisoux",
+    "amenity": "restaurant",
+    "capacity": "40",
+    "cuisine": "regional",
+    "delivery": "no",
+    "name": "Hôtel du Sapin",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4508859416,
+  "lat": 44.9348123,
+  "lon": 4.8912792,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Place Saint-Jean",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/Les5N/",
+    "contact:instagram": "https://www.instagram.com/restaurant_shalimar_valence",
+    "contact:tripadvisor": "https://www.tripadvisor.fr/Restaurant_Review-g187272-d4756541-Reviews-Le_Shalimar-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "cuisine": "indian",
+    "description:fr": "Livraison UberEats ou à partir du 30 €. Frais de livraison 5€ jusqu'à 5km, 7,5€ jusqu'à 10km et 10€ jusqu'à 15km. À partir du 60 € frais de livraison gratuit.",
+    "diet:halal": "yes",
+    "lgbtq": "welcome",
+    "name": "Shalimar junior",
+    "opening_hours": "Mo-Th,Su 11:45-13:45,18:45-21:45; Fr-Sa 11:45-13:45,18:45-22:15",
+    "phone": "+33 9 70 35 17 74",
+    "reservation": "recommended",
+    "website": "https://www.restaurant-indien-valence.fr/",
+    "website:menu": "https://www.restaurant-indien-valence.fr/carte.php"
+  }
+},
+{
+  "type": "node",
+  "id": 4523333050,
+  "lat": 44.8759378,
+  "lon": 4.8774576,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Lam"
+  }
+},
+{
+  "type": "node",
+  "id": 4523333058,
+  "lat": 44.8756148,
+  "lon": 4.8780633,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Tandem"
+  }
+},
+{
+  "type": "node",
+  "id": 4584375791,
+  "lat": 44.9333239,
+  "lon": 4.8965869,
+  "tags": {
+    "addr:housenumber": "85",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue Sadi Carnot",
+    "amenity": "restaurant",
+    "check_date": "2025-08-11",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d24949056-Reviews-Oto-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "japanese",
+    "delivery": "no",
+    "name": "OTO",
+    "note": "Ancien restaurant indiqué \"No info on opening hours \" déjà rencontré sur https://restaurantguru.com/Le-panda-de-Chine-France lors que le restaurant était définitivement fermé",
+    "opening_hours": "Mo-Th,Su 11:45-14:45,18:45-22:45;Fr-Sa 11:45-14:45,18:45-23:00",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+33 4 75 60 37 52",
+    "reservation": "yes",
+    "takeaway": "yes",
+    "website": "https://www.panda-chine-restaurant.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4645269878,
+  "lat": 44.9280634,
+  "lon": 4.8914875,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Brocherie"
+  }
+},
+{
+  "type": "node",
+  "id": 4710556112,
+  "lat": 45.0170320,
+  "lon": 5.0410678,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Grand Gousier",
+    "survey:date": "2020-09-02"
+  }
+},
+{
+  "type": "node",
+  "id": 4712068463,
+  "lat": 44.9679137,
+  "lon": 4.9510111,
+  "tags": {
+    "amenity": "restaurant",
+    "email": "restaurantsaintmartin@outlook.fr",
+    "name": "Saint-Martin",
+    "opening_hours": "Mo 12:00-14:00; Tu-Th 12:00-14:00,19:00-21:00; Fr-Sa 12:00-14:00,19:00-22:00",
+    "phone": "+33 4 75 55 93 73",
+    "ref:FR:SIRET": "79783407400016"
+  }
+},
+{
+  "type": "node",
+  "id": 4725897802,
+  "lat": 44.9014614,
+  "lon": 5.0128421,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "L'Oberge"
+  }
+},
+{
+  "type": "node",
+  "id": 4845944600,
+  "lat": 44.7770572,
+  "lon": 5.1421005,
+  "tags": {
+    "addr:housenumber": "3-5",
+    "addr:street": "Route du Vercors",
+    "amenity": "restaurant",
+    "check_date": "2026-03-12",
+    "contact:facebook": "share/1NzRZg9r2W",
+    "contact:instagram": "chezvousdrome",
+    "cuisine": "pizza;burger;regional",
+    "email": "chezvousdrome@gmail.com",
+    "name": "Chez vous",
+    "phone": "+33 4 75 41 55 82",
+    "takeaway": "yes",
+    "website": "https://www.hoteldumididrome.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4858154835,
+  "lat": 44.7524319,
+  "lon": 5.3715876,
+  "tags": {
+    "addr:housenumber": "10",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/bonspassants",
+    "name": "Les Bons Passants",
+    "opening_hours": "Mo-Sa 12:00-14:00+",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4858154987,
+  "lat": 44.7521407,
+  "lon": 5.3707747,
+  "tags": {
+    "addr:city": "Die",
+    "addr:housenumber": "3",
+    "addr:postcode": "26150",
+    "addr:street": "Rue Notre-Dame",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Hobo",
+    "opening_hours": "Tu,We,Fr,Sa 12:00-13:30, 19:00-20:30",
+    "phone": "+33 4 81 57 00 00",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 4858155101,
+  "lat": 44.7528649,
+  "lon": 5.3724688,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Rue de l'Armellerie",
+    "amenity": "restaurant",
+    "name": "La Divina Cucina",
+    "opening_hours": "We-Sa 18:30-21:30",
+    "phone": "+33 755484373"
+  }
+},
+{
+  "type": "node",
+  "id": 4858155177,
+  "lat": 44.7526840,
+  "lon": 5.3718395,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Rue de l'Armellerie",
+    "amenity": "restaurant",
+    "capacity": "30",
+    "cuisine": "japanese",
+    "name": "Yamaneko",
+    "opening_hours": "Tu-Su 11:30-14:30",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4858155191,
+  "lat": 44.7526833,
+  "lon": 5.3720208,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Sayam Kebab"
+  }
+},
+{
+  "type": "node",
+  "id": 4863571890,
+  "lat": 44.9340548,
+  "lon": 4.8909517,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "4",
+    "addr:postcode": "26000",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "check_date": "2026-04-05",
+    "check_date:diet:vegan": "2026-04-05",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d9849731-Reviews-My_Little_Warung_Valence-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "asian;thai;vietnamese",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "highchair": "yes",
+    "indoor_seating": "yes",
+    "name": "My Little Warung",
+    "note": "Indiqué comme LA LUCIOLE sur Pappers",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 26 52 00 16",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "812934008",
+    "ref:FR:SIRET": "81293400800010",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+    "toilets:wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4863574775,
+  "lat": 44.9317358,
+  "lon": 4.8905896,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Place des Clercs",
+    "amenity": "restaurant",
+    "name": "Le Perron Brasserie",
+    "opening_hours": "Mo-Fr 09:00-10:00; Sa-Su 09:00-01:00",
+    "shop": "vacant"
+  }
+},
+{
+  "type": "node",
+  "id": 4863587112,
+  "lat": 44.9329695,
+  "lon": 4.8914104,
+  "tags": {
+    "addr:housenumber": "20",
+    "amenity": "restaurant",
+    "diet:vegetarian": "yes",
+    "name": "Toque & vin",
+    "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"
+  }
+},
+{
+  "type": "node",
+  "id": 4863595005,
+  "lat": 44.9328195,
+  "lon": 4.8916000,
+  "tags": {
+    "addr:housenumber": "3",
+    "amenity": "restaurant",
+    "name": "Le comptoir du théâtre",
+    "opening_hours": "Mo-Sa 11:30-14:30,18:00-22:00",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2013"
+  }
+},
+{
+  "type": "node",
+  "id": 4863597653,
+  "lat": 44.9339709,
+  "lon": 4.8957310,
+  "tags": {
+    "access:wheelchair": "yes",
+    "addr:housenumber": "50",
+    "addr:street": "Boulevard Vauban",
+    "amenity": "restaurant",
+    "branch": "Valence (Vauban)",
+    "brand": "Basilic & Co",
+    "brand:wikidata": "Q130248490",
+    "contact:facebook": "https://www.facebook.com/basilicandcovalencevauban/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d24119135-Reviews-Basilic_&_Co_Valence_(Vauban)-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "italian;pizza",
+    "delivery": "yes",
+    "description:fr": "Indiqué comme ouvert en continue de 11h45 à 22h sur https://basilic-and-co.com/basilic-and-co-inaugure-une-nouvelle-pizzeria-a-valence/ en contradiction avec les informations de Website. Les vendredis et samedis, le service se prolonge même jusqu’à 22h30.",
+    "diet:vegetarian": "yes",
+    "dog": "yes",
+    "highchair": "yes",
+    "indoor_seating": "yes",
+    "name": "Basilic & Co",
+    "opening_hours": "Mo-Su 11:45-14:00,18:00-22:00",
+    "operator": "Basilic & Co",
+    "outdoor_seating": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:electronic_purses": "yes",
+    "phone": "+33 4 75 25 22 52",
+    "reservation": "yes",
+    "smoking": "no",
+    "source": "cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2013",
+    "website": "https://commande.basilic-and-co.com/restaurants/pizzeria-valence-vauban",
+    "website:menu": "https://basilic-and-co.com/wp-content/uploads/2025/06/Basilic-Co-Romans-Set-de-table-Carte-ete-2025.pdf"
+  }
+},
+{
+  "type": "node",
+  "id": 4871669852,
+  "lat": 44.7317701,
+  "lon": 4.9245972,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "no",
+    "name": "O'garage",
+    "opening_hours": "Mo-Su 11:00-01:00",
+    "phone": "+33 4 75 43 90 59",
+    "takeaway": "yes",
+    "website": "https://www.pizzagrane.com/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4871669856,
+  "lat": 44.7315217,
+  "lon": 4.9234482,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Len'k",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4881618022,
+  "lat": 44.8820697,
+  "lon": 4.8788876,
+  "tags": {
+    "addr:housenumber": "1303",
+    "addr:street": "Avenue du Président Salvador Allende",
+    "amenity": "restaurant",
+    "cuisine": "pizza;french",
+    "name": "Le Loft",
+    "name:fr": "Le Loft",
+    "opening_hours": "Mo 11:30-14:00; Tu-Fr 11:30-14:00,19:30-21:30; Sa 19:30-21:30",
+    "website": "https://www.restaurantleloft.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4943666963,
+  "lat": 44.7642641,
+  "lon": 4.9132648,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Bocca",
+    "ref:FR:SIRET": "82847470000030"
+  }
+},
+{
+  "type": "node",
+  "id": 4943667115,
+  "lat": 44.9191519,
+  "lon": 4.8855212,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "236",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue Victor Hugo",
+    "alt_name": "Jack et Jill",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/jackandjill155/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d3845423-Reviews-Jack_and_Jill-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "french;asian",
+    "delivery": "no",
+    "name": "Jack & Jill",
+    "opening_hours": "Tu-Th 12:00-13:15; Fr-Sa 12:00-13:15, 19:30-21:15",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 44 39 31",
+    "reservation": "yes",
+    "takeaway": "no",
+    "website": "https://www.restaurantjackandjill.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4944073648,
+  "lat": 45.0483651,
+  "lon": 5.0500823,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 5083195544,
+  "lat": 44.8927664,
+  "lon": 4.8821890,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Les Mourettes"
+  }
+},
+{
+  "type": "node",
+  "id": 5191785416,
+  "lat": 44.9713610,
+  "lon": 4.9567866,
+  "tags": {
+    "addr:housenumber": "40",
+    "addr:street": "Place de la Musique",
+    "amenity": "restaurant",
+    "contact:phone": "+33 4 75 40 43 66",
+    "name": "La Partition"
+  }
+},
+{
+  "type": "node",
+  "id": 5275564240,
+  "lat": 44.9315241,
+  "lon": 4.8911811,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "4",
+    "addr:postcode": "26000",
+    "addr:street": "Place de l'Université",
+    "amenity": "restaurant",
+    "check_date": "2025-08-11",
+    "check_date:opening_hours": "2024-11-02",
+    "contact:facebook": "https://web.facebook.com/Les-Bons-Vivants-100765435166886",
+    "contact:instagram": "https://www.instagram.com/lesbonsvivantsvalence/",
+    "delivery": "no",
+    "description:fr": "Pièce de boucher, Burger, Steak Haché, etc.",
+    "diet:vegetarian": "no",
+    "email": "contactlesbonsviants@gmail.com",
+    "mobile": "+33 7 88 49 02 95",
+    "name": "Les Bons Vivants",
+    "opening_hours": "Tu,Th 12:00-14:00,19:00-21:30;Fr-Sa 12:00-14:00,19:00-22:00",
+    "opening_hours:signed": "no",
+    "phone": "+33 4 75 55 78 90",
+    "reservation": "recommended",
+    "takeaway": "no",
+    "website": "https://lesbonsvivants-valence.fr",
+    "website:menu": "https://lesbonsvivants-valence.fr/fr/services"
+  }
+},
+{
+  "type": "node",
+  "id": 5383389633,
+  "lat": 44.9277638,
+  "lon": 4.8925638,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "39",
+    "addr:postcode": "26000",
+    "addr:street": "Rue Denis Papin",
+    "amenity": "restaurant",
+    "check_date": "2026-04-19",
+    "contact:facebook": "https://www.facebook.com/lefamilial2626/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d10001325-Reviews-Restaurant_le_Familial-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "couscous",
+    "description:fr": "Prévoir cocotte et tupperware pour retirer les commandes à emporter. Pour les grandes commandes, possibilité de prêt de gastronome, pour plus de renseignement contactez nous.",
+    "name": "Le Familial",
+    "opening_hours": "Mo-Su 12:00-13:30,19:00-21:30",
+    "phone": "+33 4 75 44 14 97",
+    "reservation": "yes",
+    "source": "survey",
+    "takeaway": "yes",
+    "website": "https://restaurant-oriental-valence.fr/Acceuil",
+    "website:menu": "https://restaurant-oriental-valence.fr/carte"
+  }
+},
+{
+  "type": "node",
+  "id": 5449186290,
+  "lat": 44.7290231,
+  "lon": 5.0258989,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "La Part du Colibri",
+    "opening_hours": "We-Sa 12:00-13:45,19:00-20:30; Su 12:00-13:45",
+    "organic": "only",
+    "phone": "+33 4 75 43 00 67",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5470108027,
+  "lat": 44.7639354,
+  "lon": 4.9159179,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Brésil"
+  }
+},
+{
+  "type": "node",
+  "id": 5501796621,
+  "lat": 44.9335996,
+  "lon": 4.8944005,
+  "tags": {
+    "addr:housenumber": "8",
+    "addr:street": "Rue d'Arménie",
+    "amenity": "restaurant",
+    "cuisine": "lebanese;armenian",
+    "diet:vegetarian": "yes",
+    "name": "Sassoun",
+    "phone": "+33 4 75 56 22 99",
+    "source": "survey",
+    "website": "https://www.sassoun.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 5578197824,
+  "lat": 44.9374922,
+  "lon": 4.8901440,
+  "tags": {
+    "addr:city": "Bourg-lès-Valence",
+    "addr:housenumber": "29",
+    "addr:postcode": "26500",
+    "addr:street": "Quai Thannaron",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/brasseriebourcaine/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g196694-d23481771-Reviews-Brasserie_Bourcaine_Chez_Claire-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "delivery": "yes",
+    "email": "davolo@hotmail.fr",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "name": "Brasserie Bourcaine",
+    "opening_hours": "Mo-Su 08:00-00:00",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+33 4 26 52 05 24",
+    "smoking": "dedicated",
+    "takeaway": "yes",
+    "website": "https://labrasserie-bourcaine.eatbu.com/?lang=fr"
+  }
+},
+{
+  "type": "node",
+  "id": 5625399921,
+  "lat": 44.9341855,
+  "lon": 4.8908688,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "18",
+    "addr:postcode": "26000",
+    "addr:street": "Place Saint Jean",
+    "amenity": "restaurant",
+    "check_date": "2025-07-23",
+    "check_date:opening_hours": "2024-06-27",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=100057583893853",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d2436006-Reviews-Restaurant_L_Epicerie-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "cuisine": "european;french",
+    "delivery": "no",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "name": "L'Épicerie",
+    "opening_hours": "Tu 11:45-13:30,22:45-01:45; We-Sa 11:45-13:45,19:00-21:45",
+    "opening_hours:signed": "no",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+33 4 75 42 74 46",
+    "reservation": "yes",
+    "website": "http://pierre.seve.free.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 5728560755,
+  "lat": 44.9254837,
+  "lon": 4.8915121,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "46",
+    "addr:postcode": "26000",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "name": "Au puits d'argent",
+    "phone": "+33677809194"
+  }
+},
+{
+  "type": "node",
+  "id": 5809295303,
+  "lat": 44.9284761,
+  "lon": 4.8929483,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "22",
+    "addr:postcode": "26000",
+    "addr:street": "Rue Louis Pasteur",
+    "amenity": "restaurant",
+    "check_date": "2025-05-26",
+    "contact:facebook": "http://www.facebook.com/LeSiecle26",
+    "contact:instagram": "https://www.instagram.com/lesieclevalence",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d23479773-Reviews-Le_Siecle-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "delivery": "no",
+    "description:fr": "Café/Bar/Restaurant • Petit déjeuner maison 8h à 11h",
+    "indoor_seating": "yes",
+    "name": "Le Siècle",
+    "opening_hours": "Mo,Th-Sa 08:00-21:30;Tu 08:00-15:00;Su 08:00-16:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 82 88 09",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "510511694",
+    "ref:FR:SIRET": "51051169400018",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 5851747192,
+  "lat": 44.8991969,
+  "lon": 4.8879410,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Brunch Bay"
+  }
+},
+{
+  "type": "node",
+  "id": 5907077689,
+  "lat": 44.9674763,
+  "lon": 5.4150954,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2025-07-20",
+    "name": "Côté terasse"
+  }
+},
+{
+  "type": "node",
+  "id": 5948002733,
+  "lat": 44.9175752,
+  "lon": 4.8616834,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Jordan Thomas Pizza",
+    "opening_hours": "Su-Th 09:00-22:00; Fr-Sa 09:00-22:30",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 85 87 86",
+    "ref:FR:SIRET": "99220194700015",
+    "takeaway": "yes",
+    "website": "https://soyons.jordan-tomas-pizza.com",
+    "website:menu": "https://soyons.jordan-tomas-pizza.com/notre-carte/notre-carte-soyons/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6131071662,
+  "lat": 44.9384731,
+  "lon": 5.1169614,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "40",
+    "cuisine": "pizza;regional;burger",
+    "delivery": "no",
+    "name": "Auberge des Templiers",
+    "outdoor_seating": "yes",
+    "smoking": "outside",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6312279973,
+  "lat": 44.9311906,
+  "lon": 4.8953066,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue Félix Faure",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/pages/Restaurant-La-Planche-Lyon/1460491470898757",
+    "contact:petitfute": "https://www.petitfute.com/v34804-valence-26000/c1165-restaurants/c4-cuisine-francaise/1504135-la-planche.html",
+    "diet:vegetarian": "yes",
+    "name": "La Planche",
+    "phone": "+33 4 75 58 88 69"
+  }
+},
+{
+  "type": "node",
+  "id": 6372931007,
+  "lat": 45.0460506,
+  "lon": 5.0519726,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Place Jean Jaurès",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Cantine du Pois",
+    "outdoor_seating": "sidewalk",
+    "phone": "+33 4 75 48 94 98"
+  }
+},
+{
+  "type": "node",
+  "id": 6410294241,
+  "lat": 44.9312089,
+  "lon": 4.8909404,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "3",
+    "addr:postcode": "26000",
+    "addr:street": "Place de l'Université",
+    "amenity": "restaurant",
+    "check_date": "2025-05-27",
+    "contact:facebook": "https://www.facebook.com/restaurantle1204/",
+    "contact:instagram": "https://instagram.com/12.04_valence_diner/",
+    "contact:thefork": "https://www.thefork.fr/restaurant/le-12-04-r719484",
+    "contact:tripadvisor": "https://www.tripadvisor.fr/Restaurant_Review-g187272-d23741690-Reviews-12_04-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "cuisine": "french",
+    "diet:vegetarian": "yes",
+    "dog": "yes",
+    "email": "le12.04restaurant@gmail.com",
+    "mobile": "+33 6 46 40 74 73",
+    "name": "12/04",
+    "outdoor_seating": "yes",
+    "payment:cb": "yes",
+    "payment:coins": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:visa": "yes",
+    "phone": "+33 4 75 55 28 47",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "website:menu": "https://www.thefork.fr/restaurant/le-12-04-r719484/menu",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6414030985,
+  "lat": 44.7543644,
+  "lon": 5.3777155,
+  "tags": {
+    "addr:housenumber": "330",
+    "addr:postcode": "26150",
+    "addr:street": "Avenue Rhin-et-Danube",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Merilou",
+    "phone": "+33 4 75 21 46 08",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6416166287,
+  "lat": 44.9586614,
+  "lon": 4.8882878,
+  "tags": {
+    "addr:housenumber": "159",
+    "addr:street": "Avenue de Lyon",
+    "amenity": "restaurant",
+    "name": "La Table Méridionale",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6418925774,
+  "lat": 44.9320534,
+  "lon": 4.8983079,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Carré Rouge",
+    "opening_hours": "Tu-Su 00:00-01:00,01:00-01:15"
+  }
+},
+{
+  "type": "node",
+  "id": 6433855285,
+  "lat": 44.8890521,
+  "lon": 4.8507079,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:city": "Soyons",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=100057687090321",
+    "contact:housenumber": "30",
+    "contact:phone": "+33 4 75 60 99 65",
+    "contact:postcode": "07130",
+    "contact:street": "Avenue Olivier de Serres",
+    "contact:website": "https://www.lamarmite-soyons.com",
+    "cuisine": "french",
+    "name": "La Marmite",
+    "ref:FR:SIRET": "52166824400010",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6477628865,
+  "lat": 44.9343311,
+  "lon": 4.8907915,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "34",
+    "addr:postcode": "26000",
+    "addr:street": "Côte des Chapeliers",
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2024-06-27",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "mobile": "+33 6 10 14 57 30",
+    "name": "La Cantine",
+    "opening_hours:signed": "no",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6477628866,
+  "lat": 44.9342750,
+  "lon": 4.8908003,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "36",
+    "addr:postcode": "26000",
+    "addr:street": "Côte des Chapeliers",
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2025-07-12",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d6033940-Reviews-Le_Saint_Georges-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "greek;armenian",
+    "delivery": "yes",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "kids_area": "no",
+    "name": "Le Saint-Georges",
+    "opening_hours": "Mo 18:30-23:30;Tu-Fr 12:00-15:00,19:00-23:30;Sa 12:00-15:30,18:30-23:50;Su 12:00-16:00",
+    "opening_hours:signed": "no",
+    "outdoor_seating": "yes",
+    "panoramax": "492a146a-f86b-4d4a-8708-035c2e877539",
+    "payment:cards": "yes",
+    "payment:cash": "yes",
+    "payment:qr_code": "no",
+    "phone": "+33 4 75 42 69 20",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "504106477",
+    "ref:FR:SIRET": "50410647700012",
+    "reservation": "yes",
+    "smoking": "no",
+    "takeaway": "yes",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 6477628867,
+  "lat": 44.9348186,
+  "lon": 4.8915634,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "1",
+    "addr:postcode": "26000",
+    "addr:street": "Place Saint Jean",
+    "amenity": "restaurant",
+    "check_date": "2025-07-23",
+    "contact:facebook": "https://www.facebook.com/LenvieRestaurant26/",
+    "contact:instagram": "https://www.instagram.com/restaurant_l_envie",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d10769753-Reviews-Restaurant_L_Envie-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "african;antilles",
+    "description:fr": "Horaires différents sur Facebook, à confirmer sur place",
+    "indoor_seating": "yes",
+    "name": "L'Envie",
+    "opening_hours": "Mo-Su 11:00-14:00,18:00-23:00",
+    "outdoor_seating": "yes",
+    "payment:cheque": "yes",
+    "phone": "+33 4 26 50 44 79",
+    "website": "http://www.lenvie-restaurant-valence.com/",
+    "website:menu": "https://www.lenvie-restaurant-valence.com/la-carte-lenvie-restaurant-valence"
+  }
+},
+{
+  "type": "node",
+  "id": 6481426227,
+  "lat": 44.7528515,
+  "lon": 5.3712064,
+  "tags": {
+    "addr:city": "Die",
+    "addr:housenumber": "8",
+    "addr:postcode": "26150",
+    "addr:street": "Rue Joseph Reynaud",
+    "amenity": "restaurant",
+    "cuisine": "regional;végétarienne",
+    "description": "Restaurant d'insertion",
+    "email": "latrame26@protonmail.com",
+    "name": "Les Petits Fourneaux",
+    "opening_hours": "Tu-Sa 12:00-13:30+,19:00-20:30+",
+    "operator": "La Trame",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 21 00 94",
+    "reservation": "yes",
+    "website": "https://latrame26.org/restaurant/"
+  }
+},
+{
+  "type": "node",
+  "id": 6503457343,
+  "lat": 44.9287080,
+  "lon": 4.8898977,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2025-07-23",
+    "contact:city": "Valence",
+    "contact:facebook": "https://www.facebook.com/lebriand26",
+    "contact:housenumber": "10",
+    "contact:instagram": "https://www.instagram.com/restaurant_bar_le_briand/",
+    "contact:postcode": "26000",
+    "contact:street": "Place Aristide Briand",
+    "contact:tripadvisor": "http://www.tripadvisor.fr/Restaurant_Review-g187272-d4124438-Reviews-Le_Briand-Valence_Drome_Auvergne_Rhone_Alpes.html",
+    "cuisine": "tapas",
+    "description:fr": "Bistrot Tapas et Bar à Vin. Le briand propose café thé croissant le matin et cuisine 100 % maison pour les repas.",
+    "email": "ck@restaurant-lebriand.fr",
+    "indoor_seating": "yes",
+    "name": "Le Briand",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 41 64 32",
+    "ref:FR:SIRET": "53257856400033",
+    "website": "https://www.restaurant-lebriand.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 6525176174,
+  "lat": 45.0451019,
+  "lon": 5.0507466,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Place Charles de Gaulle",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Bistrot gourmand",
+    "phone": "+33 4 75 72 50 08"
+  }
+},
+{
+  "type": "node",
+  "id": 6525488155,
+  "lat": 45.0423531,
+  "lon": 5.0522620,
+  "tags": {
+    "addr:housenumber": "48",
+    "addr:street": "Quai Chopin",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Il DiVino",
+    "phone": "+33 7 69 96 27 35",
+    "website": "https://www.divino-restaurant.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6525488156,
+  "lat": 45.0425040,
+  "lon": 5.0543630,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Rue Saint-Nicolas",
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "Royal Tandoor",
+    "opening_hours": "Mo-Su 18:00-22:30",
+    "phone": "+339 81 78 12 97",
+    "website": "https://www.restoroyaltandoor.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 6525488157,
+  "lat": 45.0430605,
+  "lon": 5.0523691,
+  "tags": {
+    "addr:housenumber": "70",
+    "addr:street": "Rue Saint-Nicolas",
+    "amenity": "restaurant",
+    "cuisine": "french;traditional",
+    "name": "Le Mandrin",
+    "phone": "+33 4 75 02 93 55"
+  }
+},
+{
+  "type": "node",
+  "id": 6530471466,
+  "lat": 45.0331873,
+  "lon": 5.0404050,
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Avenue Salvador Allende",
+    "amenity": "restaurant",
+    "name": "Hôtel restaurant des Ors",
+    "phone": "+33 4 75 02 26 24",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 6531628143,
+  "lat": 45.0463849,
+  "lon": 5.0533935,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Avenue Victor Hugo",
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "email": "info@thu-hong.restaurant",
+    "name": "Thu-Hong",
+    "opening_hours": "Su off",
+    "phone": "+33 4 75 05 31 30",
+    "website": "http://thu-hong.restaurant/"
+  }
+},
+{
+  "type": "node",
+  "id": 6535381748,
+  "lat": 45.0021384,
+  "lon": 5.4220556,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Hôtel des Grands Goulets"
+  }
+},
+{
+  "type": "node",
+  "id": 6537101894,
+  "lat": 45.0484670,
+  "lon": 5.0483920,
+  "tags": {
+    "addr:housenumber": "13",
+    "addr:street": "Place Carnot",
+    "amenity": "restaurant",
+    "check_date": "2025-01-03",
+    "cuisine": "french",
+    "email": "lecocq45@sfr.fr",
+    "name": "Le Café de Paris",
+    "phone": "+33 4 75 72 95 66",
+    "reservation": "recommended",
+    "website": "http://www.cafedeparisrestaurantromans.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 6537101897,
+  "lat": 45.0482916,
+  "lon": 5.0487854,
+  "tags": {
+    "addr:housenumber": "64",
+    "addr:street": "Rue Jacquemart",
+    "amenity": "restaurant",
+    "cuisine": "couscous",
+    "name": "Scheherazade",
+    "opening_hours": "Mo off; Tu-Fr 10:00-14:30, 18:00-22:30; Sa 10:00-15:00, 18:00-22:30; Su 10:00-15:00",
+    "phone": "+33 4 75 05 20 66"
+  }
+},
+{
+  "type": "node",
+  "id": 6541713240,
+  "lat": 44.6102620,
+  "lon": 4.9356524,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Café de l'Europe",
+    "restaurant": "pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 6541744971,
+  "lat": 44.6100237,
+  "lon": 4.9345330,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:street": "Place du Commerce",
+    "amenity": "restaurant",
+    "check_date": "2026-03-27",
+    "cuisine": "pizza",
+    "name": "Pizzeria Vintage",
+    "phone": "+33 4 75 52 43 56",
+    "ref:FR:SIRET": "92900522100015",
+    "restaurant": "pizza",
+    "start_date": "2024-04-29"
+  }
+},
+{
+  "type": "node",
+  "id": 6594187906,
+  "lat": 44.9890618,
+  "lon": 4.9771249,
+  "tags": {
+    "addr:floor": "0",
+    "amenity": "restaurant",
+    "branch": "Comptoir",
+    "brand": "Courtepaille",
+    "brand:wikidata": "Q3116688",
+    "check_date": "2025-09-28",
+    "cuisine": "french",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "level": "0",
+    "name": "Courtepaille",
+    "opening_hours": "Mo-Su 12:00-14:00,19:00-22:00",
+    "outdoor_seating": "yes",
+    "payment:cards": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:qr_code": "no",
+    "phone": "+33 4 75 79 74 00",
+    "ref:FR:SIRET": "52483951100028",
+    "toilets": "yes",
+    "toilets:access": "customers",
+    "toilets:fee": "no",
+    "toilets:gender_segregated": "yes",
+    "website": "https://www.courtepaille.com/restaurant/courtepaille-valence-tgv/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6616052793,
+  "lat": 44.9471166,
+  "lon": 4.8504004,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Avenue Marc Bouvat",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/lebistrodelagare07/",
+    "cuisine": "regional;french",
+    "email": "lebistrodelagare07@gmail.com",
+    "level": "0",
+    "name": "Restaurant PICA PICA",
+    "opening_hours": "We-Sa 12:00-13:30,19:00-21:00; Su 12:00-13:30",
+    "phone": "+33 4 26 52 05 91",
+    "takeaway": "no",
+    "website": "https://www.facebook.com/pg/lebistrodelagare07/",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 6677504411,
+  "lat": 45.0393270,
+  "lon": 5.1983933,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Ho'Resto de Piz'"
+  }
+},
+{
+  "type": "node",
+  "id": 6679928796,
+  "lat": 44.5668697,
+  "lon": 4.9663790,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Le Cafoutch"
+  }
+},
+{
+  "type": "node",
+  "id": 6708539410,
+  "lat": 44.8961137,
+  "lon": 5.3708581,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Perce-Neige"
+  }
+},
+{
+  "type": "node",
+  "id": 6731845985,
+  "lat": 44.6969326,
+  "lon": 5.1995410,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Tunnel"
+  }
+},
+{
+  "type": "node",
+  "id": 6746056803,
+  "lat": 44.6579366,
+  "lon": 4.8911941,
+  "tags": {
+    "access": "customers",
+    "amenity": "restaurant",
+    "name": "Restaurant du Camping"
+  }
+},
+{
+  "type": "node",
+  "id": 6763290888,
+  "lat": 44.6280951,
+  "lon": 4.9745538,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizza pierre à feu"
+  }
+},
+{
+  "type": "node",
+  "id": 6813665184,
+  "lat": 44.7306730,
+  "lon": 5.0177352,
+  "tags": {
+    "addr:housenumber": "55",
+    "addr:postcode": "26400",
+    "addr:street": "Avenue Georges Clemenceau",
+    "amenity": "restaurant",
+    "cuisine": "kebab",
+    "name": "Sultan Kebab",
+    "website": "https://sultankebabcrest.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 6838872422,
+  "lat": 44.7324680,
+  "lon": 4.9595959,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional;french",
+    "email": "chezrichard26400@outlook.fr",
+    "name": "Chez Richard",
+    "opening_hours": "Apr-Oct Mo-Su 17:00-22:00",
+    "phone": "+336 81 65 22 79"
+  }
+},
+{
+  "type": "node",
+  "id": 6857751344,
+  "lat": 44.9438909,
+  "lon": 4.8944156,
+  "tags": {
+    "amenity": "restaurant",
+    "food": "pizza",
+    "name": "La Tour de Pizz'"
+  }
+},
+{
+  "type": "node",
+  "id": 6857767753,
+  "lat": 44.9428549,
+  "lon": 4.8944967,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chez Pti'Mat"
+  }
+},
+{
+  "type": "node",
+  "id": 6857777109,
+  "lat": 44.9439549,
+  "lon": 4.8941131,
+  "tags": {
+    "amenity": "restaurant",
+    "food": "indian",
+    "name": "Darjeeling"
+  }
+},
+{
+  "type": "node",
+  "id": 6898908402,
+  "lat": 45.0314184,
+  "lon": 5.0778818,
+  "tags": {
+    "addr:housenumber": "90 Rue du 19 Mars 1962",
+    "addr:street": "Rue du 19 Mars 1962",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Corleone Pizza",
+    "phone": "+33 4 75 45 86 83",
+    "website": "https://www.pizza-corleone.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 6945211767,
+  "lat": 44.5696576,
+  "lon": 5.2755928,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Rue de la Poste",
+    "amenity": "restaurant",
+    "description": "Bistrot restaurant et pizzeria",
+    "indoor_seating": "yes",
+    "name": "Le comptoir de Philomène",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7092870856,
+  "lat": 45.0029676,
+  "lon": 4.8720370,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Corleone"
+  }
+},
+{
+  "type": "node",
+  "id": 7208857107,
+  "lat": 45.0457692,
+  "lon": 5.0578899,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Aix & Terra"
+  }
+},
+{
+  "type": "node",
+  "id": 7208857110,
+  "lat": 45.0457882,
+  "lon": 5.0576481,
+  "tags": {
+    "addr:housenumber": "60",
+    "amenity": "restaurant",
+    "check_date": "2026-02-18",
+    "check_date:opening_hours": "2026-02-18",
+    "name": "Les délices du loup",
+    "opening_hours": "Mo 10:00-19:00; Tu-Th 10:00-21:00; Fr-Sa 10:00-21:30",
+    "phone": "+33 6 25 43 03 99",
+    "website": "https://lesdelicesduloup.fr",
+    "website:menu": "https://lesdelicesduloup.fr/menu/"
+  }
+},
+{
+  "type": "node",
+  "id": 7223489343,
+  "lat": 45.0456991,
+  "lon": 5.0473093,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La cigale"
+  }
+},
+{
+  "type": "node",
+  "id": 7388390484,
+  "lat": 44.9765031,
+  "lon": 5.3334366,
+  "tags": {
+    "addr:city": "Saint-Jean-en-Royans",
+    "addr:housenumber": "10880",
+    "addr:place": "Col de la Machine",
+    "addr:postcode": "26190",
+    "addr:street": "Route de la Forêt de Lente",
+    "amenity": "restaurant",
+    "email": "contact@hostelquartierlibre.fr",
+    "name": "Restaurant Hostel Quartier Libre",
+    "opening_hours": "Mo-Su 08:00-23:00",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 48 26 36",
+    "website": "https://www.hostelquartierlibre.fr/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7622888886,
+  "lat": 44.6134310,
+  "lon": 5.0096413,
+  "tags": {
+    "addr:housenumber": "1210",
+    "addr:street": "Route de Soyans",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "cuisine": "regional",
+    "description": "La Fontaine Minérale, un lieu de partage incontournable en Drôme provençale !",
+    "email": "contact@lafontaineminerale.fr",
+    "name": "La Fontaine Minérale",
+    "opening_hours": "Mo-Su 10:00-23:30",
+    "outdoor_seating": "yes",
+    "phone": "+33 4 75 90 15 70",
+    "survey:date": "2024-08-25",
+    "website": "https://www.lafontaineminerale.fr/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7746197821,
+  "lat": 45.0493914,
+  "lon": 5.2944051,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La linottine"
+  }
+},
+{
+  "type": "node",
+  "id": 7746602329,
+  "lat": 44.8584924,
+  "lon": 5.0127687,
+  "tags": {
+    "addr:housenumber": "720",
+    "addr:street": "Route des Dourcines",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Auberge du vieux moulin",
+    "phone": "+33 4 75 59 06 17",
+    "website": "https://www.aubergeduvieuxmoulin.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 7830002582,
+  "lat": 44.7416434,
+  "lon": 5.0789049,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Table du Serre"
+  }
+},
+{
+  "type": "node",
+  "id": 7840382174,
+  "lat": 45.0484840,
+  "lon": 5.0488383,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Pizza Cozy",
+    "brand:wikidata": "Q102115246",
+    "check_date": "2026-06-15",
+    "cuisine": "pizza",
+    "name": "Pizza Cosy"
+  }
+},
+{
+  "type": "node",
+  "id": 7840489696,
+  "lat": 45.0480833,
+  "lon": 5.0486087,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "italian;pizza",
+    "name": "Mangia e Costa"
+  }
+},
+{
+  "type": "node",
+  "id": 7872822288,
+  "lat": 44.8366778,
+  "lon": 4.8942202,
+  "tags": {
+    "addr:housenumber": "46",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Café du Château",
+    "opening_hours": "We-Su 10:30-22:00; Mo,Tu,PH off",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "ref:FR:SIRET": "87885371200015",
+    "source": "INSEE - 2022-06",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7948765838,
+  "lat": 44.9324726,
+  "lon": 5.0253546,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Martinière",
+    "phone": "+33 4 75 59 60 65",
+    "website": "https://hr-lamartiniere.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 7962655572,
+  "lat": 44.8349256,
+  "lon": 4.9713079,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Le Pendolino",
+    "phone": "+33 4 75 82 83 06",
+    "ref:FR:SIRET": "47864540100025",
+    "source": "INSEE - 06/2019;survey",
+    "takeaway": "only"
+  }
+},
+{
+  "type": "node",
+  "id": 8146547095,
+  "lat": 44.8852394,
+  "lon": 4.8802719,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Royal d'Asie"
+  }
+},
+{
+  "type": "node",
+  "id": 8212537385,
+  "lat": 44.9921238,
+  "lon": 4.9804192,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2025-07-10",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "level": "0",
+    "name": "Green sur mesure",
+    "opening_hours": "Mo-Fr 08:00-15:00; PH closed",
+    "website": "https://www.greensurmesure.fr/restaurant/alixan-valence/"
+  }
+},
+{
+  "type": "node",
+  "id": 8258740159,
+  "lat": 44.9297012,
+  "lon": 4.8935522,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:city": "Valence",
+    "contact:housenumber": "13",
+    "contact:instagram": "https://www.instagram.com/bistrotburgervalence/",
+    "contact:postcode": "26000",
+    "contact:street": "Rue Henry Chalamet",
+    "cuisine": "burger",
+    "delivery": "yes",
+    "name": "Bistrot Burger",
+    "opening_hours": "Tu-Th 12:00-13:30, 19:00-21:30; Fr-Sa 12:00-13:30, 19:00-22:00",
+    "phone": "+33 4 75 63 88 51",
+    "ref:FR:SIRET": "88363813200026",
+    "takeaway": "yes",
+    "website": "https://www.bistrot-burger-valence.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 8266483083,
+  "lat": 44.9093448,
+  "lon": 5.0204301,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Frégate",
+    "website": "https://www.la-fregate-bar.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 8286781575,
+  "lat": 44.9346145,
+  "lon": 4.9324999,
+  "tags": {
+    "addr:street": "54 Chem. de Thabor, 26000 Valence",
+    "amenity": "restaurant",
+    "description": "Un lieu atypique, convivial, chaleureux. Une cuisine respectueuse des saisonnalités, où les produits frais sont à l’honneur. Différents espaces adaptés à vos besoins, pour travailler seul, se réunir en équipe, déjeuner entre collègues...",
+    "name": "Saison 2",
+    "phone": "+33 4 26 42 39 01",
+    "website": "https://www.saison2-restaurant.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 8289147515,
+  "lat": 44.8759150,
+  "lon": 4.8769652,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "L'Art des Liens"
+  }
+},
+{
+  "type": "node",
+  "id": 8445503723,
+  "lat": 44.7874314,
+  "lon": 5.1477486,
+  "tags": {
+    "addr:housenumber": "12",
+    "addr:street": "Route de Plan de Baix",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "email": "domainelabelleverte@gmail.com",
+    "internet_access": "yes",
+    "name": "Restaurant du Domaine La Belle Verte",
+    "phone": "+33 426603971"
+  }
+},
+{
+  "type": "node",
+  "id": 8458945554,
+  "lat": 44.6952244,
+  "lon": 5.3031737,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/Restaurant-La-Colombe-dAurel-100628125009067/",
+    "name": "La Colombe d'Aurel"
+  }
+},
+{
+  "type": "node",
+  "id": 8458994367,
+  "lat": 44.7534560,
+  "lon": 5.3721938,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Mazel"
+  }
+},
+{
+  "type": "node",
+  "id": 8549852317,
+  "lat": 45.0449692,
+  "lon": 5.0491495,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Gourmet de Jaquemart",
+    "survey:date": "2021-03-22"
+  }
+},
+{
+  "type": "node",
+  "id": 8639670677,
+  "lat": 44.9676903,
+  "lon": 5.4145191,
+  "tags": {
+    "addr:housenumber": "45",
+    "addr:street": "Avenue des Grands Goulets",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "check_date": "2025-11-12",
+    "cuisine": "crepe",
+    "name": "Chez La Yaute",
+    "opening_hours": "Su-Th 06:30-20:00; Fr,Sa 06:30-23:00",
+    "ref:FR:SIRET": "90454724700018",
+    "start_date": "2021-10-25"
+  }
+},
+{
+  "type": "node",
+  "id": 8639678057,
+  "lat": 44.9580495,
+  "lon": 5.4221445,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Neuf"
+  }
+},
+{
+  "type": "node",
+  "id": 8812101450,
+  "lat": 44.9038744,
+  "lon": 4.9025998,
+  "tags": {
+    "addr:housenumber": "308",
+    "addr:street": "Chemin du Plateau de Lautagne",
+    "amenity": "restaurant",
+    "name": "5&5",
+    "phone": "+33 4 28 70 80 65",
+    "website": "https://5et5.restaurant/carte"
+  }
+},
+{
+  "type": "node",
+  "id": 8861545160,
+  "lat": 44.9446731,
+  "lon": 4.8545734,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/dupainsurlaplancheresto/?locale=fr_FR",
+    "name": "Du pain sur la planche",
+    "opening_hours": "Mo-Sa 09:30-17:30",
+    "phone": "+33 4 75 78 31 10",
+    "ref:FR:SIRET": "50175187900013"
+  }
+},
+{
+  "type": "node",
+  "id": 8872526322,
+  "lat": 44.9306926,
+  "lon": 4.8906592,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Place de la République",
+    "amenity": "restaurant",
+    "check_date": "2025-05-27",
+    "contact:facebook": "https://www.facebook.com/restoboll/",
+    "cuisine": "bowl;poke",
+    "diet:vegetarian": "yes",
+    "name": "Boll",
+    "opening_hours": "Mo-Sa 11:00-15:00",
+    "phone": "+33 4 75 40 85 17"
+  }
+},
+{
+  "type": "node",
+  "id": 8901624705,
+  "lat": 44.9124874,
+  "lon": 4.9636010,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Lisa Belle",
+    "ref:FR:SIRET": "53989480800010",
+    "source": "INSEE - 2021-07; survey"
+  }
+},
+{
+  "type": "node",
+  "id": 9022580313,
+  "lat": 44.8655555,
+  "lon": 4.8650175,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Bistronome",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9063024835,
+  "lat": 44.8739764,
+  "lon": 5.0782127,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Auberge des Trois Ruisseaux"
+  }
+},
+{
+  "type": "node",
+  "id": 9099226331,
+  "lat": 44.6024106,
+  "lon": 5.1036614,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Château du Poët-célard",
+    "website": "https://scicpoetcelard.org/"
+  }
+},
+{
+  "type": "node",
+  "id": 9124424110,
+  "lat": 44.8957387,
+  "lon": 5.3695672,
+  "tags": {
+    "amenity": "restaurant",
+    "beverage": "yes",
+    "name": "Lou Goustouna"
+  }
+},
+{
+  "type": "node",
+  "id": 9219113611,
+  "lat": 44.9325875,
+  "lon": 4.8909773,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "37",
+    "addr:postcode": "26000",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2024-06-08",
+    "cuisine": "french",
+    "delivery": "no",
+    "diet:vegetarian": "yes",
+    "mobile": "+33 6 60 05 14 29",
+    "name": "Le tire-bouchon",
+    "opening_hours:signed": "no",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "947950705",
+    "ref:FR:SIRET": "94795070500014",
+    "reservation": "yes",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 9329853378,
+  "lat": 44.9677728,
+  "lon": 5.4142386,
+  "tags": {
+    "addr:housenumber": "75",
+    "addr:street": "Avenue des Grands Goulets",
+    "amenity": "restaurant",
+    "check_date": "2025-11-12",
+    "cuisine": "pizza",
+    "mobile": "+33 7 86 68 83 24",
+    "name": "La Flambée Du Vercors",
+    "opening_hours": "Th-Mo 11:00-14:00,17:00-21:00",
+    "outdoor_seating": "yes",
+    "ref:FR:SIRET": "32926801500024",
+    "start_date": "2020-07-01",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9346640938,
+  "lat": 44.8421708,
+  "lon": 5.4218818,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "L'Echappée Belle"
+  }
+},
+{
+  "type": "node",
+  "id": 9355602659,
+  "lat": 44.6432395,
+  "lon": 4.8731085,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Les Aubergistes",
+    "phone": "+33475903235",
+    "tourism": "hostel",
+    "website": "https://www.les-aubergistes.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 9371661742,
+  "lat": 44.9377825,
+  "lon": 5.0272074,
+  "tags": {
+    "alt_name": "Chez Grég et Sab",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/Laubergechezgregetsab/",
+    "name": "L'Auberge"
+  }
+},
+{
+  "type": "node",
+  "id": 9371661743,
+  "lat": 44.9740402,
+  "lon": 5.0270139,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "email": "pizzeriachezvivi@gmail.com",
+    "name": "Chez Vivi",
+    "opening_hours": "Mo-Tu 12:00-14:00; Th-Sa 12:00-14:00, 18:30-22:00; Su 18:00-21:00",
+    "phone": "+33 4 75 02 38 69",
+    "ref:FR:SIRET": "92901653300010",
+    "takeaway": "yes",
+    "website": "http://pizzeriachezvivi.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 9372785785,
+  "lat": 44.6633004,
+  "lon": 5.2722343,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Balcon de Roanne"
+  }
+},
+{
+  "type": "node",
+  "id": 9373547965,
+  "lat": 44.7154356,
+  "lon": 5.0573500,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:postcode": "26400",
+    "addr:street": "Place de la Poste",
+    "amenity": "restaurant",
+    "contact:phone": "+33 4 75 59 69 62",
+    "name": "L'Entrepote",
+    "opening_hours": "Mo-Fr 06:30-21:00; Sa 07:00-14:00, 16:00-21:00; Su 07:00-13:00"
+  }
+},
+{
+  "type": "node",
+  "id": 9786641018,
+  "lat": 44.7284114,
+  "lon": 5.0243529,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Donjon"
+  }
+},
+{
+  "type": "node",
+  "id": 9894780707,
+  "lat": 45.0459281,
+  "lon": 5.0556046,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Place Jean Jaurès",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "branch": "Basilic & Co",
+    "brand": "Basilic & Co",
+    "brand:wikidata": "Q130248490",
+    "cuisine": "pizza",
+    "diet:vegetarian": "yes",
+    "drive_through": "no",
+    "name": "Basilic & Co Romans-sur-Isère",
+    "opening_hours": "Mo-Su 11:45-22:00",
+    "operator": "Basilic & Co",
+    "phone": "+33 4 75 71 74 58",
+    "takeaway": "yes",
+    "website": "https://basilic-and-co.com/restaurants/pizzeria-romans-sur-isere/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9909319187,
+  "lat": 44.6520921,
+  "lon": 5.1337092,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "L'Auberge des Dauphins"
+  }
+},
+{
+  "type": "node",
+  "id": 9939910032,
+  "lat": 44.8864117,
+  "lon": 5.1822826,
+  "tags": {
+    "addr:street": "Haneau de La Vacherie",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Gîte d'Etape - Hotel-Bar-Restaurant",
+    "phone": "+33 475 428399",
+    "website": "https://www.lacoloduchaffal.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 9947337784,
+  "lat": 44.8382138,
+  "lon": 5.0008620,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le 19",
+    "opening_hours": "Th-Su 11:00-15:00",
+    "phone": "+33 4 75 59 48 18",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 10024624526,
+  "lat": 44.9324631,
+  "lon": 4.8963946,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Saint-Jacques"
+  }
+},
+{
+  "type": "node",
+  "id": 10204864786,
+  "lat": 44.7057439,
+  "lon": 5.2596430,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chez Jojo"
+  }
+},
+{
+  "type": "node",
+  "id": 10599912113,
+  "lat": 44.9405214,
+  "lon": 4.8594452,
+  "tags": {
+    "addr:city": "Saint-Péray",
+    "addr:housenumber": "8",
+    "addr:postcode": "07130",
+    "addr:street": "Rue du Grand Mail",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Restaurant Le 8 - Chez Pierre Lo",
+    "opening_hours": "Tu-We 12:00-14:00 Th-Sa 12:00-14:00,18:00-21:00",
+    "phone": "+33475586318"
+  }
+},
+{
+  "type": "node",
+  "id": 10630992300,
+  "lat": 44.8730800,
+  "lon": 4.8669290,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restonoble"
+  }
+},
+{
+  "type": "node",
+  "id": 10632295200,
+  "lat": 44.8785293,
+  "lon": 4.8747050,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chez Alex"
+  }
+},
+{
+  "type": "node",
+  "id": 10701983779,
+  "lat": 44.8393578,
+  "lon": 4.8904261,
+  "tags": {
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "diet:halal": "no",
+    "diet:kosher": "no",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "name": "Corleone",
+    "opening_hours": "Mo-Fr 11:00-14:00, Su-Th,PH 18:00-22:00, Fr,Sa 18:00-23:00",
+    "outdoor_seating": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "smoking": "no",
+    "source": "survey",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10778240506,
+  "lat": 44.9598919,
+  "lon": 4.9377946,
+  "tags": {
+    "addr:postcode": "26320",
+    "addr:street": "zone d'activité de Laye",
+    "amenity": "restaurant",
+    "brand": "Memphis",
+    "brand:wikidata": "Q101641106",
+    "cuisine": "american",
+    "name": "Memphis",
+    "phone": "+33 4 69 11 74 29"
+  }
+},
+{
+  "type": "node",
+  "id": 10827632006,
+  "lat": 44.6966708,
+  "lon": 5.1985897,
+  "tags": {
+    "addr:housenumber": "62",
+    "addr:postcode": "26340",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "check_date": "2026-05-19",
+    "cuisine": "burger",
+    "name": "Le Pain des Fous",
+    "opening_hours": "Mo,Tu,Th,Fr 11:30-14:00; Sa 19:00-21:00",
+    "phone": "+33 6 25 01 62 27"
+  }
+},
+{
+  "type": "node",
+  "id": 10827632007,
+  "lat": 44.6961840,
+  "lon": 5.1972599,
+  "tags": {
+    "addr:city": "Saillans",
+    "addr:housenumber": "12",
+    "addr:postcode": "26340",
+    "addr:street": "Rue du Docteur Illaire",
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "Snack du pont",
+    "opening_hours": "Mo-Su 11:30-23:00",
+    "phone": "+33 9 73 15 99 67",
+    "survey:date": "2023-04-20"
+  }
+},
+{
+  "type": "node",
+  "id": 10830200036,
+  "lat": 44.7593066,
+  "lon": 5.3616135,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "indoor_seating": "yes",
+    "name": "La Stazione",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10833353845,
+  "lat": 44.6884630,
+  "lon": 5.2337135,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Auberge du Pont d'Espenel"
+  }
+},
+{
+  "type": "node",
+  "id": 10880989895,
+  "lat": 44.9341845,
+  "lon": 4.8913253,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "13",
+    "addr:postcode": "26000",
+    "addr:street": "Place Saint Jean",
+    "amenity": "restaurant",
+    "capacity": "60",
+    "check_date": "2025-05-27",
+    "contact:email": "prune.rombi@gmail.com",
+    "contact:facebook": "https://www.facebook.com/latabledeprune/",
+    "contact:instagram": "https://www.instagram.com/la_table_de_prune/",
+    "contact:phone": "+33 4 75 42 53 28",
+    "contact:website": "https://latabledeprune.eatbu.com/?lang=fr",
+    "delivery": "yes",
+    "description:fr": "Capacité: 60 couverts maximum et 60 couverts en terrasse. Une cuisine flexitarienne, végétarienne et végan ! Que de produits frais, de saison et locaux, pour des assiettes colorés et pleines de saveurs.",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "dog": "yes",
+    "name": "La table de Prune",
+    "note": "Informations horaires d'ouverture vieillissant à confirmer sur place",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:meal_voucher": "yes",
+    "ref:FR:NAF": "56.10A",
+    "ref:FR:SIRET": "52167673400010",
+    "smoking": "no",
+    "takeaway": "yes",
+    "website:menu": "https://cdn.website.dish.co/media/d0/16/3814828/Menu-1.jpg"
+  }
+},
+{
+  "type": "node",
+  "id": 10882963128,
+  "lat": 44.9328502,
+  "lon": 4.8945208,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "51",
+    "addr:postcode": "26000",
+    "addr:street": "Rue André-François Bouffier",
+    "amenity": "restaurant",
+    "capacity": "62",
+    "cuisine": "traditional",
+    "delivery": "no",
+    "description:fr": "Capacité: 38 couverts + 24 couverts en terrasse (https://www.drome-cestmanature.com). Label Toque Local. Café offert pour 1 formule Plat du jour + dessert (...) 1 cocktail maison avec ou sans alcool suivant le jour et la formule. (https://cev-26.fr)",
+    "diet:vegetarian": "yes",
+    "email": "sylvainviougeaspro@gmail.com",
+    "indoor_seating": "yes",
+    "name": "La suite",
+    "opening_hours": "Tu-Th 08:00-14:00; Fr-Sa 08:00-22:00",
+    "outdoor_seating": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "phone": "+33 4 75 25 77 35",
+    "reservation": "yes",
+    "takeaway": "yes",
+    "website:menu": "https://fr.restaurantguru.com/La-Suite-Valence-Valence/menu"
+  }
+},
+{
+  "type": "node",
+  "id": 10893603117,
+  "lat": 44.7336877,
+  "lon": 4.9986344,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Maison XV"
+  }
+},
+{
+  "type": "node",
+  "id": 10893603445,
+  "lat": 44.7332014,
+  "lon": 5.0104347,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Petite Auberge"
+  }
+},
+{
+  "type": "node",
+  "id": 10938059013,
+  "lat": 44.6460407,
+  "lon": 5.0630316,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "+33665185843",
+    "cuisine": "senegalese;bowl",
+    "diet:vegan": "limited",
+    "diet:vegetarian": "yes",
+    "name": "Chez Juju",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10956818437,
+  "lat": 44.8372149,
+  "lon": 5.1871640,
+  "tags": {
+    "addr:city": "Omblèze",
+    "addr:postcode": "26400",
+    "addr:street": "Lieu-dit le Moulin de la Pipe",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "email": "auberge@moulindelapipe.com",
+    "name": "Moulin de la Pipe",
+    "opening_hours": "Mar-Sep We-Su 08:00-19:00; Jul-Aug 08:00-19:00",
+    "phone": "+33 4 75 76 42 05",
+    "phone:mobile": "+33 6 70 00 95 75",
+    "website": "https://www.moulindelapipe.com/restaurant-vercors-ombleze"
+  }
+},
+{
+  "type": "node",
+  "id": 10961471195,
+  "lat": 44.7739427,
+  "lon": 4.8576933,
+  "tags": {
+    "addr:city": "Livron",
+    "addr:housenumber": "700",
+    "addr:postcode": "26250",
+    "addr:street": "Rue Van Gogh",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizza La Cantina",
+    "opening_hours": "We 19:00-23:00; Th-Sa 12:00-15:00,19:00-00:00; Su 19:00-00:00",
+    "phone": "+33 4 75 55 44 54",
+    "website": "https://garenne.net/cantina/"
+  }
+},
+{
+  "type": "node",
+  "id": 11064770474,
+  "lat": 44.9985022,
+  "lon": 4.9984545,
+  "tags": {
+    "addr:city": "Alixan",
+    "addr:housenumber": "350",
+    "addr:postcode": "26300",
+    "addr:street": "Rue des Marguerites",
+    "amenity": "restaurant",
+    "name": "Le Maxime's",
+    "phone": "+33 6 50 82 27 05",
+    "ref:FR:SIRET": "92063971300022"
+  }
+},
+{
+  "type": "node",
+  "id": 11198373022,
+  "lat": 44.9295650,
+  "lon": 5.0223928,
+  "tags": {
+    "addr:city": "Montélier",
+    "addr:postcode": "26120",
+    "addr:street": "Les Petits Champs",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Pizza Pyramide",
+    "opening_hours": "Tu-Th 17:30-21:00; Fr-Sa 17:00-21:30; Su 17:30-21:00; Mo off",
+    "phone": "+33603630792",
+    "takeaway": "yes",
+    "website": "https://pizza-pyramide.business.site"
+  }
+},
+{
+  "type": "node",
+  "id": 11225502216,
+  "lat": 44.8725510,
+  "lon": 4.8803843,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "M&A Pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 11268961973,
+  "lat": 44.9336981,
+  "lon": 4.8909366,
+  "tags": {
+    "addr:housenumber": "15",
+    "addr:street": "Grande Rue",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/lagopevalence",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d10436515-Reviews-Restaurant_L_Agope-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "french;fine_dining",
+    "description:fr": "Sevag Agop est né à Valence (Drôme) en 1981 de parents d’origine arménienne fuyant Beyrouth (Liban) en 1974 ( Guerre ) pour un avenir meilleur en France. Les jours de fermeture, il est possible de réserver pour des groupes à partir de 10 personnes.",
+    "diet:vegetarian": "yes",
+    "email": "contact@restaurant-lapoge.fr",
+    "email2": "sevag.agop@hotmail.fr",
+    "name": "Restaurant l'Agopé",
+    "opening_hours": "Tu-Th 12:00-13:30; Fr 12:00-13:00, 19:00-22:00; Sa 12:00-22:00; Su-Mo Off",
+    "outdoor_seating": "yes",
+    "phone": "+33 9 83 05 59 89",
+    "ref:FR:NAF": "5610A",
+    "ref:FR:SIREN": "498183854",
+    "ref:FR:SIRET": "49818385400039",
+    "website": "https://www.restaurant-lagope.fr/",
+    "website:menu": "https://www.restaurant-lagope.fr/menus-1"
+  }
+},
+{
+  "type": "node",
+  "id": 11281356358,
+  "lat": 44.8997752,
+  "lon": 5.0197609,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Bouchon dromois",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11283153705,
+  "lat": 44.7289697,
+  "lon": 5.0261255,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "36",
+    "addr:postcode": "26400",
+    "addr:street": "Rue Archinard",
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "mobile": "+33 7 84 91 23 72",
+    "name": "Las Catrinas",
+    "opening_hours": "Tu-Sa 12:00-14:00,19:00-21:30",
+    "phone": "+33 9 88 47 61 83",
+    "takeaway": "yes",
+    "website": "https://www.lascatrinas.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 11446583093,
+  "lat": 44.9309577,
+  "lon": 4.8794252,
+  "tags": {
+    "addr:housenumber": "808",
+    "addr:street": "Boulevard Général de Gaulle",
+    "amenity": "restaurant",
+    "name": "Quai 808",
+    "phone": "+33 4 75 43 19 95",
+    "website": "https://www.facebook.com/quai808restaurant/?modal=admin_todo_tour"
+  }
+},
+{
+  "type": "node",
+  "id": 11576823369,
+  "lat": 44.8656950,
+  "lon": 4.8670179,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:city": "Portes-lès-Valence",
+    "contact:phone": "+33 4 75 57 82 00",
+    "contact:postcode": "26800",
+    "contact:street": "Aire De Portes Lès Valence - Autoroute A7",
+    "indoor_seating": "yes",
+    "name": "Mezzo Di Pasta",
+    "opening_hours": "Mo-Sa 11:00-21:30",
+    "outdoor_seating": "yes",
+    "ref:FR:SIRET": "30691609900253",
+    "website": "https://www.mezzodipasta.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 11685237665,
+  "lat": 44.7270489,
+  "lon": 4.9271107,
+  "tags": {
+    "addr:city": "Grâne",
+    "addr:housenumber": "495",
+    "addr:postcode": "26400",
+    "addr:street": "Route de Roche",
+    "amenity": "restaurant",
+    "name": "Le 1723",
+    "opening_hours": "Mo-Su 11:00-14:30, We-Su 18:00-22:30",
+    "phone": "+33475626417"
+  }
+},
+{
+  "type": "node",
+  "id": 11752283106,
+  "lat": 45.0455162,
+  "lon": 5.0458482,
+  "tags": {
+    "addr:city": "Romans-Sur-Isère",
+    "addr:housenumber": "2",
+    "addr:postcode": "26100",
+    "addr:street": "Rue Marc-Antoine Jullien de la Drôme",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Café Julian"
+  }
+},
+{
+  "type": "node",
+  "id": 11752294985,
+  "lat": 45.0422674,
+  "lon": 5.0568847,
+  "tags": {
+    "addr:city": "Romans-sur-Isère",
+    "addr:housenumber": "9",
+    "addr:postcode": "26100",
+    "addr:street": "Avenue Charles Jourdan",
+    "amenity": "restaurant",
+    "cuisine": "italian;pizza",
+    "name": "Cotta Pizzeria",
+    "opening_hours": "Mo-Su 12:00-14:00,19:00-22:00",
+    "phone": "+33 4 75 02 76 69",
+    "website": "https://cotta-pizzeria.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 11840894960,
+  "lat": 45.0343710,
+  "lon": 5.0541582,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "Jules & John",
+    "opening_hours": "Mo-Th, Su 11:30-21:30; Fr, Sa 11:30-22:00",
+    "phone": "+33 4 75 71 35 40",
+    "ref:FR:SIRET": "41282455900592",
+    "takeaway": "yes",
+    "website": "https://www.jules-et-john.fr/restaurants/bourg-de-peage-jules-john-26/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11917631770,
+  "lat": 44.9082504,
+  "lon": 5.3334348,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "Le Cairn",
+    "opening_hours": "Mo-Su 09:00-18:00"
+  }
+},
+{
+  "type": "node",
+  "id": 11920224729,
+  "lat": 44.9264435,
+  "lon": 4.8990602,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "86",
+    "addr:postcode": "26000",
+    "addr:street": "Rue du Pont du Gât",
+    "amenity": "restaurant",
+    "check_date": "2025-08-11",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=61553902994517",
+    "contact:instagram": "https://www.instagram.com/lateranga_26/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d27532131-Reviews-La_Teranga-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "cuisine": "african",
+    "delivery": "yes",
+    "description:fr": "Restauration sénégalaise",
+    "email": "lateranga26000@gmail.com",
+    "name": "Le teranga",
+    "phone": "+33 4 75 84 87 70",
+    "reservation": "yes",
+    "takeaway": "yes",
+    "website": "https://www.restaurant-la-teranga.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 12037124624,
+  "lat": 44.6944245,
+  "lon": 5.1939623,
+  "tags": {
+    "addr:city": "Saillans",
+    "addr:housenumber": "285",
+    "addr:postcode": "26340",
+    "addr:street": "Route de Crest",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "name": "Les 3 Colombes",
+    "opening_hours": "Mo-Fr 11:30-14:30",
+    "outdoor_seating": "terrace",
+    "phone": "+33 6 41 01 44 80"
+  }
+},
+{
+  "type": "node",
+  "id": 12069930507,
+  "lat": 44.7283500,
+  "lon": 5.0245556,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "25",
+    "addr:postcode": "26400",
+    "addr:street": "Rue Aristide Dumont",
+    "amenity": "restaurant",
+    "contact:phone": "+33685660527",
+    "diet:gluten_free": "yes",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Aelia",
+    "opening_hours": "Tu-We 12:00-14:30; Th-Sa 12:00-14:30,19:00-21:30",
+    "organic": "only",
+    "ref:vatin": "FR58941304958",
+    "reservation": "recommended",
+    "start_date": "2025-05-22",
+    "website": "https://www.instagram.com/aelia_restaurant/"
+  }
+},
+{
+  "type": "node",
+  "id": 12069930508,
+  "lat": 44.7289656,
+  "lon": 5.0262591,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "+33475855954",
+    "cuisine": "pizza",
+    "diet:vegan": "yes",
+    "name": "Chez Fafa",
+    "opening_hours": "Tu 18:00-21:00; Fr-Mo 18:00-21:30",
+    "ref:FR:SIRET": "91434292800019",
+    "website": "https://www.chezfafa.fr"
+  }
+},
+{
+  "type": "node",
+  "id": 12085027800,
+  "lat": 44.7283281,
+  "lon": 5.0228004,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Co’Thé Café"
+  }
+},
+{
+  "type": "node",
+  "id": 12092114932,
+  "lat": 44.9335782,
+  "lon": 4.8945029,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "Indian Tandoori"
+  }
+},
+{
+  "type": "node",
+  "id": 12114550702,
+  "lat": 45.0426865,
+  "lon": 5.0485166,
+  "tags": {
+    "addr:housenumber": "30",
+    "addr:postcode": "26100",
+    "addr:street": "Place Maurice Faure",
+    "amenity": "restaurant",
+    "contact:facebook": "laraviolista26",
+    "cuisine": "local",
+    "dog": "yes",
+    "internet_access": "wlan",
+    "name": "La Raviolista",
+    "opening_hours": "Mo-Su 11:45-14:30, 19:00-22:30",
+    "payment:cheque": "no",
+    "payment:meal_voucher": "no",
+    "phone": "+33 9 55 33 83 14"
+  }
+},
+{
+  "type": "node",
+  "id": 12281529554,
+  "lat": 44.7280502,
+  "lon": 5.0210465,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "La Cosca"
+  }
+},
+{
+  "type": "node",
+  "id": 12281531209,
+  "lat": 44.7279974,
+  "lon": 5.0211474,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2024-10-23",
+    "name": "Yokoso",
+    "website": "yokoso-crest.fr"
+  }
+},
+{
+  "type": "node",
+  "id": 12373918213,
+  "lat": 44.8821774,
+  "lon": 4.8783177,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Le Diable au Thym"
+  }
+},
+{
+  "type": "node",
+  "id": 12567439667,
+  "lat": 44.9324673,
+  "lon": 4.8947450,
+  "tags": {
+    "addr:housenumber": "67",
+    "addr:street": "Rue Madier de Montjau",
+    "amenity": "restaurant",
+    "capacity": "20",
+    "contact:facebook": "https://www.facebook.com/people/Champa-Saveurs-dAsie/100076130386890/",
+    "contact:instagram": "https://www.instagram.com/champavalence/",
+    "contact:tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g187272-d21356723-Reviews-Champa_Saveurs_d_Asie-Drome_Auvergne_Rh%C3%B4ne_Alpes.html",
+    "craft": "caterer",
+    "cuisine": "lao;thai",
+    "delivery": "no",
+    "description:fr": "Aucune livraison fait par le restaurant lui-même. Toute commande passée sur leur site doivent être récupéré directement au restaurant directement.",
+    "diet:gluten_free": "yes",
+    "diet:halal": "yes",
+    "diet:vegetarian": "yes",
+    "level": "0",
+    "name": "Champa Valence",
+    "opening_hours": "Tu-Sa 11:00-19:00",
+    "operator": "Champa",
+    "phone": "+33 9 53 39 96 41",
+    "ref:FR:SIRET": "84253014900017",
+    "ref:vatin": "FR58842530149",
+    "reservation": "no",
+    "smoking": "no",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:wheelchair": "no",
+    "website": "https://champavalence.fr",
+    "website:menu": "https://champavalence.fr/notre-carte/",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 12636073362,
+  "lat": 44.9420206,
+  "lon": 4.8578592,
+  "tags": {
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "capacity": "36",
+    "check_date": "2025-03-12",
+    "contact:facebook": "https://www.facebook.com/people/L-Art-des-Choix-Kebab-Tacos-Saint-Péray/100092044800789/",
+    "contact:housenumber": "8",
+    "contact:street": "Rue Pôle 2000",
+    "cuisine": "kebab",
+    "delivery": "yes",
+    "diet:chicken": "yes",
+    "diet:fish": "yes",
+    "diet:halal": "yes",
+    "diet:vegetarian": "yes",
+    "email": "poleresto2000@gmail.com",
+    "level": "0",
+    "name": "L'Art des Choix",
+    "opening_hours": "Mo-Th 11:00-14:30,18:00-22:30; Fr,Sa 11:00-14:30,18:00-23:00; Su 17:30-22:00",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "+33 4 75 80 05 54",
+    "ref:FR:SIRET": "81011982600016",
+    "ref:vatin": "FR46810119826",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "toilets:wheelchair": "yes",
+    "website": "https://lartdeschoix07.fr",
+    "website:menu": "https://lartdeschoix07.fr",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12695078854,
+  "lat": 44.9176352,
+  "lon": 4.8614568,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "+33 4 75 40 75 52",
+    "contact:website": "https://bonheur-dasie-soyons.eatbu.com/",
+    "cuisine": "asian",
+    "name": "Bonheur d'Asie",
+    "opening_hours": "Mo-Su 12:00-14:30,19:00-22:30",
+    "ref:FR:SIRET": "53081813700024",
+    "website:menu": "https://cdn.website.dish.co/media/bc/eb/5130262/MENU.jpg",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12725057053,
+  "lat": 44.7285240,
+  "lon": 5.0225034,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "1",
+    "addr:place": "Place du Général de Gaulle",
+    "addr:postcode": "26400",
+    "amenity": "restaurant",
+    "cuisine": "sandwich;salad;coffee_shop;dessert",
+    "description": "Café & Cuisine de saison",
+    "diet:organic": "yes",
+    "diet:vegetarian": "yes",
+    "drive_through": "no",
+    "name": "Alma",
+    "opening_hours": "Mo-Fr 10:00-17:00",
+    "outdoor_seating": "yes",
+    "phone": "+33475785274",
+    "takeaway": "yes",
+    "website": "https://www.instagram.com/alma.cafe.crest/"
+  }
+},
+{
+  "type": "node",
+  "id": 12942403359,
+  "lat": 44.9994024,
+  "lon": 5.0020224,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Comptoir 532"
+  }
+},
+{
+  "type": "node",
+  "id": 12945216064,
+  "lat": 44.9035336,
+  "lon": 5.0079626,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:housenumber": "85",
+    "contact:phone": "+33475805782",
+    "diet:vegetarian": "yes",
+    "name": "Resto Cantine Ribamboule",
+    "opening_hours": "Mo-Fr 11:30-14:00",
+    "organic": "yes",
+    "outdoor_seating": "yes",
+    "website": "https://courtcircuit.org/"
+  }
+},
+{
+  "type": "node",
+  "id": 12987537896,
+  "lat": 44.8655617,
+  "lon": 4.8669626,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Bistro Régent",
+    "brand:wikidata": "Q98967977",
+    "cuisine": "steak_house;french",
+    "name": "Bistro Régent"
+  }
+},
+{
+  "type": "node",
+  "id": 13057767666,
+  "lat": 44.9048240,
+  "lon": 4.9020395,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "19 B",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue des Langories",
+    "amenity": "restaurant",
+    "name": "Le Petit Clos - Restaurant à Valence",
+    "phone": "+33 4 28 99 12 10",
+    "ref:FR:SIRET": "95110766300027",
+    "start_date": "2023-03-31",
+    "website": "https://www.petit-clos.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 13061580427,
+  "lat": 45.0427738,
+  "lon": 5.0489856,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:housenumber": "13",
+    "contact:street": "Place Maurice Faure",
+    "cuisine": "breakfast",
+    "diet:vegetarian": "only",
+    "email": "contact@atelierdujus.fr",
+    "name": "L'atelier du Jus",
+    "opening_hours": "Tu, Th, Sa 09:00-19:00; We, Fr 09:00-23:00; Su 09:00-14:00",
+    "outdoor_seating": "terrace",
+    "phone": "+33682891123",
+    "ref:FR:SIRET": "87832269200012",
+    "website": "https://latelierdujus.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 13061580432,
+  "lat": 45.0445770,
+  "lon": 5.0489681,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:housenumber": "55",
+    "contact:phone": "+33475451056",
+    "cuisine": "italian",
+    "name": "Mangia & Costa",
+    "opening_hours": "Mo,Tu,Th-Sa 11:30-14:00,18:30-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 13068231232,
+  "lat": 44.6372157,
+  "lon": 5.3168219,
+  "tags": {
+    "alt_name": "Auberge le Domanial",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "mobile": "+33 6 14 59 76 46",
+    "name": "La Table de Marie",
+    "opening_hours": "May-Aug 12:00-14:00,19:00-22:00",
+    "phone": "+33 4 75 21 79 19",
+    "website": "https://www.aubergepenneslesec.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 13121183209,
+  "lat": 44.9312801,
+  "lon": 4.8932920,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french;international",
+    "name": "La Canopée",
+    "opening_hours": "Mo-Fr 12:00-14:00",
+    "outdoor_seating": "yes",
+    "toilets:wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13121184725,
+  "lat": 44.9222559,
+  "lon": 4.8865034,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Chez Rémi",
+    "opening_hours": "Tu-Sa 12:00-14:00; Fr,Sa 19:00-22:00",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13208931069,
+  "lat": 44.9082669,
+  "lon": 4.8787149,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "L'Atelier",
+    "opening_hours": "Mo-Sa 08:00-20:00",
+    "phone": "+33 4 75 80 70 03",
+    "ref:FR:SIRET": "92191041000015",
+    "website": "https://atelier-20.eatbu.com/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13243054299,
+  "lat": 44.6458046,
+  "lon": 5.0623172,
+  "tags": {
+    "addr:city": "Saoû",
+    "addr:housenumber": "4",
+    "addr:postcode": "26400",
+    "addr:street": "La Placette",
+    "amenity": "restaurant",
+    "check_date": "2025-11-27",
+    "contact:email": "contact@loizo.fr",
+    "contact:facebook": "https://www.facebook.com/Loiseau-sur-sa-branche-219807588031844/",
+    "contact:phone": "+33475760203",
+    "contact:website": "https://www.loizo.fr/",
+    "cuisine": "french",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "level": "0",
+    "name": "L'oiseau sur sa branche",
+    "opening_hours": "Mo,Su 10:00-18:30; Tu-Fr 10:00-22:00; Sa 08:30-22:00",
+    "outdoor_seating": "yes",
+    "source": "cadastre-dgi-fr source : Direction Générale des Finances Publiques - Cadastre. Mise à jour : 2017",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13264753501,
+  "lat": 45.0177185,
+  "lon": 5.2928856,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Chez Pen"
+  }
+},
+{
+  "type": "node",
+  "id": 13328114764,
+  "lat": 44.6452267,
+  "lon": 5.0592792,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2025-11-24",
+    "name": "Cerise & Vinaigrette"
+  }
+},
+{
+  "type": "node",
+  "id": 13371550167,
+  "lat": 44.9745780,
+  "lon": 5.0259914,
+  "tags": {
+    "addr:city": "Alixan",
+    "addr:housenumber": "5",
+    "addr:postcode": "26300",
+    "addr:street": "Place de la Mairie",
+    "amenity": "restaurant",
+    "cuisine": "fine_dining;french",
+    "name": "Mandibule",
+    "opening_hours": "Tu 19:00-21:00; We-Sa 12:00-13:00,19:00-21:00",
+    "outdoor_seating": "yes",
+    "payment:american_express": "yes",
+    "payment:cash": "yes",
+    "payment:contactless": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "+33475730244",
+    "reservation": "recommended",
+    "website": "https://www.mandibulerestaurant.com",
+    "website:menu": "https://www.mandibulerestaurant.com/menus-carte/",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13393955369,
+  "lat": 45.0400651,
+  "lon": 5.0763451,
+  "tags": {
+    "alt_name": "La Villa De Lise",
+    "amenity": "restaurant",
+    "name": "La Table de Jean-Paul Bossée",
+    "phone": "+33 6 16 45 79 79",
+    "website": "https://www.lavilladelise.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 13396372583,
+  "lat": 45.0453710,
+  "lon": 5.0495979,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Le Choclo",
+    "opening_hours": "Mo-Sa 12:00-13:30,19:00-21:00",
+    "phone": "+33 9 82 76 57 27",
+    "website": "https://www.choclo-restaurant.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 13509592860,
+  "lat": 44.9204072,
+  "lon": 4.8782864,
+  "tags": {
+    "addr:city": "Valence",
+    "addr:housenumber": "142",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue de Provence",
+    "amenity": "restaurant",
+    "cuisine": "burger;regional",
+    "diet:meat": "yes",
+    "diet:vegetarian": "yes",
+    "name": "L'Esprit M",
+    "opening_hours": "Tu-We 07:30-15:30,16:30-18:00; Th-Fr 07:30-15:30,16:30-20:00; Sa 07:30-20:00",
+    "phone": "+33 4 86 84 08 12",
+    "website": "https://lespritm.fr/le-restaurant-de-lespritm/"
+  }
+},
+{
+  "type": "node",
+  "id": 13521794928,
+  "lat": 45.0456538,
+  "lon": 5.0494814,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 13668765874,
+  "lat": 44.5851461,
+  "lon": 5.1337785,
+  "tags": {
+    "addr:city": "Bourdeaux",
+    "addr:housenumber": "1",
+    "addr:postcode": "26460",
+    "addr:street": "Place de la Chevalerie",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Magasin Général - Bistro Cantine",
+    "opening_hours": "We-Fr 08:00-19:00; Sa-Su 10:00-22:00",
+    "phone": "+33 9 62 55 00 85",
+    "website": "https://www.instagram.com/magasingeneral26/"
+  }
+},
+{
+  "type": "node",
+  "id": 13683458867,
+  "lat": 44.6118644,
+  "lon": 4.9360964,
+  "tags": {
+    "addr:housenumber": "290",
+    "addr:street": "Boulevard de Provence",
+    "amenity": "restaurant",
+    "name": "La Cartonnerie",
+    "phone": "+33 4 75 90 72 75",
+    "ref:FR:SIRET": "89308051500016",
+    "start_date": "2020-12-12"
+  }
+},
+{
+  "type": "node",
+  "id": 13713246599,
+  "lat": 44.7285852,
+  "lon": 5.0212295,
+  "tags": {
+    "addr:city": "Crest",
+    "addr:housenumber": "45",
+    "addr:postcode": "26400",
+    "addr:street": "Rue de l'Hôtel de Ville",
+    "amenity": "restaurant",
+    "cuisine": "sandwich;tea",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Mi•Rae",
+    "opening_hours": "Tu,We,Fr 11:30-18:00; Su,Mo 11:30-21:30",
+    "website": "https://www.facebook.com/people/MiRae/61583058044481/"
+  }
+},
+{
+  "type": "node",
+  "id": 13785178369,
+  "lat": 44.9202310,
+  "lon": 4.8610411,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:email": "mezzo-mezzo@orange.fr",
+    "contact:facebook": "https://www.facebook.com/RestaurantMezzoMezzo/",
+    "contact:phone": "+33 4 75 57 67 60",
+    "cuisine": "italian",
+    "name": "Mezzo Mezzo",
+    "opening_hours": "Mo-Fr 07:30-14:30; Sa 11:45-14:30; Fr-Sa 19:00-22:00",
+    "ref:FR:SIRET": "53251308200026",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13952875201,
+  "lat": 44.9176743,
+  "lon": 4.8855792,
+  "tags": {
+    "addr:housenumber": "285",
+    "addr:postcode": "26000",
+    "addr:street": "Avenue Victor Hugo",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "Le Bistrot André",
+    "opening_hours": "Mo-Th 12:00-13:30, 19:00-21:30; Fr 12:00-13:30, 19:00-21:00; Sa 12:00-14:00, 19:00-21:00; Su 12:00-14:00, 19:00-20:30",
+    "phone": "+33475441532",
+    "website": "https://www.anne-sophie-pic.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 13955313929,
+  "lat": 44.8930399,
+  "lon": 4.8801868,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:city": "Valence",
+    "contact:facebook": "https://www.facebook.com/profile.php?id=61583309347683",
+    "contact:housenumber": "130",
+    "contact:phone": "+33 4 82 32 88 52",
+    "contact:postcode": "26000",
+    "contact:street": "Avenue de Marseille",
+    "contact:website": "https://www.allpizzapastabuffet.fr/valence-fiche/",
+    "cuisine": "italian;pizza;pasta",
+    "name": "All Pizza & Pasta Buffet",
+    "opening_hours": "Mo-Th 12:00-14:00,19:00-21:30; Fr-Sa 12:00-14:00,19:00-22:00",
+    "ref:FR:SIRET": "98996181800014",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13972611586,
+  "lat": 44.9896405,
+  "lon": 4.9771259,
+  "tags": {
+    "addr:city": "Alixan",
+    "addr:housenumber": "1A",
+    "addr:postcode": "26300",
+    "addr:street": "Avenue de la Gare",
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "brand": "Basics 4",
+    "cuisine": "brasserie",
+    "diet:vegetarian": "yes",
+    "name": "Brasserie Basics 4 Rovaltain",
+    "phone": "+33475614826",
+    "website": "https://www.basics4.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 13987109001,
+  "lat": 44.9231522,
+  "lon": 4.9342673,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2026-07-04",
+    "cuisine": "pizza",
+    "name": "Pisolino Pizzeria"
+  }
+},
+{
+  "type": "node",
+  "id": 13987116001,
+  "lat": 44.9324530,
+  "lon": 4.8964701,
+  "tags": {
+    "addr:housenumber": "9",
+    "addr:postcode": "26000",
+    "addr:street": "Faubourg Saint-Jacques",
+    "amenity": "restaurant",
+    "check_date": "2026-07-04",
+    "cuisine": "burger",
+    "name": "L'Atelier du burger",
+    "phone": "+33 4 75 86 11 50"
+  }
+},
+{
+  "type": "node",
+  "id": 13989342388,
+  "lat": 44.7538118,
+  "lon": 5.3698783,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "Pépère",
+    "opening_hours": "We-Su 12:00-14:00,19:00-22:30",
+    "phone": "+33 486332803"
+  }
+},
+{
+  "type": "node",
+  "id": 13991858725,
+  "lat": 45.0352930,
+  "lon": 5.0826871,
+  "tags": {
+    "addr:floor": "0",
+    "amenity": "restaurant",
+    "check_date": "2026-07-06",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "level": "0",
+    "name": "Le Bistro De La Grange",
+    "opening_hours": "Mo-Fr 11:45-14:00",
+    "phone": "+33 6 72 32 91 90",
+    "wheelchair": "yes"
+  }
+}
+
+  ]
+}

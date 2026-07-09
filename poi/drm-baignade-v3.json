@@ -1,0 +1,120 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.7 375dc00a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-09T19:19:13Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 1723311325,
+  "lat": 44.7339520,
+  "lon": 4.9612090,
+  "tags": {
+    "name": "Crest",
+    "natural": "beach",
+    "nudism": "permissive"
+  }
+},
+{
+  "type": "node",
+  "id": 4326900701,
+  "lat": 44.8184737,
+  "lon": 4.9619081,
+  "tags": {
+    "access": "private",
+    "leisure": "swimming_pool"
+  }
+},
+{
+  "type": "node",
+  "id": 5357132426,
+  "lat": 44.6223665,
+  "lon": 5.0991479,
+  "tags": {
+    "leisure": "swimming_area",
+    "name": "Gourd du Saut",
+    "natural": "water"
+  }
+},
+{
+  "type": "node",
+  "id": 5822426741,
+  "lat": 44.7847777,
+  "lon": 5.1497364,
+  "tags": {
+    "name": "Badestelle",
+    "natural": "beach"
+  }
+},
+{
+  "type": "node",
+  "id": 6836623856,
+  "lat": 45.0292850,
+  "lon": 5.2968813,
+  "tags": {
+    "fire_hydrant:type": "pillar",
+    "leisure": "swimming_pool"
+  }
+},
+{
+  "type": "node",
+  "id": 8313148873,
+  "lat": 44.9275563,
+  "lon": 4.8756525,
+  "tags": {
+    "leisure": "swimming_pool",
+    "source": "BDTopo IGN",
+    "sport": "swimming"
+  }
+},
+{
+  "type": "node",
+  "id": 8313148875,
+  "lat": 44.9337605,
+  "lon": 4.9264287,
+  "tags": {
+    "leisure": "swimming_pool"
+  }
+},
+{
+  "type": "node",
+  "id": 9002049678,
+  "lat": 44.6971722,
+  "lon": 5.1490454,
+  "tags": {
+    "leisure": "swimming_area"
+  }
+},
+{
+  "type": "node",
+  "id": 9002094424,
+  "lat": 44.7042395,
+  "lon": 5.1040460,
+  "tags": {
+    "leisure": "swimming_area"
+  }
+},
+{
+  "type": "node",
+  "id": 12848445824,
+  "lat": 44.5832423,
+  "lon": 5.1356012,
+  "tags": {
+    "natural": "beach"
+  }
+},
+{
+  "type": "node",
+  "id": 13063274123,
+  "lat": 44.6384503,
+  "lon": 5.3188276,
+  "tags": {
+    "leisure": "swimming_pool"
+  }
+}
+
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.7 375dc00a",
+  "osm3s": {
+    "timestamp_osm_base": "2026-07-09T19:18:13Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 6623632013,
+  "lat": 45.0425278,
+  "lon": 5.0559393,
+  "tags": {
+    "addr:housenumber": "5",
+    "addr:street": "Côte Garenne",
+    "amenity": "ice_cream",
+    "email": "contact@glaciersaintnicolas.fr",
+    "name": "Glacier Saint-Nicolas",
+    "outdoor_seating": "yes",
+    "phone": "+33 6 13 34 72 00",
+    "website": "https://www.glaciersaintnicolas.fr/"
+  }
+},
+{
+  "type": "node",
+  "id": 9883568717,
+  "lat": 44.9678597,
+  "lon": 5.4146226,
+  "tags": {
+    "addr:housenumber": "50",
+    "addr:street": "Avenue des Grands Goulets",
+    "amenity": "ice_cream",
+    "name": "Lilyland",
+    "opening_hours": "We-Su 14:00-19:00"
+  }
+},
+{
+  "type": "node",
+  "id": 10017600585,
+  "lat": 44.9343500,
+  "lon": 4.8909324,
+  "tags": {
+    "amenity": "ice_cream",
+    "indoor_seating": "yes",
+    "name": "Frenchy Délices",
+    "opening_hours": "Fr-We 07:30-22:00; Th off",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10648259236,
+  "lat": 44.9666148,
+  "lon": 5.4181554,
+  "tags": {
+    "addr:housenumber": "70",
+    "addr:street": "Avenue de Provence",
+    "amenity": "ice_cream",
+    "check_date": "2025-07-20",
+    "name": "Lyly Land"
+  }
+},
+{
+  "type": "node",
+  "id": 10876297196,
+  "lat": 44.9309762,
+  "lon": 4.8884498,
+  "tags": {
+    "amenity": "ice_cream"
+  }
+},
+{
+  "type": "node",
+  "id": 10876338739,
+  "lat": 44.9309191,
+  "lon": 4.8902207,
+  "tags": {
+    "amenity": "ice_cream",
+    "name": "Gelato Philo"
+  }
+}
+
+  ]
+}
