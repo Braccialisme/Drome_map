@@ -94,88 +94,12 @@
       color: var(--orange);
     }
 
-    /* ── BOUTONS CARTE (zoom + géoloc) ── */
-    #map-controls {
-      position: absolute;
-      bottom: calc(var(--panel-h) + 12px);
-      right: 12px;
-      display: none;
-      z-index: 10;
-      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    /* Zoom en haut du panel dans une bande - see below */
-
-    #geolocate {
-      position: absolute;
-      bottom: calc(var(--panel-h) + 88px);
-      right: 12px;
-      width: 42px; height: 42px;
-      background: var(--greige-0);
-      border: 1px solid var(--greige-2);
-      border-radius: var(--radius-l);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.6) inset,
-        0 -1px 0 rgba(0,0,0,0.05) inset,
-        0 4px 10px rgba(0,0,0,0.10);
-      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s;
-    }
-    #geolocate.active {
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-    #geolocate.active svg { stroke: var(--orange); }
-    #geolocate:active { transform: scale(0.94); }
-
-    #zoom-btns {
-      position: absolute;
-      bottom: calc(var(--panel-h) + 140px);
-      right: 12px;
-      display: flex;
-      flex-direction: column;
-      z-index: 10;
-      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* Bouton maison : juste sous la géolocalisation, même style hardware */
-    #home-btn {
-      position: absolute;
-      bottom: calc(var(--panel-h) + 40px);
-      right: 12px;
-      width: 42px; height: 42px;
-      background: var(--greige-0);
-      border: 1px solid var(--greige-2);
-      border-radius: var(--radius-l);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.6) inset,
-        0 -1px 0 rgba(0,0,0,0.05) inset,
-        0 4px 10px rgba(0,0,0,0.10);
-      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s;
-    }
-    #home-btn:active { transform: scale(0.94); }
-
-    /* Boussole / rose des vents : coin haut-droit, sans bulle — juste la rose */
+    /* ── CONTRÔLES HAUT-DROITE : boussole / géoloc / maison, sans fond ── */
     #compass {
-      position: absolute;
-      top: 12px;
-      right: 12px;
+      position: absolute; top: 12px; right: 12px;
       width: 42px; height: 42px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: none; border: none; padding: 0; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       z-index: 10;
     }
     #compass:active { transform: scale(0.94); }
@@ -185,35 +109,22 @@
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
     }
 
-    /* Panneau baissé : les boutons descendent avec lui et se posent juste
-       au-dessus des intercalaires (bande de 40px restée visible). */
-    body.panel-collapsed #scale     { bottom: calc(40px + 12px); }
-    body.panel-collapsed #home-btn  { bottom: calc(40px + 40px); }
-    body.panel-collapsed #geolocate { bottom: calc(40px + 88px); }
-    body.panel-collapsed #zoom-btns { bottom: calc(40px + 140px); }
-    /* Mêmes principes 3D que les toggles hardware */
-    .zoom-btn {
-      width: 42px; height: 36px;
-      background: var(--greige-0);
-      border: 1px solid var(--greige-2);
-      cursor: pointer;
-      font-family: var(--font-mono);
-      font-size: 16px;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.6) inset,
-        0 -1px 0 rgba(0,0,0,0.05) inset,
-        0 4px 10px rgba(0,0,0,0.10);
+    #geolocate, #home-btn {
+      position: absolute; right: 16px;
+      width: 34px; height: 34px;
+      background: none; border: none; padding: 0; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
     }
-    .zoom-btn:first-child {
-      border-radius: var(--radius-l) var(--radius-l) 0 0;
-      border-bottom: none;
-    }
-    .zoom-btn:last-child { border-radius: 0 0 var(--radius-l) var(--radius-l); }
-    .zoom-btn:active { background: var(--greige-1); transform: scale(0.96); }
+    #geolocate { top: 62px; }
+    #home-btn  { top: 104px; }
+    #geolocate svg, #home-btn svg { display: block; }
+    #geolocate.active svg { stroke: var(--orange); }
+    #geolocate:active, #home-btn:active { transform: scale(0.9); }
+
+    /* Panneau baissé : seule l'échelle suit (les boutons sont ancrés en haut) */
+    body.panel-collapsed #scale { bottom: calc(40px + 12px); }
 
     /* ── PANEL BOTTOM = LE BLOC ── */
     #panel-wrap {
@@ -730,13 +641,8 @@
   Ech. <span class="num" id="scale-val">1:100k</span>
 </div>
 
-<div id="zoom-btns">
-  <button class="zoom-btn" id="zoom-in">+</button>
-  <button class="zoom-btn" id="zoom-out">−</button>
-</div>
-
 <button id="geolocate" title="Ma position">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="3"/>
     <circle cx="12" cy="12" r="8" stroke-dasharray="2 2.5"/>
     <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
@@ -1543,7 +1449,7 @@ function applyMeasure() {
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': '#cc6a3a', 'line-width': 4, 'line-opacity': 0.9 } });
   map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src', filter: ['!', ['has', 'label']],
-    paint: { 'circle-radius': 6, 'circle-color': '#cc6a3a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 2 } });
+    paint: { 'circle-radius': 5, 'circle-color': '#f2efe7', 'circle-stroke-color': '#cc6a3a', 'circle-stroke-width': 2.5 } });
   map.addLayer({ id: 'measure-lbl', type: 'symbol', source: 'measure-src', filter: ['has', 'label'],
     layout: { 'text-field': ['get', 'label'], 'text-font': ['VG5000'], 'text-size': 12, 'text-offset': [0, -1.2], 'text-anchor': 'bottom', 'text-allow-overlap': true },
     paint: { 'text-color': '#1a1a1a', 'text-halo-color': '#f2efe7', 'text-halo-width': 2 } });
@@ -2046,9 +1952,6 @@ geoBtn.addEventListener('click', () => {
     if (geolocMarker) { geolocMarker.remove(); geolocMarker = null; }
   }
 });
-
-document.getElementById('zoom-in').addEventListener('click', () => map.zoomIn());
-document.getElementById('zoom-out').addEventListener('click', () => map.zoomOut());
 
 // ── MAISON ──────────────────────────────────────────────────────────────────
 const HOME = [5.0185106, 44.7316719]; // 16 Rue des Frères Gamon, Crest
