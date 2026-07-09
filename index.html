@@ -753,6 +753,7 @@ const state = {
   slopeOpacity: 0.55,
   slopeMin: 27,
   slopeMax: 43,
+  grilleStep: 'auto',
   layers: {
     daylight: false,
     threeD: false,
@@ -1259,9 +1260,9 @@ async function applyViewpoints(gen) {
 }
 
 async function applyRivieres(gen) {
-  const q = `[out:json][timeout:25];(way["waterway"~"^(river|stream)$"](${bboxStr}););out geom;`;
+  const q = `[out:json][timeout:25];(way["waterway"="river"](${bboxStr});way["waterway"="stream"]["name"](${bboxStr}););out geom;`;
   try {
-    const osm = await overpassFetch('drm-rivieres-v3', q);
+    const osm = await overpassFetch('drm-rivieres-v4', q);
     const gj = osmToGeoJSON(osm, 'line');
     if (stale(gen) || map.getSource('rivieres-src')) return;
     map.addSource('rivieres-src', { type: 'geojson', data: gj });
@@ -1364,8 +1365,13 @@ function applyDrone() {
 }
 
 // ── Grille de coordonnées (graticule lat/lon) ───────────────────────────────
+function grilleStepDeg() {
+  if (state.grilleStep !== 'auto') return parseFloat(state.grilleStep);
+  const z = map.getZoom();
+  return z >= 13 ? 0.02 : z >= 11 ? 0.05 : z >= 9 ? 0.1 : 0.25; // densité auto selon zoom
+}
 function applyGrille() {
-  const feats = [], step = 0.05, W = 4.3, E = 6.0, S = 44.1, N = 45.5;
+  const feats = [], step = grilleStepDeg(), W = 4.3, E = 6.0, S = 44.1, N = 45.5;
   for (let lon = W; lon <= E + 1e-9; lon += step)
     feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[lon, S], [lon, N]] }, properties: {} });
   for (let lat = S; lat <= N + 1e-9; lat += step)
@@ -1373,6 +1379,11 @@ function applyGrille() {
   map.addSource('grille-src', { type: 'geojson', data: { type: 'FeatureCollection', features: feats } });
   map.addLayer({ id: 'grille-lyr', type: 'line', source: 'grille-src',
     paint: { 'line-color': '#f2efe7', 'line-opacity': 0.35, 'line-width': 0.6 } });
+}
+function reapplyGrille() {
+  if (map.getLayer('grille-lyr')) map.removeLayer('grille-lyr');
+  if (map.getSource('grille-src')) map.removeSource('grille-src');
+  if (state.layers.grille) applyGrille();
 }
 
 // ── PENTES (slope) — calcul client-side depuis le MNT LiDAR HD ──────────────
@@ -1780,6 +1791,13 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">Grille de coordonnées</div>
     </div>
+    ${state.layers.grille ? `
+    <div class="route-modes" style="margin:2px 0 8px;">
+      <button data-grille="auto" class="${state.grilleStep === 'auto' ? 'on' : ''}">Auto</button>
+      <button data-grille="0.1" class="${state.grilleStep === '0.1' ? 'on' : ''}">Large</button>
+      <button data-grille="0.05" class="${state.grilleStep === '0.05' ? 'on' : ''}">Moyen</button>
+      <button data-grille="0.02" class="${state.grilleStep === '0.02' ? 'on' : ''}">Fin</button>
+    </div>` : ''}
     <div class="row ${state.layers.drone ? 'active' : ''}" data-layer="drone">
       <div class="checkbox"></div>
       <div class="row-label">Zones drone (vol loisir)</div>
@@ -1963,6 +1981,12 @@ function attachPanelEvents() {
   const precacheBtn = content.querySelector('#precache-btn');
   if (precacheBtn) precacheBtn.addEventListener('click', () => precacheZone(precacheBtn));
 
+  content.querySelectorAll('[data-grille]').forEach(b => b.addEventListener('click', () => {
+    state.grilleStep = b.dataset.grille;
+    content.querySelectorAll('[data-grille]').forEach(x => x.classList.toggle('on', x === b));
+    reapplyGrille();
+  }));
+
   const joy = content.querySelector('#joystick');
   if (joy) {
     const dot = content.querySelector('#joystick-dot');
@@ -2140,6 +2164,13 @@ function updateScale() {
   scaleVal.textContent = scales[rounded] || 'Z' + zoom.toFixed(1);
 }
 map.on('zoom', updateScale);
+// Grille en densité auto : re-densifie quand le zoom change
+let grilleZ = -1;
+map.on('moveend', () => {
+  if (!state.layers.grille || state.grilleStep !== 'auto') return;
+  const z = Math.round(map.getZoom());
+  if (z !== grilleZ) { grilleZ = z; reapplyGrille(); }
+});
 map.on('load', () => { loadPoiIcons(); updateScale(); rerender(); });
 
 // Init
