@@ -61,6 +61,20 @@
       --tab-w:        44px;
     }
 
+    /* Mode nuit : palette charbon + crème */
+    body.night {
+      --ink:          #f2efe7;
+      --ink-2:        #e4e0d5;
+      --greige-0:     #2b2a27;
+      --greige-1:     #232220;
+      --greige-2:     #3a3833;
+      --greige-3:     #4c483f;
+      --greige-4:     #8a877c;
+      --dust:         rgba(242,239,231,0.55);
+      --dust-2:       rgba(242,239,231,0.32);
+    }
+    body.night .maplibregl-canvas { filter: brightness(0.9) contrast(0.95) saturate(0.85); }
+
     html, body {
       height: 100%;
       overflow: hidden;
@@ -1038,7 +1052,7 @@ function applyDaylight() {
 }
 
 // Contrôle du soleil : auto (heure réelle) ou manuel (joystick)
-let sunManual = false, sunAzimuthManual = 200;
+let sunManual = false, sunAzimuthManual = 200, nightMode = false;
 // Position du soleil (algo SunCalc) → azimut boussole depuis le Nord
 const D2R = Math.PI / 180;
 function sunAzimuth() {
@@ -1725,6 +1739,10 @@ const PANELS = {
       <div class="checkbox"></div>
       <div class="row-label">Relief 3D<div class="row-sub">incline la carte (MNT LiDAR HD)</div></div>
     </div>
+    <div class="row ${nightMode ? 'active' : ''}" id="night-row">
+      <div class="checkbox"></div>
+      <div class="row-label">Mode nuit<div class="row-sub">palette charbon + crème</div></div>
+    </div>
 
     <div class="slider-block">
       <div class="slider-header">
@@ -1811,6 +1829,8 @@ const PANELS = {
       </div>
       <div class="joystick" id="joystick"><div class="joystick-dot" id="joystick-dot"></div></div>
       <div class="row-sub" id="sun-az" style="text-align:center; margin-top:8px;">Azimut ${Math.round(sunManual ? sunAzimuthManual : sunAzimuth())}°</div>
+      <div class="slider-label" style="margin-top:8px;">Heure du jour (course du soleil)</div>
+      <input type="range" id="sun-hour" min="5" max="21" step="0.25" value="13" style="width:100%;">
     </div>` : ''}
     <div class="row ${state.layers.grille ? 'active' : ''}" data-layer="grille">
       <div class="checkbox"></div>
@@ -2019,6 +2039,13 @@ function attachPanelEvents() {
     if (map.getLayer('grille-lyr')) map.setPaintProperty('grille-lyr', 'line-width', state.grilleWidth);
   });
 
+  const nightRow = content.querySelector('#night-row');
+  if (nightRow) nightRow.addEventListener('click', () => {
+    nightMode = !nightMode;
+    document.body.classList.toggle('night', nightMode);
+    renderPanel();
+  });
+
   const joy = content.querySelector('#joystick');
   if (joy) {
     const dot = content.querySelector('#joystick-dot');
@@ -2050,6 +2077,15 @@ function attachPanelEvents() {
       const az = sunManual ? sunAzimuthManual : sunAzimuth();
       place(az); azEl.textContent = 'Azimut ' + Math.round(az) + '°';
     }));
+    const hourSlider = content.querySelector('#sun-hour');
+    if (hourSlider) hourSlider.addEventListener('input', () => {
+      const h = parseFloat(hourSlider.value);
+      const d = new Date(); d.setHours(Math.floor(h), Math.round((h % 1) * 60), 0, 0);
+      const c = map.getCenter();
+      sunManual = true; sunAzimuthManual = sunCompass(d, c.lat, c.lng);
+      place(sunAzimuthManual); setModeButtons(); updateSunlight();
+      azEl.textContent = 'Azimut ' + Math.round(sunAzimuthManual) + '° · ' + Math.floor(h) + 'h' + (h % 1 ? '30' : '');
+    });
   }
 
   const ra = content.querySelector('#route-a');
