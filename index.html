@@ -363,46 +363,33 @@
     .row:active { background: var(--greige-2); }
 
     /* Toggle hardware : carré greige, cercle dedans, ombre portée 3D */
+    /* Toggle pilule (croquis) : rail + pastille cylindre qui glisse */
     .checkbox {
-      width: 22px; height: 22px;
-      border: 1px solid var(--greige-2);
-      border-radius: var(--radius);
-      background: var(--greige-0);
+      width: 36px; height: 21px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.7) inset,
-        0 -1px 0 rgba(0,0,0,0.06) inset,
-        0 1px 3px rgba(0,0,0,0.08);
-      transition: all 0.15s;
+      position: relative;
+      border-radius: 11px;
+      background: var(--greige-2);
+      border: 1px solid var(--greige-3);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.12);
+      transition: background 0.2s, border-color 0.2s;
     }
-    /* Cylindre extrudé sur le socle carré, avec chanfrein (collerette) entre
-       les deux. Dessus plat (pas une sphère), relief par ombre portée. */
     .checkbox::after {
       content: '';
-      width: 12px; height: 12px;
+      position: absolute;
+      top: 1px; left: 1px;
+      width: 17px; height: 17px;
       border-radius: 50%;
-      background: linear-gradient(180deg, #ffffff 0%, var(--greige-1) 22%, var(--greige-2) 100%);
-      box-shadow:
-        0 0 0 1.5px var(--greige-1),          /* chanfrein : collerette socle↔cylindre */
-        inset 0 -1px 1px rgba(0,0,0,0.12),
-        0 1px 0 rgba(255,255,255,0.7),
-        0 1.5px 2px rgba(0,0,0,0.16);
-      transition: background 0.15s, box-shadow 0.15s;
+      background: linear-gradient(180deg, #ffffff 0%, var(--greige-0) 45%, var(--greige-2) 100%);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.22), 0 0 0 0.5px rgba(0,0,0,0.05);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .row.active .checkbox { border-color: var(--greige-3); }
-    .row.active .checkbox::after {
-      background: linear-gradient(180deg, #f6c09a 0%, var(--orange) 24%, var(--orange-2) 100%);
-      box-shadow:
-        0 0 0 1.5px var(--greige-1),
-        inset 0 -1px 1px rgba(0,0,0,0.18),
-        0 1px 0 rgba(255,255,255,0.35),
-        0 1.5px 2.5px rgba(0,0,0,0.20),
-        0 0 5px var(--orange-glow);
+    .row.active .checkbox {
+      background: var(--orange);
+      border-color: var(--orange-2);
     }
-    .row:active .checkbox { transform: scale(0.95); }
+    .row.active .checkbox::after { transform: translateX(15px); }
+    .row:active .checkbox::after { filter: brightness(0.97); }
 
     .row-icon {
       width: 20px; height: 20px;
@@ -504,8 +491,8 @@
     }
     .joystick-dot {
       position: absolute; width: 22px; height: 22px; border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #f6c09a, var(--orange) 58%, var(--orange-2));
-      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      background: linear-gradient(180deg, #ffffff 0%, var(--greige-1) 38%, var(--greige-3) 100%);
+      box-shadow: 0 0 0 1px var(--greige-3), 0 1px 2px rgba(0,0,0,0.22);
       transform: translate(-50%, -50%); cursor: grab; touch-action: none;
     }
     .row-label {
