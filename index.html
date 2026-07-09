@@ -363,33 +363,50 @@
     .row:active { background: var(--greige-2); }
 
     /* Toggle hardware : carré greige, cercle dedans, ombre portée 3D */
-    /* Toggle pilule (croquis) : rail + pastille cylindre qui glisse */
+    /* Touche hardware 3D (pavé num) : socle épais qui s'enfonce + pastille cylindre */
     .checkbox {
-      width: 36px; height: 21px;
+      width: 27px; height: 27px;
       flex-shrink: 0;
       position: relative;
-      border-radius: 11px;
-      background: var(--greige-2);
-      border: 1px solid var(--greige-3);
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.12);
-      transition: background 0.2s, border-color 0.2s;
+      border-radius: 7px;
+      background: linear-gradient(180deg, #ffffff 0%, var(--greige-0) 42%, var(--greige-1) 100%);
+      border: 1px solid var(--greige-2);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 -2px 3px rgba(0,0,0,0.05) inset,
+        0 3px 0 var(--greige-2),
+        0 4px 5px rgba(0,0,0,0.14);
+      transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
     }
     .checkbox::after {
       content: '';
-      position: absolute;
-      top: 1px; left: 1px;
-      width: 17px; height: 17px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, #ffffff 0%, var(--greige-0) 45%, var(--greige-2) 100%);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.22), 0 0 0 0.5px rgba(0,0,0,0.05);
-      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 11px; height: 11px; border-radius: 50%;
+      background: linear-gradient(180deg, #ffffff 0%, var(--greige-2) 100%);
+      box-shadow: 0 0 0 1px var(--greige-2), inset 0 -1px 1px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.12);
+      transition: background 0.15s, box-shadow 0.15s;
     }
     .row.active .checkbox {
-      background: var(--orange);
+      background: linear-gradient(180deg, #f3ac7d 0%, var(--orange) 45%, var(--orange-2) 100%);
       border-color: var(--orange-2);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.35) inset,
+        0 3px 0 var(--orange-2),
+        0 4px 6px rgba(0,0,0,0.18),
+        0 0 7px var(--orange-glow);
     }
-    .row.active .checkbox::after { transform: translateX(15px); }
-    .row:active .checkbox::after { filter: brightness(0.97); }
+    .row.active .checkbox::after {
+      background: linear-gradient(180deg, #ffffff, var(--greige-0));
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.2);
+    }
+    /* enfoncement de la touche au clic */
+    .row:active .checkbox {
+      transform: translateY(3px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.6) inset,
+        0 1px 2px rgba(0,0,0,0.15);
+    }
 
     .row-icon {
       width: 20px; height: 20px;
@@ -468,6 +485,12 @@
       font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dust);
     }
     .route-modes button.on { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
+
+    .grille-ctrl { display: flex; align-items: center; gap: 10px; margin: 4px 0 10px; }
+    .grille-swatches { display: flex; gap: 5px; }
+    .grille-sw { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--greige-3); cursor: pointer; padding: 0; }
+    .grille-sw.on { box-shadow: 0 0 0 2px var(--ink); }
+    .grille-ctrl input[type="range"] { flex: 1; }
 
     .sun-block { border-top: 1px solid var(--greige-2); margin-top: 6px; padding-top: 10px; }
     .sun-modes { display: flex; gap: 4px; margin-bottom: 12px; }
@@ -754,6 +777,8 @@ const state = {
   slopeMin: 27,
   slopeMax: 43,
   grilleStep: 'auto',
+  grilleColor: '#f2efe7',
+  grilleWidth: 0.7,
   layers: {
     daylight: false,
     threeD: false,
@@ -1018,7 +1043,7 @@ function applyDaylight() {
       'hillshade-accent-color': '#2c2c2c',
       'hillshade-illumination-anchor': 'map',
       'hillshade-illumination-direction': sunAzimuth(),
-      'hillshade-exaggeration': 0.42
+      'hillshade-exaggeration': Math.min(state.reliefOpacity * 0.8, 1)
     } });
   updateSunlight();
 }
@@ -1076,24 +1101,35 @@ async function overpassFetch(cacheKey, query) {
     } catch(e) {}
   }
 
-  const url = 'https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query);
   inflight[cacheKey] = (async () => {
     try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Overpass ' + res.status);
-      const data = await res.json();
-      memCache[cacheKey] = data;
-      try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch(e) {}
-      return data;
-    } catch (e) {
-      toast('Données OSM indisponibles (réseau ?)');
-      throw e;
+      // Bascule sur plusieurs miroirs Overpass : le public overpass-api.de est
+      // souvent saturé (5 min / timeout). On tente le suivant si un rame.
+      for (const host of OVERPASS_HOSTS) {
+        try {
+          const ctrl = new AbortController();
+          const t = setTimeout(() => ctrl.abort(), 20000);
+          const res = await fetch(host + '?data=' + encodeURIComponent(query), { signal: ctrl.signal });
+          clearTimeout(t);
+          if (!res.ok) continue;
+          const data = await res.json();
+          memCache[cacheKey] = data;
+          try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch(e) {}
+          return data;
+        } catch (e) { /* miroir suivant */ }
+      }
+      throw new Error('Overpass indisponible');
     } finally {
       delete inflight[cacheKey];
     }
   })();
   return inflight[cacheKey];
 }
+const OVERPASS_HOSTS = [
+  'https://overpass.kumi.systems/api/interpreter',
+  'https://overpass-api.de/api/interpreter',
+  'https://overpass.private.coffee/api/interpreter'
+];
 
 function osmToGeoJSON(osm, type) {
   const features = [];
@@ -1378,7 +1414,7 @@ function applyGrille() {
     feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[W, lat], [E, lat]] }, properties: {} });
   map.addSource('grille-src', { type: 'geojson', data: { type: 'FeatureCollection', features: feats } });
   map.addLayer({ id: 'grille-lyr', type: 'line', source: 'grille-src',
-    paint: { 'line-color': '#f2efe7', 'line-opacity': 0.35, 'line-width': 0.6 } });
+    paint: { 'line-color': state.grilleColor, 'line-opacity': 0.55, 'line-width': state.grilleWidth } });
 }
 function reapplyGrille() {
   if (map.getLayer('grille-lyr')) map.removeLayer('grille-lyr');
@@ -1792,11 +1828,11 @@ const PANELS = {
       <div class="row-label">Grille de coordonnées</div>
     </div>
     ${state.layers.grille ? `
-    <div class="route-modes" style="margin:2px 0 8px;">
-      <button data-grille="auto" class="${state.grilleStep === 'auto' ? 'on' : ''}">Auto</button>
-      <button data-grille="0.1" class="${state.grilleStep === '0.1' ? 'on' : ''}">Large</button>
-      <button data-grille="0.05" class="${state.grilleStep === '0.05' ? 'on' : ''}">Moyen</button>
-      <button data-grille="0.02" class="${state.grilleStep === '0.02' ? 'on' : ''}">Fin</button>
+    <div class="grille-ctrl">
+      <div class="grille-swatches">
+        ${['#f2efe7', '#1a1a1a', '#cc6a3a', '#4a7ba3'].map(c => `<button class="grille-sw ${state.grilleColor === c ? 'on' : ''}" data-gcol="${c}" style="background:${c}"></button>`).join('')}
+      </div>
+      <input type="range" id="grille-w" min="3" max="28" value="${Math.round(state.grilleWidth * 10)}">
     </div>` : ''}
     <div class="row ${state.layers.drone ? 'active' : ''}" data-layer="drone">
       <div class="checkbox"></div>
@@ -1939,6 +1975,8 @@ function attachPanelEvents() {
       const v = parseInt(slider.value);
       val.textContent = v + '%';
       state.reliefOpacity = v / 100;
+      // en mode Lumière du jour, le slider pilote l'exagération du hillshade
+      if (map.getLayer('lidardem-hs')) map.setPaintProperty('lidardem-hs', 'hillshade-exaggeration', Math.min(state.reliefOpacity * 0.8, 1));
     });
     slider.addEventListener('change', rerender);
   }
@@ -1981,11 +2019,16 @@ function attachPanelEvents() {
   const precacheBtn = content.querySelector('#precache-btn');
   if (precacheBtn) precacheBtn.addEventListener('click', () => precacheZone(precacheBtn));
 
-  content.querySelectorAll('[data-grille]').forEach(b => b.addEventListener('click', () => {
-    state.grilleStep = b.dataset.grille;
-    content.querySelectorAll('[data-grille]').forEach(x => x.classList.toggle('on', x === b));
-    reapplyGrille();
+  content.querySelectorAll('[data-gcol]').forEach(b => b.addEventListener('click', () => {
+    state.grilleColor = b.dataset.gcol;
+    content.querySelectorAll('[data-gcol]').forEach(x => x.classList.toggle('on', x === b));
+    if (map.getLayer('grille-lyr')) map.setPaintProperty('grille-lyr', 'line-color', state.grilleColor);
   }));
+  const gw = content.querySelector('#grille-w');
+  if (gw) gw.addEventListener('input', () => {
+    state.grilleWidth = parseInt(gw.value) / 10;
+    if (map.getLayer('grille-lyr')) map.setPaintProperty('grille-lyr', 'line-width', state.grilleWidth);
+  });
 
   const joy = content.querySelector('#joystick');
   if (joy) {
