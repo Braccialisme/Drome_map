@@ -515,6 +515,20 @@
     }
     .gpx-btn:active { transform: scale(0.98); }
     .gpx-clear { color: var(--orange-2); }
+
+    .bestiaire { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .best-card {
+      background: var(--greige-0); border: 1px solid var(--greige-2);
+      border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative;
+    }
+    .best-card:active { transform: scale(0.98); }
+    .best-card img, .best-noimg { width: 100%; height: 72px; object-fit: cover; display: block; background: var(--greige-2); }
+    .best-name { font-family: var(--font-ui); font-size: 11px; padding: 4px 6px; color: var(--ink); line-height: 1.2; }
+    .best-count {
+      position: absolute; top: 4px; right: 4px;
+      background: var(--orange); color: var(--greige-0);
+      font-family: var(--font-mono); font-size: 9px; padding: 1px 6px; border-radius: 8px;
+    }
     .gpx-active { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
 
     .route-block { border-top: 1px solid var(--greige-2); margin-top: 8px; padding-top: 10px; }
@@ -796,6 +810,7 @@
     <div class="tabs-column">
       <div class="tab active" data-tab="fond">Fond</div>
       <div class="tab" data-tab="nature">Nature</div>
+      <div class="tab" data-tab="faune">Faune</div>
       <div class="tab" data-tab="activites">Activ.</div>
       <div class="tab" data-tab="patri">Patri.</div>
       <div class="tab" data-tab="commerce">Comm.</div>
@@ -850,6 +865,7 @@ const state = {
     canyoning: false,
     transport: false,
     curvature: false,
+    faune: false,
     monuments: false,
     villages: false,
     restaurants: false,
@@ -975,6 +991,7 @@ function rerender() {
   if (state.layers.slope) applySlope();
   if (state.layers.curvature) applyCurvature();
   if (state.layers.transport) applyTransport(gen);
+  if (state.layers.faune) applyFaune(gen);
   if (state.layers.forets) applyForets(gen);
   if (state.layers.rivieres) applyRivieres(gen);
   if (state.layers.contours) applyContours();
@@ -1648,6 +1665,76 @@ async function applyTransport(gen) {
   } catch(e) { console.warn('Transport fetch failed', e); }
 }
 
+// ── FAUNE (observations iNaturalist + bestiaire) ────────────────────────────
+let fauneData = null, fauneInflight = null;
+async function fetchFaune() {
+  if (fauneData) return fauneData;
+  if (fauneInflight) return fauneInflight;
+  fauneInflight = (async () => {
+    // 1. statique pré-cuit
+    try { const r = await fetch('poi/drm-faune-v1.json'); if (r.ok) { const d = await r.json(); fauneData = d.results || d; return fauneData; } } catch(e) {}
+    // 2. iNaturalist live
+    try {
+      const url = 'https://api.inaturalist.org/v1/observations?nelat=45.05&nelng=5.45&swlat=44.55&swlng=4.85&iconic_taxa=Animalia&quality_grade=research&photos=true&per_page=200&order_by=votes';
+      const r = await fetch(url); const d = await r.json(); fauneData = d.results || [];
+      return fauneData;
+    } catch(e) { toast('Faune indisponible (réseau ?)'); return []; }
+    finally { fauneInflight = null; }
+  })();
+  return fauneInflight;
+}
+function fauneGeo(obs) {
+  return { type: 'FeatureCollection', features: (obs || []).filter(o => o.geojson && o.geojson.coordinates).map(o => ({
+    type: 'Feature', geometry: o.geojson,
+    properties: {
+      name: (o.taxon && (o.taxon.preferred_common_name || o.taxon.name)) || 'Espèce',
+      photo: (o.taxon && o.taxon.default_photo && o.taxon.default_photo.square_url) || '',
+      taxon: (o.taxon && o.taxon.iconic_taxon_name) || '', id: o.id
+    }
+  })) };
+}
+async function applyFaune(gen) {
+  const obs = await fetchFaune();
+  if (stale(gen) || map.getSource('faune-src')) return;
+  map.addSource('faune-src', { type: 'geojson', data: fauneGeo(obs) });
+  map.addLayer({ id: 'faune-pts', type: 'circle', source: 'faune-src',
+    paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 6],
+      'circle-color': '#3f8f4a', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+  if (!boundEvents.has('faune')) {
+    boundEvents.add('faune');
+    map.on('click', 'faune-pts', e => {
+      const p = e.features[0].properties;
+      const img = p.photo ? `<img class="p-thumb" src="${esc(p.photo)}" alt="">` : '';
+      new maplibregl.Popup({ closeButton: true, offset: 10, maxWidth: '220px' }).setLngLat(e.lngLat)
+        .setHTML(`<div class="p-title">${esc(p.name)}</div><div class="p-kind">${esc((p.taxon || '').toLowerCase())}</div>${img}<a class="p-wiki" href="https://www.inaturalist.org/observations/${p.id}" target="_blank" rel="noopener">iNaturalist →</a>`)
+        .addTo(map);
+    });
+    map.on('mouseenter', 'faune-pts', () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', 'faune-pts', () => map.getCanvas().style.cursor = '');
+  }
+}
+async function renderBestiaire() {
+  const el = document.getElementById('bestiaire');
+  if (!el) return;
+  el.innerHTML = '<div class="row-sub">Chargement du bestiaire…</div>';
+  const obs = await fetchFaune();
+  const byTaxon = {};
+  obs.forEach(o => {
+    if (!o.taxon) return;
+    const k = o.taxon.id;
+    if (!byTaxon[k]) byTaxon[k] = { name: o.taxon.preferred_common_name || o.taxon.name, photo: (o.taxon.default_photo || {}).square_url || '', count: 0, ll: o.geojson ? o.geojson.coordinates : null };
+    byTaxon[k].count++;
+  });
+  const list = Object.values(byTaxon).sort((a, b) => b.count - a.count);
+  if (!list.length) { el.innerHTML = '<div class="row-sub">Aucune observation.</div>'; return; }
+  el.innerHTML = list.map(t => `<div class="best-card" data-lng="${t.ll ? t.ll[0] : ''}" data-lat="${t.ll ? t.ll[1] : ''}">
+      ${t.photo ? `<img src="${esc(t.photo)}" alt="">` : '<div class="best-noimg"></div>'}
+      <div class="best-name">${esc(t.name)}</div><div class="best-count">${t.count}</div></div>`).join('');
+  el.querySelectorAll('.best-card').forEach(c => c.addEventListener('click', () => {
+    if (c.dataset.lat) map.flyTo({ center: [+c.dataset.lng, +c.dataset.lat], zoom: 13, duration: 1000 });
+  }));
+}
+
 // ── ITINÉRAIRES (import de traces GPX) ──────────────────────────────────────
 let gpxData = null;
 function parseGpx(text) {
@@ -1989,6 +2076,14 @@ const PANELS = {
       <div class="row-label">Arrêts de transport<div class="row-sub">arrêts de bus · gares (OSM)</div></div>
     </div>
   `,
+  faune: () => `
+    <div class="row ${state.layers.faune ? 'active' : ''}" data-layer="faune">
+      <div class="checkbox"></div>
+      <div class="row-label">Observations sur la carte<div class="row-sub">faune locale (iNaturalist)</div></div>
+    </div>
+    <div class="row-sub" style="margin:10px 0 8px;">Bestiaire — espèces observées</div>
+    <div id="bestiaire" class="bestiaire"></div>
+  `,
   patri: () => `
     <div class="row ${state.layers.monuments ? 'active' : ''}" data-layer="monuments">
       <div class="checkbox"></div>
@@ -2119,6 +2214,7 @@ const ICON_PATHS = {
   slope:        '<path d="M3 20h18" /><path d="M5 20l11 -12" /><path d="M16 8l0 5" />',
   curvature:    '<path d="M21 12h-2c-.894 0 -1.662 -.857 -1.761 -2c-.296 -3.45 -.749 -6 -2.749 -6s-2.5 3.582 -2.5 8s-.5 8 -2.5 8s-2.452 -2.547 -2.749 -6c-.1 -1.147 -.867 -2 -1.763 -2h-2" />',
   transport:    '<path d="M4 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M16 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M4 17h-2v-11a1 1 0 0 1 1 -1h14a5 7 0 0 1 5 7v5h-2m-4 0h-8" /><path d="M16 5l1.5 7l4.5 0" /><path d="M2 10l15 0" /><path d="M7 5l0 5" /><path d="M12 5l0 5" />',
+  faune:        '<path d="M9 15a4 4 0 1 0 6 0a4 4 0 0 0 -6 0" /><circle cx="6.5" cy="9.5" r="1.4" /><circle cx="17.5" cy="9.5" r="1.4" /><circle cx="4" cy="14" r="1.2" /><circle cx="20" cy="14" r="1.2" />',
   contours:     '<path d="M3 20h18l-6.921 -14.612a2.3 2.3 0 0 0 -4.158 0l-6.921 14.612" /><path d="M7.5 11l2 2.5l2.5 -2.5l2 3l2.5 -2" />',
   sentiers:     '<path d="M12 4a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M7 21l3 -4" /><path d="M16 21l-2 -4l-3 -3l1 -6" /><path d="M6 12l2 -3l4 -1l3 3l3 1" />',
   rivieres:     '<path d="M3 7c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 17c3 -2 6 -2 9 0s6 2 9 0" /><path d="M3 12c3 -2 6 -2 9 0s6 2 9 0" />',
@@ -2141,7 +2237,7 @@ const ICON_COLORS = {
   viewpoints: '#6a3fb0', monuments: '#8b5a3a', villages: '#1a1a1a',
   restaurants: '#cc6a3a', cafes: '#8b5a3a', glaciers: '#4a7ba3', boulangeries: '#a8834a',
   forets: '#3f7a34', grille: '#6b6355', drone: '#b03a3a', nautique: '#2f7fb5', canyoning: '#2f9e9e',
-  daylight: '#d99a20', threeD: '#6b6355', slope: '#f04a00', curvature: '#7a3ea8', transport: '#7a3ea8'
+  daylight: '#d99a20', threeD: '#6b6355', slope: '#f04a00', curvature: '#7a3ea8', transport: '#7a3ea8', faune: '#3f8f4a'
 };
 function iconSvg(key) {
   const p = ICON_PATHS[key];
@@ -2174,6 +2270,7 @@ function renderPanel() {
     if (svg) row.querySelector('.checkbox').insertAdjacentHTML('afterend', svg);
   });
   attachPanelEvents();
+  if (state.activeTab === 'faune') renderBestiaire();
 }
 
 function attachPanelEvents() {
