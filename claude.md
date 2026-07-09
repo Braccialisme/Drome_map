@@ -249,8 +249,13 @@ Tout est dans `index.html` (HTML+CSS+JS inline). Le style MapLibre démarre vide
 
 ### POI (Overpass API + clustering)
 
-- `overpassFetch(cacheKey, query)` → cache mémoire + localStorage 30j.
-  `osmToGeoJSON` gère node / way-center / relation-center / line.
+- `overpassFetch(cacheKey, query)` → cache mémoire + localStorage 30j, **3 miroirs
+  Overpass** en bascule (kumi.systems → overpass-api.de → private.coffee) + timeout
+  20s (le public sature souvent). `osmToGeoJSON` gère node / way-center / relation-center / line.
+- **Précache hors-ligne** (bouton onglet Exp) : `precacheZone()` amorce tous les
+  jeux Overpass + les tuiles fond/contours de la bbox (z10-13) → SW les garde 30j.
+- **Hillshade** : joystick azimut (auto heure / manuel), slider relief = exagération.
+  Marche sur n'importe quel fond (sat, Cassini, État-Major, aérienne).
 - **Clustering** (`addClusteredPoi`) : source geojson `cluster:true` → 2 couches
   symbol (cluster = icône Tabler + compte, individuel = icône). Icônes = pastilles
   SVG Tabler générées en images (`loadPoiIcons`, `map.addImage`), colorées par

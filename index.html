@@ -161,29 +161,29 @@
     }
 
     /* Poignée = languette de la fiche, en haut à gauche, avec chevron large */
+    /* Poignée = slider hexa sur rail pointillé + flèche (croquis ggg) */
     .panel-handle {
       position: absolute;
-      top: -24px;
+      top: -25px;
       left: 14px;
-      width: 56px;
-      height: 25px;
+      width: 74px;
+      height: 26px;
       background: var(--greige-1);
       border: 1px solid var(--greige-2);
       border-bottom: none;
-      border-radius: var(--radius-l) var(--radius-l) 0 0;
+      border-radius: 13px 13px 0 0;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
     }
     .panel-handle svg {
-      width: 24px; height: 24px;
-      color: var(--dust);
+      width: 60px; height: 20px;
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    /* Panneau ouvert : chevron vers le bas (fermer) ; baissé : vers le haut (ouvrir) */
-    #panel-wrap.collapsed .panel-handle svg { transform: rotate(180deg); }
+    /* Panneau baissé : la flèche se retourne (pousser vers le haut = ouvrir) */
+    #panel-wrap.collapsed .panel-handle svg { transform: scaleX(-1); }
 
     /* Le bloc lui-même */
     #panel {
@@ -363,50 +363,37 @@
     .row:active { background: var(--greige-2); }
 
     /* Toggle hardware : carré greige, cercle dedans, ombre portée 3D */
-    /* Touche hardware 3D (pavé num) : socle épais qui s'enfonce + pastille cylindre */
+    /* Toggle calme : socle carré greige + cylindre plat, chanfrein léger */
     .checkbox {
-      width: 27px; height: 27px;
-      flex-shrink: 0;
-      position: relative;
-      border-radius: 7px;
-      background: linear-gradient(180deg, #ffffff 0%, var(--greige-0) 42%, var(--greige-1) 100%);
+      width: 22px; height: 22px;
       border: 1px solid var(--greige-2);
+      border-radius: var(--radius);
+      background: var(--greige-0);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
       box-shadow:
-        0 1px 0 rgba(255,255,255,0.9) inset,
-        0 -2px 3px rgba(0,0,0,0.05) inset,
-        0 3px 0 var(--greige-2),
-        0 4px 5px rgba(0,0,0,0.14);
-      transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
+        0 1px 0 rgba(255,255,255,0.7) inset,
+        0 -1px 0 rgba(0,0,0,0.06) inset,
+        0 1px 2px rgba(0,0,0,0.06);
+      transition: all 0.15s;
     }
     .checkbox::after {
       content: '';
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 11px; height: 11px; border-radius: 50%;
-      background: linear-gradient(180deg, #ffffff 0%, var(--greige-2) 100%);
-      box-shadow: 0 0 0 1px var(--greige-2), inset 0 -1px 1px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.12);
-      transition: background 0.15s, box-shadow 0.15s;
-    }
-    .row.active .checkbox {
-      background: linear-gradient(180deg, #f3ac7d 0%, var(--orange) 45%, var(--orange-2) 100%);
-      border-color: var(--orange-2);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #ffffff 0%, var(--greige-1) 22%, var(--greige-2) 100%);
       box-shadow:
-        0 1px 0 rgba(255,255,255,0.35) inset,
-        0 3px 0 var(--orange-2),
-        0 4px 6px rgba(0,0,0,0.18),
-        0 0 7px var(--orange-glow);
+        0 0 0 1.5px var(--greige-1),
+        inset 0 -1px 1px rgba(0,0,0,0.10),
+        0 1px 1px rgba(0,0,0,0.12);
+      transition: background 0.15s;
     }
+    .row.active .checkbox { border-color: var(--greige-3); }
     .row.active .checkbox::after {
-      background: linear-gradient(180deg, #ffffff, var(--greige-0));
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.2);
+      background: linear-gradient(180deg, #f6c09a 0%, var(--orange) 24%, var(--orange-2) 100%);
+      box-shadow: 0 0 0 1.5px var(--greige-1), 0 0 4px var(--orange-glow);
     }
-    /* enfoncement de la touche au clic */
-    .row:active .checkbox {
-      transform: translateY(3px);
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.6) inset,
-        0 1px 2px rgba(0,0,0,0.15);
-    }
+    .row:active .checkbox { transform: scale(0.95); }
 
     .row-icon {
       width: 20px; height: 20px;
@@ -732,8 +719,10 @@
 
 <div id="panel-wrap">
   <div class="panel-handle" id="handle" title="Ouvrir / fermer">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="5 9 12 16 19 9"/>
+    <svg viewBox="0 0 60 20" fill="none">
+      <polygon points="10,3 16,6.5 16,13.5 10,17 4,13.5 4,6.5" fill="#d0ccc0" stroke="#8a877c" stroke-width="1.2"/>
+      <line x1="21" y1="10" x2="44" y2="10" stroke="#8a877c" stroke-width="1.4" stroke-dasharray="3 3" stroke-linecap="round"/>
+      <path d="M45 5 L51 10 L45 15" fill="none" stroke="#8a877c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
   <div id="panel">
