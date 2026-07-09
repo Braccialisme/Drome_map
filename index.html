@@ -1200,9 +1200,11 @@ async function overpassFetch(cacheKey, query) {
   return inflight[cacheKey];
 }
 const OVERPASS_HOSTS = [
+  'https://overpass.openstreetmap.fr/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
   'https://overpass-api.de/api/interpreter',
-  'https://overpass.private.coffee/api/interpreter'
+  'https://overpass.osm.ch/api/interpreter',
+  'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
 ];
 
 function osmToGeoJSON(osm, type) {
@@ -1921,7 +1923,7 @@ const PANELS = {
     </div>
     <div class="row ${state.basemap === 'etatmajor' ? 'active' : ''}" data-basemap="etatmajor">
       <div class="checkbox"></div>
-      <div class="row-label">État-Major</div>
+      <div class="row-label">État-Major (~1850)</div>
     </div>
     <div class="row ${state.basemap === 'cassini' ? 'active' : ''}" data-basemap="cassini">
       <div class="checkbox"></div>
