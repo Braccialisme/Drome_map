@@ -11,7 +11,8 @@
   <style>
     @font-face {
       font-family: 'VG5000';
-      src: url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2');
+      src: url('fonts/VG5000-Regular_web.ttf') format('truetype'),
+           url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2');
       font-weight: 400;
       font-display: swap;
     }
@@ -77,6 +78,8 @@
     /* Textes codés en dur → crème en mode nuit */
     body.night .tab { color: rgba(242,239,231,0.82); }
     body.night .content-title, body.night .row-label { color: var(--ink); }
+    /* Échelle : garder le look jour (rectangle noir, texte crème) en mode nuit */
+    body.night #scale { background: #1a1a1a; color: #f2efe7; }
 
     html, body {
       height: 100%;
@@ -516,7 +519,9 @@
     .gpx-btn:active { transform: scale(0.98); }
     .gpx-clear { color: var(--orange-2); }
 
-    .bestiaire { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .best-head { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dust); margin: 12px 0 6px; }
+    .best-head:first-child { margin-top: 0; }
+    .best-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .best-card {
       background: var(--greige-0); border: 1px solid var(--greige-2);
       border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative;
@@ -1645,10 +1650,11 @@ async function applyTransport(gen) {
     const stops = osmToGeoJSON(osm, 'point');
     if (stale(gen) || map.getSource('transport-stops-src')) return;
     map.addSource('transport-stops-src', { type: 'geojson', data: stops });
-    map.addLayer({ id: 'transport-stops', type: 'circle', source: 'transport-stops-src',
+    map.addLayer({ id: 'transport-stops', type: 'symbol', source: 'transport-stops-src',
       minzoom: 11,
-      paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2.5, 15, 5],
-        'circle-color': '#7a3ea8', 'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+      layout: { 'icon-image': 'poi-transport',
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 11, 0.45, 15, 0.8],
+        'icon-allow-overlap': true, 'icon-ignore-placement': true } });
     if (!boundEvents.has('transport-stops')) {
       boundEvents.add('transport-stops');
       map.on('click', 'transport-stops', e => {
@@ -1671,13 +1677,26 @@ async function applyTransport(gen) {
 const TAXON_ICON = {
   Aves: '<path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4"/><path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4"/>',
   Mammalia: '<path d="M3 3c0 2 1 3 4 3c2 0 3 1 3 3"/><path d="M21 3c0 2 -1 3 -4 3c-2 0 -3 .333 -3 3"/><path d="M12 18c-1 0 -4 -3 -4 -6c0 -2 1.333 -3 4 -3s4 1 4 3c0 3 -3 6 -4 6"/><path d="M15.185 14.889l.095 -.18a4 4 0 1 1 -6.56 0"/><path d="M17 3c0 1.333 -.333 2.333 -1 3"/><path d="M7 3c0 1.333 .333 2.333 1 3"/><path d="M8.5 10l-1.5 -1"/><path d="M15.5 10l1.5 -1"/>',
+  Reptilia: '<path d="M5 19c-1.6 0 -2.7 -1.3 -2.7 -3.2s1.3 -3.3 3.2 -3.3c2.6 0 3.7 2 6.2 2c1.9 0 3.2 -1.3 3.2 -3.2s-1.1 -3.1 -2.7 -3.1" /><path d="M18.4 4.7l1.6 -1M18.4 5.7l1.6 1" /><circle cx="17.6" cy="5.2" r="0.6" fill="currentColor" stroke="none" />',
   _default: '<path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538"/><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052"/><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267"/><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.885 0 1.73 -.974 1.93 -2.267"/><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866"/>'
 };
 const TAXON_COLOR = { Aves: '#d99a20', Mammalia: '#8b5a3a', Reptilia: '#3f8f4a', Amphibia: '#2f9e9e' };
 function taxonColor(g) { return TAXON_COLOR[g] || '#6b6355'; }
 function taxonSvg(g, size) {
-  const p = TAXON_ICON[g] || TAXON_ICON._default;
-  return `<svg width="${size || 22}" height="${size || 22}" viewBox="0 0 24 24" fill="none" stroke="${taxonColor(g)}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const p = TAXON_ICON[g] || TAXON_ICON._default, col = taxonColor(g);
+  return `<svg width="${size || 22}" height="${size || 22}" viewBox="0 0 24 24" fill="none" color="${col}" stroke="${col}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+}
+function loadFauneIcons() {
+  ['Aves', 'Mammalia', 'Reptilia', 'Amphibia', '_default'].forEach(g => {
+    const id = 'fau-' + g;
+    if (map.hasImage(id)) return;
+    const col = taxonColor(g), p = TAXON_ICON[g] || TAXON_ICON._default;
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">' +
+      '<g fill="none" color="' + col + '" stroke="' + col + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(1.667)">' + p + '</g></svg>';
+    const img = new Image(46, 46);
+    img.onload = () => { if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 2 }); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
 }
 
 let fauneData = null, fauneInflight = null;
@@ -1711,10 +1730,12 @@ async function applyFaune(gen) {
   const obs = await fetchFaune();
   if (stale(gen) || map.getSource('faune-src')) return;
   map.addSource('faune-src', { type: 'geojson', data: fauneGeo(obs) });
-  map.addLayer({ id: 'faune-pts', type: 'circle', source: 'faune-src',
-    paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 3, 14, 6],
-      'circle-color': ['match', ['get', 'taxon'], 'Aves', '#d99a20', 'Mammalia', '#8b5a3a', 'Reptilia', '#3f8f4a', 'Amphibia', '#2f9e9e', '#6b6355'],
-      'circle-stroke-color': '#f2efe7', 'circle-stroke-width': 1.5 } });
+  map.addLayer({ id: 'faune-pts', type: 'symbol', source: 'faune-src',
+    layout: {
+      'icon-image': ['match', ['get', 'taxon'], 'Aves', 'fau-Aves', 'Mammalia', 'fau-Mammalia', 'Reptilia', 'fau-Reptilia', 'Amphibia', 'fau-Amphibia', 'fau-_default'],
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.45, 14, 0.8, 17, 1.05],
+      'icon-allow-overlap': true, 'icon-ignore-placement': true
+    } });
   if (!boundEvents.has('faune')) {
     boundEvents.add('faune');
     map.on('click', 'faune-pts', e => {
@@ -1739,11 +1760,20 @@ async function renderBestiaire() {
     if (!byTaxon[k]) byTaxon[k] = { name: o.taxon.preferred_common_name || o.taxon.name, group: o.taxon.iconic_taxon_name, count: 0, ll: o.geojson ? o.geojson.coordinates : null };
     byTaxon[k].count++;
   });
-  const list = Object.values(byTaxon).sort((a, b) => b.count - a.count);
+  const list = Object.values(byTaxon);
   if (!list.length) { el.innerHTML = '<div class="row-sub">Aucune observation.</div>'; return; }
-  el.innerHTML = list.map(t => `<div class="best-card" data-lng="${t.ll ? t.ll[0] : ''}" data-lat="${t.ll ? t.ll[1] : ''}">
+  const GLABEL = { Mammalia: 'Mammifères', Aves: 'Oiseaux', Reptilia: 'Reptiles', Amphibia: 'Amphibiens' };
+  const GORDER = ['Mammalia', 'Aves', 'Reptilia', 'Amphibia'];
+  const groups = {};
+  list.forEach(t => { const g = t.group || 'Autres'; (groups[g] = groups[g] || []).push(t); });
+  const card = t => `<div class="best-card" data-lng="${t.ll ? t.ll[0] : ''}" data-lat="${t.ll ? t.ll[1] : ''}">
       <div class="best-ic">${taxonSvg(t.group, 30)}</div>
-      <div class="best-name">${esc(t.name)}</div><div class="best-count">${t.count}</div></div>`).join('');
+      <div class="best-name">${esc(t.name)}</div><div class="best-count">${t.count}</div></div>`;
+  const order = GORDER.concat(Object.keys(groups).filter(g => !GORDER.includes(g)));
+  el.innerHTML = order.filter(g => groups[g]).map(g => {
+    groups[g].sort((a, b) => b.count - a.count);
+    return `<div class="best-head">${GLABEL[g] || g}</div><div class="best-grid">${groups[g].map(card).join('')}</div>`;
+  }).join('');
   el.querySelectorAll('.best-card').forEach(c => c.addEventListener('click', () => {
     if (c.dataset.lat) map.flyTo({ center: [+c.dataset.lng, +c.dataset.lat], zoom: 13, duration: 1000 });
   }));
@@ -1884,8 +1914,21 @@ function haversine(a, b) {
 function fmtDist(m) { return m < 1000 ? Math.round(m) + ' m' : (m / 1000).toFixed(1) + ' km'; }
 function fmtDur(s) { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); }
 
+// Pins A/B = marqueurs DOM propres (plus de "vilains points")
+let routeMarkers = { A: null, B: null };
+function pinEl(letter) {
+  const el = document.createElement('div');
+  el.style.cssText = 'width:26px;height:34px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35))';
+  el.innerHTML = '<svg width="26" height="34" viewBox="0 0 26 34"><path d="M13 33C5 22 1.5 17 1.5 11a11.5 11.5 0 1 1 23 0c0 6 -3.5 11 -11.5 22z" fill="#cc6a3a" stroke="#f2efe7" stroke-width="2"/><text x="13" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#f2efe7">' + letter + '</text></svg>';
+  return el;
+}
+function setPin(which, lonlat) {
+  if (!lonlat) { if (routeMarkers[which]) { routeMarkers[which].remove(); routeMarkers[which] = null; } return; }
+  if (!routeMarkers[which]) routeMarkers[which] = new maplibregl.Marker({ element: pinEl(which), anchor: 'bottom' }).setLngLat(lonlat).addTo(map);
+  else routeMarkers[which].setLngLat(lonlat);
+}
 function measureGeo() {
-  const feats = routePts().map(p => ({ type: 'Feature', geometry: { type: 'Point', coordinates: p }, properties: {} }));
+  const feats = [];
   if (routeA && routeB) {
     if (measureRoute) feats.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: measureRoute.coords }, properties: { kind: 'route' } });
     const vol = haversine(routeA, routeB);
@@ -1904,8 +1947,6 @@ function applyMeasure() {
   map.addLayer({ id: 'measure-route', type: 'line', source: 'measure-src', filter: ['==', ['get', 'kind'], 'route'],
     layout: { 'line-cap': 'round', 'line-join': 'round' },
     paint: { 'line-color': '#cc6a3a', 'line-width': 4, 'line-opacity': 0.9 } });
-  map.addLayer({ id: 'measure-pts', type: 'circle', source: 'measure-src', filter: ['!', ['has', 'label']],
-    paint: { 'circle-radius': 5, 'circle-color': '#f2efe7', 'circle-stroke-color': '#cc6a3a', 'circle-stroke-width': 2.5 } });
   map.addLayer({ id: 'measure-lbl', type: 'symbol', source: 'measure-src', filter: ['has', 'label'],
     layout: { 'text-field': ['get', 'label'], 'text-font': ['VG5000'], 'text-size': 12, 'text-offset': [0, -1.2], 'text-anchor': 'bottom', 'text-allow-overlap': true },
     paint: { 'text-color': '#1a1a1a', 'text-halo-color': '#f2efe7', 'text-halo-width': 2 } });
@@ -1930,6 +1971,7 @@ function computeRoute() {
 }
 function setRoutePoint(idx, lonlat) {
   if (idx === 0) routeA = lonlat; else routeB = lonlat;
+  setPin(idx === 0 ? 'A' : 'B', lonlat);
   measureRoute = null;
   if (map.getSource('measure-src')) refreshMeasure(); else applyMeasure();
   if (routeA && routeB) {
@@ -1942,7 +1984,7 @@ function setRoutePoint(idx, lonlat) {
     map.flyTo({ center: lonlat, zoom: Math.max(map.getZoom(), 12), duration: 800 });
   }
 }
-function clearRoute() { routeA = routeB = measureRoute = null; refreshMeasure(); renderPanel(); }
+function clearRoute() { routeA = routeB = measureRoute = null; setPin('A', null); setPin('B', null); refreshMeasure(); renderPanel(); }
 
 // Recherche Nominatim pour remplir A ou B
 async function routeSearch(q, resEl, idx, input) {
@@ -2096,7 +2138,7 @@ const PANELS = {
       <div class="row-label">Observations sur la carte<div class="row-sub">faune locale (iNaturalist)</div></div>
     </div>
     <div class="row-sub" style="margin:10px 0 8px;">Bestiaire — espèces observées</div>
-    <div id="bestiaire" class="bestiaire"></div>
+    <div id="bestiaire"></div>
   `,
   patri: () => `
     <div class="row ${state.layers.monuments ? 'active' : ''}" data-layer="monuments">
@@ -2191,11 +2233,6 @@ const PANELS = {
       <div class="slider-header" style="margin-top:8px"><span class="slider-label">Intensité</span></div>
       <input type="range" id="curv-str" min="3000" max="22000" step="500" value="${state.curvStrength}">
     </div>` : ''}
-    <div class="row ${issOn ? 'active' : ''}" id="iss-row" style="border-top:1px solid var(--greige-2); margin-top:6px;">
-      <div class="checkbox"></div>
-      <div class="row-label">ISS en direct<div class="row-sub">la station spatiale sur la carte</div></div>
-    </div>
-
     <div class="route-block">
       <div class="row-sub" style="margin-bottom:6px;">Itinéraire A → B</div>
       <div class="route-field"><input type="text" id="route-a" placeholder="Départ (A)" autocomplete="off"><div class="search-results route-res" id="route-a-res"></div></div>
@@ -2205,7 +2242,7 @@ const PANELS = {
         <button data-prof="trekking" class="${routeProfile === 'trekking' ? 'on' : ''}">Vélo</button>
         <button data-prof="hiking-mountain" class="${routeProfile === 'hiking-mountain' ? 'on' : ''}">À pied</button>
       </div>
-      ${(routeA || routeB) ? `<button class="gpx-btn gpx-clear" id="route-clear">Effacer l'itinéraire</button>` : ''}
+      <button class="gpx-btn gpx-clear" id="route-clear">Effacer l'itinéraire</button>
     </div>
 
     <div class="gpx-block">
@@ -2261,7 +2298,7 @@ function iconSvg(key) {
 
 // Pastilles-icônes des POI sur la carte : disque coloré + icône blanche.
 // Enregistrées une fois dans la carte, réutilisées par les couches symbol.
-const POI_ICON_KEYS = ['monuments', 'baignade', 'viewpoints', 'restaurants', 'cafes', 'glaciers', 'boulangeries', 'nautique', 'canyoning'];
+const POI_ICON_KEYS = ['monuments', 'baignade', 'viewpoints', 'restaurants', 'cafes', 'glaciers', 'boulangeries', 'nautique', 'canyoning', 'transport'];
 function loadPoiIcons() {
   POI_ICON_KEYS.forEach(key => {
     if (map.hasImage('poi-' + key)) return;
@@ -2383,8 +2420,6 @@ function attachPanelEvents() {
     renderPanel();
   });
 
-  const issRow = content.querySelector('#iss-row');
-  if (issRow) issRow.addEventListener('click', () => { toggleISS(!issOn); renderPanel(); });
 
   const joy = content.querySelector('#joystick');
   if (joy) {
@@ -2564,13 +2599,13 @@ const compassRose = document.getElementById('compass-rose');
 map.on('rotate', () => { compassRose.style.transform = `rotate(${-map.getBearing()}deg)`; });
 document.getElementById('compass').addEventListener('click', () => map.easeTo({ bearing: 0, duration: 500 }));
 
-// ── EASTER EGG : position live de l'ISS ─────────────────────────────────────
-let issOn = false, issMarker = null, issTimer = null;
+// ── ISS : toujours en direct sur la carte, clic = infos ─────────────────────
+let issMarker = null, issData = null;
 function issEl() {
   const el = document.createElement('div');
-  el.style.cssText = 'width:38px;height:38px;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4));cursor:pointer';
+  el.style.cssText = 'width:36px;height:36px;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.4));cursor:pointer';
   el.innerHTML =
-    '<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+    '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
       '<circle cx="12" cy="12" r="11" fill="#f2efe7" stroke="none"/>' +
       '<rect x="10" y="10" width="4" height="4" fill="#cc6a3a" stroke="#8b3a1a"/>' +
       '<path d="M10 12h-5M14 12h5"/>' +
@@ -2578,22 +2613,27 @@ function issEl() {
       '<rect x="19" y="9.5" width="3" height="5" fill="#4a7ba3"/>' +
     '</svg>';
   el.title = 'Station Spatiale Internationale';
-  el.addEventListener('click', () => { if (issMarker) map.flyTo({ center: issMarker.getLngLat(), zoom: 4, duration: 1500 }); });
+  el.addEventListener('click', () => {
+    if (!issMarker) return;
+    const alt = issData ? Math.round(issData.altitude) : '?';
+    const spd = issData ? Math.round(issData.velocity) : '?';
+    new maplibregl.Popup({ closeButton: true, offset: 18, maxWidth: '220px' })
+      .setLngLat(issMarker.getLngLat())
+      .setHTML(`<div class="p-title">Station Spatiale (ISS)</div><div class="p-kind">en orbite, en direct</div><div class="p-line"><span class="p-k">Altitude</span> ${alt} km</div><div class="p-line"><span class="p-k">Vitesse</span> ${spd} km/h</div>`)
+      .addTo(map);
+  });
   return el;
 }
 async function updateISS() {
   try {
     const r = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
-    const d = await r.json();
-    if (!issMarker) issMarker = new maplibregl.Marker({ element: issEl(), anchor: 'center' }).setLngLat([d.longitude, d.latitude]).addTo(map);
-    else issMarker.setLngLat([d.longitude, d.latitude]);
+    issData = await r.json();
+    if (!issMarker) issMarker = new maplibregl.Marker({ element: issEl(), anchor: 'center' }).setLngLat([issData.longitude, issData.latitude]).addTo(map);
+    else issMarker.setLngLat([issData.longitude, issData.latitude]);
   } catch(e) {}
 }
-function toggleISS(on) {
-  issOn = on;
-  if (on) { updateISS(); issTimer = setInterval(updateISS, 4000); toast('ISS suivie en direct'); }
-  else { if (issTimer) clearInterval(issTimer); issTimer = null; if (issMarker) { issMarker.remove(); issMarker = null; } }
-}
+updateISS();
+setInterval(updateISS, 5000);
 
 const scaleVal = document.getElementById('scale-val');
 function updateScale() {
@@ -2616,7 +2656,7 @@ function hideSplash() {
   s.classList.add('hide');
   setTimeout(() => { s.style.display = 'none'; }, 650);
 }
-map.on('load', () => { loadPoiIcons(); updateScale(); rerender(); setTimeout(hideSplash, 500); });
+map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender(); setTimeout(hideSplash, 500); });
 setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
