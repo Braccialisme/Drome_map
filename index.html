@@ -536,6 +536,57 @@
     }
     .gpx-active { background: var(--orange); border-color: var(--orange-2); color: var(--greige-0); }
 
+    /* ── GRAMMAIRE UX (objet, pas site) ── */
+    .silkscreen {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--greige-4);
+    }
+    .compartment {
+      position: relative;
+      background: var(--greige-0);
+      border: 1px solid var(--greige-2);
+      border-radius: 3px;
+      padding: 16px 8px 8px;
+      margin-bottom: 8px;
+    }
+    .comp-title {
+      position: absolute;
+      top: 0; left: 8px;
+      transform: translateY(-50%);
+      background: var(--greige-1);
+      padding: 0 6px;
+    }
+    .readout {
+      display: flex; align-items: baseline; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .readout-val {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+    .button-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .hardware-button {
+      padding: 8px 4px;
+      border: 1px solid var(--greige-2);
+      border-radius: 3px;
+      background: var(--greige-0);
+      color: var(--greige-4);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(0,0,0,0.15);
+      transition: background 140ms cubic-bezier(0.2, 0, 0, 1), color 140ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    .hardware-button.on { background: var(--orange); border-color: var(--orange-2); color: #fff; }
+    .hardware-button:active { box-shadow: inset 0 1px 0 rgba(0,0,0,0.15), inset 0 -1px 0 rgba(255,255,255,0.5); }
+
     .route-block { border-top: 1px solid var(--greige-2); margin-top: 8px; padding-top: 10px; }
     .route-field { margin-bottom: 6px; }
     .route-field input {
@@ -2046,29 +2097,15 @@ const PANELS = {
     </div>
     <div class="search-results" id="search-results"></div>
 
-    <div class="row ${state.basemap === 'sat' ? 'active' : ''}" data-basemap="sat">
-      <div class="checkbox"></div>
-      <div class="row-label">Sat + Relief</div>
-    </div>
-    <div class="row ${state.basemap === 'ign' ? 'active' : ''}" data-basemap="ign">
-      <div class="checkbox"></div>
-      <div class="row-label">Plan IGN</div>
-    </div>
-    <div class="row ${state.basemap === 'lidar-only' ? 'active' : ''}" data-basemap="lidar-only">
-      <div class="checkbox"></div>
-      <div class="row-label">LiDAR seul</div>
-    </div>
-    <div class="row ${state.basemap === 'aerienne50' ? 'active' : ''}" data-basemap="aerienne50">
-      <div class="checkbox"></div>
-      <div class="row-label">Aérienne 1950-1965</div>
-    </div>
-    <div class="row ${state.basemap === 'etatmajor' ? 'active' : ''}" data-basemap="etatmajor">
-      <div class="checkbox"></div>
-      <div class="row-label">État-Major (~1850)</div>
-    </div>
-    <div class="row ${state.basemap === 'cassini' ? 'active' : ''}" data-basemap="cassini">
-      <div class="checkbox"></div>
-      <div class="row-label">Cassini (~1750)</div>
+    <div class="compartment">
+      <div class="silkscreen comp-title">Fond</div>
+      <div class="readout">
+        <span class="silkscreen">Fond actif</span>
+        <span class="readout-val">${BASEMAP_NAMES[state.basemap] || '—'}</span>
+      </div>
+      <div class="button-grid">
+        ${[['sat', 'Sat'], ['ign', 'Plan IGN'], ['lidar-only', 'LiDAR'], ['aerienne50', 'Aérienne'], ['etatmajor', 'État-Major'], ['cassini', 'Cassini']].map(([k, lbl]) => `<button class="hardware-button ${state.basemap === k ? 'on' : ''}" data-basemap="${k}">${lbl}</button>`).join('')}
+      </div>
     </div>
 
     <div class="row ${state.layers.villages ? 'active' : ''}" data-layer="villages" style="border-top:1px solid var(--greige-2); margin-top:6px;">
