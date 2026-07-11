@@ -808,6 +808,149 @@
     }
 
     .geoloc-marker { width: 30px; height: 30px; }
+
+    /* ══ PANNEAU EP-133 K.O. II (design handoff) ══════════════════════════════ */
+    #panel-wrap {
+      --char: #201f1d; --char-wall: #0d0d0c; --char-txt: #e9e7e0;
+      --cream: #efece3; --cream-wall: #cbc6b9;
+      --korange: #d55a28; --orange-wall: #a5410f;
+      --silk: #8a877c; --slit: #141210;
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: var(--panel-h);
+      z-index: 20;
+      border-radius: 10px 10px 0 0;
+      background: linear-gradient(180deg, #d3d0c9 0%, #c9c6bf 46%, #c2beb6 100%);
+      box-shadow: 0 -8px 26px rgba(48,38,20,.30), inset 0 1px 0 rgba(255,255,255,.6);
+      overflow: hidden;
+      transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1);
+    }
+    #panel-wrap.collapsed { transform: translateY(calc(var(--panel-h) - 40px)); }
+    #panel-wrap::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 6;
+      opacity: .5; mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    #panel { display: flex; height: 100%; position: relative; z-index: 1; background: transparent; border: none; box-shadow: none; }
+    .panel-body { flex: 1; display: flex; flex-direction: column; padding: 16px 16px 0; min-width: 0; }
+    .panel-content {
+      flex: 1; overflow-y: auto; overscroll-behavior: contain;
+      display: flex; flex-direction: column; gap: 20px;
+      scrollbar-width: none; padding: 0; background: transparent;
+    }
+    .panel-content::-webkit-scrollbar { display: none; }
+
+    .toprow { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .collapse {
+      width: 40px; height: 30px; border-radius: 7px; border: none; cursor: pointer; flex: none;
+      background: var(--cream);
+      box-shadow: 0 2px 0 0 var(--cream-wall), 0 4px 6px rgba(60,50,30,.24), inset 0 1px 0 rgba(255,255,255,.6);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 90ms linear, box-shadow 90ms linear;
+    }
+    .collapse:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--cream-wall), inset 0 1px 0 rgba(255,255,255,.5); }
+    .chev { width: 7px; height: 7px; border-left: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(-45deg); margin-top: -2px; transition: transform .16s linear; }
+    #panel-wrap.collapsed .chev { transform: rotate(135deg); margin-top: 2px; }
+    .search-wrap { position: relative; flex: 1; }
+    .search {
+      width: 100%; height: 30px; border-radius: 7px; border: none; box-sizing: border-box;
+      background: #c1beb6;
+      box-shadow: inset 0 2px 4px rgba(50,40,22,.34), inset 0 -1px 0 rgba(255,255,255,.35);
+      padding: 0 12px;
+      font-family: var(--font-mono); font-size: 11px; color: var(--ink);
+      text-transform: uppercase; letter-spacing: .09em;
+    }
+    .search::placeholder { color: var(--silk); }
+    .search:focus { outline: none; }
+    .search-wrap .search-results {
+      position: absolute; top: 34px; left: 0; right: 0; z-index: 8;
+      background: var(--cream); border-radius: 7px;
+      box-shadow: 0 6px 14px rgba(48,38,20,.28);
+      max-height: 180px; overflow-y: auto; display: none;
+    }
+    .search-wrap .search-results.visible { display: block; }
+    .search-wrap .search-result {
+      padding: 8px 12px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+      letter-spacing: .04em; color: var(--ink); cursor: pointer; border-bottom: 1px solid rgba(50,40,22,.12);
+    }
+    .search-wrap .search-result:last-child { border-bottom: none; }
+
+    /* Groupe + languette silkscreen */
+    .group { }
+    .group-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+    .silkscreen {
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--ink);
+    }
+    .group-head .silkscreen { font-size: 8px; letter-spacing: .16em; }
+    .group-head .count { font-family: var(--font-mono); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--silk); }
+
+    /* Grille de keys */
+    .key-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .cell { display: flex; flex-direction: column; }
+    .key {
+      position: relative; width: 100%; aspect-ratio: 1/1;
+      border-radius: 8px; border: none; cursor: pointer;
+      display: flex; align-items: flex-start; justify-content: flex-start;
+      background: var(--char);
+      box-shadow: 0 3px 0 0 var(--char-wall), 0 6px 8px rgba(24,17,6,.30), inset 0 1px 0 rgba(255,255,255,.06);
+      transition: transform 90ms linear, box-shadow 90ms linear;
+      transform: scale(.92);
+    }
+    .key:active { transform: scale(.92) translateY(3px); box-shadow: 0 1px 0 0 var(--char-wall), 0 2px 4px rgba(24,17,6,.30), inset 0 1px 0 rgba(255,255,255,.05); }
+    .key--cream { background: var(--cream); box-shadow: 0 3px 0 0 var(--cream-wall), 0 6px 8px rgba(60,50,30,.22), inset 0 1px 0 rgba(255,255,255,.6); }
+    .key--cream:active { transform: scale(.92) translateY(3px); box-shadow: 0 1px 0 0 var(--cream-wall), 0 2px 4px rgba(60,50,30,.22), inset 0 1px 0 rgba(255,255,255,.5); }
+    .key--orange { background: var(--korange); box-shadow: 0 3px 0 0 var(--orange-wall), 0 6px 9px rgba(90,40,10,.28), inset 0 1px 0 rgba(255,255,255,.2); }
+    .key--orange:active { transform: scale(.92) translateY(3px); box-shadow: 0 1px 0 0 var(--orange-wall), 0 2px 4px rgba(90,40,10,.28), inset 0 1px 0 rgba(255,255,255,.16); }
+    .key-label {
+      font-family: var(--font-mono); font-size: 12px; line-height: 1.14; letter-spacing: .02em;
+      text-transform: uppercase; color: var(--char-txt); padding: 10px 10px 0; text-align: left;
+    }
+    .key--cream .key-label { color: var(--ink); }
+    .key--orange .key-label { color: #fff; }
+    .key-silk { display: flex; align-items: center; gap: 7px; margin-top: 7px; padding-left: 2px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; border: 1.5px solid var(--silk); background: transparent; }
+    .dot.on { background: var(--korange); border-color: var(--korange); }
+    .key-silk .sub { font-family: var(--font-mono); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--silk); }
+
+    /* Fader */
+    .fader-wrap { position: relative; padding-top: 8px; }
+    .signal { position: absolute; top: -13px; left: calc(50% - .5px); width: 1px; height: 20px; background: rgba(26,26,26,.28); }
+    .fader { display: flex; align-items: center; gap: 16px; }
+    .fader > .silkscreen { flex: none; width: 54px; }
+    .fader-track { flex: 1; position: relative; height: 22px; display: flex; align-items: center; cursor: pointer; }
+    .fader-slit { position: absolute; left: 0; right: 0; top: calc(50% - 1.5px); height: 3px; border-radius: 2px; background: var(--slit); box-shadow: inset 0 1px 1.5px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.4); }
+    .zero-tick { position: absolute; left: 0; top: calc(50% - 6px); width: 1px; height: 12px; background: var(--silk); }
+    .fader-cap { position: absolute; top: calc(50% - 11px); width: 22px; height: 22px; border-radius: 50%; background: #c2bdb0; box-shadow: 0 3px 5px rgba(46,37,18,.34), 0 1px 1px rgba(46,37,18,.24), inset 0 1px 0 rgba(255,255,255,.4); transform: translateX(-50%); }
+    .fader-cap::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(46,37,18,.3); }
+    .fader .readout { flex: none; width: 26px; text-align: right; font-family: var(--font-mono); font-size: 12px; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    /* Nameplate */
+    .nameplate { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 2px; padding: 12px 0 12px; border-top: 1px solid rgba(26,26,26,.14); }
+    .np-text { display: flex; flex-direction: column; }
+    .np-title { font-family: var(--font-mono); font-size: 15px; letter-spacing: .04em; color: var(--ink); }
+    .np-sub { font-family: var(--font-mono); font-size: 8px; letter-spacing: .18em; text-transform: uppercase; color: var(--silk); margin-top: 2px; }
+    .grille { width: 118px; height: 26px; border-radius: 3px; background-image: radial-gradient(circle, rgba(26,26,26,.32) 1px, transparent 1.5px); background-size: 8px 8px; box-shadow: inset 0 1px 2px rgba(50,40,22,.2); }
+
+    /* Tab-strip */
+    .tabs-column { width: 42px; flex: none; display: flex; flex-direction: column; position: relative; z-index: 2; padding: 0; background: transparent; box-shadow: inset 3px 0 5px rgba(50,40,22,.18); }
+    .tab {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      writing-mode: vertical-rl; transform: none; border: none; max-height: none; border-radius: 0;
+      font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .18em;
+      color: var(--silk);
+      background: linear-gradient(90deg, #c0bcb0, #c9c5b9);
+      box-shadow: inset 2px 0 3px rgba(50,40,22,.22), inset -1px 0 0 rgba(255,255,255,.3);
+      cursor: pointer; padding: 0;
+      transition: background 120ms linear, color 120ms linear;
+    }
+    .tab::before, .tab.active::before { content: none; }
+    .tab + .tab { border-top: 1px solid rgba(50,40,22,.2); }
+    .tab.active { color: #fff; background: linear-gradient(180deg, #dd6a3a, #c25026); box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 -3px 5px rgba(120,50,20,.35), -1px 0 5px rgba(120,50,20,.3); }
+
+    /* Réglages secondaires (sliders slope/curv/drone/grille) : rail slit + readout */
+    .setting { margin-top: 12px; }
+    .setting .silkscreen { display: block; margin-bottom: 6px; }
+    .setting input[type=range] { width: 100%; }
   </style>
 </head>
 <body>
@@ -853,16 +996,23 @@
 </button>
 
 <div id="panel-wrap">
-  <div class="panel-handle" id="handle" title="Ouvrir / fermer">
-    <svg viewBox="0 0 60 20" fill="none">
-      <polygon points="10,3 16,6.5 16,13.5 10,17 4,13.5 4,6.5" fill="#d0ccc0" stroke="#8a877c" stroke-width="1.2"/>
-      <line x1="21" y1="10" x2="44" y2="10" stroke="#8a877c" stroke-width="1.4" stroke-dasharray="3 3" stroke-linecap="round"/>
-      <path d="M45 5 L51 10 L45 15" fill="none" stroke="#8a877c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
   <div id="panel">
-    <div class="panel-content" id="panel-content">
-      <!-- Contenu dynamique injecté ici -->
+    <div class="panel-body">
+      <div class="toprow">
+        <button class="collapse" id="handle" title="Ouvrir / fermer"><span class="chev"></span></button>
+        <div class="search-wrap">
+          <input class="search" id="search-input" type="text" placeholder="Chercher…" autocomplete="off">
+          <div class="search-results" id="search-results"></div>
+        </div>
+      </div>
+      <div class="panel-content" id="panel-content"><!-- injecté --></div>
+      <div class="nameplate">
+        <div class="np-text">
+          <span class="np-title">Drôme · Diois</span>
+          <span class="np-sub">Cartographie du Diois · V.1.3</span>
+        </div>
+        <div class="grille"></div>
+      </div>
     </div>
     <div class="tabs-column">
       <div class="tab active" data-tab="fond">Fond</div>
@@ -2089,127 +2239,53 @@ async function fetchWikiSummary(lang, title) {
 // ── CONTENT PANELS ──────────────────────────────────────────────────────────
 const content = document.getElementById('panel-content');
 
+// ── Rendu des keys K.O. II (design handoff) ─────────────────────────────────
+const LED_OVERRIDE = { threeD: '#6c6a63', grille: '#6a8a5a', daylight: '#d99a20', villages: '#1a1a1a' };
+function ledColor(k) { return LED_OVERRIDE[k] || (typeof ICON_COLORS !== 'undefined' && ICON_COLORS[k]) || '#8a877c'; }
+function bKey(k, label, sub) {
+  const on = state.basemap === k;
+  return `<div class="cell"><button class="key ${on ? 'key--orange' : ''}" data-basemap="${k}"><span class="key-label">${label}</span></button><div class="key-silk"><span class="dot ${on ? 'on' : ''}"></span><span class="sub">${sub}</span></div></div>`;
+}
+function lKey(k, label, sub) {
+  const on = !!state.layers[k], c = ledColor(k);
+  return `<div class="cell"><button class="key" data-layer="${k}"><span class="key-label">${label}</span></button><div class="key-silk"><span class="dot ${on ? 'on' : ''}" style="${on ? `background:${c};border-color:${c}` : `border-color:${c}`}"></span>${sub ? `<span class="sub">${sub}</span>` : ''}</div></div>`;
+}
+function cKey(id, label, on) {
+  return `<div class="cell"><button class="key ${on ? 'key--orange' : 'key--cream'}" id="${id}"><span class="key-label">${label}</span></button></div>`;
+}
+function grp(head, cells, count) {
+  return `<div class="group"><div class="group-head"><span class="silkscreen">${head}</span>${count != null ? `<span class="count">${count} act.</span>` : ''}</div><div class="key-grid">${cells}</div></div>`;
+}
+function nAct(keys) { return keys.filter(k => state.layers[k]).length; }
+function fader(label, id, val) {
+  return `<div class="fader-wrap"><div class="fader"><span class="silkscreen">${label}</span><div class="fader-track" id="${id}-track"><span class="fader-slit"></span><span class="zero-tick"></span><span class="fader-cap" style="left:${val}%"></span></div><span class="readout" id="${id}-val">${val}</span></div></div>`;
+}
+
 const PANELS = {
-  fond: () => `
-    <div class="search-row">
-      <div class="search-icon"></div>
-      <input type="text" id="search-input" placeholder="Chercher un village, un lieu…" autocomplete="off">
-    </div>
-    <div class="search-results" id="search-results"></div>
-
-    <div class="compartment">
-      <div class="silkscreen comp-title">Fond</div>
-      <div class="readout">
-        <span class="silkscreen">Fond actif</span>
-        <span class="readout-val">${BASEMAP_NAMES[state.basemap] || '—'}</span>
-      </div>
-      <div class="button-grid">
-        ${[['sat', 'Sat'], ['ign', 'Plan IGN'], ['lidar-only', 'LiDAR'], ['aerienne50', 'Aérienne'], ['etatmajor', 'État-Major'], ['cassini', 'Cassini']].map(([k, lbl]) => `<button class="hardware-button ${state.basemap === k ? 'on' : ''}" data-basemap="${k}">${lbl}</button>`).join('')}
-      </div>
-    </div>
-
-    <div class="row ${state.layers.villages ? 'active' : ''}" data-layer="villages" style="border-top:1px solid var(--greige-2); margin-top:6px;">
-      <div class="checkbox"></div>
-      <div class="row-label">Noms des villages et villes</div>
-    </div>
-    <div class="row ${state.layers.threeD ? 'active' : ''}" data-layer="threeD" style="border-top:1px solid var(--greige-2); margin-top:6px;">
-      <div class="checkbox"></div>
-      <div class="row-label">Relief 3D<div class="row-sub">incline la carte (MNT LiDAR HD)</div></div>
-    </div>
-    <div class="row ${nightMode ? 'active' : ''}" id="night-row">
-      <div class="checkbox"></div>
-      <div class="row-label">Mode nuit<div class="row-sub">palette charbon + crème</div></div>
-    </div>
-
-    <div class="slider-block">
-      <div class="slider-header">
-        <span class="slider-label">Intensité relief</span>
-        <span class="slider-val" id="relief-val">${Math.round(state.reliefOpacity * 100)}%</span>
-      </div>
-      <input type="range" id="relief-slider" min="0" max="100" value="${Math.round(state.reliefOpacity * 100)}">
-    </div>
-  `,
-  nature: () => `
-    <div class="row ${state.layers.contours ? 'active' : ''}" data-layer="contours">
-      <div class="checkbox"></div>
-      <div class="row-label">Contours de niveau</div>
-    </div>
-    <div class="row ${state.layers.sentiers ? 'active' : ''}" data-layer="sentiers">
-      <div class="checkbox"></div>
-      <div class="row-label">Sentiers GR</div>
-    </div>
-    <div class="row ${state.layers.rivieres ? 'active' : ''}" data-layer="rivieres">
-      <div class="checkbox"></div>
-      <div class="row-label">Rivières</div>
-    </div>
-    <div class="row ${state.layers.baignade ? 'active' : ''}" data-layer="baignade">
-      <div class="checkbox"></div>
-      <div class="row-label">Points de baignade</div>
-    </div>
-    <div class="row ${state.layers.viewpoints ? 'active' : ''}" data-layer="viewpoints">
-      <div class="checkbox"></div>
-      <div class="row-label">Points de vue</div>
-    </div>
-    <div class="row ${state.layers.forets ? 'active' : ''}" data-layer="forets">
-      <div class="checkbox"></div>
-      <div class="row-label">Noms des forêts</div>
-    </div>
-  `,
-  activites: () => `
-    <div class="row ${state.layers.nautique ? 'active' : ''}" data-layer="nautique">
-      <div class="checkbox"></div>
-      <div class="row-label">Canoë · kayak · rafting</div>
-    </div>
-    <div class="row ${state.layers.canyoning ? 'active' : ''}" data-layer="canyoning">
-      <div class="checkbox"></div>
-      <div class="row-label">Canyoning</div>
-    </div>
-    <div class="row ${state.layers.transport ? 'active' : ''}" data-layer="transport" style="border-top:1px solid var(--greige-2); margin-top:6px;">
-      <div class="checkbox"></div>
-      <div class="row-label">Arrêts de transport<div class="row-sub">arrêts de bus · gares (OSM)</div></div>
-    </div>
-  `,
-  faune: () => `
-    <div class="row ${state.layers.faune ? 'active' : ''}" data-layer="faune">
-      <div class="checkbox"></div>
-      <div class="row-label">Observations sur la carte<div class="row-sub">faune locale (iNaturalist)</div></div>
-    </div>
-    <div class="row-sub" style="margin:10px 0 8px;">Bestiaire — espèces observées</div>
-    <div id="bestiaire"></div>
-  `,
-  patri: () => `
-    <div class="row ${state.layers.monuments ? 'active' : ''}" data-layer="monuments">
-      <div class="checkbox"></div>
-      <div class="row-label">Monuments historiques</div>
-    </div>
-    <div class="row ${state.layers.villages ? 'active' : ''}" data-layer="villages">
-      <div class="checkbox"></div>
-      <div class="row-label">Villages et hameaux</div>
-    </div>
-  `,
-  commerce: () => `
-    <div class="row ${state.layers.restaurants ? 'active' : ''}" data-layer="restaurants">
-      <div class="checkbox"></div>
-      <div class="row-label">Restaurants</div>
-    </div>
-    <div class="row ${state.layers.cafes ? 'active' : ''}" data-layer="cafes">
-      <div class="checkbox"></div>
-      <div class="row-label">Cafés &amp; bars</div>
-    </div>
-    <div class="row ${state.layers.glaciers ? 'active' : ''}" data-layer="glaciers">
-      <div class="checkbox"></div>
-      <div class="row-label">Glaciers</div>
-    </div>
-    <div class="row ${state.layers.boulangeries ? 'active' : ''}" data-layer="boulangeries">
-      <div class="checkbox"></div>
-      <div class="row-label">Boulangeries</div>
-    </div>
-  `,
-  experimental: () => `
-    <div class="row ${state.layers.daylight ? 'active' : ''}" data-layer="daylight">
-      <div class="checkbox"></div>
-      <div class="row-label">Lumière du jour<div class="row-sub">relief ombré · soleil réglable</div></div>
-    </div>
+  fond: () =>
+    grp('Fond', [bKey('sat', 'Sat', '2024'), bKey('ign', 'Plan IGN', 'plan'), bKey('lidar-only', 'LiDAR', 'mnt'),
+      bKey('aerienne50', 'Aérienne', '1950'), bKey('etatmajor', 'État-Major', '1850'), bKey('cassini', 'Cassini', '1750')].join(''))
+    + grp('Couches', [lKey('villages', 'Villages', 'noms'), lKey('threeD', 'Relief 3D', 'mnt'), cKey('night-row', 'Nuit', nightMode)].join(''))
+    + fader('Relief', 'relief', Math.round(state.reliefOpacity * 100)),
+  nature: () => grp('Nature',
+    [lKey('contours', 'Contours', 'niveau'), lKey('sentiers', 'Sentiers', 'GR'), lKey('rivieres', 'Rivières', 'eau'),
+      lKey('baignade', 'Baignade', 'eau'), lKey('viewpoints', 'Vues', 'pano'), lKey('forets', 'Forêts', 'noms')].join(''),
+    nAct(['contours', 'sentiers', 'rivieres', 'baignade', 'viewpoints', 'forets'])),
+  activites: () => grp('Activités',
+    [lKey('nautique', 'Canoë', 'eau vive'), lKey('canyoning', 'Canyon', 'gorge'), lKey('transport', 'Transport', 'arrêts')].join(''),
+    nAct(['nautique', 'canyoning', 'transport'])),
+  faune: () => grp('Faune', lKey('faune', 'Obs.', 'iNat'))
+    + `<div class="group"><div class="group-head"><span class="silkscreen">Bestiaire</span></div><div id="bestiaire"></div></div>`,
+  patri: () => grp('Patrimoine',
+    [lKey('monuments', 'Monuments', 'MH'), lKey('villages', 'Villages', 'noms')].join(''),
+    nAct(['monuments', 'villages'])),
+  commerce: () => grp('Commerces',
+    [lKey('restaurants', 'Restos', 'food'), lKey('cafes', 'Cafés', 'bar'), lKey('glaciers', 'Glaciers', 'glace'), lKey('boulangeries', 'Pain', 'four')].join(''),
+    nAct(['restaurants', 'cafes', 'glaciers', 'boulangeries'])),
+  experimental: () =>
+    grp('Relief avancé', [lKey('daylight', 'Lumière', 'soleil'), lKey('slope', 'Pentes', '°'), lKey('curvature', 'Courbure', 'crêtes')].join(''))
+    + grp('Repères', [lKey('grille', 'Grille', 'coord'), lKey('drone', 'Drone', 'vol')].join(''))
+    + `
     ${state.layers.daylight ? `
     <div class="sun-block">
       <div class="sun-modes">
@@ -2221,10 +2297,6 @@ const PANELS = {
       <div class="slider-label" style="margin-top:8px;">Heure du jour (course du soleil)</div>
       <input type="range" id="sun-hour" min="5" max="21" step="0.25" value="13" style="width:100%;">
     </div>` : ''}
-    <div class="row ${state.layers.grille ? 'active' : ''}" data-layer="grille">
-      <div class="checkbox"></div>
-      <div class="row-label">Grille de coordonnées</div>
-    </div>
     ${state.layers.grille ? `
     <div class="grille-ctrl">
       <div class="grille-swatches">
@@ -2232,10 +2304,6 @@ const PANELS = {
       </div>
       <input type="range" id="grille-w" min="3" max="28" value="${Math.round(state.grilleWidth * 10)}">
     </div>` : ''}
-    <div class="row ${state.layers.drone ? 'active' : ''}" data-layer="drone">
-      <div class="checkbox"></div>
-      <div class="row-label">Zones drone (vol loisir)</div>
-    </div>
     ${state.layers.drone ? `
     <div class="drone-legend">
       <div class="dl-slider"><span>Opacité</span><input type="range" id="drone-slider" min="10" max="100" value="${Math.round(state.droneOpacity * 100)}"></div>
@@ -2246,10 +2314,6 @@ const PANELS = {
       <div class="dl-row"><span class="dl-sw" style="border:1px solid var(--greige-3)"></span>Reste : 120 m (défaut loisir)</div>
       <div class="dl-note">Indicatif. Vérifie l'appli officielle (Géoportail / AlphaTango) avant de voler.</div>
     </div>` : ''}
-    <div class="row ${state.layers.slope ? 'active' : ''}" data-layer="slope" style="border-top:1px solid var(--greige-2); margin-top:6px;">
-      <div class="checkbox"></div>
-      <div class="row-label">Pentes (slope)<div class="row-sub">calculé depuis le MNT LiDAR HD</div></div>
-    </div>
     ${state.layers.slope ? `
     <div class="slider-block">
       <div class="slider-header"><span class="slider-label">Opacité</span><span class="slider-val">${Math.round(state.slopeOpacity * 100)}%</span></div>
@@ -2259,10 +2323,6 @@ const PANELS = {
       <div class="slider-header" style="margin-top:8px"><span class="slider-label">Pente max</span><span class="slider-val" id="slope-max-val">${state.slopeMax}°</span></div>
       <input type="range" id="slope-max" min="10" max="80" value="${state.slopeMax}">
     </div>` : ''}
-    <div class="row ${state.layers.curvature ? 'active' : ''}" data-layer="curvature">
-      <div class="checkbox"></div>
-      <div class="row-label">Courbure<div class="row-sub">crêtes (orange) · talwegs (bleu)</div></div>
-    </div>
     ${state.layers.curvature ? `
     <div class="slider-block">
       <div class="slider-header"><span class="slider-label">Opacité</span><span class="slider-val">${Math.round(state.curvOpacity * 100)}%</span></div>
@@ -2352,13 +2412,25 @@ function loadPoiIcons() {
 
 function renderPanel() {
   content.innerHTML = PANELS[state.activeTab]();
-  // Injecte l'icône après la case à cocher de chaque toggle de couche
-  content.querySelectorAll('.row[data-layer]').forEach(row => {
-    const svg = iconSvg(row.dataset.layer);
-    if (svg) row.querySelector('.checkbox').insertAdjacentHTML('afterend', svg);
-  });
   attachPanelEvents();
   if (state.activeTab === 'faune') renderBestiaire();
+}
+
+// Fader K.O. II : drag du cap → valeur 0-100
+function wireFader(id, set, commit) {
+  const track = document.getElementById(id + '-track');
+  if (!track) return;
+  const cap = track.querySelector('.fader-cap');
+  const val = document.getElementById(id + '-val');
+  const move = e => {
+    const r = track.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    const v = Math.round(Math.max(0, Math.min(1, (p.clientX - r.left) / r.width)) * 100);
+    cap.style.left = v + '%'; if (val) val.textContent = v;
+    set(v);
+  };
+  const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (commit) commit(); };
+  track.addEventListener('pointerdown', e => { e.preventDefault(); move(e); window.addEventListener('pointermove', move); window.addEventListener('pointerup', up); });
 }
 
 function attachPanelEvents() {
@@ -2380,18 +2452,10 @@ function attachPanelEvents() {
     });
   });
 
-  const slider = content.querySelector('#relief-slider');
-  if (slider) {
-    const val = content.querySelector('#relief-val');
-    slider.addEventListener('input', () => {
-      const v = parseInt(slider.value);
-      val.textContent = v + '%';
-      state.reliefOpacity = v / 100;
-      // en mode Lumière du jour, le slider pilote l'exagération du hillshade
-      if (map.getLayer('lidardem-hs')) map.setPaintProperty('lidardem-hs', 'hillshade-exaggeration', Math.min(state.reliefOpacity * 0.8, 1));
-    });
-    slider.addEventListener('change', rerender);
-  }
+  wireFader('relief', v => {
+    state.reliefOpacity = v / 100;
+    if (map.getLayer('lidardem-hs')) map.setPaintProperty('lidardem-hs', 'hillshade-exaggeration', Math.min(state.reliefOpacity * 0.8, 1));
+  }, () => rerender());
 
   const dslider = content.querySelector('#drone-slider');
   if (dslider) {
@@ -2512,10 +2576,6 @@ function attachPanelEvents() {
   const rc = content.querySelector('#route-clear');
   if (rc) rc.addEventListener('click', clearRoute);
 
-  const searchInput = content.querySelector('#search-input');
-  if (searchInput) {
-    searchInput.addEventListener('input', debounce(handleSearch, 350));
-  }
 }
 
 // ── SEARCH ──────────────────────────────────────────────────────────────────
@@ -2635,6 +2695,9 @@ document.getElementById('home-btn').addEventListener('click',
 const compassRose = document.getElementById('compass-rose');
 map.on('rotate', () => { compassRose.style.transform = `rotate(${-map.getBearing()}deg)`; });
 document.getElementById('compass').addEventListener('click', () => map.easeTo({ bearing: 0, duration: 500 }));
+
+// Recherche persistante (toprow)
+document.getElementById('search-input').addEventListener('input', debounce(handleSearch, 350));
 
 // ── ISS : toujours en direct sur la carte, clic = infos ─────────────────────
 let issMarker = null, issData = null;
