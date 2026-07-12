@@ -1,0 +1,19 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>panel_nature v4</title></head><body>
+<script>
+window.PANEL = {
+  plate: 'assets/ui/panel-nature-v4-plate.png', w: 1242, h: 1073, mode: 'toggle',
+  // 6 touches justifiées à droite : 2 colonnes (x653/896) × 3 lignes (270/499/743)
+  slots: [
+    { id:'contours',  label:'Contours', sub:'niveau', x:653, y:270 },
+    { id:'sentiers',  label:'Sentiers', sub:'GR',     x:896, y:270 },
+    { id:'rivieres',  label:'Rivières', sub:'eau',    x:651, y:499 },
+    { id:'baignade',  label:'Baignade', sub:'eau',    x:894, y:496 },
+    { id:'viewpoints',label:'Vues',     sub:'pano',   x:651, y:743 },
+    { id:'forets',    label:'Forêts',   sub:'noms',   x:896, y:743, on:true },
+  ],
+};
+</script>
+<script src="panel-v4.js"></script>
+</body></html>

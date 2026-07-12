@@ -1,0 +1,149 @@
+/* ============================================================================
+   ui-kit.css — design system EP-133 (K.O. II) pour Drôme Map
+   RÈGLE D'OR : zéro matière dessinée en CSS. Chaque composant = son sprite PNG
+   depuis assets/ui/. Le seul dessin CSS autorisé = la trace orange (#c05f24)
+   reliant les half-keys, et le texte silkscreen.
+   Une fois validé : READ-ONLY. Les features utilisent ces classes, ne les
+   modifient jamais.
+   ============================================================================ */
+
+:root {
+  --ui-orange: #c05f24;
+  --ui-silk:   #b7b7b7;   /* texte silkscreen sur plaque */
+  --ui-label:  #1a1a1a;   /* label sombre sur touche crème/orange */
+
+  --key:      64px;       /* largeur de référence d'une touche */
+  --tab-w:    88px;
+  --tab-h:    40px;
+  --led:      12px;
+
+  --silk-font: 'VG5000', ui-monospace, monospace;
+}
+
+/* Tout sprite : appliqué en background, jamais de matière CSS ---------------- */
+.key, .half-key, .ptab, .fader, .fader__cap, .knob, .led,
+.panel-btn {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+  font-family: var(--silk-font);
+}
+
+/* ---- Silkscreen : texte live posé sur les sprites ------------------------- */
+.silk {
+  font-family: var(--silk-font);
+  font-size: 9px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  color: var(--ui-silk);
+}
+
+/* ============================ .key (touche pleine) ========================= */
+.key {
+  width: var(--key);
+  aspect-ratio: 144 / 150;
+  background-image: url('assets/ui/key.png');
+  display: grid;
+  place-items: start;                 /* label ancré en haut-gauche (style EP) */
+  padding: 12% 0 0 14%;
+  box-sizing: border-box;
+}
+.key--orange { background-image: url('assets/ui/key-orange.png'); }
+
+/* label vivant, justifié à gauche en haut de la touche */
+.key__label {
+  font-family: var(--silk-font);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: #e8e8e8;
+  text-align: left;
+  pointer-events: none;
+}
+.key--orange .key__label { color: #fff; }
+
+/* état pressé : pas de sprite dédié → micro-enfoncement (fallback autorisé) */
+.key:active,
+.key.pressed { transform: translateY(1px); filter: brightness(1.08); }
+
+/* ---- LED + sous-label sous le coin bas-gauche de la touche ---------------- */
+.key-slot { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.key-foot { display: inline-flex; align-items: center; gap: 5px; padding-left: 3px; }
+
+.led {
+  width: var(--led);
+  height: var(--led);
+  aspect-ratio: 1;
+  background-image: url('assets/ui/led-off.png');
+}
+.led.on { background-image: url('assets/ui/led-on.png'); }
+
+/* ============================ .half-key =================================== */
+.half-key {
+  width: calc(var(--key) * 1.55);
+  aspect-ratio: 153 / 73;
+  background-image: url('assets/ui/half-key.png');
+  display: grid;
+  place-items: center;
+}
+.half-key--orange { background-image: url('assets/ui/half-key-orange.png'); }
+.half-key:active,
+.half-key.pressed { transform: translateY(1px); filter: brightness(1.08); }
+
+/* ============================ .ptab (onglet) ============================== */
+.ptab {
+  width: var(--tab-w);
+  height: var(--tab-h);
+  background-image: url('assets/ui/tab.png');
+  display: grid;
+  place-items: center;                 /* texte onglet centré */
+}
+.ptab--cream  { background-image: url('assets/ui/tab-cream.png'); }
+.ptab--orange { background-image: url('assets/ui/tab-orange.png'); }
+.ptab .silk { color: #3a3a3a; text-align: center; }
+.ptab--orange .silk { color: #fff; }
+
+/* ============================ .fader ====================================== */
+/* piste verticale + cap métal qui coulisse dessus */
+.fader {
+  width: calc(var(--key) * .8);
+  height: calc(var(--key) * 4.2);
+  background-image: url('assets/ui/fader-track.png');
+  background-size: auto 100%;
+}
+.fader__cap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 145%;                 /* disque seul (sprite recadré), centré sur la piste */
+  aspect-ratio: 1;
+  background-image: url('assets/ui/fader-cap.png');
+  /* la position verticale (top) est pilotée par JS selon la valeur */
+}
+
+/* ============================ .knob (potard azimut) ======================= */
+.knob {
+  width: calc(var(--key) * 2.4);
+  aspect-ratio: 1;
+  background-image: url('assets/ui/knob.png');
+  /* rotation pilotée par JS : transform: rotate(Ndeg) sur un enfant indicateur */
+}
+
+/* ============================ panneau min/max ============================= */
+.panel-btn { width: 30px; height: 30px; }
+.panel-btn--min { background-image: url('assets/ui/minimise.png'); }
+.panel-btn--max { background-image: url('assets/ui/maximise.png'); }
+
+/* ============================ trace orange (SEUL dessin CSS) =============== */
+.trace {
+  position: absolute;
+  background: var(--ui-orange);
+}
+.trace--v { width: 2px; }
+.trace--h { height: 2px; }

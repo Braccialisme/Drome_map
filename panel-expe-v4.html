@@ -1,0 +1,35 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>panel_expe v4</title>
+<style>
+  /* le knob entier tourne autour de son centre (sprite azimuth_potard) */
+  #knob { position:absolute; background:url('assets/ui/knob-azimuth.png') center/contain no-repeat; pointer-events:none; }
+  #read { position:absolute; font-size:26px; color:#7c766c; font-variant-numeric:tabular-nums; letter-spacing:.02em; pointer-events:none; transform:translateY(-50%); }
+  #khit { position:absolute; border-radius:50%; cursor:grab; } #khit:active{cursor:grabbing;}
+</style></head><body>
+<script>
+const KN={cx:844,cy:713,d:372}; let az=201, hr=14;
+window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'toggle',
+ slots:[
+  {id:'daylight', label:'Lumière', sub:'soleil',x:417,y:269,on:true},
+  {id:'slope',    label:'Pentes',  sub:'°',     x:659,y:269},
+  {id:'curvature',label:'Courbure',sub:'crêtes',x:902,y:269},
+  {id:'grille',   label:'Grille',  sub:'coord', x:417,y:498},
+  {id:'drone',    label:'Drone',   sub:'vol',   x:417,y:742},
+ ],
+ halves:[
+  {id:'auto',  label:'Auto',  cx:155,cy:285,on:true},
+  {id:'manuel',label:'Manuel',cx:155,cy:845},
+ ],
+ extra:(panel,el)=>{
+   // readout °+heure sur la ligne du N (warm grey)
+   panel.appendChild(Object.assign(el('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°  ${hr}h`),{id:'read'}));
+   // knob entier qui tourne autour de son centre
+   const p=el('',{left:(KN.cx-KN.d/2)+'px',top:(KN.cy-KN.d/2)+'px',width:KN.d+'px',height:KN.d+'px',transform:`rotate(${az-180}deg)`}); p.id='knob'; panel.appendChild(p);
+   // zone drag
+   const k=el('',{left:(KN.cx-160)+'px',top:(KN.cy-160)+'px',width:'320px',height:'320px'}); k.id='khit'; panel.appendChild(k);
+   const set=e=>{const r=panel.getBoundingClientRect(),s=+(panel.style.getPropertyValue('--s')||1);
+     az=Math.round((Math.atan2(e.clientX-(r.left+KN.cx*s),-(e.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360);
+     window._panelRender();};
+   k.onpointerdown=e=>{k.setPointerCapture(e.pointerId);const mv=ev=>set(ev),up=()=>{k.removeEventListener('pointermove',mv);k.removeEventListener('pointerup',up);};k.addEventListener('pointermove',mv);k.addEventListener('pointerup',up);set(e);};
+ }
+};
+</script><script src="panel-v4.js"></script></body></html>

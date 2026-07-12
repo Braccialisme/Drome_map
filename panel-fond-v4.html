@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>panel_fond v4 — plaque + labels + LED/infos</title>
+<style>
+  @font-face {
+    font-family: 'VG5000';
+    src: url('fonts/VG5000-Regular_web.ttf') format('truetype'),
+         url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2');
+    font-display: swap;
+  }
+  body { margin:0; background:#222; padding:20px; box-sizing:border-box; }
+  .panel {
+    position: relative; width: 1244px; height: 1073px;
+    background: url('assets/ui/panel-fond-v4-plate.png') 0 0 / 1244px 1073px no-repeat;
+    font-family: 'VG5000', monospace;
+    transform: scale(var(--s, 1)); transform-origin: top left;
+  }
+  .klabel { position:absolute; font-size:27px; color:#ededed; letter-spacing:.01em; pointer-events:none; }
+  .klabel.on { color:#fff; }
+  .hk { position:absolute; font-size:26px; color:#e6e6e2; transform:translateX(-50%); pointer-events:none; }
+  .hk.on { color:#fff; }
+  /* LED + info sous chaque gros bouton */
+  .led { position:absolute; width:20px; height:20px;
+    background:url('assets/ui/led-off.png') center/contain no-repeat; pointer-events:none; }
+  .led.on { background-image:url('assets/ui/led-on.png'); }
+  .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase;
+    letter-spacing:.12em; pointer-events:none; }
+  .hit { position:absolute; background:transparent; border:0; cursor:pointer; padding:0; }
+</style>
+</head>
+<body>
+  <div class="panel" id="panel"></div>
+  <script>
+  // grille 7 basemaps — coords espace-plaque PLEINE 1244×1073, touche ~157×150.
+  const SLOTS = [
+    { id:'sat',        label:'Sat',        sub:'2024', x:419, y:269 },
+    { id:'ign',        label:'Plan IGN',   sub:'plan', x:661, y:269 },
+    { id:'lidar-only', label:'LiDAR',      sub:'mnt',  x:904, y:269 },
+    { id:'aerienne50', label:'Aérienne',   sub:'1950', x:419, y:498 },
+    { id:'etatmajor',  label:'État-Major', sub:'1850', x:659, y:498 },
+    { id:'cassini',    label:'Cassini',    sub:'1750', x:902, y:495 },
+    { id:'nuit',       label:'Nuit',       sub:'',     x:419, y:742 },
+  ];
+  const HALVES = [
+    { id:'relief',  label:'Relief',  cx:158, cy:276, on:true },
+    { id:'village', label:'Village', cx:158, cy:830, on:false },
+  ];
+  let selected = 'sat';
+  const panel = document.getElementById('panel');
+  const el=(c,s,t)=>{const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;};
+  function render(){
+    panel.innerHTML='';
+    HALVES.forEach(h=>panel.appendChild(el('hk'+(h.on?' on':''),{left:h.cx+'px',top:h.cy+'px'},h.label)));
+    SLOTS.forEach(s=>{
+      const on=s.id===selected;
+      panel.appendChild(el('klabel'+(on?' on':''),{left:(s.x+18)+'px',top:(s.y+16)+'px'},s.label));
+      // LED (allumée si sélectionnée) + info sous la touche
+      panel.appendChild(el('led'+(on?' on':''),{left:(s.x+2)+'px',top:(s.y+164)+'px'}));
+      if(s.sub) panel.appendChild(el('ksub',{left:(s.x+34)+'px',top:(s.y+167)+'px'},s.sub));
+      const hit=el('hit',{left:s.x+'px',top:s.y+'px',width:'157px',height:'150px'});
+      hit.onclick=()=>{selected=s.id;render();};
+      panel.appendChild(hit);
+    });
+  }
+  render();
+  const fit=()=>document.querySelector('.panel').style.setProperty('--s',
+    Math.min(1,(window.innerWidth-40)/1244,(window.innerHeight-40)/1073).toFixed(3));
+  addEventListener('resize',fit);fit();
+  </script>
+</body>
+</html>

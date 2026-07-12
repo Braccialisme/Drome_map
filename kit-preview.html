@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Kit — preview EP-133</title>
+<style>
+  @font-face {
+    font-family: 'VG5000';
+    src: url('fonts/VG5000-Regular_web.ttf') format('truetype'),
+         url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2');
+    font-weight: normal; font-display: swap;
+  }
+  body {
+    margin: 0; padding: 32px;
+    background: #cfcfcf;              /* proche de la plaque, pas la vraie */
+    font-family: 'VG5000', monospace;
+    color: #222;
+  }
+  h1 { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; }
+  section {
+    margin: 0 0 40px; padding: 20px;
+    background: #dcdcdc; border-radius: 4px;
+  }
+  h2 { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #666; margin: 0 0 16px; }
+  .row { display: flex; align-items: flex-start; gap: 28px; flex-wrap: wrap; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .cap { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: #888; }
+</style>
+<link rel="stylesheet" href="ui-kit.css">
+</head>
+<body>
+  <h1>UI Kit — chaque composant, chaque état</h1>
+
+  <section>
+    <h2>.key — touche pleine</h2>
+    <div class="row">
+      <div class="cell"><div class="key"><span class="key__label">Relief</span></div><span class="cap">key</span></div>
+      <div class="cell"><div class="key pressed"><span class="key__label">Relief</span></div><span class="cap">key .pressed</span></div>
+      <div class="cell"><div class="key key--orange"><span class="key__label">Relief</span></div><span class="cap">key--orange</span></div>
+      <div class="cell">
+        <div class="key-slot">
+          <div class="key key--orange"><span class="key__label">Sat</span></div>
+          <div class="key-foot"><span class="led on"></span><span class="silk">Pitch</span></div>
+        </div>
+        <span class="cap">slot sélectionné (led on)</span>
+      </div>
+      <div class="cell">
+        <div class="key-slot">
+          <div class="key"><span class="key__label">Ombre</span></div>
+          <div class="key-foot"><span class="led"></span><span class="silk">Time</span></div>
+        </div>
+        <span class="cap">slot inactif (led off)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>.half-key</h2>
+    <div class="row">
+      <div class="cell"><div class="half-key"><span class="key__label">Village</span></div><span class="cap">half-key</span></div>
+      <div class="cell"><div class="half-key pressed"><span class="key__label">Village</span></div><span class="cap">.pressed</span></div>
+      <div class="cell"><div class="half-key half-key--orange"><span class="key__label">Relief</span></div><span class="cap">half-key--orange</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>.ptab — onglets</h2>
+    <div class="row">
+      <div class="cell"><div class="ptab"><span class="silk">Fond</span></div><span class="cap">tab</span></div>
+      <div class="cell"><div class="ptab ptab--cream"><span class="silk">Expe</span></div><span class="cap">tab--cream</span></div>
+      <div class="cell"><div class="ptab ptab--orange"><span class="silk">Fond</span></div><span class="cap">tab--orange (actif)</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>.fader — piste + cap</h2>
+    <div class="row">
+      <div class="cell">
+        <div class="fader" style="position:relative">
+          <div class="fader__cap" style="top:6%"></div>
+        </div>
+        <span class="cap">cap haut (100)</span>
+      </div>
+      <div class="cell">
+        <div class="fader" style="position:relative">
+          <div class="fader__cap" style="top:45%"></div>
+        </div>
+        <span class="cap">cap milieu (50)</span>
+      </div>
+      <div class="cell">
+        <div class="fader" style="position:relative">
+          <div class="fader__cap" style="top:82%"></div>
+        </div>
+        <span class="cap">cap bas (0)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>.led</h2>
+    <div class="row">
+      <div class="cell"><span class="led"></span><span class="cap">off</span></div>
+      <div class="cell"><span class="led on"></span><span class="cap">on</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>.knob — potard azimut</h2>
+    <div class="row">
+      <div class="cell"><div class="knob"></div><span class="cap">knob</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>panneau min / max</h2>
+    <div class="row">
+      <div class="cell"><button class="panel-btn panel-btn--min"></button><span class="cap">minimise</span></div>
+      <div class="cell"><button class="panel-btn panel-btn--max"></button><span class="cap">maximise</span></div>
+    </div>
+  </section>
+
+</body>
+</html>

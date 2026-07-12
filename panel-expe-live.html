@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>panel_expe — moteur (plaque + toggles + knob azimut)</title>
+<style>
+  @font-face {
+    font-family: 'VG5000';
+    src: url('fonts/VG5000-Regular_web.ttf') format('truetype'),
+         url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Mezzo.woff2') format('woff2'),
+         url('fonts/VG5000-Regular_web.ttf') format('truetype');
+    font-display: swap;
+  }
+  body { margin:0; background:#222; display:flex; justify-content:center; align-items:flex-start; padding:20px; }
+  .panel {
+    position: relative; width: 1124px; height: 1067px;
+    background: url('assets/ui/panel-expe-plate.png') 0 0 / 1124px 1067px no-repeat;
+    font-family: 'VG5000', monospace;
+    transform: scale(var(--s, 1)); transform-origin: top center;
+  }
+  .key-on { position:absolute; width:152px; height:158px;
+    background: url('assets/ui/key-orange.png') center/100% 100% no-repeat; pointer-events:none; }
+  .led { position:absolute; width:20px; height:20px;
+    background: url('assets/ui/led-off.png') center/contain no-repeat; pointer-events:none; }
+  .led.on { background-image: url('assets/ui/led-on.png'); }
+  .klabel { position:absolute; font-size:25px; color:#ededed; letter-spacing:.01em; pointer-events:none; }
+  .klabel.on { color:#fff; }
+  .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase; letter-spacing:.12em; transform:translateY(-50%); pointer-events:none; }
+  .hit { position:absolute; width:152px; height:158px; background:transparent; border:0; cursor:pointer; padding:0; }
+  .tab { position:absolute; font-size:23px; color:#3a3a3a; transform:translate(-50%,-50%); pointer-events:none; }
+  .tab.on { color:#fff; } .tab.light { color:#2a2a2a; }
+  .hk { position:absolute; font-size:25px; color:#e6e6e2; transform:translate(-50%,-50%); pointer-events:none; }
+  .hk.on { color:#fff; }
+
+  /* knob azimut : pointeur rotatif + readout, posés sur le knob baked */
+  #knob-hit { position:absolute; border-radius:50%; cursor:grab; }
+  #knob-hit:active { cursor:grabbing; }
+  #knob-ptr { position:absolute; width:6px; height:118px; background:#c05f24; border-radius:3px;
+    transform-origin:50% 100%; pointer-events:none; box-shadow:0 0 3px rgba(0,0,0,.35); }
+  #knob-read { position:absolute; font-size:30px; color:#1a1a1a; font-variant-numeric:tabular-nums;
+    transform:translate(-50%,-50%); pointer-events:none; letter-spacing:.02em; }
+</style>
+</head>
+<body>
+  <div class="panel" id="panel"></div>
+  <script>
+  // ── DESCRIPTEUR Expe (mapping slot→fonction = À CALER avec Andrea) ───────────
+  const SLOTS = [
+    { id:'daylight',  label:'Lumière',  sub:'soleil', x:407, y:251, on:true  },
+    { id:'slope',     label:'Pentes',   sub:'°',      x:650, y:251, on:false },
+    { id:'curvature', label:'Courbure', sub:'crêtes', x:893, y:251, on:false },
+    { id:'grille',    label:'Grille',   sub:'coord',  x:407, y:494, on:false },
+    { id:'drone',     label:'Drone',    sub:'vol',    x:407, y:728, on:false },
+  ];
+  const TABS = [
+    { label:'Fond' }, { label:'Nature' }, { label:'Faune' }, { label:'Activ.' },
+    { label:'Patri.' }, { label:'Comm.', light:true }, { label:'Expe.', on:true },
+  ];
+  const TAB_X = [77, 237, 397, 557, 717, 878, 1043], TAB_Y = 32;
+  const HALVES = [   // colonne gauche — rôle à définir (Auto/Manuel soleil ?)
+    { id:'auto',   label:'Auto',   cx:145, cy:287, on:true },
+    { id:'manual', label:'Manuel', cx:145, cy:843, on:false },
+  ];
+  const KNOB = { cx:884, cy:705, ptrLen:118 };   // centre knob (espace plaque)
+  let azimut = 201;                               // degrés (0 = nord/haut, horaire)
+
+  const panel = document.getElementById('panel');
+  const el = (cls, css, txt) => { const d=document.createElement('div'); d.className=cls; Object.assign(d.style, css); if(txt!=null) d.textContent=txt; return d; };
+
+  function render() {
+    panel.innerHTML = '';
+    TABS.forEach((t,i) => panel.appendChild(el('tab'+(t.on?' on':'')+(t.light?' light':''),
+      { left:TAB_X[i]+'px', top:TAB_Y+'px' }, t.label)));
+    HALVES.forEach(h => panel.appendChild(el('hk'+(h.on?' on':''), { left:h.cx+'px', top:h.cy+'px' }, h.label)));
+    SLOTS.forEach(s => {
+      if (s.on) panel.appendChild(el('key-on', { left:s.x+'px', top:s.y+'px' }));
+      panel.appendChild(el('klabel'+(s.on?' on':''), { left:(s.x+16)+'px', top:(s.y+14)+'px' }, s.label));
+      panel.appendChild(el('led'+(s.on?' on':''), { left:(s.x+2)+'px', top:(s.y+172)+'px' }));
+      if (s.sub) panel.appendChild(el('ksub', { left:(s.x+34)+'px', top:(s.y+182)+'px' }, s.sub));
+      const hit = el('hit', { left:s.x+'px', top:s.y+'px' });
+      hit.onclick = () => { s.on = !s.on; render(); };
+      panel.appendChild(hit);
+    });
+    // knob : pointeur + readout + zone drag
+    const ptr = el('', { left:(KNOB.cx-3)+'px', top:(KNOB.cy-KNOB.ptrLen)+'px',
+      transform:`rotate(${azimut}deg)` }); ptr.id='knob-ptr';
+    panel.appendChild(ptr);
+    panel.appendChild(Object.assign(el('', { left:(KNOB.cx)+'px', top:(KNOB.cy+165)+'px' },
+      Math.round((azimut%360+360)%360)+'°'), { id:'knob-read' }));
+    const kh = el('', { left:(KNOB.cx-150)+'px', top:(KNOB.cy-150)+'px', width:'300px', height:'300px' });
+    kh.id='knob-hit'; panel.appendChild(kh);
+    bindKnob(kh);
+  }
+  function bindKnob(kh) {
+    const setFromEvent = e => {
+      const r = panel.getBoundingClientRect(), s = (panel.style.getPropertyValue('--s')||1);
+      const cx = r.left + KNOB.cx*s, cy = r.top + KNOB.cy*s;
+      const dx = e.clientX - cx, dy = e.clientY - cy;
+      azimut = Math.round((Math.atan2(dx, -dy) * 180/Math.PI + 360) % 360);
+      render();
+    };
+    kh.onpointerdown = e => { kh.setPointerCapture(e.pointerId);
+      const mv = ev => setFromEvent(ev);
+      const up = () => { kh.removeEventListener('pointermove', mv); kh.removeEventListener('pointerup', up); };
+      kh.addEventListener('pointermove', mv); kh.addEventListener('pointerup', up); setFromEvent(e); };
+  }
+  render();
+  const fit = () => document.querySelector('.panel').style.setProperty('--s',
+    Math.min(1, (window.innerHeight - 40) / 1067).toFixed(3));
+  addEventListener('resize', fit); fit();
+  </script>
+</body>
+</html>

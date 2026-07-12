@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>panel_fond — moteur data-driven (plaque + overlay vivant)</title>
+<style>
+  @font-face {
+    font-family: 'VG5000';
+    src: url('fonts/VG5000-Regular_web.ttf') format('truetype'),
+         url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2');
+    font-display: swap;
+  }
+  body { margin:0; background:#222; display:flex; justify-content:center; align-items:flex-start; padding:20px; }
+
+  /* Panneau = plaque Figma neutre en fond. Coordonnées en px espace-plaque (1125×1067). */
+  .panel {
+    position: relative;
+    width: 1125px; height: 1067px;
+    background: url('assets/ui/panel-fond-plate.png') 0 0 / 1125px 1067px no-repeat;
+    font-family: 'VG5000', monospace;
+    /* tient dans la fenêtre sans changer l'espace de coords */
+    transform: scale(var(--s, 1)); transform-origin: top center;
+  }
+
+  /* Sprite d'état posé sur la touche active (par-dessus la plaque sombre) */
+  .key-on {
+    position:absolute; width:152px; height:158px;
+    background: url('assets/ui/key-orange.png') center/100% 100% no-repeat;
+    pointer-events:none;
+  }
+  .led {
+    position:absolute; width:20px; height:20px;
+    background: url('assets/ui/led-off.png') center/contain no-repeat;
+    pointer-events:none;
+  }
+  .led.on { background-image: url('assets/ui/led-on.png'); }
+
+  .klabel { position:absolute; font-size:25px; color:#ededed; letter-spacing:.01em; pointer-events:none; }
+  .klabel.on { color:#fff; }
+  .ksub   { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase; letter-spacing:.12em; transform:translateY(-50%); pointer-events:none; }
+
+  /* Zone cliquable transparente sur chaque touche */
+  .hit { position:absolute; width:152px; height:158px; background:transparent; border:0; cursor:pointer; padding:0; }
+  .hit:active { filter:brightness(1.06); }
+
+  .tab    { position:absolute; font-size:23px; color:#3a3a3a; transform:translate(-50%,-50%); pointer-events:none; }
+  .tab.on { color:#fff; }
+  .tab.light { color:#2a2a2a; }
+
+  .hk     { position:absolute; font-size:25px; color:#e6e6e2; transform:translate(-50%,-50%); pointer-events:none; }
+  .hk.on  { color:#fff; }
+</style>
+</head>
+<body>
+  <div class="panel" id="panel"></div>
+
+  <script>
+  // ── DESCRIPTEUR (à terme : fond-slots.json + coords auto-extraites) ──────────
+  // box = coin haut-gauche touche (152×158) dans l'espace plaque 1125×1067.
+  const SLOTS = [
+    { id:'sat',        label:'Sat',        sub:'2024', x:367, y:243 },
+    { id:'ign',        label:'Plan IGN',   sub:'plan', x:610, y:243 },
+    { id:'lidar-only', label:'LiDAR',      sub:'mnt',  x:853, y:243 },
+    { id:'aerienne50', label:'Aérienne',   sub:'1950', x:367, y:486 },
+    { id:'etatmajor',  label:'État-Major', sub:'1850', x:610, y:486 },
+    { id:'cassini',    label:'Cassini',    sub:'1750', x:853, y:486 },
+    { id:'nuit',       label:'Nuit',       sub:'',     x:367, y:726 },
+  ];
+  const TABS = [
+    { label:'Fond',   on:true },  { label:'Nature' }, { label:'Faune' },
+    { label:'Activ.' }, { label:'Patri.' },
+    { label:'Comm.', light:true }, { label:'Expe.', light:true },
+  ];
+  const TAB_X = [77, 237, 397, 557, 717, 878, 1043], TAB_Y = 32;
+  const HALVES = [
+    { id:'relief',  label:'Relief',  cx:146, cy:287 },
+    { id:'village', label:'Village', cx:146, cy:843 },
+  ];
+
+  // état (autonome ici ; dans l'app = state.basemap)
+  let selected = 'sat';
+
+  const panel = document.getElementById('panel');
+  const el = (cls, css, txt) => { const d=document.createElement('div'); d.className=cls; Object.assign(d.style, css); if(txt!=null) d.textContent=txt; return d; };
+
+  function render() {
+    panel.innerHTML = '';
+    // onglets
+    TABS.forEach((t,i) => panel.appendChild(el(
+      'tab' + (t.on?' on':'') + (t.light?' light':''),
+      { left:TAB_X[i]+'px', top:TAB_Y+'px' }, t.label)));
+    // demi-keys
+    HALVES.forEach(h => panel.appendChild(el('hk', { left:h.cx+'px', top:h.cy+'px' }, h.label)));
+    // touches
+    SLOTS.forEach(s => {
+      const on = s.id === selected;
+      if (on) panel.appendChild(el('key-on', { left:s.x+'px', top:s.y+'px' }));
+      panel.appendChild(el('klabel'+(on?' on':''), { left:(s.x+16)+'px', top:(s.y+14)+'px' }, s.label));
+      panel.appendChild(el('led'+(on?' on':''), { left:(s.x+2)+'px', top:(s.y+172)+'px' }));
+      if (s.sub) panel.appendChild(el('ksub', { left:(s.x+34)+'px', top:(s.y+182)+'px' }, s.sub));
+      const hit = el('hit', { left:s.x+'px', top:s.y+'px' });
+      hit.title = s.label;
+      hit.onclick = () => { selected = s.id; render(); /* app: setBasemap(s.id) */ };
+      panel.appendChild(hit);
+    });
+  }
+  render();
+
+  // scale-to-fit vertical
+  const fit = () => document.querySelector('.panel').style.setProperty('--s',
+    Math.min(1, (window.innerHeight - 40) / 1067).toFixed(3));
+  addEventListener('resize', fit); fit();
+  </script>
+</body>
+</html>
