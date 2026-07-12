@@ -952,17 +952,20 @@
     .half-key.on { --fill:#c05f24; --wall:#6a3210; --edge:rgba(255,255,255,.18); }
     .hk-label { font-family:var(--font-mono); font-size:11px; letter-spacing:.01em; color:var(--txt); }
 
-    /* Fader vertical entre les deux demi-keys */
-    .fader-v { position: relative; flex: 1; min-height: 84px; display: flex; justify-content: center; margin: 12px 0 18px; }
-    .fv-track { position: relative; width: 22px; cursor: pointer; }
-    .fv-slit { position: absolute; top: 2px; bottom: 2px; left: calc(50% - 1.5px); width: 3px; border-radius: 2px; background: var(--slit); box-shadow: inset 0 0 2px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.35); }
-    .fv-cap { position: absolute; left: 50%; width: 22px; height: 14px; border-radius: 3px; background: linear-gradient(180deg,#d0ccc0,#bdb8ab); box-shadow: 0 2px 4px rgba(46,37,18,.34), inset 0 1px 0 rgba(255,255,255,.5); transform: translate(-50%,-50%); }
-    .fv-cap::after { content:""; position:absolute; left:4px; right:4px; top:calc(50% - .5px); height:1px; background:rgba(46,37,18,.35); }
-    .fv-read { position: absolute; left: -6px; right: -6px; bottom: -16px; text-align: center; font-family:var(--font-mono); font-size:10px; color:var(--ink); font-variant-numeric:tabular-nums; }
-
-    /* Spline signal : trace orange verticale sharp (aucun congé) qui plonge DANS
-       relief (haut) et village (bas) — z-index sous les keys = plug-in */
-    .ctrl-col .spline { position: absolute; z-index: 0; pointer-events: none; left: calc(50% - 15px); top: 8px; bottom: 8px; width: 1.5px; background: var(--korange); }
+    /* Fader vertical = trace signal orange sharp. 3 segments (2 horizontales +
+       1 verticale), plonge dans relief (haut) / village (bas), coupée par lidar/ortho. */
+    .fader-v { position: relative; flex: 1; min-height: 82px; display: flex; justify-content: center; margin: 2px 0; z-index: 0; }
+    .fv-track { position: relative; width: 44px; cursor: pointer; }
+    .fv-line { position: absolute; top: -11px; bottom: -11px; left: calc(50% - 1px); width: 2px; background: var(--korange); }
+    .fv-line::before, .fv-line::after { content: ""; position: absolute; left: -6px; width: 8px; height: 2px; background: var(--korange); }
+    .fv-line::before { top: 0; }      /* horizontale haute, plonge dans relief */
+    .fv-line::after  { bottom: 0; }   /* horizontale basse, plonge dans village */
+    .fv-cap { position: absolute; left: 50%; width: 18px; height: 11px; background: linear-gradient(180deg,#d0ccc0,#bdb8ab); box-shadow: 0 2px 4px rgba(46,37,18,.34), inset 0 1px 0 rgba(255,255,255,.5); transform: translate(-50%,-50%); }
+    .fv-cap::after { content:""; position:absolute; left:3px; right:3px; top:calc(50% - .5px); height:1px; background:rgba(46,37,18,.4); }
+    /* labels qui COUPENT la trace (bg panneau derrière) */
+    .fv-end { position: absolute; left: 50%; transform: translateX(-50%); padding: 0 2px; background: #c9c6bf; font-family:var(--font-mono); font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--silk); white-space:nowrap; }
+    .fv-end.top { top: -9px; } .fv-end.bot { bottom: -9px; }
+    .fv-read { position: absolute; right: calc(50% + 8px); transform: translateY(-50%); font-family:var(--font-mono); font-size:9px; color:var(--ink); font-variant-numeric:tabular-nums; }
     /* KEYCAP — cube (face) posé sur une base un peu plus large. Sharp, congés courts. */
     .key {
       --fill: #1a1a1a; --wall: #0a0a09; --edge: rgba(255,255,255,.10); --txt: #b7b7b7;
@@ -2332,9 +2335,14 @@ function fader(label, id, val) {
 function halfKey(k, label, on) {
   return `<button class="half-key ${on ? 'on' : ''}" data-layer="${k}"><span class="hk-label">${label}</span></button>`;
 }
-// Fader vertical (haut = max)
+// Fader vertical = la trace orange elle-même (spline sharp). Haut=lidar(100), bas=ortho(0).
 function faderV(id, val) {
-  return `<div class="fader-v"><div class="fv-track" id="${id}-track"><span class="fv-slit"></span><span class="fv-cap" style="top:${100 - val}%"></span></div><span class="fv-read" id="${id}-val">${val}</span></div>`;
+  return `<div class="fader-v"><div class="fv-track" id="${id}-track">`
+    + `<span class="fv-line"></span>`
+    + `<span class="fv-end top">lidar</span><span class="fv-end bot">ortho</span>`
+    + `<span class="fv-read" id="${id}-val" style="top:${100 - val}%">${val}</span>`
+    + `<span class="fv-cap" style="top:${100 - val}%"></span>`
+    + `</div></div>`;
 }
 
 const PANELS = {
@@ -2344,7 +2352,6 @@ const PANELS = {
         ${halfKey('threeD', 'Relief', state.layers.threeD)}
         ${faderV('relief', Math.round(state.reliefOpacity * 100))}
         ${halfKey('villages', 'Village', state.layers.villages)}
-        <span class="spline"></span>
       </div>
       <div class="key-grid">
         ${[bKey('sat', 'Sat', '2024'), bKey('ign', 'Plan IGN', 'plan'), bKey('lidar-only', 'LiDAR', 'mnt'),
@@ -2527,7 +2534,7 @@ function wireFaderV(id, set, commit) {
     const r = track.getBoundingClientRect();
     const p = e.touches ? e.touches[0] : e;
     const v = Math.round(Math.max(0, Math.min(1, 1 - (p.clientY - r.top) / r.height)) * 100);
-    cap.style.top = (100 - v) + '%'; if (val) val.textContent = v;
+    cap.style.top = (100 - v) + '%'; if (val) { val.textContent = v; val.style.top = (100 - v) + '%'; }
     set(v);
   };
   const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (commit) commit(); };
