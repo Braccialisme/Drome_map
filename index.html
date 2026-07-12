@@ -821,18 +821,13 @@
       height: var(--panel-h);
       z-index: 20;
       display: flex; flex-direction: column;
-      border-radius: 6px 6px 0 0;
-      background: linear-gradient(180deg, #d3d0c9 0%, #c9c6bf 46%, #c2beb6 100%);
-      box-shadow: 0 -8px 26px rgba(48,38,20,.30), inset 0 1px 0 rgba(255,255,255,.6);
+      border-radius: 4px 4px 0 0;
+      background: #cbc8c1;
+      box-shadow: 0 -6px 20px rgba(48,38,20,.20);
       overflow: hidden;
       transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1);
     }
     #panel-wrap.collapsed { transform: translateY(calc(var(--panel-h) - 46px)); }
-    #panel-wrap::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 6;
-      opacity: .5; mix-blend-mode: soft-light;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
     .panel-body { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 14px 0; min-width: 0; position: relative; z-index: 1; }
     .panel-content {
       flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
@@ -850,17 +845,12 @@
       border-radius: 2px 2px 0 0;
       font-family: var(--font-mono); font-size: 10px; letter-spacing: .03em;
       color: var(--silk);
-      background: linear-gradient(180deg, #cdcabf, #c4c1b6);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 3px rgba(50,40,22,.16);
+      background: #c4c0b5;
       display: flex; align-items: center; justify-content: center;
       transition: color 120ms linear, background 120ms linear;
       overflow: hidden; white-space: nowrap;
     }
-    .ptab.active {
-      color: #fff;
-      background: linear-gradient(180deg, #d06a37, var(--korange));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -2px 4px rgba(120,50,20,.34);
-    }
+    .ptab.active { color: #fff; background: var(--korange); }
     .ptab:not(.active):active { filter: brightness(.97); }
     .tab-bar .collapse {
       flex: none; width: 34px; height: 30px; border-radius: 4px; border: none; cursor: pointer;
@@ -879,13 +869,13 @@
     }
     .pill {
       width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
-      background: radial-gradient(120% 120% at 50% 20%, #f4f1ea, var(--cream)); color: #2a2a28;
+      background: var(--cream); color: #2a2a28;
       font-family: var(--font-mono); font-size: 15px; line-height: 1;
-      box-shadow: 0 2px 3px rgba(60,50,30,.28), inset 0 1px 0 rgba(255,255,255,.8);
+      box-shadow: 0 1px 0 var(--cream-wall);
       display: flex; align-items: center; justify-content: center;
-      transition: transform 90ms linear, box-shadow 90ms linear;
+      transition: transform 90ms linear, filter 90ms linear;
     }
-    .pill:active { transform: translateY(1px); box-shadow: 0 1px 1px rgba(60,50,30,.24), inset 0 1px 2px rgba(60,50,30,.3); }
+    .pill:active { transform: translateY(1px); filter: brightness(.95); box-shadow: none; }
     .pill:disabled { opacity: .4; }
     .chev { width: 7px; height: 7px; border-left: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(-45deg); margin-top: -2px; transition: transform .16s linear; }
     #panel-wrap.collapsed .chev { transform: rotate(135deg); margin-top: 2px; }
@@ -937,20 +927,16 @@
 
     /* Demi-key (relief / village) : keycap landscape, largeur = 1 key, hauteur = moitié */
     .half-key {
-      --fill:#1a1a1a; --wall:#0a0a09; --edge:rgba(255,255,255,.10); --txt:#b7b7b7;
+      --fill:#1c1c1a; --wall:#000; --txt:#c6c6c2;
       position: relative; z-index: 1; width: var(--key); height: calc(var(--key) * .5); border: none; cursor: pointer;
       border-radius: 2px; display: flex; align-items: center; padding: 0 8px;
-      background:
-        radial-gradient(130% 160% at 50% -40%, rgba(255,255,255,.09), rgba(0,0,0,0) 55%),
-        linear-gradient(180deg, color-mix(in srgb,var(--fill),white 8%) 0%, var(--fill) 45%, color-mix(in srgb,var(--fill),black 14%) 100%);
-      box-shadow: inset 0 1px 0 var(--edge), inset 0 -1.5px 3px rgba(0,0,0,.30);
-      transition: transform 90ms cubic-bezier(0.2,0,0,1);
+      background: var(--fill);
+      box-shadow: 0 1px 0 var(--wall);
+      transition: filter 80ms linear, transform 80ms linear;
     }
-    .half-key::before { content:""; position:absolute; z-index:-1; left:-2px; right:-2px; top:-1px; bottom:-4px; border-radius:3px; background:var(--wall); box-shadow:0 5px 9px rgba(20,14,6,.32); }
-    .half-key:active { transform: translateY(3px); }
-    .half-key:active::before { bottom:-1px; box-shadow:0 2px 4px rgba(20,14,6,.30); }
-    .half-key.on { --fill:#c05f24; --wall:#6a3210; --edge:rgba(255,255,255,.18); }
-    .hk-label { font-family:var(--font-mono); font-size:11px; letter-spacing:.01em; color:var(--txt); }
+    .half-key:active { transform: translateY(1px); box-shadow: none; filter: brightness(1.12); }
+    .half-key.on { --fill:#c05f24; --wall:#7a3810; --txt:#fff; }
+    .hk-label { font-family:var(--font-mono); font-size:11px; letter-spacing:.02em; color:var(--txt); }
 
     /* Fader vertical = trace signal orange sharp. 3 segments (2 horizontales +
        1 verticale), plonge dans relief (haut) / village (bas), coupée par lidar/ortho. */
@@ -960,41 +946,28 @@
     .fv-line::before, .fv-line::after { content: ""; position: absolute; left: -6px; width: 8px; height: 2px; background: var(--korange); }
     .fv-line::before { top: 0; }      /* horizontale haute, plonge dans relief */
     .fv-line::after  { bottom: 0; }   /* horizontale basse, plonge dans village */
-    .fv-cap { position: absolute; left: 50%; width: 18px; height: 11px; background: linear-gradient(180deg,#d0ccc0,#bdb8ab); box-shadow: 0 2px 4px rgba(46,37,18,.34), inset 0 1px 0 rgba(255,255,255,.5); transform: translate(-50%,-50%); }
+    .fv-cap { position: absolute; left: 50%; width: 18px; height: 11px; background: #c9c5b9; box-shadow: 0 1px 0 rgba(46,37,18,.35); transform: translate(-50%,-50%); }
     .fv-cap::after { content:""; position:absolute; left:3px; right:3px; top:calc(50% - .5px); height:1px; background:rgba(46,37,18,.4); }
     /* labels qui COUPENT la trace (bg panneau derrière) */
     .fv-end { position: absolute; left: 50%; transform: translateX(-50%); padding: 0 2px; background: #c9c6bf; font-family:var(--font-mono); font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--silk); white-space:nowrap; }
     .fv-end.top { top: -9px; } .fv-end.bot { bottom: -9px; }
     .fv-read { position: absolute; right: calc(50% + 8px); transform: translateY(-50%); font-family:var(--font-mono); font-size:9px; color:var(--ink); font-variant-numeric:tabular-nums; }
     /* KEYCAP — cube (face) posé sur une base un peu plus large. Sharp, congés courts. */
+    /* KEY = aplat mat (langage écran TE). Zéro dégradé/grain/skirt. 1px bas mini. */
     .key {
-      --fill: #1a1a1a; --wall: #0a0a09; --edge: rgba(255,255,255,.10); --txt: #b7b7b7;
+      --fill: #1c1c1a; --wall: #000; --txt: #c6c6c2;
       position: relative; width: 100%; aspect-ratio: 1/1;
       border-radius: 2px; border: none; cursor: pointer;
       display: flex; align-items: flex-start; justify-content: flex-start;
-      background:
-        radial-gradient(130% 100% at 50% -25%, rgba(255,255,255,.09), rgba(0,0,0,0) 55%),
-        linear-gradient(180deg, color-mix(in srgb, var(--fill), white 8%) 0%, var(--fill) 45%, color-mix(in srgb, var(--fill), black 14%) 100%);
-      box-shadow: inset 0 1px 0 var(--edge), inset 0 -1.5px 3px rgba(0,0,0,.30);
-      transition: transform 90ms cubic-bezier(0.2, 0, 0, 1);
+      background: var(--fill);
+      box-shadow: 0 1px 0 var(--wall);
+      transition: filter 80ms linear, transform 80ms linear;
     }
-    .key::before {
-      content: ""; position: absolute; z-index: -1;
-      left: -2px; right: -2px; top: 1px; bottom: -4px;
-      border-radius: 3px; background: var(--wall);
-      box-shadow: 0 5px 9px rgba(20,14,6,.32);
-    }
-    .key::after {
-      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay; opacity: .10;
-    }
-    .key:active { transform: translateY(3px); }
-    .key:active::before { bottom: -1px; box-shadow: 0 2px 4px rgba(20,14,6,.30); }
-    .key--orange { --fill: #c05f24; --wall: #6a3210; --edge: rgba(255,255,255,.18); }
-    .key--cream  { --fill: #efece3; --wall: #bdb9ac; --edge: rgba(255,255,255,.7); --txt: #2a2a28; }
+    .key:active { transform: translateY(1px); box-shadow: none; filter: brightness(1.12); }
+    .key--orange { --fill: #c05f24; --wall: #7a3810; --txt: #fff; }
+    .key--cream  { --fill: #e7e4db; --wall: #c4c0b4; --txt: #26261f; }
     .key-label {
-      font-family: var(--font-mono); font-size: 9px; line-height: 1.08; letter-spacing: 0;
+      font-family: var(--font-mono); font-size: 9px; line-height: 1.08; letter-spacing: .02em;
       color: var(--txt); padding: 5px 5px 0; text-align: left;
       position: relative; z-index: 1; word-break: break-word;
     }
@@ -2349,7 +2322,7 @@ const PANELS = {
   fond: () =>
     `<div class="fond-cols">
       <div class="ctrl-col">
-        ${halfKey('threeD', 'Relief', state.layers.threeD)}
+        ${halfKey('daylight', 'Relief', state.layers.daylight)}
         ${faderV('relief', Math.round(state.reliefOpacity * 100))}
         ${halfKey('villages', 'Village', state.layers.villages)}
       </div>
