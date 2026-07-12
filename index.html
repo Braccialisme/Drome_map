@@ -813,7 +813,7 @@
     #panel-wrap {
       --char: #201f1d; --char-wall: #0d0d0c; --char-txt: #e9e7e0;
       --cream: #efece3; --cream-wall: #cbc6b9;
-      --korange: #d55a28; --orange-wall: #a5410f;
+      --korange: #c05f24; --orange-wall: #7a3810;
       --silk: #8a877c; --slit: #141210;
       position: absolute; bottom: 0; left: 0; right: 0;
       height: var(--panel-h);
@@ -887,26 +887,40 @@
     /* Grille de keys */
     .key-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .cell { display: flex; flex-direction: column; }
+    /* KEY — matière plastique injecté (hybride : recette CSS + grain scoped) */
     .key {
+      --fill: #1a1a1a; --wall: #090909; --edge: rgba(255,255,255,.10); --txt: #b7b7b7;
       position: relative; width: 100%; aspect-ratio: 1/1;
-      border-radius: 8px; border: none; cursor: pointer;
+      border-radius: 11%; border: 1px solid var(--wall); cursor: pointer;
       display: flex; align-items: flex-start; justify-content: flex-start;
-      background: var(--char);
-      box-shadow: 0 3px 0 0 var(--char-wall), 0 6px 8px rgba(24,17,6,.30), inset 0 1px 0 rgba(255,255,255,.06);
-      transition: transform 90ms linear, box-shadow 90ms linear;
+      overflow: hidden;
+      background:
+        radial-gradient(130% 100% at 50% -20%, rgba(255,255,255,.08), rgba(0,0,0,0) 55%),
+        linear-gradient(180deg,
+          color-mix(in srgb, var(--fill), white 7%) 0%,
+          var(--fill) 42%,
+          color-mix(in srgb, var(--fill), black 16%) 100%);
+      box-shadow:
+        0 2px 0 var(--wall),
+        0 7px 11px rgba(20,14,6,.34),
+        inset 0 1px 0 var(--edge),
+        inset 0 -2px 4px rgba(0,0,0,.30);
+      transition: transform 100ms cubic-bezier(0.2, 0, 0, 1), box-shadow 100ms cubic-bezier(0.2, 0, 0, 1);
       transform: scale(.92);
     }
-    .key:active { transform: scale(.92) translateY(3px); box-shadow: 0 1px 0 0 var(--char-wall), 0 2px 4px rgba(24,17,6,.30), inset 0 1px 0 rgba(255,255,255,.05); }
-    .key--cream { background: var(--cream); box-shadow: 0 3px 0 0 var(--cream-wall), 0 6px 8px rgba(60,50,30,.22), inset 0 1px 0 rgba(255,255,255,.6); }
-    .key--cream:active { transform: scale(.92) translateY(3px); box-shadow: 0 1px 0 0 var(--cream-wall), 0 2px 4px rgba(60,50,30,.22), inset 0 1px 0 rgba(255,255,255,.5); }
-    .key--orange { background: var(--korange); box-shadow: 0 3px 0 0 var(--orange-wall), 0 6px 9px rgba(90,40,10,.28), inset 0 1px 0 rgba(255,255,255,.2); }
-    .key--orange:active { transform: scale(.92) translateY(3px); box-shadow: 0 1px 0 0 var(--orange-wall), 0 2px 4px rgba(90,40,10,.28), inset 0 1px 0 rgba(255,255,255,.16); }
+    .key::after {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay; opacity: .11;
+    }
+    .key:active { transform: scale(.92) translateY(2px); box-shadow: 0 1px 0 var(--wall), 0 3px 5px rgba(20,14,6,.30), inset 0 1px 0 var(--edge); }
+    .key--orange { --fill: #c05f24; --wall: #7a3810; --edge: rgba(255,255,255,.18); }
+    .key--cream  { --fill: #efece3; --wall: #c4c0b4; --edge: rgba(255,255,255,.7); --txt: #2a2a28; }
     .key-label {
       font-family: var(--font-mono); font-size: 12px; line-height: 1.14; letter-spacing: .02em;
-      text-transform: uppercase; color: var(--char-txt); padding: 10px 10px 0; text-align: left;
+      color: var(--txt); padding: 9px 10px 0; text-align: left;
+      position: relative; z-index: 1;
     }
-    .key--cream .key-label { color: var(--ink); }
-    .key--orange .key-label { color: #fff; }
     .key-silk { display: flex; align-items: center; gap: 7px; margin-top: 7px; padding-left: 2px; }
     .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; border: 1.5px solid var(--silk); background: transparent; }
     .dot.on { background: var(--korange); border-color: var(--korange); }
