@@ -867,16 +867,22 @@
 
     /* Ligne du haut : pills − / + · recherche · plaque */
     .panel-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .pills { display: flex; gap: 6px; flex: none; }
+    /* − / + = baisser / lever le panneau (2 ronds dans un boîtier arrondi) */
+    .pills {
+      display: flex; gap: 4px; flex: none; padding: 3px;
+      border-radius: 999px; background: #bdbab2;
+      box-shadow: inset 0 1px 3px rgba(50,40,22,.32), inset 0 -1px 0 rgba(255,255,255,.3);
+    }
     .pill {
-      width: 30px; height: 30px; border-radius: 4px; border: none; cursor: pointer;
-      background: var(--cream); color: #2a2a28;
-      font-family: var(--font-mono); font-size: 16px; line-height: 1;
-      box-shadow: 0 2px 0 0 var(--cream-wall), 0 4px 6px rgba(60,50,30,.22), inset 0 1px 0 rgba(255,255,255,.6);
+      width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
+      background: radial-gradient(120% 120% at 50% 20%, #f4f1ea, var(--cream)); color: #2a2a28;
+      font-family: var(--font-mono); font-size: 15px; line-height: 1;
+      box-shadow: 0 2px 3px rgba(60,50,30,.28), inset 0 1px 0 rgba(255,255,255,.8);
       display: flex; align-items: center; justify-content: center;
       transition: transform 90ms linear, box-shadow 90ms linear;
     }
-    .pill:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--cream-wall), inset 0 1px 0 rgba(255,255,255,.5); }
+    .pill:active { transform: translateY(1px); box-shadow: 0 1px 1px rgba(60,50,30,.24), inset 0 1px 2px rgba(60,50,30,.3); }
+    .pill:disabled { opacity: .4; }
     .chev { width: 7px; height: 7px; border-left: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(-45deg); margin-top: -2px; transition: transform .16s linear; }
     #panel-wrap.collapsed .chev { transform: rotate(135deg); margin-top: 2px; }
     .search-wrap { position: relative; flex: 1; }
@@ -916,6 +922,39 @@
     /* Grille de keys */
     .key-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; max-width: 252px; margin-left: auto; }
     .cell { display: flex; flex-direction: column; }
+
+    /* FOND : colonne contrôle gauche + grille droite */
+    .fond-cols { display: flex; gap: 14px; align-items: stretch; }
+    .ctrl-col { flex: none; width: 92px; display: flex; flex-direction: column; position: relative; }
+    .fond-cols .key-grid { flex: 1; max-width: none; margin-left: 0; gap: 6px; align-content: start; }
+
+    /* Demi-key (relief / village) : keycap landscape, moitié hauteur */
+    .half-key {
+      --fill:#1a1a1a; --wall:#0a0a09; --edge:rgba(255,255,255,.10); --txt:#b7b7b7;
+      position: relative; z-index: 1; width: 100%; height: 34px; border: none; cursor: pointer;
+      border-radius: 4px; display: flex; align-items: center; padding: 0 10px;
+      background:
+        radial-gradient(130% 160% at 50% -40%, rgba(255,255,255,.09), rgba(0,0,0,0) 55%),
+        linear-gradient(180deg, color-mix(in srgb,var(--fill),white 8%) 0%, var(--fill) 45%, color-mix(in srgb,var(--fill),black 14%) 100%);
+      box-shadow: inset 0 1px 0 var(--edge), inset 0 -1.5px 3px rgba(0,0,0,.30);
+      transition: transform 90ms cubic-bezier(0.2,0,0,1);
+    }
+    .half-key::before { content:""; position:absolute; z-index:-1; left:-2px; right:-2px; top:-1px; bottom:-4px; border-radius:5px; background:var(--wall); box-shadow:0 5px 9px rgba(20,14,6,.32); }
+    .half-key:active { transform: translateY(3px); }
+    .half-key:active::before { bottom:-1px; box-shadow:0 2px 4px rgba(20,14,6,.30); }
+    .half-key.on { --fill:#c05f24; --wall:#6a3210; --edge:rgba(255,255,255,.18); }
+    .hk-label { font-family:var(--font-mono); font-size:11px; letter-spacing:.01em; color:var(--txt); }
+
+    /* Fader vertical entre les deux demi-keys */
+    .fader-v { position: relative; flex: 1; min-height: 84px; display: flex; justify-content: center; margin: 12px 0 18px; }
+    .fv-track { position: relative; width: 22px; cursor: pointer; }
+    .fv-slit { position: absolute; top: 2px; bottom: 2px; left: calc(50% - 1.5px); width: 3px; border-radius: 2px; background: var(--slit); box-shadow: inset 0 0 2px rgba(0,0,0,.8), 0 1px 0 rgba(255,255,255,.35); }
+    .fv-cap { position: absolute; left: 50%; width: 22px; height: 14px; border-radius: 3px; background: linear-gradient(180deg,#d0ccc0,#bdb8ab); box-shadow: 0 2px 4px rgba(46,37,18,.34), inset 0 1px 0 rgba(255,255,255,.5); transform: translate(-50%,-50%); }
+    .fv-cap::after { content:""; position:absolute; left:4px; right:4px; top:calc(50% - .5px); height:1px; background:rgba(46,37,18,.35); }
+    .fv-read { position: absolute; left: -6px; right: -6px; bottom: -16px; text-align: center; font-family:var(--font-mono); font-size:10px; color:var(--ink); font-variant-numeric:tabular-nums; }
+
+    /* Spline signal : relie relief → fader → village (seule ligne, sens réel) */
+    .ctrl-col .spline { position: absolute; left: 3px; top: 30px; bottom: 30px; width: 8px; pointer-events: none; border-left: 1.5px solid var(--korange); border-top: 1.5px solid var(--korange); border-bottom: 1.5px solid var(--korange); border-radius: 3px 0 0 3px; opacity: .8; }
     /* KEYCAP — cube (face) posé sur une base un peu plus large. Sharp, congés courts. */
     .key {
       --fill: #1a1a1a; --wall: #0a0a09; --edge: rgba(255,255,255,.10); --txt: #b7b7b7;
@@ -1032,8 +1071,8 @@
   <div class="panel-body">
     <div class="panel-top">
       <div class="pills">
-        <button class="pill" id="zoom-out" title="Dézoomer">−</button>
-        <button class="pill" id="zoom-in" title="Zoomer">+</button>
+        <button class="pill" id="panel-lower" title="Baisser le panneau">−</button>
+        <button class="pill" id="panel-raise" title="Lever le panneau">+</button>
       </div>
       <div class="search-wrap">
         <input class="search" id="search-input" type="text" placeholder="Chercher…" autocomplete="off">
@@ -2282,13 +2321,30 @@ function nAct(keys) { return keys.filter(k => state.layers[k]).length; }
 function fader(label, id, val) {
   return `<div class="fader-wrap"><div class="fader"><span class="silkscreen">${label}</span><div class="fader-track" id="${id}-track"><span class="fader-slit"></span><span class="zero-tick"></span><span class="fader-cap" style="left:${val}%"></span></div><span class="readout" id="${id}-val">${val}</span></div></div>`;
 }
+// Demi-key (colonne contrôle fond) : keycap landscape, moitié hauteur
+function halfKey(k, label, on) {
+  return `<button class="half-key ${on ? 'on' : ''}" data-layer="${k}"><span class="hk-label">${label}</span></button>`;
+}
+// Fader vertical (haut = max)
+function faderV(id, val) {
+  return `<div class="fader-v"><div class="fv-track" id="${id}-track"><span class="fv-slit"></span><span class="fv-cap" style="top:${100 - val}%"></span></div><span class="fv-read" id="${id}-val">${val}</span></div>`;
+}
 
 const PANELS = {
   fond: () =>
-    grp('Fond', [bKey('sat', 'Sat', '2024'), bKey('ign', 'Plan IGN', 'plan'), bKey('lidar-only', 'LiDAR', 'mnt'),
-      bKey('aerienne50', 'Aérienne', '1950'), bKey('etatmajor', 'État-Major', '1850'), bKey('cassini', 'Cassini', '1750')].join(''))
-    + grp('Couches', [lKey('villages', 'Villages', 'noms'), lKey('threeD', 'Relief 3D', 'mnt'), cKey('night-row', 'Nuit', nightMode)].join(''))
-    + fader('Relief', 'relief', Math.round(state.reliefOpacity * 100)),
+    `<div class="fond-cols">
+      <div class="ctrl-col">
+        ${halfKey('threeD', 'Relief', state.layers.threeD)}
+        ${faderV('relief', Math.round(state.reliefOpacity * 100))}
+        ${halfKey('villages', 'Village', state.layers.villages)}
+        <span class="spline"></span>
+      </div>
+      <div class="key-grid">
+        ${[bKey('sat', 'Sat', '2024'), bKey('ign', 'Plan IGN', 'plan'), bKey('lidar-only', 'LiDAR', 'mnt'),
+          bKey('aerienne50', 'Aérienne', '1950'), bKey('etatmajor', 'État-Major', '1850'), bKey('cassini', 'Cassini', '1750'),
+          cKey('night-row', 'Nuit', nightMode)].join('')}
+      </div>
+    </div>`,
   nature: () => grp('Nature',
     [lKey('contours', 'Contours', 'niveau'), lKey('sentiers', 'Sentiers', 'GR'), lKey('rivieres', 'Rivières', 'eau'),
       lKey('baignade', 'Baignade', 'eau'), lKey('viewpoints', 'Vues', 'pano'), lKey('forets', 'Forêts', 'noms')].join(''),
@@ -2454,6 +2510,22 @@ function wireFader(id, set, commit) {
   const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (commit) commit(); };
   track.addEventListener('pointerdown', e => { e.preventDefault(); move(e); window.addEventListener('pointermove', move); window.addEventListener('pointerup', up); });
 }
+// Fader vertical : haut = 100, bas = 0
+function wireFaderV(id, set, commit) {
+  const track = document.getElementById(id + '-track');
+  if (!track) return;
+  const cap = track.querySelector('.fv-cap');
+  const val = document.getElementById(id + '-val');
+  const move = e => {
+    const r = track.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    const v = Math.round(Math.max(0, Math.min(1, 1 - (p.clientY - r.top) / r.height)) * 100);
+    cap.style.top = (100 - v) + '%'; if (val) val.textContent = v;
+    set(v);
+  };
+  const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (commit) commit(); };
+  track.addEventListener('pointerdown', e => { e.preventDefault(); move(e); window.addEventListener('pointermove', move); window.addEventListener('pointerup', up); });
+}
 
 function attachPanelEvents() {
   content.querySelectorAll('[data-basemap]').forEach(row => {
@@ -2474,10 +2546,12 @@ function attachPanelEvents() {
     });
   });
 
-  wireFader('relief', v => {
+  const setRelief = v => {
     state.reliefOpacity = v / 100;
     if (map.getLayer('lidardem-hs')) map.setPaintProperty('lidardem-hs', 'hillshade-exaggeration', Math.min(state.reliefOpacity * 0.8, 1));
-  }, () => rerender());
+  };
+  wireFader('relief', setRelief, () => rerender());
+  wireFaderV('relief', setRelief, () => rerender());
 
   const dslider = content.querySelector('#drone-slider');
   if (dslider) {
@@ -2656,9 +2730,19 @@ document.querySelectorAll('.ptab').forEach(tab => {
   });
 });
 
-// Pills − / + = zoom carte
-document.getElementById('zoom-in').addEventListener('click', () => map.zoomIn());
-document.getElementById('zoom-out').addEventListener('click', () => map.zoomOut());
+// Pills − / + = baisser / lever le panneau (3 niveaux de hauteur)
+const PANEL_H = ['26vh', '44vh', '70vh'];
+let panelLevel = 1;
+const pLower = document.getElementById('panel-lower');
+const pRaise = document.getElementById('panel-raise');
+function applyPanelLevel() {
+  document.documentElement.style.setProperty('--panel-h', PANEL_H[panelLevel]);
+  pLower.disabled = panelLevel === 0;
+  pRaise.disabled = panelLevel === PANEL_H.length - 1;
+}
+pRaise.addEventListener('click', () => { if (panelLevel < PANEL_H.length - 1) { panelLevel++; applyPanelLevel(); } });
+pLower.addEventListener('click', () => { if (panelLevel > 0) { panelLevel--; applyPanelLevel(); } });
+applyPanelLevel();
 
 // ── HANDLE (open/close panel) ───────────────────────────────────────────────
 const panelWrap = document.getElementById('panel-wrap');
