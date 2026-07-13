@@ -11,6 +11,8 @@ window.BTN = {
   search: { off:'assets/ui/search.png', on:'assets/ui/search.png',    w:321, h:115, fx:20, fy:20, fw:283, fh:77,  fs:0                             },
   dl:     { off:'assets/ui/dl.png',     on:'assets/ui/dl.png',        w:141, h:115, fx:20, fy:20, fw:103, fh:77,  fs:0                             },
   minmax: { off:'assets/ui/minmax.png', on:'assets/ui/minmax.png',    w:141, h:115, fx:20, fy:20, fw:103, fh:77,  fs:0                             },
+  transport:{off:'assets/ui/transport-btn.png',on:'assets/ui/transport-btn.png', w:96, h:92, fx:21, fy:21, fw:57, fh:53, fs:0 },
+  itin:    { off:'assets/ui/itin-btn.png', on:'assets/ui/itin-btn.png', w:308, h:76, fx:22, fy:20, fw:267, fh:38, fs:0 },
 };
 
 // makeButton(host, opts) — opts: {type, x, y, label, on, onClick, press(bool), fs/lx/ly (override)}

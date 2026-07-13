@@ -2349,7 +2349,14 @@ function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on
   if(o.sub) V4.P.appendChild(v4El('ksub',{left:(o.x+34)+'px',top:(o.y+167)+'px'},o.sub)); }
 function pillsV4(){
   makeButton(V4.P,{type:'minmax',x:79,y:120,onClick:()=>setPanelCollapsed(!document.getElementById('panel-wrap').classList.contains('collapsed'))});
-  makeButton(V4.P,{type:'search',x:249,y:118,onClick:()=>{const s=document.getElementById('search-overlay');s.hidden=!s.hidden;if(!s.hidden)document.getElementById('search-input').focus();}}); }
+  makeButton(V4.P,{type:'search',x:249,y:118,onClick:()=>{
+    const ov=document.getElementById('search-overlay');
+    if(!ov.hidden){ ov.hidden=true; return; }
+    const pl=document.getElementById('plate'), r=pl.getBoundingClientRect(), s=v4scale();
+    Object.assign(ov.style,{position:'fixed',left:(r.left+249*s)+'px',top:(r.top+118*s)+'px',
+      width:(283*s)+'px',right:'auto',bottom:'auto'});
+    ov.hidden=false; document.getElementById('search-input').focus();
+  }}); }
 function basemapV4(id,label,sub,x,y){ const night=id==='nuit', on=night?nightMode:state.basemap===id;
   keyV4({x,y,label,sub,on,onClick:()=>{ if(night){nightMode=!nightMode;document.body.classList.toggle('night',nightMode);} else state.basemap=id; drawPanel(); rerender(); }}); }
 function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id],color:(typeof ledColor==='function'?ledColor(id):'#c05f24'),
@@ -2390,11 +2397,13 @@ async function v4FauneScreen(){
     overflowY:'auto',borderRadius:'22px',background:'#c6c9c1',boxShadow:'inset 0 2px 7px #2a2c2755',
     padding:'14px',boxSizing:'border-box'}); box.id='fscreen'; V4.P.appendChild(box);
   const msg=t=>box.innerHTML=`<div style="color:#3a3d38;font:15px VG5000,monospace;padding:10px;text-align:center">${t}</div>`;
-  if(!V4.bestiaire){ msg('Chargement du bestiaire…');
-    try{ V4.bestiaire=await v4LoadBestiaire(); }catch(e){ msg('Bestiaire hors-ligne'); return; }
-    if(document.getElementById('fscreen')!==box) return; }
+  if(!V4.bestiaire || !Object.keys(V4.bestiaire).length){ msg('Chargement du bestiaire…');
+    let b; try{ b=await v4LoadBestiaire(); }catch(e){ msg('Bestiaire hors-ligne'); return; }
+    if(document.getElementById('fscreen')!==box) return;
+    if(!b || !Object.keys(b).length){ msg('Aucune observation'); return; } // pas de cache si vide → retry
+    V4.bestiaire=b; }
   const g=V4GROUP[V4.fkind], list=(V4.bestiaire[g]||[]);
-  if(!list.length){ msg('Aucune observation'); return; }
+  if(!list.length){ msg(`Aucun ${({mammiferes:'mammifère',oiseaux:'oiseau',reptiles:'reptile',amphibiens:'amphibien'})[V4.fkind]||'animal'} observé`); return; }
   box.innerHTML='';
   const grid=v4El('',{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}); box.appendChild(grid);
   list.forEach(t=>{
@@ -2416,24 +2425,24 @@ const PANELV4={
     [['sat','Sat','2024',419,269],['ign','Plan IGN','plan',661,269],['lidar-only','LiDAR','mnt',904,269],
      ['aerienne50','Aérienne','1950',419,498],['etatmajor','État-Major','1850',659,498],
      ['cassini','Cassini','1750',902,495],['nuit','Nuit','',419,742]].forEach(a=>basemapV4(...a));
-    // ── itinéraire A→B : 2 barres = inputs route (fonctionnels) + 3 transport ──
-    const IY1=690, IY2=772;
+    // ── itinéraire A→B : 2 barres fines (itin) = inputs route + 3 boutons transport ──
+    const IY1=700, IY2=752;
     [['route-a','Départ (A)',IY1,0],['route-b','Arrivée (B)',IY2,1]].forEach(([id,ph,y,idx])=>{
-      makeButton(V4.P,{type:'search',x:655,y});
+      makeButton(V4.P,{type:'itin',x:655,y});
       const inp=document.createElement('input'); inp.id=id; inp.placeholder=ph; inp.autocomplete='off';
-      Object.assign(inp.style,{position:'absolute',left:'688px',top:(y+18)+'px',width:'236px',height:'40px',
-        background:'transparent',border:0,outline:0,font:"20px VG5000,monospace",color:'#2a2a28'});
+      Object.assign(inp.style,{position:'absolute',left:'690px',top:(y+4)+'px',width:'208px',height:'30px',
+        background:'transparent',border:0,outline:0,font:"16px VG5000,monospace",color:'#2a2a28'});
       V4.P.appendChild(inp);
       const res=document.createElement('div'); res.id=id+'-res'; res.className='search-results route-res';
-      Object.assign(res.style,{position:'absolute',left:'655px',top:(y+80)+'px',width:'300px',zIndex:'40'});
+      Object.assign(res.style,{position:'absolute',left:'655px',top:(y+42)+'px',width:'300px',zIndex:'40'});
       V4.P.appendChild(res);
       inp.addEventListener('input',debounce(()=>routeSearch(inp.value,res,idx,inp),350));
-      inp.value = idx===0 ? (routeA?routeA.label||'':'') : (routeB?routeB.label||'':'');
+      inp.value = idx===0 ? (routeA&&routeA.label||'') : (routeB&&routeB.label||'');
     });
-    [['car-fast','car',665],['trekking','bike',770],['hiking-mountain','foot',875]].forEach(([prof,ic,x])=>{
-      const b=makeButton(V4.P,{type:'minmax',x,y:868,scale:.62,onClick:()=>{routeProfile=prof;computeRoute();drawPanel();}});
+    [['car-fast','car',668],['trekking','bike',742],['hiking-mountain','foot',816]].forEach(([prof,ic,x])=>{
+      const b=makeButton(V4.P,{type:'transport',x,y:812,onClick:()=>{routeProfile=prof;computeRoute();drawPanel();}});
       const svg=ICON4[ic](routeProfile===prof?'%23c05f24':'%231a1a1a');
-      b.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'46px',height:'46px',pointerEvents:'none',background:`url("data:image/svg+xml,${svg}") center/contain no-repeat`}));
+      b.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'32px',height:'32px',pointerEvents:'none',background:`url("data:image/svg+xml,${svg}") center/contain no-repeat`}));
     }); },
   nature(){ pillsV4(); [['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],['viewpoints','Vues','pano',651,743],['forets','Forêts','noms',896,743]].forEach(a=>layerKeyV4(...a)); },
   activites(){ pillsV4(); [['nautique','Canoë','eau vive',653,270],['canyoning','Canyon','gorge',896,270],['transport','Transport','arrêts',651,499]].forEach(a=>layerKeyV4(...a)); },
