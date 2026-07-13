@@ -6,7 +6,7 @@
 window.BTN = {
   key:    { off:'assets/ui/mkey.png',   on:'assets/ui/mkey-on.png',   w:264, h:258, fx:9,  fy:9,  fw:159, fh:151, fs:27, lx:18, ly:16, la:'left'   },
   half:   { off:'assets/ui/mhalf.png',  on:'assets/ui/mhalf-on.png',  w:264, h:189, fx:9,  fy:9,  fw:158, fh:81,  fs:26, lx:0,  ly:0,  la:'center' },
-  tab:    { off:'assets/ui/tab.png',    on:'assets/ui/tab-on.png',    w:265, h:175, fx:9,  fy:9,  fw:158, fh:67,  fs:22, lx:0,  ly:0,  la:'center' },
+  tab:    { off:'assets/ui/tab.png',    on:'assets/ui/tab-on.png',    w:265, h:175, fx:9,  fy:9,  fw:158, fh:67,  fs:22, lx:0,  ly:0,  la:'center', alt:'assets/ui/tab-white.png' },
   kind:   { off:'assets/ui/kind.png',   on:'assets/ui/kind-on.png',   w:321, h:115, fx:20, fy:20, fw:283, fh:77,  fs:23, lx:22, ly:0,  la:'left'   },
   search: { off:'assets/ui/search.png', on:'assets/ui/search.png',    w:321, h:115, fx:20, fy:20, fw:283, fh:77,  fs:0                             },
   dl:     { off:'assets/ui/dl.png',     on:'assets/ui/dl.png',        w:141, h:115, fx:20, fy:20, fw:103, fh:77,  fs:0                             },
@@ -23,7 +23,7 @@ window.makeButton = function (host, o) {
   Object.assign(b.style, {
     position: 'absolute', left: (o.x - B.fx) + 'px', top: (o.y - B.fy) + 'px',
     width: B.w + 'px', height: B.h + 'px', border: 0, padding: 0, cursor: 'pointer',
-    background: `url('${on ? B.on : B.off}') 0 0/100% 100% no-repeat`,
+    background: `url('${on ? B.on : (o.alt && B.alt ? B.alt : B.off)}') 0 0/100% 100% no-repeat`,
     transition: 'transform .07s ease, filter .07s ease',
   });
   const fs = o.fs != null ? o.fs : B.fs;

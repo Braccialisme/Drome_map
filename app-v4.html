@@ -1,0 +1,162 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Drôme-Diois — panneau v4 unifié</title>
+<style>
+  @font-face { font-family:'VG5000'; font-display:swap;
+    src:url('fonts/VG5000-Regular_web.ttf') format('truetype'),
+        url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2'); }
+  body { margin:0; background:#222; padding:20px; box-sizing:border-box; font-family:'VG5000',monospace; }
+  #panel { position:relative; width:1244px; height:1073px; transform:scale(var(--s,1)); transform-origin:top left;
+    background:no-repeat 0 0/1244px 1073px; }
+  .led { position:absolute; width:20px; height:20px; pointer-events:none;
+    background:url('assets/ui/led-off.png') center/contain no-repeat; }
+  .led.on { background-image:url('assets/ui/led-on.png'); }
+  .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase; letter-spacing:.12em; pointer-events:none; }
+  .knoll { position:absolute; width:52px; height:52px; cursor:grab; transform:translate(-50%,-50%);
+    background:url('assets/ui/knoll.png') center/contain no-repeat; } .knoll:active{cursor:grabbing;}
+  .sknoll { position:absolute; width:46px; height:46px; cursor:grab; transform:translate(-50%,-50%);
+    background:url('assets/ui/knoll.png') center/contain no-repeat; }
+  #kptr { position:absolute; background:url('assets/ui/azimuth-pointer.png') center/100% 100% no-repeat; transform-origin:50% 0; pointer-events:none; }
+  #kread { position:absolute; font-size:26px; color:#7c766c; font-variant-numeric:tabular-nums; pointer-events:none; transform:translateY(-50%); }
+  #khit { position:absolute; border-radius:50%; cursor:grab; }
+  #fscreen { position:absolute; border-radius:22px; }
+</style></head><body>
+<div id="panel"></div>
+<script src="buttons-v4.js"></script>
+<script>
+const W=1244,H=1073, P=document.getElementById('panel');
+const plate=id=>`assets/ui/panel-${id}-v4-plate.png`;
+const el=(c,s,t)=>{const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;};
+
+// ── état (local ; à brancher sur le state de l'app à l'intégration) ──────────
+let basemap='sat', az=201, hr=14, reliefVal=60, kind='mammiferes';
+const layers={relief:true, village:false, contours:false, sentiers:false, rivieres:false,
+  baignade:false, viewpoints:false, forets:true, nautique:false, canyoning:false, transport:false,
+  monuments:false, villages:false, restaurants:true, cafes:false, glaciers:false, boulangeries:false,
+  daylight:true, slope:false, curvature:false, grille:false, drone:false, auto:true, manuel:false, faune:false};
+let sVals=[35,62,48,55,72,40];
+
+// ── onglets ──────────────────────────────────────────────────────────────
+const TABS=['fond','nature','faune','activ','patri','comm','expe'];
+const TABX=[14,178,342,506,670,825,989];
+let active=location.hash.slice(1)||'fond';
+
+// ── helpers boutons touche+led+sub ─────────────────────────────────────────
+function keyBtn(o){ // {x,y,label,sub,on,onClick}
+  makeButton(P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
+  P.appendChild(el('led'+(o.on?' on':''),{left:(o.x+2)+'px',top:(o.y+164)+'px'}));
+  if(o.sub) P.appendChild(el('ksub',{left:(o.x+34)+'px',top:(o.y+167)+'px'},o.sub));
+}
+function grid(list){ list.forEach(k=>keyBtn({x:k.x,y:k.y,label:k.label,sub:k.sub,on:layers[k.id],
+  onClick:()=>{layers[k.id]=!layers[k.id];draw();}})); }
+function halfBtn(id,label,x,y){ makeButton(P,{type:'half',x,y,label,on:layers[id],
+  onClick:()=>{layers[id]=!layers[id];draw();}}); }
+function pills(){ makeButton(P,{type:'minmax',x:79,y:120}); makeButton(P,{type:'search',x:249,y:118}); }
+
+// ── panneaux ────────────────────────────────────────────────────────────────
+const PANELS={
+  fond(){
+    pills();
+    halfBtn('relief','Relief',79,262); halfBtn('village','Village',79,816);
+    // slider relief vertical
+    const RT={x:161,y0:400,y1:721}, ky=RT.y1-reliefVal/100*(RT.y1-RT.y0);
+    const kn=el('knoll',{left:RT.x+'px',top:ky+'px'});
+    dragY(kn,RT,v=>{reliefVal=v;draw();}); P.appendChild(kn);
+    [['sat','Sat','2024',419,269],['ign','Plan IGN','plan',661,269],['lidar-only','LiDAR','mnt',904,269],
+     ['aerienne50','Aérienne','1950',419,498],['etatmajor','État-Major','1850',659,498],
+     ['cassini','Cassini','1750',902,495],['nuit','Nuit','',419,742]].forEach(([id,l,s,x,y])=>
+      keyBtn({x,y,label:l,sub:s,on:basemap===id,onClick:()=>{basemap=id;draw();}}));
+  },
+  nature(){ pills(); grid([['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],
+    ['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],
+    ['viewpoints','Vues','pano',651,743],['forets','Forêts','noms',896,743]]
+    .map(([id,label,sub,x,y])=>({id,label,sub,x,y}))); },
+  activ(){ pills(); grid([['nautique','Canoë','eau vive',653,270],['canyoning','Canyon','gorge',896,270],
+    ['transport','Transport','arrêts',651,499]].map(([id,label,sub,x,y])=>({id,label,sub,x,y}))); },
+  patri(){ pills(); grid([['monuments','Monuments','MH',653,270],['villages','Villages','noms',896,270]]
+    .map(([id,label,sub,x,y])=>({id,label,sub,x,y}))); },
+  comm(){ pills(); grid([['restaurants','Restos','food',651,270],['cafes','Cafés','bar',896,270],
+    ['glaciers','Glaciers','glace',651,499],['boulangeries','Pain','four',894,496]]
+    .map(([id,label,sub,x,y])=>({id,label,sub,x,y}))); },
+  expe(){
+    pills();
+    halfBtn('auto','Auto',79,262); halfBtn('manuel','Manuel',79,816);
+    [['daylight','Lumière','soleil',417,269],['slope','Pentes','°',659,269],['curvature','Courbure','crêtes',902,269],
+     ['grille','Grille','coord',417,498],['drone','Drone','vol',417,742]].forEach(([id,l,s,x,y])=>
+      keyBtn({x,y,label:l,sub:s,on:layers[id],onClick:()=>{layers[id]=!layers[id];draw();}}));
+    makeButton(P,{type:'dl',x:955,y:955});
+    // sliders slope/curve
+    const TRK={x0:107,len:168,ys:[442,481,521,652,691,731]};
+    TRK.ys.forEach((y,i)=>{ const kn=el('sknoll',{left:(TRK.x0+sVals[i]/100*TRK.len)+'px',top:y+'px',
+      backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`});
+      dragX(kn,TRK,i,v=>{sVals[i]=v;draw();}); P.appendChild(kn); });
+    // knob azimut
+    const KN={cx:841,cy:709};
+    P.appendChild(Object.assign(el('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°  ${hr}h`),{id:'kread'}));
+    P.appendChild(Object.assign(el('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',
+      transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
+    const kh=Object.assign(el('',{left:(KN.cx-160)+'px',top:(KN.cy-160)+'px',width:'320px',height:'320px'}),{id:'khit'});
+    kh.onpointerdown=e=>{kh.setPointerCapture(e.pointerId);
+      const mv=ev=>{const r=P.getBoundingClientRect(),s=+(P.style.getPropertyValue('--s')||1);
+        az=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360);draw();};
+      const up=()=>{kh.removeEventListener('pointermove',mv);kh.removeEventListener('pointerup',up);};
+      kh.addEventListener('pointermove',mv);kh.addEventListener('pointerup',up);};
+    P.appendChild(kh);
+  },
+  faune(){ pills();
+    makeButton(P,{type:'key',x:888,y:255,on:layers.faune,onClick:()=>{layers.faune=!layers.faune;draw();}});
+    const KINDS=[['mammiferes','Mammifères'],['oiseaux','Oiseaux'],['reptiles','Reptiles'],['insectes','Insectes']];
+    const KY=[468,579,686,797];
+    KINDS.forEach(([id,label],i)=>makeButton(P,{type:'kind',x:778,y:KY[i],label,on:kind===id,
+      onClick:()=>{kind=id;draw();}}));
+    fauneScreen();
+  },
+};
+
+// ── écran LCD faune ──────────────────────────────────────────────────────────
+const SPR={cerf:[".1.....1.",".111.111.","...1.1...","..11111..",".1122211.",".1222221.",".1222221.","..1...1..","..1...1.."],
+  sanglier:[".........",".1111111.","112222211","122222221","122222211",".1.11.1..",".1.11.1.."],
+  oiseau:["...111...","..12221..",".1222211.","122222111",".1222221.","..12111..","...1.1..."],
+  chouette:[".1.....1.",".11...11.",".1212121.",".1222221.",".1211121.",".1222221.","..12221..","..1...1.."],
+  serpent:["...11111.","..1....1.","..1.111..",".11.1....",".1..1.111",".1..12221",".111....."],
+  lezard:[".11......","1221.....",".12211...","112222111",".12222221",".1.1..1.1"],
+  papillon:[".1.....1.","11.1.1.11","122111221",".1221221.","..12221..","...1.1..."],
+  scarabee:[".1.....1.","..12221..",".1222221.","112222211",".1222221.","112222211",".1.....1."]};
+const FKIND={mammiferes:['cerf','sanglier'],oiseaux:['oiseau','chouette'],reptiles:['serpent','lezard'],insectes:['papillon','scarabee']};
+function fauneScreen(){
+  const S={x:96,y:247,w:474,h:600}, CELL=7;
+  const cv=document.createElement('canvas'); cv.id='fscreen'; cv.width=S.w; cv.height=S.h;
+  Object.assign(cv.style,{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px'}); P.appendChild(cv);
+  const x=cv.getContext('2d'), cols=Math.floor(S.w/CELL), rows=Math.floor(S.h/CELL);
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){ x.fillStyle='#aeb8c0'; x.fillRect(c*CELL,r*CELL,CELL,CELL);
+    x.strokeStyle='#ccd2d6'; x.lineWidth=.5; x.strokeRect(c*CELL+.25,r*CELL+.25,CELL-.5,CELL-.5); }
+  const list=FKIND[kind], P2=18,M=4,per=Math.floor((cols-M)/P2),mr=Math.floor((rows-M)/P2); let i=0;
+  for(let r=0;r<mr;r++)for(let c=0;c<per;c++){ const g=SPR[list[i%list.length]];i++; const ox=M+c*P2,oy=M+r*P2;
+    for(let py=0;py<g.length;py++)for(let px=0;px<g[py].length;px++){ if(g[py][px]==='.')continue;
+      x.fillStyle=g[py][px]==='2'?'#3a3a3a':'#141414'; x.fillRect((ox+px)*CELL,(oy+py)*CELL,CELL,CELL);} }
+}
+
+// ── drag helpers ──────────────────────────────────────────────────────────
+function dragY(kn,RT,cb){ kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);
+  const mv=ev=>{const r=P.getBoundingClientRect(),s=+(P.style.getPropertyValue('--s')||1);
+    const y=(ev.clientY-r.top)/s; cb(Math.max(0,Math.min(100,Math.round((RT.y1-y)/(RT.y1-RT.y0)*100))));};
+  const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);};
+  kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);}; }
+function dragX(kn,TRK,i,cb){ kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);
+  const mv=ev=>{const r=P.getBoundingClientRect(),s=+(P.style.getPropertyValue('--s')||1);
+    const x=(ev.clientX-r.left)/s; cb(Math.max(0,Math.min(100,Math.round((x-TRK.x0)/TRK.len*100))));};
+  const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);};
+  kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);}; }
+
+// ── rendu ────────────────────────────────────────────────────────────────
+function draw(){
+  P.innerHTML='';
+  P.style.backgroundImage=`url('${plate(active)}')`;
+  // onglets cliquables
+  TABS.forEach((id,i)=>{ const on=id===active, white=(i>=5)&&!on;
+    makeButton(P,{type:'tab',x:TABX[i],y:7,on,alt:white,onClick:()=>{active=id;draw();}}); });
+  PANELS[active]();
+}
+draw();
+const fit=()=>P.style.setProperty('--s',Math.min(1,(innerWidth-40)/W,(innerHeight-40)/H).toFixed(3));
+addEventListener('resize',fit);fit();
+</script></body></html>
