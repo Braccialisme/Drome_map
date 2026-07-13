@@ -2863,32 +2863,6 @@ setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
 renderPanel();
-
-// ── DEBUG PWA (temporaire) : affiche les vraies valeurs du device ────────────
-(function(){
-  const probeB=document.createElement('div');
-  probeB.style.cssText='position:fixed;bottom:0;left:0;width:1px;height:env(safe-area-inset-bottom,0px);pointer-events:none;';
-  const probeT=document.createElement('div');
-  probeT.style.cssText='position:fixed;top:0;left:0;width:1px;height:env(safe-area-inset-top,0px);pointer-events:none;';
-  document.body.append(probeB,probeT);
-  const box=document.createElement('div');
-  box.style.cssText='position:fixed;top:120px;left:8px;z-index:99999;background:#000d;color:#0f0;font:11px monospace;padding:7px 9px;border-radius:7px;line-height:1.5;pointer-events:none;';
-  document.body.appendChild(box);
-  function upd(){
-    const sab=probeB.getBoundingClientRect().height, sat=probeT.getBoundingClientRect().height;
-    const pw=document.getElementById('panel-wrap'), pr=pw&&pw.getBoundingClientRect()||{top:0,bottom:0};
-    const mp=document.getElementById('map'), mr=mp&&mp.getBoundingClientRect()||{bottom:0};
-    box.innerHTML=
-      'standalone: '+(!!navigator.standalone)+' / '+matchMedia('(display-mode: standalone)').matches+'<br>'+
-      '.pwa class: '+document.documentElement.classList.contains('pwa')+'<br>'+
-      'safe-area top/bot: '+sat.toFixed(0)+' / '+sab.toFixed(0)+'<br>'+
-      'innerH: '+innerHeight+'  screenH: '+screen.height+'<br>'+
-      'visualVP H: '+(window.visualViewport?visualViewport.height.toFixed(0):'?')+'<br>'+
-      'panel top/bot: '+pr.top.toFixed(0)+' / '+pr.bottom.toFixed(0)+'<br>'+
-      'map bot: '+mr.bottom.toFixed(0);
-  }
-  upd(); addEventListener('resize',upd); setTimeout(upd,400); setTimeout(upd,1500);
-})();
 </script>
 </body>
 </html>
