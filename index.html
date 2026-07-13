@@ -838,14 +838,14 @@
 
 
     /* ── Panneau v4 : plaque sprite, scale-to-fit largeur, ancrée en bas ── */
-    #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
-      height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
+    /* Ancré au bord bas PHYSIQUE : bottom:0, zéro margin/translateY/offset. Le safe-area
+       est géré DANS le panneau (padding-bottom) → son fond gris s'étend sous l'indicateur
+       home. background gris = tout px OS résiduel invisible. */
+    #panel-wrap { position:fixed !important; bottom:0 !important; left:0; right:0; top:auto !important;
+      height:auto !important; z-index:20; background:#b9b9bb;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
-    /* PWA : bottom:0 respecte le safe-area iOS → un trou (carte visible) sous le panneau.
-       On décale le panneau jusqu'au bas de la web view. Le tampon gris de plaque + body
-       bg couvrent alors les derniers px (safe-area = zone iOS, non-rendable en web). */
-    html.pwa #panel-wrap { bottom: calc(-1 * env(safe-area-inset-bottom, 0px)); }
-    @media (display-mode: standalone) { #panel-wrap { bottom: calc(-1 * env(safe-area-inset-bottom, 0px)); } }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
       background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
@@ -2348,6 +2348,7 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   // repli : laisse voir tabs + top-bar (Drôme-Diois)
   document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
 addEventListener('resize',fitPanel);
+if(window.visualViewport) visualViewport.addEventListener('resize',fitPanel);
 function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
   // LED = point coloré par couche (moyen habile de remettre les couleurs)
   const col=o.color||'#c05f24';
