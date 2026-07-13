@@ -92,7 +92,9 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      background: var(--greige-1);
+      /* gris ~bas-de-plaque : le petit gap sous le panneau (chrome navigateur /
+         safe-area) blende avec le panneau au lieu d'afficher du greige */
+      background: #b0b0b2;
       font-family: var(--font-ui);
       color: var(--ink);
     }
@@ -807,34 +809,6 @@
 
     .geoloc-marker { width: 30px; height: 30px; }
 
-    /* ══ PANNEAU EP-133 K.O. II (design handoff) ══════════════════════════════ */
-    #panel-wrap {
-      --char: #201f1d; --char-wall: #0d0d0c; --char-txt: #e9e7e0;
-      --cream: #efece3; --cream-wall: #cbc6b9;
-      --korange: #c05f24; --orange-wall: #7a3810;
-      --silk: #8a877c; --slit: #141210;
-      /* key = 13.6% de la largeur panneau (proportions du SVG, mises à l'échelle écran) */
-      --key: min(54px, 13.5vw);
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: var(--panel-h);
-      z-index: 20;
-      display: flex; flex-direction: column;
-      border-radius: 4px 4px 0 0;
-      background: #cbc8c1;
-      box-shadow: 0 -6px 20px rgba(48,38,20,.20);
-      overflow: hidden;
-      transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1);
-    }
-    #panel-wrap.collapsed { transform: translateY(calc(var(--panel-h) - 46px)); }
-    .panel-body { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 14px 0; min-width: 0; position: relative; z-index: 1; }
-    .panel-content {
-      flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
-      display: flex; flex-direction: column; gap: 14px;
-      scrollbar-width: none; padding: 0 0 14px; background: transparent;
-    }
-    .panel-content::-webkit-scrollbar { display: none; }
-    .panel-content > * { min-width: 0; max-width: 100%; }
-    .fond-cols, .group { min-width: 0; }
 
     /* Search minimisable : loupe seule (28px), s'ouvre au focus */
     .search-wrap { position: relative; flex: 0 0 30px; transition: flex-basis 180ms cubic-bezier(.2,0,0,1); }
