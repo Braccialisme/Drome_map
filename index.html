@@ -997,6 +997,26 @@
     .setting { margin-top: 12px; }
     .setting .silkscreen { display: block; margin-bottom: 6px; }
     .setting input[type=range] { width: 100%; }
+
+    /* ── Panneau v4 : plaque sprite, scale-to-fit largeur, ancrée en bas ── */
+    #panel-wrap { position:absolute; bottom:0; left:0; right:0; z-index:20;
+      transition:transform .18s cubic-bezier(.2,0,0,1); }
+    #panel-wrap.collapsed { transform:translateY(calc(100% - 52px)); }
+    #panel-v4 { width:100%; overflow:hidden; }
+    #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
+      background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
+    #panel-v4 .led { position:absolute; width:20px; height:20px; pointer-events:none;
+      background:url('assets/ui/led-off.png') center/contain no-repeat; }
+    #panel-v4 .led.on { background-image:url('assets/ui/led-on.png'); }
+    #panel-v4 .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase; letter-spacing:.12em; pointer-events:none; }
+    #panel-v4 .knoll { position:absolute; width:52px; height:52px; cursor:grab; transform:translate(-50%,-50%); background:url('assets/ui/knoll.png') center/contain no-repeat; }
+    #panel-v4 .sknoll { position:absolute; width:46px; height:46px; cursor:grab; transform:translate(-50%,-50%); background:url('assets/ui/knoll.png') center/contain no-repeat; }
+    #panel-v4 #kptr { position:absolute; background:url('assets/ui/azimuth-pointer.png') center/100% 100% no-repeat; transform-origin:50% 0; pointer-events:none; }
+    #panel-v4 #kread { position:absolute; font-size:26px; color:#7c766c; pointer-events:none; transform:translateY(-50%); }
+    #panel-v4 #khit { position:absolute; border-radius:50%; cursor:grab; }
+    #panel-v4 #fscreen { position:absolute; border-radius:22px; }
+    #search-overlay { position:absolute; left:10px; right:10px; bottom:calc(100% - 4px); z-index:30; }
+    #search-overlay[hidden] { display:none; }
   </style>
 </head>
 <body>
@@ -1042,34 +1062,17 @@
 </button>
 
 <div id="panel-wrap">
-  <div class="tab-bar">
-    <button class="ptab active" data-tab="fond">Fond</button>
-    <button class="ptab" data-tab="nature">Nature</button>
-    <button class="ptab" data-tab="faune">Faune</button>
-    <button class="ptab" data-tab="activites">Activ.</button>
-    <button class="ptab" data-tab="patri">Patri.</button>
-    <button class="ptab" data-tab="commerce">Comm.</button>
-    <button class="ptab" data-tab="experimental">Expe.</button>
-    <div class="pills">
-      <button class="pill" id="panel-lower" title="Minimiser">−</button>
-      <button class="pill" id="panel-raise" title="Agrandir">+</button>
-    </div>
+  <div id="panel-v4"><div id="plate"></div></div>
+  <!-- recherche conservée (logique inchangée) : overlay ouvert par le pill recherche -->
+  <div class="search-wrap" id="search-overlay" hidden>
+    <input class="search" id="search-input" type="text" placeholder="Chercher…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
   </div>
-  <div class="panel-body">
-    <div class="panel-top">
-      <div class="search-wrap">
-        <input class="search" id="search-input" type="text" placeholder="Chercher…" autocomplete="off">
-        <div class="search-results" id="search-results"></div>
-      </div>
-      <div class="np">
-        <span class="np-title">Drome Diois</span>
-        <span class="np-sub">cartographie</span>
-      </div>
-    </div>
-    <div class="panel-content" id="panel-content"><!-- injecté --></div>
-  </div>
+  <!-- ancien conteneur gardé caché : renderBestiaire/faune y injecte encore -->
+  <div class="panel-content" id="panel-content" hidden></div>
 </div>
 
+<script src="buttons-v4.js"></script>
 <script>
 // ── Service Worker (cache offline 30j) — https/localhost seulement ───────────
 if ('serviceWorker' in navigator) {
@@ -2475,11 +2478,96 @@ function loadPoiIcons() {
   });
 }
 
-function renderPanel() {
-  content.innerHTML = PANELS[state.activeTab]();
-  attachPanelEvents();
-  if (state.activeTab === 'faune') renderBestiaire();
-}
+// ── PANNEAU v4 (plaque sprite) — remplace l'ancien rendu HTML ───────────────
+const V4 = { TABS:['fond','nature','faune','activites','patri','commerce','experimental'],
+  TABX:[14,178,342,506,670,825,989], fkind:'mammiferes', P:null };
+function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activites:'activ',patri:'patri',commerce:'comm',experimental:'expe'}[id]; }
+function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
+function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
+function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.getElementById('plate');
+  if(!pv||!pl)return; const s=pv.clientWidth/1244; pl.style.setProperty('--s',s); pl.style.transform=`scale(${s})`; pv.style.height=(1073*s)+'px'; }
+addEventListener('resize',fitPanel);
+function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
+  V4.P.appendChild(v4El('led'+(o.on?' on':''),{left:(o.x+2)+'px',top:(o.y+164)+'px'}));
+  if(o.sub) V4.P.appendChild(v4El('ksub',{left:(o.x+34)+'px',top:(o.y+167)+'px'},o.sub)); }
+function pillsV4(){
+  makeButton(V4.P,{type:'minmax',x:79,y:120,onClick:()=>setPanelCollapsed(!document.getElementById('panel-wrap').classList.contains('collapsed'))});
+  makeButton(V4.P,{type:'search',x:249,y:118,onClick:()=>{const s=document.getElementById('search-overlay');s.hidden=!s.hidden;if(!s.hidden)document.getElementById('search-input').focus();}}); }
+function basemapV4(id,label,sub,x,y){ const night=id==='nuit', on=night?nightMode:state.basemap===id;
+  keyV4({x,y,label,sub,on,onClick:()=>{ if(night){nightMode=!nightMode;document.body.classList.toggle('night',nightMode);} else state.basemap=id; drawPanel(); rerender(); }}); }
+function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id],
+  onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); if(id==='threeD')map.easeTo({pitch:state.layers.threeD?62:0,duration:700}); }}); }
+function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!state.layers[id],
+  onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
+function v4DragY(kn,RT,cb,commit){ kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);
+  const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
+    const y=(ev.clientY-r.top)/s; cb(Math.max(0,Math.min(100,Math.round((RT.y1-y)/(RT.y1-RT.y0)*100))));};
+  const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);commit&&commit();};
+  kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
+
+const V4SPR={cerf:[".1.....1.",".111.111.","...1.1...","..11111..",".1122211.",".1222221.",".1222221.","..1...1..","..1...1.."],
+  sanglier:[".........",".1111111.","112222211","122222221","122222211",".1.11.1..",".1.11.1.."],
+  oiseau:["...111...","..12221..",".1222211.","122222111",".1222221.","..12111..","...1.1..."],
+  chouette:[".1.....1.",".11...11.",".1212121.",".1222221.",".1211121.",".1222221.","..12221..","..1...1.."],
+  serpent:["...11111.","..1....1.","..1.111..",".11.1....",".1..1.111",".1..12221",".111....."],
+  lezard:[".11......","1221.....",".12211...","112222111",".12222221",".1.1..1.1"],
+  papillon:[".1.....1.","11.1.1.11","122111221",".1221221.","..12221..","...1.1..."],
+  scarabee:[".1.....1.","..12221..",".1222221.","112222211",".1222221.","112222211",".1.....1."]};
+const V4FKIND={mammiferes:['cerf','sanglier'],oiseaux:['oiseau','chouette'],reptiles:['serpent','lezard'],insectes:['papillon','scarabee']};
+function v4FauneScreen(){ const S={x:96,y:247,w:474,h:600},CELL=7;
+  const cv=document.createElement('canvas'); cv.id='fscreen'; cv.width=S.w; cv.height=S.h;
+  Object.assign(cv.style,{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute'}); V4.P.appendChild(cv);
+  const x=cv.getContext('2d'),cols=Math.floor(S.w/CELL),rows=Math.floor(S.h/CELL);
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){ x.fillStyle='#aeb8c0'; x.fillRect(c*CELL,r*CELL,CELL,CELL);
+    x.strokeStyle='#ccd2d6'; x.lineWidth=.5; x.strokeRect(c*CELL+.25,r*CELL+.25,CELL-.5,CELL-.5); }
+  const list=V4FKIND[V4.fkind],P2=18,M=4,per=Math.floor((cols-M)/P2),mr=Math.floor((rows-M)/P2); let i=0;
+  for(let r=0;r<mr;r++)for(let c=0;c<per;c++){ const g=V4SPR[list[i%list.length]];i++; const ox=M+c*P2,oy=M+r*P2;
+    for(let py=0;py<g.length;py++)for(let px=0;px<g[py].length;px++){ if(g[py][px]==='.')continue;
+      x.fillStyle=g[py][px]==='2'?'#3a3a3a':'#141414'; x.fillRect((ox+px)*CELL,(oy+py)*CELL,CELL,CELL);} } }
+
+const PANELV4={
+  fond(){ pillsV4();
+    layerHalfV4('daylight','Relief',79,262); layerHalfV4('villages','Village',79,816);
+    const RT={x:161,y0:400,y1:721},ky=RT.y1-state.reliefOpacity*(RT.y1-RT.y0);
+    const kn=v4El('knoll',{left:RT.x+'px',top:ky+'px'});
+    v4DragY(kn,RT,v=>{ state.reliefOpacity=v/100; if(map.getLayer('lidardem-hs'))map.setPaintProperty('lidardem-hs','hillshade-exaggeration',Math.min(state.reliefOpacity*0.8,1)); drawPanel(); },()=>rerender());
+    V4.P.appendChild(kn);
+    [['sat','Sat','2024',419,269],['ign','Plan IGN','plan',661,269],['lidar-only','LiDAR','mnt',904,269],
+     ['aerienne50','Aérienne','1950',419,498],['etatmajor','État-Major','1850',659,498],
+     ['cassini','Cassini','1750',902,495],['nuit','Nuit','',419,742]].forEach(a=>basemapV4(...a));
+    makeButton(V4.P,{type:'search',x:655,y:780}); makeButton(V4.P,{type:'search',x:655,y:858}); },
+  nature(){ pillsV4(); [['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],['viewpoints','Vues','pano',651,743],['forets','Forêts','noms',896,743]].forEach(a=>layerKeyV4(...a)); },
+  activites(){ pillsV4(); [['nautique','Canoë','eau vive',653,270],['canyoning','Canyon','gorge',896,270],['transport','Transport','arrêts',651,499]].forEach(a=>layerKeyV4(...a)); },
+  patri(){ pillsV4(); [['monuments','Monuments','MH',653,270],['villages','Villages','noms',896,270]].forEach(a=>layerKeyV4(...a)); },
+  commerce(){ pillsV4(); [['restaurants','Restos','food',651,270],['cafes','Cafés','bar',896,270],['glaciers','Glaciers','glace',651,499],['boulangeries','Pain','four',894,496]].forEach(a=>layerKeyV4(...a)); },
+  experimental(){ pillsV4();
+    makeButton(V4.P,{type:'half',x:79,y:262,label:'Auto',on:!sunManual,onClick:()=>{sunManual=false;updateSunlight();drawPanel();}});
+    makeButton(V4.P,{type:'half',x:79,y:816,label:'Manuel',on:sunManual,onClick:()=>{sunManual=true;updateSunlight();drawPanel();}});
+    [['daylight','Lumière','soleil',417,269],['slope','Pentes','°',659,269],['curvature','Courbure','crêtes',902,269],['grille','Grille','coord',417,498],['drone','Drone','vol',417,742]].forEach(a=>layerKeyV4(...a));
+    makeButton(V4.P,{type:'dl',x:955,y:955,onClick:()=>{ if(typeof precacheZone==='function')precacheZone(document.getElementById('precache-btn')||{}); }});
+    const TRK={x0:107,len:168,ys:[442,481,521,652,691,731]};
+    TRK.ys.forEach((y,i)=>V4.P.appendChild(v4El('sknoll',{left:(TRK.x0+.5*TRK.len)+'px',top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`})));
+    const KN={cx:841,cy:709},az=Math.round(sunManual?sunAzimuthManual:sunAzimuth());
+    V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°`),{id:'kread'}));
+    V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
+    const kh=Object.assign(v4El('',{left:(KN.cx-160)+'px',top:(KN.cy-160)+'px',width:'320px',height:'320px'}),{id:'khit'});
+    kh.onpointerdown=e=>{kh.setPointerCapture(e.pointerId);
+      const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
+        sunManual=true; sunAzimuthManual=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360); updateSunlight(); drawPanel();};
+      const up=()=>{kh.removeEventListener('pointermove',mv);kh.removeEventListener('pointerup',up);};
+      kh.addEventListener('pointermove',mv);kh.addEventListener('pointerup',up);};
+    V4.P.appendChild(kh); },
+  faune(){ pillsV4();
+    makeButton(V4.P,{type:'key',x:888,y:255,on:!!state.layers.faune,onClick:()=>{state.layers.faune=!state.layers.faune;drawPanel();rerender();}});
+    [['mammiferes','Mammifères'],['oiseaux','Oiseaux'],['reptiles','Reptiles'],['insectes','Insectes']].forEach(([id,label],i)=>
+      makeButton(V4.P,{type:'kind',x:778,y:[468,579,686,797][i],label,on:V4.fkind===id,onClick:()=>{V4.fkind=id;drawPanel();}}));
+    v4FauneScreen(); },
+};
+function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)return; V4.P=plate; plate.innerHTML='';
+  plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
+  V4.TABS.forEach((id,i)=>makeButton(plate,{type:'tab',x:V4.TABX[i],y:7,on:id===state.activeTab,alt:i>=5&&id!==state.activeTab,onClick:()=>{state.activeTab=id;drawPanel();}}));
+  (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
+function renderPanel(){ drawPanel(); }  // compat : anciens appels
 
 // Fader K.O. II : drag du cap → valeur 0-100
 function wireFader(id, set, commit) {
@@ -2725,8 +2813,9 @@ function setPanelCollapsed(c) {
   panelWrap.classList.toggle('collapsed', c);
   document.body.classList.toggle('panel-collapsed', c);
 }
-document.getElementById('panel-lower').addEventListener('click', () => setPanelCollapsed(true));
-document.getElementById('panel-raise').addEventListener('click', () => setPanelCollapsed(false));
+// (min/max déplacé sur le pill de la plaque v4 — voir pillsV4)
+document.getElementById('panel-lower')?.addEventListener('click', () => setPanelCollapsed(true));
+document.getElementById('panel-raise')?.addEventListener('click', () => setPanelCollapsed(false));
 
 // ── Géolocalisation ─────────────────────────────────────────────────────────
 let geolocActive = false, geolocMarker = null, watchId = null;
