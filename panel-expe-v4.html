@@ -21,8 +21,8 @@ window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'togg
   {id:'drone',    label:'Drone',   sub:'vol',   x:417,y:742},
  ],
  halves:[
-  {id:'auto',  label:'Auto',  cx:155,cy:285,on:true},
-  {id:'manuel',label:'Manuel',cx:155,cy:845},
+  {id:'auto',  label:'Auto',  x:79,y:262,on:true},
+  {id:'manuel',label:'Manuel',x:79,y:816},
  ],
  extra:(panel,el)=>{
    // 6 knolls sliders slope/curvature (drag horizontal)
@@ -36,6 +36,8 @@ window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'togg
      kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);const mv=ev=>set(ev),up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);};kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);set(e);};
      panel.appendChild(kn);
    });
+   // bouton dl (télécharger data) rouge, bas-droite
+   makeButton(panel,{type:'dl',x:955,y:955});
    // readout °+heure sur la ligne du N (warm grey)
    panel.appendChild(Object.assign(el('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°  ${hr}h`),{id:'read'}));
    // pointeur+knoll qui pivote depuis le centre du cylindre (haut du sprite = centre)
@@ -48,4 +50,4 @@ window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'togg
    k.onpointerdown=e=>{k.setPointerCapture(e.pointerId);const mv=ev=>set(ev),up=()=>{k.removeEventListener('pointermove',mv);k.removeEventListener('pointerup',up);};k.addEventListener('pointermove',mv);k.addEventListener('pointerup',up);set(e);};
  }
 };
-</script><script src="panel-v4.js"></script></body></html>
+</script><script src="buttons-v4.js"></script><script src="panel-v4.js"></script></body></html>

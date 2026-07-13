@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>panel_fond v4 — plaque + labels + LED/infos</title>
+<title>panel_fond v4 — plaque nue + boutons sprite</title>
 <style>
   @font-face {
     font-family: 'VG5000';
@@ -11,38 +11,28 @@
          url('https://cdn.velvetyne.fr/fonts/vg5000/VG5000-Regular.woff2') format('woff2');
     font-display: swap;
   }
-  body { margin:0; background:#222; padding:20px; box-sizing:border-box; }
+  body { margin:0; background:#222; padding:20px; box-sizing:border-box; font-family:'VG5000',monospace; }
   .panel {
     position: relative; width: 1244px; height: 1073px;
     background: url('assets/ui/panel-fond-v4-plate.png') 0 0 / 1244px 1073px no-repeat;
-    font-family: 'VG5000', monospace;
     transform: scale(var(--s, 1)); transform-origin: top left;
   }
-  /* touche = sprite overlay (permet vrai press + neutralisation on/off) */
-  .keycap { position:absolute; width:254px; height:248px; pointer-events:none;
-    background:url('assets/ui/mkey.png') 0 0/100% 100% no-repeat;
-    transition:transform .07s ease, filter .07s ease; }
-  .keycap.on { background-image:url('assets/ui/mkey-on.png'); }
-  .keycap.pressed { transform:translateY(7px) scale(.985); filter:brightness(.8) contrast(1.05); }
-  .kl { position:absolute; left:27px; top:26px; font-size:27px; color:#ededed; letter-spacing:.01em; }
-  .keycap.on .kl { color:#fff; }
-  .hk { position:absolute; font-size:26px; color:#e6e6e2; transform:translateX(-50%); pointer-events:none; }
-  .hk.on { color:#fff; }
-  /* LED + info sous chaque gros bouton */
+  .v4btn { font-family:'VG5000',monospace; }
+  /* LED + info sous chaque touche (ne s'enfoncent pas) */
   .led { position:absolute; width:20px; height:20px;
     background:url('assets/ui/led-off.png') center/contain no-repeat; pointer-events:none; }
   .led.on { background-image:url('assets/ui/led-on.png'); }
   .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase;
     letter-spacing:.12em; pointer-events:none; }
-  .hit { position:absolute; background:transparent; border:0; cursor:pointer; padding:0; }
   #rknoll { position:absolute; width:52px; height:52px; background:url('assets/ui/knoll.png') center/contain no-repeat;
     cursor:grab; transform:translate(-50%,-50%); } #rknoll:active{cursor:grabbing;}
 </style>
 </head>
 <body>
   <div class="panel" id="panel"></div>
+  <script src="buttons-v4.js"></script>
   <script>
-  // grille 7 basemaps — coords espace-plaque PLEINE 1244×1073, touche ~157×150.
+  // grille 7 basemaps — x,y = coin haut-gauche de la FACE (touche ~157×150).
   const SLOTS = [
     { id:'sat',        label:'Sat',        sub:'2024', x:419, y:269 },
     { id:'ign',        label:'Plan IGN',   sub:'plan', x:661, y:269 },
@@ -52,12 +42,13 @@
     { id:'cassini',    label:'Cassini',    sub:'1750', x:902, y:495 },
     { id:'nuit',       label:'Nuit',       sub:'',     x:419, y:742 },
   ];
+  // demi-keys (toggle) — x,y = coin haut-gauche face (small_button ~157×81)
   const HALVES = [
-    { id:'relief',  label:'Relief',  cx:158, cy:276, on:true },
-    { id:'village', label:'Village', cx:158, cy:830, on:false },
+    { id:'relief',  label:'Relief',  x:79, y:262, on:true },
+    { id:'village', label:'Village', x:79, y:816, on:false },
   ];
   let selected = 'sat';
-  // slider vertical relief (track propre sur 01_bis) : x161, y 400(haut/lidar)→721(bas/ortho)
+  // slider vertical relief : track x161, y 400(haut/lidar)→721(bas/ortho)
   const RTRACK={x:161,y0:400,y1:721}; let reliefVal=50;
   const panel = document.getElementById('panel');
   const el=(c,s,t)=>{const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;};
@@ -69,26 +60,24 @@
   }
   function render(){
     panel.innerHTML='';
+    // top-bar : pill min/max + recherche (sprites)
+    makeButton(panel,{type:'minmax',x:79,y:120});
+    makeButton(panel,{type:'search',x:249,y:118});
     // knoll slider relief
     const k=el('',{left:RTRACK.x+'px',top:reliefY()+'px'}); k.id='rknoll'; panel.appendChild(k); bindRelief(k);
-    HALVES.forEach(h=>panel.appendChild(el('hk'+(h.on?' on':''),{left:h.cx+'px',top:h.cy+'px'},h.label)));
+    // demi-keys (toggle) en sprite
+    HALVES.forEach(h=>makeButton(panel,{type:'half',x:h.x,y:h.y,label:h.label,on:h.on,
+      onClick:()=>{h.on=!h.on;render();}}));
+    // touches (single-select) en sprite + LED/info dessous
     SLOTS.forEach(s=>{
       const on=s.id===selected;
-      // keycap sprite (overlay sur la touche bakée) + label dedans
-      const cap=el('keycap'+(on?' on':''),{left:(s.x-9)+'px',top:(s.y-9)+'px'});
-      cap.appendChild(el('kl',{},s.label)); panel.appendChild(cap);
-      // LED + info sous la touche (ne s'enfoncent pas)
+      makeButton(panel,{type:'key',x:s.x,y:s.y,label:s.label,on,onClick:()=>{selected=s.id;render();}});
       panel.appendChild(el('led'+(on?' on':''),{left:(s.x+2)+'px',top:(s.y+164)+'px'}));
       if(s.sub) panel.appendChild(el('ksub',{left:(s.x+34)+'px',top:(s.y+167)+'px'},s.sub));
-      const hit=el('hit',{left:s.x+'px',top:s.y+'px',width:'157px',height:'150px'});
-      const press=v=>cap.classList.toggle('pressed',v);
-      hit.onpointerdown=()=>press(true); hit.onpointerup=()=>press(false); hit.onpointerleave=()=>press(false);
-      hit.onclick=()=>{selected=s.id;render();};
-      panel.appendChild(hit);
     });
   }
   render();
-  const fit=()=>document.querySelector('.panel').style.setProperty('--s',
+  const fit=()=>panel.style.setProperty('--s',
     Math.min(1,(window.innerWidth-40)/1244,(window.innerHeight-40)/1073).toFixed(3));
   addEventListener('resize',fit);fit();
   </script>

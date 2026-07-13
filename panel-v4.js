@@ -45,23 +45,23 @@
 
   function render() {
     panel.innerHTML = '';
+    // top-bar partagée : pill min/max + recherche (sprites)
+    makeButton(panel, { type: 'minmax', x: 79, y: 120, onClick: () => P.onMinmax && P.onMinmax() });
+    makeButton(panel, { type: 'search', x: 249, y: 118, onClick: () => P.onSearch && P.onSearch() });
+    // demi-keys (sprite small_button) — x,y = coin face, ou converti depuis cx,cy
     (P.halves || []).forEach(h => {
-      const hit = el('hit', { left: (h.cx - KW / 2) + 'px', top: (h.cy - 20) + 'px', width: KW + 'px', height: '70px' });
-      hit.onclick = () => { on[h.id] = !on[h.id]; render(); P.onHalf && P.onHalf(h.id, on[h.id]); };
-      panel.appendChild(el('hk' + (on[h.id] ? ' on' : ''), { left: h.cx + 'px', top: h.cy + 'px' }, h.label));
-      panel.appendChild(hit);
+      const hx = h.x != null ? h.x : (h.cx - 79), hy = h.y != null ? h.y : (h.cy - 40);
+      makeButton(panel, { type: 'half', x: hx, y: hy, label: h.label, on: !!on[h.id],
+        onClick: () => { on[h.id] = !on[h.id]; render(); P.onHalf && P.onHalf(h.id, on[h.id]); } });
     });
+    // touches (sprite main_button) + LED/info dessous (ne s'enfoncent pas)
     (P.slots || []).forEach(s => {
       const o = isOn(s);
-      panel.appendChild(el('klabel' + (o ? ' on' : ''), { left: (s.x + 18) + 'px', top: (s.y + 16) + 'px' }, s.label));
+      makeButton(panel, { type: 'key', x: s.x, y: s.y, label: s.label, on: o,
+        onClick: () => { if (P.mode === 'single') selected = s.id; else on[s.id] = !on[s.id];
+          render(); P.onSlot && P.onSlot(s.id, isOn(s)); } });
       panel.appendChild(el('led' + (o ? ' on' : ''), { left: (s.x + 2) + 'px', top: (s.y + KH + 14) + 'px' }));
       if (s.sub) panel.appendChild(el('ksub', { left: (s.x + 34) + 'px', top: (s.y + KH + 17) + 'px' }, s.sub));
-      const hit = el('hit', { left: s.x + 'px', top: s.y + 'px', width: KW + 'px', height: KH + 'px' });
-      hit.onclick = () => {
-        if (P.mode === 'single') selected = s.id; else on[s.id] = !on[s.id];
-        render(); P.onSlot && P.onSlot(s.id, isOn(s));
-      };
-      panel.appendChild(hit);
     });
     P.extra && P.extra(panel, el);
   }

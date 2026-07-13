@@ -16,6 +16,7 @@
 <div class="panel" id="panel">
   <canvas id="screen"></canvas>
 </div>
+<script src="buttons-v4.js"></script>
 <script>
 // ── écran LCD (grille 7px) ───────────────────────────────────────────────────
 const SCREEN={x:96,y:247,w:474,h:600};
@@ -70,17 +71,15 @@ function drawScreen(){
 }
 function render(){
   drawScreen();
-  [...panel.querySelectorAll('.klabel,.hit')].forEach(e=>e.remove());
-  KINDS.forEach((k,i)=>{
-    panel.appendChild(Object.assign(document.createElement('div'),{className:'klabel'+(k.id===kind?' on':''),textContent:k.label,
-      style:`left:${KX+20}px;top:${KY[i]+KH/2-14}px;position:absolute`}));
-    const h=document.createElement('button'); h.className='hit';
-    Object.assign(h.style,{left:KX+'px',top:KY[i]+'px',width:KW+'px',height:KH+'px'});
-    h.onclick=()=>{kind=k.id;render();}; panel.appendChild(h);
-  });
-  const mh=document.createElement('button'); mh.className='hit';
-  Object.assign(mh.style,{left:MAIN.x+'px',top:MAIN.y+'px',width:MAIN.w+'px',height:MAIN.h+'px'});
-  mh.onclick=()=>{active=!active;}; panel.appendChild(mh);
+  [...panel.querySelectorAll('.v4btn')].forEach(e=>e.remove());
+  // top-bar pills
+  makeButton(panel,{type:'minmax',x:79,y:120});
+  makeButton(panel,{type:'search',x:249,y:118});
+  // gros bouton : activer faune sur la carte (touche orange quand actif)
+  makeButton(panel,{type:'key',x:MAIN.x,y:MAIN.y,on:active,onClick:()=>{active=!active;render();}});
+  // 4 types d'animaux (longs boutons)
+  KINDS.forEach((k,i)=>makeButton(panel,{type:'kind',x:KX,y:KY[i],label:k.label,on:k.id===kind,
+    onClick:()=>{kind=k.id;render();}}));
 }
 render();
 const fit=()=>panel.style.setProperty('--s',Math.min(1,(innerWidth-40)/1242,(innerHeight-40)/1073).toFixed(3));
