@@ -2565,7 +2565,9 @@ const PANELV4={
 };
 function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)return; V4.P=plate; plate.innerHTML='';
   plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
-  V4.TABS.forEach((id,i)=>makeButton(plate,{type:'tab',x:V4.TABX[i],y:7,on:id===state.activeTab,alt:i>=5&&id!==state.activeTab,onClick:()=>{state.activeTab=id;drawPanel();}}));
+  // onglets = déjà bakés dans la plaque (état actif correct par plaque) → juste des zones cliquables
+  V4.TABS.forEach((id,i)=>{ const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
+    hit.onclick=()=>{state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
   (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
 function renderPanel(){ drawPanel(); }  // compat : anciens appels
 
