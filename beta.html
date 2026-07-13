@@ -2374,25 +2374,37 @@ function v4HSlider(kn,x0,len,o){
     const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);o.commit&&o.commit();};
     kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
 
-const V4SPR={cerf:[".1.....1.",".111.111.","...1.1...","..11111..",".1122211.",".1222221.",".1222221.","..1...1..","..1...1.."],
-  sanglier:[".........",".1111111.","112222211","122222221","122222211",".1.11.1..",".1.11.1.."],
-  oiseau:["...111...","..12221..",".1222211.","122222111",".1222221.","..12111..","...1.1..."],
-  chouette:[".1.....1.",".11...11.",".1212121.",".1222221.",".1211121.",".1222221.","..12221..","..1...1.."],
-  serpent:["...11111.","..1....1.","..1.111..",".11.1....",".1..1.111",".1..12221",".111....."],
-  lezard:[".11......","1221.....",".12211...","112222111",".12222221",".1.1..1.1"],
-  papillon:[".1.....1.","11.1.1.11","122111221",".1221221.","..12221..","...1.1..."],
-  scarabee:[".1.....1.","..12221..",".1222221.","112222211",".1222221.","112222211",".1.....1."]};
-const V4FKIND={mammiferes:['cerf','sanglier'],oiseaux:['oiseau','chouette'],reptiles:['serpent','lezard'],insectes:['papillon','scarabee']};
-function v4FauneScreen(){ const S={x:96,y:247,w:474,h:600},CELL=7;
-  const cv=document.createElement('canvas'); cv.id='fscreen'; cv.width=S.w; cv.height=S.h;
-  Object.assign(cv.style,{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute'}); V4.P.appendChild(cv);
-  const x=cv.getContext('2d'),cols=Math.floor(S.w/CELL),rows=Math.floor(S.h/CELL);
-  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){ x.fillStyle='#aeb8c0'; x.fillRect(c*CELL,r*CELL,CELL,CELL);
-    x.strokeStyle='#ccd2d6'; x.lineWidth=.5; x.strokeRect(c*CELL+.25,r*CELL+.25,CELL-.5,CELL-.5); }
-  const list=V4FKIND[V4.fkind],P2=18,M=4,per=Math.floor((cols-M)/P2),mr=Math.floor((rows-M)/P2); let i=0;
-  for(let r=0;r<mr;r++)for(let c=0;c<per;c++){ const g=V4SPR[list[i%list.length]];i++; const ox=M+c*P2,oy=M+r*P2;
-    for(let py=0;py<g.length;py++)for(let px=0;px<g[py].length;px++){ if(g[py][px]==='.')continue;
-      x.fillStyle=g[py][px]==='2'?'#3a3a3a':'#141414'; x.fillRect((ox+px)*CELL,(oy+py)*CELL,CELL,CELL);} } }
+// écran faune = bestiaire (cartes SVG + nom cliquables) filtré par groupe, avec cache
+const V4GROUP={mammiferes:'Mammalia',oiseaux:'Aves',reptiles:'Reptilia',amphibiens:'Amphibia'};
+async function v4LoadBestiaire(){
+  const obs=await fetchFaune(), byTaxon={};
+  obs.forEach(o=>{ if(!o.taxon)return; const k=o.taxon.id;
+    if(!byTaxon[k]) byTaxon[k]={name:o.taxon.preferred_common_name||o.taxon.name,group:o.taxon.iconic_taxon_name,count:0,ll:o.geojson?o.geojson.coordinates:null};
+    byTaxon[k].count++; });
+  const byGroup={}; Object.values(byTaxon).forEach(t=>{ (byGroup[t.group]=byGroup[t.group]||[]).push(t); });
+  Object.values(byGroup).forEach(l=>l.sort((a,b)=>b.count-a.count)); return byGroup;
+}
+async function v4FauneScreen(){
+  const S={x:96,y:247,w:474,h:600};
+  const box=v4El('',{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute',
+    overflowY:'auto',borderRadius:'22px',background:'#c6c9c1',boxShadow:'inset 0 2px 7px #2a2c2755',
+    padding:'14px',boxSizing:'border-box'}); box.id='fscreen'; V4.P.appendChild(box);
+  const msg=t=>box.innerHTML=`<div style="color:#3a3d38;font:15px VG5000,monospace;padding:10px;text-align:center">${t}</div>`;
+  if(!V4.bestiaire){ msg('Chargement du bestiaire…');
+    try{ V4.bestiaire=await v4LoadBestiaire(); }catch(e){ msg('Bestiaire hors-ligne'); return; }
+    if(document.getElementById('fscreen')!==box) return; }
+  const g=V4GROUP[V4.fkind], list=(V4.bestiaire[g]||[]);
+  if(!list.length){ msg('Aucune observation'); return; }
+  box.innerHTML='';
+  const grid=v4El('',{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}); box.appendChild(grid);
+  list.forEach(t=>{
+    const cell=v4El('',{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',padding:'9px 4px',
+      background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'6px',cursor:t.ll?'pointer':'default'});
+    cell.innerHTML=`${taxonSvg(g,34)}<div style="font:11px VG5000,monospace;color:#2a2c27;text-align:center;line-height:1.15;letter-spacing:.03em">${esc(t.name)}</div>`;
+    if(t.ll) cell.onclick=()=>map.flyTo({center:[t.ll[0],t.ll[1]],zoom:13,duration:1000});
+    grid.appendChild(cell);
+  });
+}
 
 const PANELV4={
   fond(){ pillsV4();
@@ -2457,7 +2469,7 @@ const PANELV4={
     V4.P.appendChild(kh); },
   faune(){ pillsV4();
     makeButton(V4.P,{type:'key',x:888,y:255,on:!!state.layers.faune,onClick:()=>{state.layers.faune=!state.layers.faune;drawPanel();rerender();}});
-    [['mammiferes','Mammifères'],['oiseaux','Oiseaux'],['reptiles','Reptiles'],['insectes','Insectes']].forEach(([id,label],i)=>
+    [['mammiferes','Mammifères'],['oiseaux','Oiseaux'],['reptiles','Reptiles'],['amphibiens','Amphibiens']].forEach(([id,label],i)=>
       makeButton(V4.P,{type:'kind',x:778,y:[468,579,686,797][i],label,on:V4.fkind===id,onClick:()=>{V4.fkind=id;drawPanel();}}));
     v4FauneScreen(); },
 };
