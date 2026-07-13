@@ -846,6 +846,17 @@
       padding-bottom: env(safe-area-inset-bottom, 0px);
       transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
+    /* iOS standalone: JS viewport figé à 100svh (793) mais 100lvh = plein (852).
+       Le strip OS = 100lvh − 100svh (~59px). On y peint via bottom NÉGATIF = déficit
+       MESURÉ par CSS (svh−lvh), pas env(safe-area). @supports garde les navigateurs
+       sains à bottom:0 (svh−lvh y vaut 0 en standalone). Collapsed: on retranche le
+       même déficit du translateY pour que le peek des tabs reste au même endroit. */
+    @media (display-mode: standalone) {
+      @supports (height: 100lvh) {
+        #panel-wrap { bottom: calc(100svh - 100lvh) !important; }
+        #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px) - (100lvh - 100svh))); }
+      }
+    }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
       background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
@@ -2896,6 +2907,7 @@ renderPanel();
     const w=document.getElementById('panel-wrap'), pl=document.getElementById('plate');
     const wb=w?w.getBoundingClientRect().bottom.toFixed(1):'?';
     const pb=pl?pl.getBoundingClientRect().bottom.toFixed(1):'?';
+    const wbot=w?getComputedStyle(w).bottom:'?';
     box.textContent=
       'innerH   '+window.innerHeight+'\n'+
       'screen.h '+screen.height+'\n'+
@@ -2904,6 +2916,7 @@ renderPanel();
       'sa-bot   '+cs.paddingBottom+'\n'+
       'wrap.bot '+wb+'\n'+
       'plate.bot '+pb+'\n'+
+      'wrap.cssBot '+wbot+'\n'+
       'docEl.cH '+document.documentElement.clientHeight+'\n'+
       '100lvh   '+lvh.getBoundingClientRect().height.toFixed(1)+'\n'+
       'standalone '+matchMedia('(display-mode: standalone)').matches;
