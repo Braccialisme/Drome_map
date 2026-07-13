@@ -1,0 +1,14 @@
+{
+  "name": "Drôme-Diois cartographie",
+  "short_name": "Drôme-Diois",
+  "description": "Carte du Diois — relief, sentiers, faune, itinéraires.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1e21",
+  "theme_color": "#1a1e21",
+  "icons": [
+    { "src": "assets_logo.png", "sizes": "1920x1920", "type": "image/png", "purpose": "any" },
+    { "src": "assets_logo.png", "sizes": "1920x1920", "type": "image/png", "purpose": "maskable" }
+  ]
+}
