@@ -3,7 +3,7 @@
 // navigation, réutilisables hors-ligne pendant 30 jours.
 // Actif uniquement en https (GitHub Pages) ou localhost — pas en file://.
 
-const VERSION = 'v3';
+const VERSION = 'v5';
 const SHELL = 'drome-shell-' + VERSION;
 const RUNTIME = 'drome-runtime-' + VERSION;
 const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 jours
@@ -52,10 +52,13 @@ self.addEventListener('fetch', event => {
 
   if (isRuntime) {
     event.respondWith(runtimeCache(req));
-  } else if (isDocument) {
+  } else if (isDocument || isSameOrigin) {
+    // HTML + fichiers de l'app (js/png/json/css) : network-first → les updates
+    // arrivent toujours quand online, cache en secours offline. (avant : cacheFirst
+    // sur les same-origin figeait buttons-v4.js / plaques → app cassée après deploy)
     event.respondWith(networkFirst(req, SHELL));
-  } else if (isSameOrigin || url.hostname === 'unpkg.com' || url.hostname === 'cdn.jsdelivr.net') {
-    event.respondWith(cacheFirst(req, SHELL));
+  } else if (url.hostname === 'unpkg.com' || url.hostname === 'cdn.jsdelivr.net') {
+    event.respondWith(cacheFirst(req, SHELL)); // libs versionnées → cache OK
   }
   // Nominatim / Overpass : laissés au réseau (POI déjà en cache localStorage)
 });
