@@ -839,10 +839,7 @@
 
     /* ── Panneau v4 : plaque sprite, scale-to-fit largeur, ancrée en bas ── */
     #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
-      height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1);
-      /* PWA standalone : remplit le safe-area home-indicator avec un gris qui blende.
-         En navigateur env()=0 → aucun impact. */
-      background:#a6a6a8; padding-bottom:env(safe-area-inset-bottom, 0px); }
+      height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
