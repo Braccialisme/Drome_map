@@ -999,10 +999,10 @@
     .setting input[type=range] { width: 100%; }
 
     /* ── Panneau v4 : plaque sprite, scale-to-fit largeur, ancrée en bas ── */
-    #panel-wrap { position:absolute; bottom:0; left:0; right:0; z-index:20;
-      transition:transform .18s cubic-bezier(.2,0,0,1); }
+    #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
+      height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - 52px)); }
-    #panel-v4 { width:100%; overflow:hidden; }
+    #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
       background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
     #panel-v4 .led { position:absolute; width:20px; height:20px; pointer-events:none;
@@ -2485,7 +2485,9 @@ function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activite
 function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
 function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
 function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.getElementById('plate');
-  if(!pv||!pl)return; const s=pv.clientWidth/1244; pl.style.setProperty('--s',s); pl.style.transform=`scale(${s})`; pv.style.height=(1073*s)+'px'; }
+  if(!pv||!pl)return; const s=pv.clientWidth/1244; pl.style.setProperty('--s',s); pl.style.transform=`scale(${s})`;
+  const h=Math.round(1073*s); pv.style.height=h+'px';
+  document.documentElement.style.setProperty('--panel-h', h+'px'); }
 addEventListener('resize',fitPanel);
 function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
   V4.P.appendChild(v4El('led'+(o.on?' on':''),{left:(o.x+2)+'px',top:(o.y+164)+'px'}));
