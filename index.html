@@ -92,9 +92,9 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      /* = gris CORPS de plaque (peint au bas des plaques) : la barre iOS (safe-area,
-         remplie en body bg) = même gris que le panneau (déplié ET replié) → invisible. */
-      background: #cbcbcd;
+      /* = gris du bas des plaques (zone tampon) : le safe-area iOS (rempli en body bg)
+         prolonge le bas du panneau sans rupture. */
+      background: #b9b9bb;
       font-family: var(--font-ui);
       color: var(--ink);
     }
@@ -2335,7 +2335,7 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   if(!pv||!pl)return;
   // bbox OPAQUE de la plaque (le rectangle plein) — on scale/translate pour coller
   // bord/bord (les marges transparentes + peel-shadow sortent de l'écran).
-  const OX=9, OY=9, OW=1132, OH=1063;
+  const OX=9, OY=9, OW=1132, OH=1231;
   const s=pv.clientWidth/OW; pl.style.setProperty('--s',s);
   pl.style.transform=`translate(${(-OX*s).toFixed(2)}px,${(-OY*s).toFixed(2)}px) scale(${s})`;
   const h=Math.round(OH*s); pv.style.height=h+'px';
