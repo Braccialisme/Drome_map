@@ -219,17 +219,7 @@
       font-family: var(--font-mono); font-size: 14px; color: var(--dust); cursor: pointer;
     }
 
-    /* ── PANEL BOTTOM = LE BLOC ── */
-    #panel-wrap {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: var(--panel-h);
-      z-index: 20;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    #panel-wrap.collapsed {
-      transform: translateY(calc(var(--panel-h) - 40px));
-    }
+    /* (ancien #panel-wrap greige supprimé — remplacé par le panneau v4 plus bas) */
 
     /* Poignée = languette de la fiche, en haut à gauche, avec chevron large */
     /* Poignée = slider hexa sur rail pointillé + flèche (croquis ggg) */
@@ -846,47 +836,6 @@
     .panel-content > * { min-width: 0; max-width: 100%; }
     .fond-cols, .group { min-width: 0; }
 
-    /* Tab-bar horizontale (intercalaires en haut) */
-    .tab-bar { display: flex; gap: 4px; padding: 8px 10px 0; flex: none; align-items: stretch; position: relative; z-index: 2; }
-    .ptab {
-      flex: 1 1 0; min-width: 0; height: 30px; border: none; cursor: pointer;
-      border-radius: 2px 2px 0 0;
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: .03em;
-      color: var(--silk);
-      background: #c4c0b5;
-      display: flex; align-items: center; justify-content: center;
-      transition: color 120ms linear, background 120ms linear;
-      overflow: hidden; white-space: nowrap;
-    }
-    .ptab.active { color: #fff; background: var(--korange); }
-    .ptab:not(.active):active { filter: brightness(.97); }
-    .tab-bar .collapse {
-      flex: none; width: 34px; height: 30px; border-radius: 4px; border: none; cursor: pointer;
-      background: var(--cream);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 2px rgba(50,40,22,.16);
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* Ligne du haut : pills − / + · recherche · plaque */
-    .panel-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    /* − / + = minimiser / agrandir le panneau (dans la tab-bar, remplace le carré) */
-    .tab-bar .pills {
-      display: flex; gap: 4px; flex: none; align-self: center; padding: 3px; margin-left: 2px;
-      border-radius: 999px; background: #bdbab2;
-      box-shadow: inset 0 1px 3px rgba(50,40,22,.32), inset 0 -1px 0 rgba(255,255,255,.3);
-    }
-    .pill {
-      width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
-      background: var(--cream); color: #2a2a28;
-      font-family: var(--font-mono); font-size: 15px; line-height: 1;
-      box-shadow: 0 1px 0 var(--cream-wall);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 90ms linear, filter 90ms linear;
-    }
-    .pill:active { transform: translateY(1px); filter: brightness(.95); box-shadow: none; }
-    .pill:disabled { opacity: .4; }
-    .chev { width: 7px; height: 7px; border-left: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(-45deg); margin-top: -2px; transition: transform .16s linear; }
-    #panel-wrap.collapsed .chev { transform: rotate(135deg); margin-top: 2px; }
     /* Search minimisable : loupe seule (28px), s'ouvre au focus */
     .search-wrap { position: relative; flex: 0 0 30px; transition: flex-basis 180ms cubic-bezier(.2,0,0,1); }
     .search-wrap:focus-within { flex: 1 1 auto; }
@@ -913,98 +862,6 @@
     }
     .search-wrap .search-result:last-child { border-bottom: none; }
 
-    /* Groupe + languette silkscreen */
-    .group { }
-    .group-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
-    .silkscreen {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: .15em;
-      text-transform: uppercase; color: var(--ink);
-    }
-    .group-head .silkscreen { font-size: 8px; letter-spacing: .16em; }
-    .group-head .count { font-family: var(--font-mono); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--silk); }
-
-    /* Grille de keys */
-    /* grille = keys de taille fixe (var --key), airy, justifiée à droite (proportions SVG) */
-    .key-grid { display: grid; grid-template-columns: repeat(3, var(--key)); gap: calc(var(--key) * .42); justify-content: end; }
-    .cell { display: flex; flex-direction: column; }
-
-    /* FOND : colonne contrôle gauche (30%) + grille droite (57%) */
-    .fond-cols { display: flex; gap: 3%; align-items: stretch; }
-    .ctrl-col { flex: 0 0 30%; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .fond-cols .key-grid { flex: 1; justify-content: end; align-content: start; }
-
-    /* Demi-key (relief / village) : keycap landscape, largeur = 1 key, hauteur = moitié */
-    .half-key {
-      --fill:#1c1c1a; --wall:#000; --txt:#c6c6c2;
-      position: relative; z-index: 1; width: var(--key); height: calc(var(--key) * .5); border: none; cursor: pointer;
-      border-radius: 2px; display: flex; align-items: center; padding: 0 8px;
-      background: var(--fill);
-      box-shadow: 0 1px 0 var(--wall);
-      transition: filter 80ms linear, transform 80ms linear;
-    }
-    .half-key:active { transform: translateY(1px); box-shadow: none; filter: brightness(1.12); }
-    .half-key.on { --fill:#c05f24; --wall:#7a3810; --txt:#fff; }
-    .hk-label { font-family:var(--font-mono); font-size:11px; letter-spacing:.02em; color:var(--txt); }
-
-    /* Fader vertical = trace signal orange sharp. 3 segments (2 horizontales +
-       1 verticale), plonge dans relief (haut) / village (bas), coupée par lidar/ortho. */
-    .fader-v { position: relative; flex: 1; min-height: 82px; display: flex; justify-content: center; margin: 2px 0; z-index: 0; }
-    .fv-track { position: relative; width: 44px; cursor: pointer; }
-    .fv-line { position: absolute; top: -11px; bottom: -11px; left: calc(50% - 1px); width: 2px; background: var(--korange); }
-    .fv-line::before, .fv-line::after { content: ""; position: absolute; left: -6px; width: 8px; height: 2px; background: var(--korange); }
-    .fv-line::before { top: 0; }      /* horizontale haute, plonge dans relief */
-    .fv-line::after  { bottom: 0; }   /* horizontale basse, plonge dans village */
-    .fv-cap { position: absolute; left: 50%; width: 18px; height: 11px; background: #c9c5b9; box-shadow: 0 1px 0 rgba(46,37,18,.35); transform: translate(-50%,-50%); }
-    .fv-cap::after { content:""; position:absolute; left:3px; right:3px; top:calc(50% - .5px); height:1px; background:rgba(46,37,18,.4); }
-    /* labels qui COUPENT la trace (bg panneau derrière) */
-    .fv-end { position: absolute; left: 50%; transform: translateX(-50%); padding: 0 2px; background: #c9c6bf; font-family:var(--font-mono); font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--silk); white-space:nowrap; }
-    .fv-end.top { top: -9px; } .fv-end.bot { bottom: -9px; }
-    .fv-read { position: absolute; right: calc(50% + 8px); transform: translateY(-50%); font-family:var(--font-mono); font-size:9px; color:var(--ink); font-variant-numeric:tabular-nums; }
-    /* KEYCAP — cube (face) posé sur une base un peu plus large. Sharp, congés courts. */
-    /* KEY = aplat mat (langage écran TE). Zéro dégradé/grain/skirt. 1px bas mini. */
-    .key {
-      --fill: #1c1c1a; --wall: #000; --txt: #c6c6c2;
-      position: relative; width: 100%; aspect-ratio: 1/1;
-      border-radius: 2px; border: none; cursor: pointer;
-      display: flex; align-items: flex-start; justify-content: flex-start;
-      background: var(--fill);
-      box-shadow: 0 1px 0 var(--wall);
-      transition: filter 80ms linear, transform 80ms linear;
-    }
-    .key:active { transform: translateY(1px); box-shadow: none; filter: brightness(1.12); }
-    .key--orange { --fill: #c05f24; --wall: #7a3810; --txt: #fff; }
-    .key--cream  { --fill: #e7e4db; --wall: #c4c0b4; --txt: #26261f; }
-    .key-label {
-      font-family: var(--font-mono); font-size: 9px; line-height: 1.08; letter-spacing: .02em;
-      color: var(--txt); padding: 5px 5px 0; text-align: left;
-      position: relative; z-index: 1; word-break: break-word;
-    }
-    .key-silk { display: flex; align-items: center; gap: 7px; margin-top: 7px; padding-left: 2px; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; border: 1.5px solid var(--silk); background: transparent; }
-    .dot.on { background: var(--korange); border-color: var(--korange); }
-    .key-silk .sub { font-family: var(--font-mono); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--silk); }
-
-    /* Fader */
-    .fader-wrap { position: relative; padding-top: 8px; }
-    .signal { position: absolute; top: -13px; left: calc(50% - .5px); width: 1px; height: 20px; background: rgba(26,26,26,.28); }
-    .fader { display: flex; align-items: center; gap: 16px; }
-    .fader > .silkscreen { flex: none; width: 54px; }
-    .fader-track { flex: 1; position: relative; height: 22px; display: flex; align-items: center; cursor: pointer; }
-    .fader-slit { position: absolute; left: 0; right: 0; top: calc(50% - 1.5px); height: 3px; border-radius: 2px; background: var(--slit); box-shadow: inset 0 1px 1.5px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.4); }
-    .zero-tick { position: absolute; left: 0; top: calc(50% - 6px); width: 1px; height: 12px; background: var(--silk); }
-    .fader-cap { position: absolute; top: calc(50% - 11px); width: 22px; height: 22px; border-radius: 50%; background: #c2bdb0; box-shadow: 0 3px 5px rgba(46,37,18,.34), 0 1px 1px rgba(46,37,18,.24), inset 0 1px 0 rgba(255,255,255,.4); transform: translateX(-50%); }
-    .fader-cap::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(46,37,18,.3); }
-    .fader .readout { flex: none; width: 26px; text-align: right; font-family: var(--font-mono); font-size: 12px; color: var(--ink); font-variant-numeric: tabular-nums; }
-
-    /* Plaque = seule déco : "Drome Diois" noir + "cartographie" orange */
-    .np { display: flex; flex-direction: column; align-items: flex-end; flex: none; margin-left: auto; text-align: right; }
-    .np-title { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: .02em; color: #111; line-height: 1; }
-    .np-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--korange); margin-top: 3px; }
-
-    /* Réglages secondaires (sliders slope/curv/drone/grille) : rail slit + readout */
-    .setting { margin-top: 12px; }
-    .setting .silkscreen { display: block; margin-bottom: 6px; }
-    .setting input[type=range] { width: 100%; }
 
     /* ── Panneau v4 : plaque sprite, scale-to-fit largeur, ancrée en bas ── */
     #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
@@ -2497,11 +2354,16 @@ function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activite
 function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
 function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
 function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.getElementById('plate');
-  if(!pv||!pl)return; const s=pv.clientWidth/1244; pl.style.setProperty('--s',s); pl.style.transform=`scale(${s})`;
-  const h=Math.round(1073*s); pv.style.height=h+'px';
+  if(!pv||!pl)return;
+  // bbox OPAQUE de la plaque (le rectangle plein) — on scale/translate pour coller
+  // bord/bord (les marges transparentes + peel-shadow sortent de l'écran).
+  const OX=9, OY=9, OW=1132, OH=1063;
+  const s=pv.clientWidth/OW; pl.style.setProperty('--s',s);
+  pl.style.transform=`translate(${(-OX*s).toFixed(2)}px,${(-OY*s).toFixed(2)}px) scale(${s})`;
+  const h=Math.round(OH*s); pv.style.height=h+'px';
   document.documentElement.style.setProperty('--panel-h', h+'px');
-  // repli : laisse voir tabs + top-bar (Drôme-Diois), ~235px plaque
-  document.documentElement.style.setProperty('--collapsed-peek', Math.round(235*s)+'px'); }
+  // repli : laisse voir tabs + top-bar (Drôme-Diois)
+  document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
 addEventListener('resize',fitPanel);
 function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
   V4.P.appendChild(v4El('led'+(o.on?' on':''),{left:(o.x+2)+'px',top:(o.y+164)+'px'}));
