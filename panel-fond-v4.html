@@ -18,8 +18,14 @@
     font-family: 'VG5000', monospace;
     transform: scale(var(--s, 1)); transform-origin: top left;
   }
-  .klabel { position:absolute; font-size:27px; color:#ededed; letter-spacing:.01em; pointer-events:none; }
-  .klabel.on { color:#fff; }
+  /* touche = sprite overlay (permet vrai press + neutralisation on/off) */
+  .keycap { position:absolute; width:254px; height:248px; pointer-events:none;
+    background:url('assets/ui/mkey.png') 0 0/100% 100% no-repeat;
+    transition:transform .07s ease, filter .07s ease; }
+  .keycap.on { background-image:url('assets/ui/mkey-on.png'); }
+  .keycap.pressed { transform:translateY(7px) scale(.985); filter:brightness(.8) contrast(1.05); }
+  .kl { position:absolute; left:27px; top:26px; font-size:27px; color:#ededed; letter-spacing:.01em; }
+  .keycap.on .kl { color:#fff; }
   .hk { position:absolute; font-size:26px; color:#e6e6e2; transform:translateX(-50%); pointer-events:none; }
   .hk.on { color:#fff; }
   /* LED + info sous chaque gros bouton */
@@ -68,11 +74,15 @@
     HALVES.forEach(h=>panel.appendChild(el('hk'+(h.on?' on':''),{left:h.cx+'px',top:h.cy+'px'},h.label)));
     SLOTS.forEach(s=>{
       const on=s.id===selected;
-      panel.appendChild(el('klabel'+(on?' on':''),{left:(s.x+18)+'px',top:(s.y+16)+'px'},s.label));
-      // LED (allumée si sélectionnée) + info sous la touche
+      // keycap sprite (overlay sur la touche bakée) + label dedans
+      const cap=el('keycap'+(on?' on':''),{left:(s.x-9)+'px',top:(s.y-9)+'px'});
+      cap.appendChild(el('kl',{},s.label)); panel.appendChild(cap);
+      // LED + info sous la touche (ne s'enfoncent pas)
       panel.appendChild(el('led'+(on?' on':''),{left:(s.x+2)+'px',top:(s.y+164)+'px'}));
       if(s.sub) panel.appendChild(el('ksub',{left:(s.x+34)+'px',top:(s.y+167)+'px'},s.sub));
       const hit=el('hit',{left:s.x+'px',top:s.y+'px',width:'157px',height:'150px'});
+      const press=v=>cap.classList.toggle('pressed',v);
+      hit.onpointerdown=()=>press(true); hit.onpointerup=()=>press(false); hit.onpointerleave=()=>press(false);
       hit.onclick=()=>{selected=s.id;render();};
       panel.appendChild(hit);
     });

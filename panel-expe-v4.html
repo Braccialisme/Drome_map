@@ -27,7 +27,10 @@ window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'togg
  extra:(panel,el)=>{
    // 6 knolls sliders slope/curvature (drag horizontal)
    TRK.ys.forEach((y,i)=>{
-     const kn=el('sknoll',{left:(TRK.x0+sVals[i]/100*TRK.len)+'px',top:y+'px'});
+     // 1er de chaque groupe (i=0,3) = knoll noir ; les 2 autres = orange
+     const black=(i%3===0);
+     const kn=el('sknoll',{left:(TRK.x0+sVals[i]/100*TRK.len)+'px',top:y+'px',
+       backgroundImage:`url('assets/ui/${black?'knoll':'knoll-dot'}.png')`});
      const set=e=>{const r=panel.getBoundingClientRect(),s=+(panel.style.getPropertyValue('--s')||1);
        const x=(e.clientX-r.left)/s; sVals[i]=Math.max(0,Math.min(100,Math.round((x-TRK.x0)/TRK.len*100))); window._panelRender();};
      kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);const mv=ev=>set(ev),up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);};kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);set(e);};
