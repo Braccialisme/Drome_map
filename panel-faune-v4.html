@@ -11,103 +11,83 @@
   .hit { position:absolute; background:transparent; border:0; cursor:pointer; padding:0; }
   .klabel { position:absolute; color:#e6e6e2; font-size:23px; pointer-events:none; letter-spacing:.02em; }
   .klabel.on { color:#fff; }
-  /* écran LCD gameboy */
-  #screen { position:absolute; overflow:hidden; background:#c6c9c1; border-radius:22px;
-    box-shadow:inset 0 2px 7px #2a2c2755;
-    display:grid; grid-template-columns:repeat(4,1fr); gap:10px 6px; align-content:start;
-    padding:22px 16px; box-sizing:border-box; }
-  #screen .cell { display:flex; flex-direction:column; align-items:center; gap:4px; }
-  #screen canvas { image-rendering:pixelated; width:76px; height:76px; }
-  #screen .nm { font-size:12px; color:#33352f; letter-spacing:.06em; text-transform:uppercase; }
-  #scanline { position:absolute; inset:0; pointer-events:none;
-    background:repeating-linear-gradient(#0000 0 3px,#2a2c2722 3px 4px); }
+  #screen { position:absolute; border-radius:30px; }
 </style></head><body>
 <div class="panel" id="panel">
-  <div id="screen"></div><div id="scanline" style="display:none"></div>
+  <canvas id="screen"></canvas>
 </div>
 <script>
-// ── palette gameboy ─────────────────────────────────────────────────────────
-const PAL = { '0':null, '1':'#33352f', '2':'#63665d', '3':'#969a8f' };
-// sprites pixel (chaînes de lignes ; largeur = longueur de ligne)
+// ── écran LCD (grille 7px) ───────────────────────────────────────────────────
+const SCREEN={x:96,y:247,w:474,h:600};
+const CELL=7, GRID_BG='#aeb8c0', GRID_LN='#ccd2d6', INK='#141414', INK2='#3a3a3a';
+// sprites pixel : 1/2 = noir/gris foncé (encre), 0 = vide (grille visible)
 const SPR = {
-  cerf:[ "....1..1....","....1..1....","...1122 11..".replace(' ',''),
-    "...112211...","....1221....","..11122111..",".1122222211.","112222222211",
-    "112222222211",".12222222221.","..122222221..","...1211121...","...1.....1...","..1.......1.." ],
-  sanglier:[ "............",".1........1.","112......211","1222....2221",
-    ".12222222221",".122222222 1".replace(' ',''),"1122222222211".slice(0,12),
-    "1222222222221".slice(0,12),".12222222221",".1.12..21.1.","..1.1..1.1..","..1......1.." ,"............","............"],
-  oiseau:[ "............","......11....",".....1331...","....133331..",
-    "..1133333 1".replace(' ',''),".1333333331.","11333333331.",".1133333311.","...1113311..",
-    ".....1..1...","....1....1..","............","............","............"],
-  chouette:[ "...1....1...","..1.1..1.1..","..1.1221.1..","...122221...",
-    "..12133121..",".1213333121.",".1233333321.",".1233333321.","..123333321.","...1222221..",
-    "....12221...","....1...1...","............","............"],
-  serpent:[ "............",".......111..","......13331.","......13331.",
-    ".11...13 11".replace(' ',''),"1221..1331..","12221.1221..",".12221221...","..1222221...",
-    "...122221...","....11221...","......1221..",".......111..","............"],
-  lezard:[ "............","..11........",".1221.......",".1221...111.",
-    "..122111221.","...12222221.","1..122222221","121122222221",".12222222211","..12222221..",
-    "...122122...","...11..11...","............","............"],
-  papillon:[ "............",".11......11.","1221....1221","12221..12221",
-    "122221 22221".replace(' ',''),"1222212 2221".slice(0,12),".122221 221.".replace(' ',''),
-    "..12212221..","...1221221..","....12221...","....1.1.1...","............","............","............"],
-  scarabee:[ "....11......","1...11...1..",".1..11..1...","..1122211...",
-    ".112222211..",".12222222 1".replace(' ',''),"1122222221 1".slice(0,12),"1122222221 1".slice(0,12),
-    ".12222222 1".replace(' ',''),".112222211..","..1122211...","...1...1....","............","............"],
+  cerf:["..1..1..","..1..1..",".111111.","11122111","112222 1".replace(' ',''),
+        "11222221",".112211.","..1..1.."],
+  sanglier:["........","1......1","1122221 ".replace(' ',''),"112222211".slice(0,8),
+            "112222211".slice(0,8),".1122211","..1..1..","........"],
+  oiseau:["...11...","..1221..",".112211.","11222 11".replace(' ',''),
+          "1122221 ".replace(' ',''),".112211.","...11...","..1..1.."],
+  chouette:["1......1","11....11","1122221 ".replace(' ',''),"12122121","12222221",
+            "11222211",".112211.","..1..1.."],
+  serpent:["....111.","...12221","...12 21".replace(' ',''),".1112 1 ".replace(/ /g,''),
+           "122221..","12221...",".1221...","..111..."],
+  lezard:["..11....",".1221...","1122111.","1222221 ".replace(' ',''),
+          "11222221",".122122.","..1..1..","........"],
+  papillon:[".1....1.","112..211","12211221","1222 2221".slice(0,8),".1221221","..12221.","...121..","...1.1.."],
+  scarabee:["1..11..1",".1122 1 ".replace(/ /g,''),".1222221","12222221","12222221",
+            ".1222221",".112211.","..1..1.."],
 };
-const KINDS = [
-  { id:'mammiferes', label:'Mammifères', animals:['cerf','sanglier'] },
-  { id:'oiseaux',    label:'Oiseaux',    animals:['oiseau','chouette'] },
-  { id:'reptiles',   label:'Reptiles',   animals:['serpent','lezard'] },
-  { id:'insectes',   label:'Insectes',   animals:['papillon','scarabee'] },
+const KINDS=[
+  {id:'mammiferes',label:'Mammifères',an:['cerf','sanglier']},
+  {id:'oiseaux',   label:'Oiseaux',   an:['oiseau','chouette']},
+  {id:'reptiles',  label:'Reptiles',  an:['serpent','lezard']},
+  {id:'insectes',  label:'Insectes',  an:['papillon','scarabee']},
 ];
-// coords longs boutons (280×75) x778, y=468/579/686/797
 const KY=[468,579,686,797], KX=778, KW=280, KH=75;
-const MAIN={x:888,y:255,w:150,h:150};             // bouton orange activer
-const SCREEN={x:100,y:246,w:462,h:616};
-
+const MAIN={x:888,y:255,w:150,h:150};
 let kind='mammiferes', active=false;
 
-function pixCanvas(name){
-  const g=SPR[name], H=g.length, W=Math.max(...g.map(r=>r.length));
-  const c=document.createElement('canvas'); c.width=W; c.height=H;
-  const x=c.getContext('2d');
-  for(let y=0;y<H;y++) for(let px=0;px<g[y].length;px++){
-    const col=PAL[g[y][px]]; if(col){ x.fillStyle=col; x.fillRect(px,y,1,1); }
-  }
-  return c;
-}
-
 const panel=document.getElementById('panel');
-const screen=document.getElementById('screen');
-Object.assign(screen.style,{left:SCREEN.x+'px',top:SCREEN.y+'px',width:SCREEN.w+'px',height:SCREEN.h+'px'});
-document.getElementById('scanline').style.cssText+=`;left:${SCREEN.x}px;top:${SCREEN.y}px;width:${SCREEN.w}px;height:${SCREEN.h}px;display:block`;
+const cv=document.getElementById('screen');
+Object.assign(cv.style,{left:SCREEN.x+'px',top:SCREEN.y+'px',width:SCREEN.w+'px',height:SCREEN.h+'px'});
+cv.width=SCREEN.w; cv.height=SCREEN.h;
+const ctx=cv.getContext('2d');
 
+function drawScreen(){
+  const cols=Math.floor(SCREEN.w/CELL), rows=Math.floor(SCREEN.h/CELL);
+  // grille LCD
+  for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+    ctx.fillStyle=GRID_BG; ctx.fillRect(x*CELL,y*CELL,CELL,CELL);
+    ctx.strokeStyle=GRID_LN; ctx.lineWidth=0.5; ctx.strokeRect(x*CELL+.25,y*CELL+.25,CELL-.5,CELL-.5);
+  }
+  // animaux (pixels noirs) — 3 colonnes, répétés pour remplir façon dex
+  const list=KINDS.find(k=>k.id===kind).an;
+  const PITCH=18, M=4, perRow=Math.floor((cols-M)/PITCH), maxRows=Math.floor((rows-M)/PITCH);
+  let i=0;
+  for(let r=0;r<maxRows;r++)for(let c=0;c<perRow;c++){
+    const g=SPR[list[i%list.length]]; i++;
+    const ox=M+c*PITCH, oy=M+r*PITCH;
+    for(let py=0;py<g.length;py++)for(let px=0;px<g[py].length;px++){
+      const v=g[py][px]; if(v==='0'||v===' '||v==='.')continue;
+      ctx.fillStyle=(v==='2')?INK2:INK;
+      ctx.fillRect((ox+px)*CELL,(oy+py)*CELL,CELL,CELL);
+    }
+  }
+}
 function render(){
-  // écran : animaux du type sélectionné (répétés pour remplir façon dex)
-  screen.innerHTML='';
-  const list=KINDS.find(k=>k.id===kind).animals;
-  const items=[]; for(let i=0;i<12;i++) items.push(list[i%list.length]);
-  items.forEach(a=>{
-    const cell=document.createElement('div'); cell.className='cell';
-    cell.appendChild(pixCanvas(a));
-    const nm=document.createElement('div'); nm.className='nm'; nm.textContent=a.slice(0,6);
-    cell.appendChild(nm); screen.appendChild(cell);
-  });
-  // overlays boutons (labels + hits) — on garde le orange baked du 1er type par défaut
+  drawScreen();
   [...panel.querySelectorAll('.klabel,.hit')].forEach(e=>e.remove());
   KINDS.forEach((k,i)=>{
-    const on=k.id===kind;
-    const lab=document.createElement('div'); lab.className='klabel'+(on?' on':'');
-    Object.assign(lab.style,{left:(KX+20)+'px',top:(KY[i]+KH/2-14)+'px'}); lab.textContent=k.label;
-    panel.appendChild(lab);
-    const hit=document.createElement('button'); hit.className='hit';
-    Object.assign(hit.style,{left:KX+'px',top:KY[i]+'px',width:KW+'px',height:KH+'px'});
-    hit.onclick=()=>{kind=k.id;render();}; panel.appendChild(hit);
+    panel.appendChild(Object.assign(document.createElement('div'),{className:'klabel'+(k.id===kind?' on':''),textContent:k.label,
+      style:`left:${KX+20}px;top:${KY[i]+KH/2-14}px;position:absolute`}));
+    const h=document.createElement('button'); h.className='hit';
+    Object.assign(h.style,{left:KX+'px',top:KY[i]+'px',width:KW+'px',height:KH+'px'});
+    h.onclick=()=>{kind=k.id;render();}; panel.appendChild(h);
   });
-  const mhit=document.createElement('button'); mhit.className='hit';
-  Object.assign(mhit.style,{left:MAIN.x+'px',top:MAIN.y+'px',width:MAIN.w+'px',height:MAIN.h+'px'});
-  mhit.onclick=()=>{active=!active;}; panel.appendChild(mhit);
+  const mh=document.createElement('button'); mh.className='hit';
+  Object.assign(mh.style,{left:MAIN.x+'px',top:MAIN.y+'px',width:MAIN.w+'px',height:MAIN.h+'px'});
+  mh.onclick=()=>{active=!active;}; panel.appendChild(mh);
 }
 render();
 const fit=()=>panel.style.setProperty('--s',Math.min(1,(innerWidth-40)/1242,(innerHeight-40)/1073).toFixed(3));
