@@ -5,8 +5,8 @@
   "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#1a1e21",
-  "theme_color": "#1a1e21",
+  "background_color": "#b9b9bb",
+  "theme_color": "#b9b9bb",
   "icons": [
     { "src": "assets_logo.png", "sizes": "1920x1920", "type": "image/png", "purpose": "any" },
     { "src": "assets_logo.png", "sizes": "1920x1920", "type": "image/png", "purpose": "maskable" }

@@ -8,7 +8,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Drôme-Diois">
-  <meta name="theme-color" content="#1a1e21">
+  <meta name="theme-color" content="#b9b9bb">
   <link rel="apple-touch-icon" href="assets_logo.png">
   <link rel="manifest" href="manifest.json">
   <title>Drôme · Diois</title>
@@ -2885,6 +2885,11 @@ renderPanel();
     paddingTop:'env(safe-area-inset-top,0px)',
     paddingBottom:'env(safe-area-inset-bottom,0px)'});
   document.body.appendChild(probe);
+  // sonde hauteur viewport layout: fixed 100lvh (est-ce que le layout connaît 852 ?)
+  const lvh=document.createElement('div');
+  Object.assign(lvh.style,{position:'fixed',top:'0',left:'0',width:'0',height:'100lvh',
+    visibility:'hidden',pointerEvents:'none'});
+  document.body.appendChild(lvh);
   function upd(){
     const cs=getComputedStyle(probe);
     const vv=window.visualViewport||{height:0,width:0};
@@ -2899,6 +2904,8 @@ renderPanel();
       'sa-bot   '+cs.paddingBottom+'\n'+
       'wrap.bot '+wb+'\n'+
       'plate.bot '+pb+'\n'+
+      'docEl.cH '+document.documentElement.clientHeight+'\n'+
+      '100lvh   '+lvh.getBoundingClientRect().height.toFixed(1)+'\n'+
       'standalone '+matchMedia('(display-mode: standalone)').matches;
   }
   upd();
