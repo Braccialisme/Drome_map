@@ -2340,10 +2340,12 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   if(!pv||!pl)return;
   // bbox OPAQUE de la plaque (le rectangle plein) — on scale/translate pour coller
   // bord/bord (les marges transparentes + peel-shadow sortent de l'écran).
-  const OX=9, OY=9, OW=1132, OH=1231;
+  const OX=9, OY=9, OW=1132, PH=1073;  // PH = hauteur LAYOUT de #plate (px CSS)
   const s=pv.clientWidth/OW; pl.style.setProperty('--s',s);
   pl.style.transform=`translate(${(-OX*s).toFixed(2)}px,${(-OY*s).toFixed(2)}px) scale(${s})`;
-  const h=Math.round(OH*s); pv.style.height=h+'px';
+  // transform scale ne change PAS la taille layout → on force pv à la hauteur VISUELLE
+  // du plate (sinon pv reste haut = gros vide gris sous le plate, ancré bottom:0).
+  const h=Math.round((PH-OY)*s); pv.style.height=h+'px';
   document.documentElement.style.setProperty('--panel-h', h+'px');
   // repli : laisse voir tabs + top-bar (Drôme-Diois)
   document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
