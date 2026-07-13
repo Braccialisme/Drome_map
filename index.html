@@ -2320,10 +2320,11 @@ function loadPoiIcons() {
 // ── PANNEAU v4 (plaque sprite) — remplace l'ancien rendu HTML ───────────────
 const V4 = { TABS:['fond','nature','faune','activites','patri','commerce','experimental'],
   TABX:[14,178,342,506,670,825,989], fkind:'mammiferes', P:null };
+// icônes transport (Tabler, fournies) — c = couleur (encodée %23…)
 const ICON4={
-  car:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M4 13l1.5-5A2 2 0 017.4 6.5h9.2A2 2 0 0118.5 8L20 13v4h-2.2a1.8 1.8 0 01-3.6 0H9.8a1.8 1.8 0 01-3.6 0H4z'/><path d='M4 13h16'/></svg>",
-  bike:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='16' r='3.4'/><circle cx='18' cy='16' r='3.4'/><path d='M6 16l4.5-7H15l-3 7M9 9h3.5'/></svg>",
-  foot:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='13.5' cy='4.5' r='1.6'/><path d='M13.5 7.5l-2.2 4.5 3 1.8 1 5M11.3 12l-3 2M14.3 13.8l3 1'/></svg>"};
+  car:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${c}' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'/><path d='M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'/><path d='M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5'/></svg>`,
+  bike:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${c}'><path d='M5 14a4 4 0 1 1 -4 4l.005 -.2a4 4 0 0 1 3.995 -3.8'/><path d='M19 14a4 4 0 1 1 -4 4l.005 -.2a4 4 0 0 1 3.995 -3.8'/><path d='M14.832 7.445l1.703 2.555h2.465a1 1 0 0 1 .993 .883l.007 .117a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -.832 -.445l-1.396 -2.093l-3.275 2.62l2.21 2.21a1 1 0 0 1 .284 .577l.009 .131v4a1 1 0 0 1 -2 0v-3.585l-2.707 -2.708a1 1 0 0 1 -.01 -1.403l.092 -.085l5 -4a1 1 0 0 1 1.457 .226'/><path d='M17 3a2 2 0 1 1 -2 2l.005 -.15a2 2 0 0 1 1.995 -1.85'/></svg>`,
+  foot:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${c}' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M13 4m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/><path d='M7 21l3 -4'/><path d='M16 21l-2 -4l-3 -3l1 -6'/><path d='M6 12l2 -3l4 -1l3 3l3 1'/></svg>`};
 function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activites:'activ',patri:'patri',commerce:'comm',experimental:'expe'}[id]; }
 function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
 function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
@@ -2340,14 +2341,18 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
 addEventListener('resize',fitPanel);
 function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
-  V4.P.appendChild(v4El('led'+(o.on?' on':''),{left:(o.x+2)+'px',top:(o.y+164)+'px'}));
+  // LED = point coloré par couche (moyen habile de remettre les couleurs)
+  const col=o.color||'#c05f24';
+  V4.P.appendChild(v4El('',{position:'absolute',left:(o.x+2)+'px',top:(o.y+166)+'px',width:'18px',height:'18px',
+    borderRadius:'50%',boxSizing:'border-box',pointerEvents:'none',
+    background:o.on?col:'transparent',border:o.on?'none':'2px solid #9a978c',boxShadow:o.on?`0 0 5px ${col}99`:'none'}));
   if(o.sub) V4.P.appendChild(v4El('ksub',{left:(o.x+34)+'px',top:(o.y+167)+'px'},o.sub)); }
 function pillsV4(){
   makeButton(V4.P,{type:'minmax',x:79,y:120,onClick:()=>setPanelCollapsed(!document.getElementById('panel-wrap').classList.contains('collapsed'))});
   makeButton(V4.P,{type:'search',x:249,y:118,onClick:()=>{const s=document.getElementById('search-overlay');s.hidden=!s.hidden;if(!s.hidden)document.getElementById('search-input').focus();}}); }
 function basemapV4(id,label,sub,x,y){ const night=id==='nuit', on=night?nightMode:state.basemap===id;
   keyV4({x,y,label,sub,on,onClick:()=>{ if(night){nightMode=!nightMode;document.body.classList.toggle('night',nightMode);} else state.basemap=id; drawPanel(); rerender(); }}); }
-function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id],
+function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id],color:(typeof ledColor==='function'?ledColor(id):'#c05f24'),
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); if(id==='threeD')map.easeTo({pitch:state.layers.threeD?62:0,duration:700}); }}); }
 function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!state.layers[id],
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
@@ -2415,7 +2420,7 @@ const PANELV4={
     });
     [['car-fast','car',665],['trekking','bike',770],['hiking-mountain','foot',875]].forEach(([prof,ic,x])=>{
       const b=makeButton(V4.P,{type:'minmax',x,y:868,scale:.62,onClick:()=>{routeProfile=prof;computeRoute();drawPanel();}});
-      const svg=ICON4[ic].replace('%231a1a1a',routeProfile===prof?'%23c05f24':'%231a1a1a');
+      const svg=ICON4[ic](routeProfile===prof?'%23c05f24':'%231a1a1a');
       b.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'46px',height:'46px',pointerEvents:'none',background:`url("data:image/svg+xml,${svg}") center/contain no-repeat`}));
     }); },
   nature(){ pillsV4(); [['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],['viewpoints','Vues','pano',651,743],['forets','Forêts','noms',896,743]].forEach(a=>layerKeyV4(...a)); },
@@ -2435,8 +2440,9 @@ const PANELV4={
       {get:()=>state.curvStrength,set:v=>state.curvStrength=Math.round(v),min:3000,max:22000,commit:()=>{if(typeof reapplyCurvature==='function')reapplyCurvature();}},
       null ];
     const TRK={x0:107,len:168,ys:[442,481,521,652,691,731]};
-    TRK.ys.forEach((y,i)=>{ const kn=v4El('sknoll',{top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`}); V4.P.appendChild(kn);
-      if(SL[i]) v4HSlider(kn,TRK.x0,TRK.len,SL[i]); else kn.style.left=(TRK.x0+.5*TRK.len)+'px'; });
+    TRK.ys.forEach((y,i)=>{ if(!SL[i])return; // 3e curv retiré (sert à rien)
+      const kn=v4El('sknoll',{top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`}); V4.P.appendChild(kn);
+      v4HSlider(kn,TRK.x0,TRK.len,SL[i]); });
     const KN={cx:841,cy:709},az=Math.round(sunManual?sunAzimuthManual:sunAzimuth());
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°`),{id:'kread'}));
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
@@ -2457,8 +2463,12 @@ const PANELV4={
 };
 function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)return; V4.P=plate; plate.innerHTML='';
   plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
-  // onglets = déjà bakés dans la plaque (état actif correct par plaque) → juste des zones cliquables
-  V4.TABS.forEach((id,i)=>{ const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
+  // onglets = bakés dans la plaque (état actif par plaque) + noms + zones cliquables
+  const TABN=['Fond','Nature','Faune','Activ','Patri','Comm','Expe'];
+  V4.TABS.forEach((id,i)=>{ const act=id===state.activeTab;
+    plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+75)+'px',top:'30px',transform:'translate(-50%,-50%)',
+      font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#3a3a3a',pointerEvents:'none'},TABN[i]));
+    const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
     hit.onclick=()=>{state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
   (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
 function renderPanel(){ drawPanel(); }  // compat : anciens appels
