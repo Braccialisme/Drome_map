@@ -29,6 +29,8 @@
   .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase;
     letter-spacing:.12em; pointer-events:none; }
   .hit { position:absolute; background:transparent; border:0; cursor:pointer; padding:0; }
+  #rknoll { position:absolute; width:52px; height:52px; background:url('assets/ui/knoll.png') center/contain no-repeat;
+    cursor:grab; transform:translate(-50%,-50%); } #rknoll:active{cursor:grabbing;}
 </style>
 </head>
 <body>
@@ -49,10 +51,20 @@
     { id:'village', label:'Village', cx:158, cy:830, on:false },
   ];
   let selected = 'sat';
+  // slider vertical relief (track propre sur 01_bis) : x161, y 400(haut/lidar)→721(bas/ortho)
+  const RTRACK={x:161,y0:400,y1:721}; let reliefVal=50;
   const panel = document.getElementById('panel');
   const el=(c,s,t)=>{const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;};
+  function reliefY(){ return RTRACK.y1 - reliefVal/100*(RTRACK.y1-RTRACK.y0); }
+  function bindRelief(k){
+    const set=e=>{const r=panel.getBoundingClientRect(),s=+(panel.style.getPropertyValue('--s')||1);
+      const y=(e.clientY-r.top)/s; reliefVal=Math.max(0,Math.min(100,Math.round((RTRACK.y1-y)/(RTRACK.y1-RTRACK.y0)*100))); render();};
+    k.onpointerdown=e=>{k.setPointerCapture(e.pointerId);const mv=ev=>set(ev),up=()=>{k.removeEventListener('pointermove',mv);k.removeEventListener('pointerup',up);};k.addEventListener('pointermove',mv);k.addEventListener('pointerup',up);set(e);};
+  }
   function render(){
     panel.innerHTML='';
+    // knoll slider relief
+    const k=el('',{left:RTRACK.x+'px',top:reliefY()+'px'}); k.id='rknoll'; panel.appendChild(k); bindRelief(k);
     HALVES.forEach(h=>panel.appendChild(el('hk'+(h.on?' on':''),{left:h.cx+'px',top:h.cy+'px'},h.label)));
     SLOTS.forEach(s=>{
       const on=s.id===selected;

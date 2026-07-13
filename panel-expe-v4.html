@@ -5,9 +5,13 @@
     transform-origin:50% 0; pointer-events:none; }
   #read { position:absolute; font-size:26px; color:#7c766c; font-variant-numeric:tabular-nums; letter-spacing:.02em; pointer-events:none; transform:translateY(-50%); }
   #khit { position:absolute; border-radius:50%; cursor:grab; } #khit:active{cursor:grabbing;}
+  .sknoll { position:absolute; width:46px; height:46px; background:url('assets/ui/knoll.png') center/contain no-repeat;
+    cursor:grab; transform:translate(-50%,-50%); } .sknoll:active{cursor:grabbing;}
 </style></head><body>
 <script>
 const KN={cx:841,cy:709,pw:39,ph:180}; let az=201, hr=14;
+// 6 sliders horizontaux (07_bis) : track x107→275, y slope[442,481,521] / curve[652,691,731]
+const TRK={x0:107,len:168,ys:[442,481,521,652,691,731]}; let sVals=[35,62,48,55,72,40];
 window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'toggle',
  slots:[
   {id:'daylight', label:'Lumière', sub:'soleil',x:417,y:269,on:true},
@@ -21,6 +25,14 @@ window.PANEL={plate:'assets/ui/panel-expe-v4-plate.png',w:1242,h:1073,mode:'togg
   {id:'manuel',label:'Manuel',cx:155,cy:845},
  ],
  extra:(panel,el)=>{
+   // 6 knolls sliders slope/curvature (drag horizontal)
+   TRK.ys.forEach((y,i)=>{
+     const kn=el('sknoll',{left:(TRK.x0+sVals[i]/100*TRK.len)+'px',top:y+'px'});
+     const set=e=>{const r=panel.getBoundingClientRect(),s=+(panel.style.getPropertyValue('--s')||1);
+       const x=(e.clientX-r.left)/s; sVals[i]=Math.max(0,Math.min(100,Math.round((x-TRK.x0)/TRK.len*100))); window._panelRender();};
+     kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);const mv=ev=>set(ev),up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);};kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);set(e);};
+     panel.appendChild(kn);
+   });
    // readout °+heure sur la ligne du N (warm grey)
    panel.appendChild(Object.assign(el('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°  ${hr}h`),{id:'read'}));
    // pointeur+knoll qui pivote depuis le centre du cylindre (haut du sprite = centre)
