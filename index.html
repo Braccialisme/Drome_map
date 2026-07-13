@@ -92,9 +92,9 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      /* gris ~bas-de-plaque : le petit gap sous le panneau (chrome navigateur /
-         safe-area) blende avec le panneau au lieu d'afficher du greige */
-      background: #b0b0b2;
+      /* = gris plat peint au bas des plaques : la barre iOS (safe-area, remplie en
+         body bg) devient identique au bas du panneau → invisible. */
+      background: #adadaf;
       font-family: var(--font-ui);
       color: var(--ink);
     }
@@ -841,17 +841,6 @@
     #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
       height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
-    /* PWA installée : "jupe" grise sous la plaque → comble le safe-area home jusqu'au
-       bas physique + couvre la ligne d'ombre. Sous les boutons → aucun risque. Navigateur
-       (pas de .pwa / pas display-mode) → pas de jupe, layout intact. */
-    html.pwa #panel-wrap::after {
-      content:''; position:absolute; left:0; right:0; top:calc(100% - 3px);
-      height:calc(env(safe-area-inset-bottom, 0px) + 60px);
-      background:linear-gradient(180deg, #a7a7a9, #9c9c9e); }
-    @media (display-mode: standalone) {
-      #panel-wrap::after { content:''; position:absolute; left:0; right:0; top:calc(100% - 3px);
-        height:calc(env(safe-area-inset-bottom, 0px) + 60px);
-        background:linear-gradient(180deg, #a7a7a9, #9c9c9e); } }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
       background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
