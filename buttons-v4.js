@@ -43,8 +43,11 @@ window.makeButton = function (host, o) {
     l.textContent = o.label;
     b.appendChild(l);
   }
-  const set = v => { b.style.transform = v ? 'translateY(7px) scale(.985)' : '';
+  const sc = o.scale || 1;
+  if (sc !== 1) b.style.transformOrigin = '0 0';
+  const set = v => { b.style.transform = (v ? 'translateY(7px) ' : '') + `scale(${sc * (v ? .985 : 1)})`;
     b.style.filter = v ? 'brightness(.8) contrast(1.05)' : ''; };
+  set(0);
   b.addEventListener('pointerdown', () => set(1));
   b.addEventListener('pointerup',   () => set(0));
   b.addEventListener('pointerleave',() => set(0));

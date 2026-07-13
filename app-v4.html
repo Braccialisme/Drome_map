@@ -28,7 +28,12 @@ const plate=id=>`assets/ui/panel-${id}-v4-plate.png`;
 const el=(c,s,t)=>{const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;};
 
 // ── état (local ; à brancher sur le state de l'app à l'intégration) ──────────
-let basemap='sat', az=201, hr=14, reliefVal=60, kind='mammiferes';
+let basemap='sat', az=201, hr=14, reliefVal=60, kind='mammiferes', routeMode='car';
+// icônes transport (décalco SVG sur les boutons itinéraire)
+const ICON={
+  car:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M4 13l1.5-5A2 2 0 017.4 6.5h9.2A2 2 0 0118.5 8L20 13v4h-2.2a1.8 1.8 0 01-3.6 0H9.8a1.8 1.8 0 01-3.6 0H4z'/><path d='M4 13h16'/></svg>",
+  bike:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='16' r='3.4'/><circle cx='18' cy='16' r='3.4'/><path d='M6 16l4.5-7H15l-3 7M9 9h3.5'/></svg>",
+  foot:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='13.5' cy='4.5' r='1.6'/><path d='M13.5 7.5l-2.2 4.5 3 1.8 1 5M11.3 12l-3 2M14.3 13.8l3 1'/></svg>"};
 const layers={relief:true, village:false, contours:false, sentiers:false, rivieres:false,
   baignade:false, viewpoints:false, forets:true, nautique:false, canyoning:false, transport:false,
   monuments:false, villages:false, restaurants:true, cafes:false, glaciers:false, boulangeries:false,
@@ -65,6 +70,16 @@ const PANELS={
      ['aerienne50','Aérienne','1950',419,498],['etatmajor','État-Major','1850',659,498],
      ['cassini','Cassini','1750',902,495],['nuit','Nuit','',419,742]].forEach(([id,l,s,x,y])=>
       keyBtn({x,y,label:l,sub:s,on:basemap===id,onClick:()=>{basemap=id;draw();}}));
+    // ── itinéraire A→B : 2 barres recherche 5-points + 3 boutons transport ──
+    makeButton(P,{type:'search',x:655,y:780}); makeButton(P,{type:'search',x:655,y:858});
+    [['car',665],['bike',770],['foot',875]].forEach(([m,x])=>{
+      const sel=routeMode===m;
+      const b=makeButton(P,{type:'minmax',x,y:945,scale:.62,onClick:()=>{routeMode=m;draw();}});
+      const svg=ICON[m].replace('%231a1a1a',sel?'%23c05f24':'%231a1a1a');
+      b.appendChild(el('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',
+        width:'46px',height:'46px',pointerEvents:'none',
+        background:`url("data:image/svg+xml,${svg}") center/contain no-repeat`}));
+    });
   },
   nature(){ pills(); grid([['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],
     ['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],
