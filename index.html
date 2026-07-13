@@ -841,6 +841,11 @@
     #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
       height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
+    /* PWA : bottom:0 respecte le safe-area iOS → un trou (carte visible) sous le panneau.
+       On décale le panneau jusqu'au bas de la web view. Le tampon gris de plaque + body
+       bg couvrent alors les derniers px (safe-area = zone iOS, non-rendable en web). */
+    html.pwa #panel-wrap { bottom: calc(-1 * env(safe-area-inset-bottom, 0px)); }
+    @media (display-mode: standalone) { #panel-wrap { bottom: calc(-1 * env(safe-area-inset-bottom, 0px)); } }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
       background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
