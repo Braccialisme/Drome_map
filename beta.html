@@ -2481,6 +2481,10 @@ function loadPoiIcons() {
 // ── PANNEAU v4 (plaque sprite) — remplace l'ancien rendu HTML ───────────────
 const V4 = { TABS:['fond','nature','faune','activites','patri','commerce','experimental'],
   TABX:[14,178,342,506,670,825,989], fkind:'mammiferes', P:null };
+const ICON4={
+  car:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M4 13l1.5-5A2 2 0 017.4 6.5h9.2A2 2 0 0118.5 8L20 13v4h-2.2a1.8 1.8 0 01-3.6 0H9.8a1.8 1.8 0 01-3.6 0H4z'/><path d='M4 13h16'/></svg>",
+  bike:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='16' r='3.4'/><circle cx='18' cy='16' r='3.4'/><path d='M6 16l4.5-7H15l-3 7M9 9h3.5'/></svg>",
+  foot:"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='13.5' cy='4.5' r='1.6'/><path d='M13.5 7.5l-2.2 4.5 3 1.8 1 5M11.3 12l-3 2M14.3 13.8l3 1'/></svg>"};
 function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activites:'activ',patri:'patri',commerce:'comm',experimental:'expe'}[id]; }
 function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
 function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
@@ -2501,11 +2505,23 @@ function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); if(id==='threeD')map.easeTo({pitch:state.layers.threeD?62:0,duration:700}); }}); }
 function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!state.layers[id],
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
-function v4DragY(kn,RT,cb,commit){ kn.onpointerdown=e=>{kn.setPointerCapture(e.pointerId);
+// drag vertical LISSE : bouge le knoll direct + applique, zéro re-render (commit à la fin)
+function v4DragY(kn,RT,apply,commit){ kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
   const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
-    const y=(ev.clientY-r.top)/s; cb(Math.max(0,Math.min(100,Math.round((RT.y1-y)/(RT.y1-RT.y0)*100))));};
+    const v=Math.max(0,Math.min(100,Math.round((RT.y1-(ev.clientY-r.top)/s)/(RT.y1-RT.y0)*100)));
+    kn.style.top=(RT.y1-v/100*(RT.y1-RT.y0))+'px'; apply(v);};
   const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);commit&&commit();};
   kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
+// slider HORIZONTAL générique LISSE : {min,max,get,set,live,commit}
+function v4HSlider(kn,x0,len,o){
+  const pos=()=>{ const n=(o.get()-o.min)/(o.max-o.min); kn.style.left=(x0+Math.max(0,Math.min(1,n))*len)+'px'; };
+  pos();
+  kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
+    const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
+      let v=o.min+((ev.clientX-r.left)/s-x0)/len*(o.max-o.min); v=Math.max(o.min,Math.min(o.max,v));
+      o.set(v); pos(); o.live&&o.live(); };
+    const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);o.commit&&o.commit();};
+    kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
 
 const V4SPR={cerf:[".1.....1.",".111.111.","...1.1...","..11111..",".1122211.",".1222221.",".1222221.","..1...1..","..1...1.."],
   sanglier:[".........",".1111111.","112222211","122222221","122222211",".1.11.1..",".1.11.1.."],
@@ -2532,12 +2548,30 @@ const PANELV4={
     layerHalfV4('daylight','Relief',79,262); layerHalfV4('villages','Village',79,816);
     const RT={x:161,y0:400,y1:721},ky=RT.y1-state.reliefOpacity*(RT.y1-RT.y0);
     const kn=v4El('knoll',{left:RT.x+'px',top:ky+'px'});
-    v4DragY(kn,RT,v=>{ state.reliefOpacity=v/100; if(map.getLayer('lidardem-hs'))map.setPaintProperty('lidardem-hs','hillshade-exaggeration',Math.min(state.reliefOpacity*0.8,1)); drawPanel(); },()=>rerender());
+    v4DragY(kn,RT,v=>{ state.reliefOpacity=v/100; if(map.getLayer('lidardem-hs'))map.setPaintProperty('lidardem-hs','hillshade-exaggeration',Math.min(state.reliefOpacity*0.8,1)); },()=>rerender());
     V4.P.appendChild(kn);
     [['sat','Sat','2024',419,269],['ign','Plan IGN','plan',661,269],['lidar-only','LiDAR','mnt',904,269],
      ['aerienne50','Aérienne','1950',419,498],['etatmajor','État-Major','1850',659,498],
      ['cassini','Cassini','1750',902,495],['nuit','Nuit','',419,742]].forEach(a=>basemapV4(...a));
-    makeButton(V4.P,{type:'search',x:655,y:780}); makeButton(V4.P,{type:'search',x:655,y:858}); },
+    // ── itinéraire A→B : 2 barres = inputs route (fonctionnels) + 3 transport ──
+    const IY1=690, IY2=772;
+    [['route-a','Départ (A)',IY1,0],['route-b','Arrivée (B)',IY2,1]].forEach(([id,ph,y,idx])=>{
+      makeButton(V4.P,{type:'search',x:655,y});
+      const inp=document.createElement('input'); inp.id=id; inp.placeholder=ph; inp.autocomplete='off';
+      Object.assign(inp.style,{position:'absolute',left:'688px',top:(y+18)+'px',width:'236px',height:'40px',
+        background:'transparent',border:0,outline:0,font:"20px VG5000,monospace",color:'#2a2a28'});
+      V4.P.appendChild(inp);
+      const res=document.createElement('div'); res.id=id+'-res'; res.className='search-results route-res';
+      Object.assign(res.style,{position:'absolute',left:'655px',top:(y+80)+'px',width:'300px',zIndex:'40'});
+      V4.P.appendChild(res);
+      inp.addEventListener('input',debounce(()=>routeSearch(inp.value,res,idx,inp),350));
+      inp.value = idx===0 ? (routeA?routeA.label||'':'') : (routeB?routeB.label||'':'');
+    });
+    [['car-fast','car',665],['trekking','bike',770],['hiking-mountain','foot',875]].forEach(([prof,ic,x])=>{
+      const b=makeButton(V4.P,{type:'minmax',x,y:868,scale:.62,onClick:()=>{routeProfile=prof;computeRoute();drawPanel();}});
+      const svg=ICON4[ic].replace('%231a1a1a',routeProfile===prof?'%23c05f24':'%231a1a1a');
+      b.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'46px',height:'46px',pointerEvents:'none',background:`url("data:image/svg+xml,${svg}") center/contain no-repeat`}));
+    }); },
   nature(){ pillsV4(); [['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],['viewpoints','Vues','pano',651,743],['forets','Forêts','noms',896,743]].forEach(a=>layerKeyV4(...a)); },
   activites(){ pillsV4(); [['nautique','Canoë','eau vive',653,270],['canyoning','Canyon','gorge',896,270],['transport','Transport','arrêts',651,499]].forEach(a=>layerKeyV4(...a)); },
   patri(){ pillsV4(); [['monuments','Monuments','MH',653,270],['villages','Villages','noms',896,270]].forEach(a=>layerKeyV4(...a)); },
@@ -2547,15 +2581,25 @@ const PANELV4={
     makeButton(V4.P,{type:'half',x:79,y:816,label:'Manuel',on:sunManual,onClick:()=>{sunManual=true;updateSunlight();drawPanel();}});
     [['daylight','Lumière','soleil',417,269],['slope','Pentes','°',659,269],['curvature','Courbure','crêtes',902,269],['grille','Grille','coord',417,498],['drone','Drone','vol',417,742]].forEach(a=>layerKeyV4(...a));
     makeButton(V4.P,{type:'dl',x:955,y:955,onClick:()=>{ if(typeof precacheZone==='function')precacheZone(document.getElementById('precache-btn')||{}); }});
+    const SL=[
+      {get:()=>state.slopeOpacity,set:v=>state.slopeOpacity=v,min:.1,max:1,live:()=>map.getLayer('slope-lyr')&&map.setPaintProperty('slope-lyr','raster-opacity',state.slopeOpacity)},
+      {get:()=>state.slopeMin,set:v=>state.slopeMin=Math.round(v),min:0,max:55,commit:()=>{if(typeof reapplySlope==='function')reapplySlope();}},
+      {get:()=>state.slopeMax,set:v=>state.slopeMax=Math.round(v),min:10,max:80,commit:()=>{if(typeof reapplySlope==='function')reapplySlope();}},
+      {get:()=>state.curvOpacity,set:v=>state.curvOpacity=v,min:.1,max:1,live:()=>map.getLayer('curv-lyr')&&map.setPaintProperty('curv-lyr','raster-opacity',state.curvOpacity)},
+      {get:()=>state.curvStrength,set:v=>state.curvStrength=Math.round(v),min:3000,max:22000,commit:()=>{if(typeof reapplyCurvature==='function')reapplyCurvature();}},
+      null ];
     const TRK={x0:107,len:168,ys:[442,481,521,652,691,731]};
-    TRK.ys.forEach((y,i)=>V4.P.appendChild(v4El('sknoll',{left:(TRK.x0+.5*TRK.len)+'px',top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`})));
+    TRK.ys.forEach((y,i)=>{ const kn=v4El('sknoll',{top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`}); V4.P.appendChild(kn);
+      if(SL[i]) v4HSlider(kn,TRK.x0,TRK.len,SL[i]); else kn.style.left=(TRK.x0+.5*TRK.len)+'px'; });
     const KN={cx:841,cy:709},az=Math.round(sunManual?sunAzimuthManual:sunAzimuth());
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°`),{id:'kread'}));
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
     const kh=Object.assign(v4El('',{left:(KN.cx-160)+'px',top:(KN.cy-160)+'px',width:'320px',height:'320px'}),{id:'khit'});
-    kh.onpointerdown=e=>{kh.setPointerCapture(e.pointerId);
+    kh.onpointerdown=e=>{e.preventDefault();kh.setPointerCapture(e.pointerId);
       const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
-        sunManual=true; sunAzimuthManual=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360); updateSunlight(); drawPanel();};
+        sunManual=true; sunAzimuthManual=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360); updateSunlight();
+        document.getElementById('kptr').style.transform=`rotate(${sunAzimuthManual-180}deg)`;
+        document.getElementById('kread').textContent=Math.round(sunAzimuthManual)+'°'; };
       const up=()=>{kh.removeEventListener('pointermove',mv);kh.removeEventListener('pointerup',up);};
       kh.addEventListener('pointermove',mv);kh.addEventListener('pointerup',up);};
     V4.P.appendChild(kh); },
