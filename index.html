@@ -841,20 +841,22 @@
     /* Ancré au bord bas PHYSIQUE : bottom:0, zéro margin/translateY/offset. Le safe-area
        est géré DANS le panneau (padding-bottom) → son fond gris s'étend sous l'indicateur
        home. background gris = tout px OS résiduel invisible. */
+    /* fond = grain de la plaque (tranche greige tuilée) → la zone exposée sous la
+       plaque (padding safe-area + strip) continue la texture, pas de couture plate/gris. */
     #panel-wrap { position:fixed !important; bottom:0 !important; left:0; right:0; top:auto !important;
-      height:auto !important; z-index:20; background:#b9b9bb;
+      height:auto !important; z-index:20;
+      background:#9e9ea0 url('assets/ui/wrap-grain.png') top left/100% auto repeat;
       padding-bottom: env(safe-area-inset-bottom, 0px);
       transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
     /* iOS standalone: JS viewport figé à 100svh (793) mais 100lvh = plein (852).
        Le strip OS = 100lvh − 100svh (~59px). On y peint via bottom NÉGATIF = déficit
        MESURÉ par CSS (svh−lvh), pas env(safe-area). @supports garde les navigateurs
-       sains à bottom:0 (svh−lvh y vaut 0 en standalone). Collapsed: on retranche le
-       même déficit du translateY pour que le peek des tabs reste au même endroit. */
+       sains à bottom:0 (svh−lvh y vaut 0 en standalone). Le collapsed garde la règle
+       par défaut : visible = peek quel que soit le shift (démontré). */
     @media (display-mode: standalone) {
       @supports (height: 100lvh) {
         #panel-wrap { bottom: calc(100svh - 100lvh) !important; }
-        #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px) - (100lvh - 100svh))); }
       }
     }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
@@ -2357,7 +2359,7 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   const h=Math.round(OH*s); pv.style.height=h+'px';
   document.documentElement.style.setProperty('--panel-h', h+'px');
   // repli : laisse voir tabs + top-bar (Drôme-Diois)
-  document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
+  document.documentElement.style.setProperty('--collapsed-peek', Math.round((205-OY)*s)+'px'); }
 addEventListener('resize',fitPanel);
 if(window.visualViewport) visualViewport.addEventListener('resize',fitPanel);
 function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
@@ -2880,52 +2882,6 @@ setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
 renderPanel();
-
-// ─── DEBUG OVERLAY (mesure PWA, temporaire) ───
-(function(){
-  const box=document.createElement('div');
-  box.id='dbg';
-  Object.assign(box.style,{position:'fixed',top:'0',left:'0',zIndex:99999,
-    font:'11px/1.35 monospace',color:'#0f0',background:'rgba(0,0,0,.82)',
-    padding:'4px 6px',whiteSpace:'pre',pointerEvents:'none',maxWidth:'62vw'});
-  document.body.appendChild(box);
-  // sonde pour lire env(safe-area-inset-*) via padding calculé
-  const probe=document.createElement('div');
-  Object.assign(probe.style,{position:'fixed',top:'0',left:'0',width:'0',height:'0',
-    visibility:'hidden',pointerEvents:'none',
-    paddingTop:'env(safe-area-inset-top,0px)',
-    paddingBottom:'env(safe-area-inset-bottom,0px)'});
-  document.body.appendChild(probe);
-  // sonde hauteur viewport layout: fixed 100lvh (est-ce que le layout connaît 852 ?)
-  const lvh=document.createElement('div');
-  Object.assign(lvh.style,{position:'fixed',top:'0',left:'0',width:'0',height:'100lvh',
-    visibility:'hidden',pointerEvents:'none'});
-  document.body.appendChild(lvh);
-  function upd(){
-    const cs=getComputedStyle(probe);
-    const vv=window.visualViewport||{height:0,width:0};
-    const w=document.getElementById('panel-wrap'), pl=document.getElementById('plate');
-    const wb=w?w.getBoundingClientRect().bottom.toFixed(1):'?';
-    const pb=pl?pl.getBoundingClientRect().bottom.toFixed(1):'?';
-    const wbot=w?getComputedStyle(w).bottom:'?';
-    box.textContent=
-      'innerH   '+window.innerHeight+'\n'+
-      'screen.h '+screen.height+'\n'+
-      'vv.h     '+vv.height.toFixed(1)+'\n'+
-      'sa-top   '+cs.paddingTop+'\n'+
-      'sa-bot   '+cs.paddingBottom+'\n'+
-      'wrap.bot '+wb+'\n'+
-      'plate.bot '+pb+'\n'+
-      'wrap.cssBot '+wbot+'\n'+
-      'docEl.cH '+document.documentElement.clientHeight+'\n'+
-      '100lvh   '+lvh.getBoundingClientRect().height.toFixed(1)+'\n'+
-      'standalone '+matchMedia('(display-mode: standalone)').matches;
-  }
-  upd();
-  addEventListener('resize',upd);
-  if(window.visualViewport) visualViewport.addEventListener('resize',upd);
-  setInterval(upd,500);
-})();
 </script>
 </body>
 </html>
