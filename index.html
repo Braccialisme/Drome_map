@@ -2,7 +2,15 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <!-- PWA : ajouté à l'écran d'accueil → plein écran (barres Safari virées) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Drôme-Diois">
+  <meta name="theme-color" content="#1a1e21">
+  <link rel="apple-touch-icon" href="assets_logo.png">
+  <link rel="manifest" href="manifest.json">
   <title>Drôme · Diois</title>
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -84,7 +92,9 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      background: var(--greige-1);
+      /* gris ~bas-de-plaque : le petit gap sous le panneau (chrome navigateur /
+         safe-area) blende avec le panneau au lieu d'afficher du greige */
+      background: #b0b0b2;
       font-family: var(--font-ui);
       color: var(--ink);
     }
@@ -211,17 +221,7 @@
       font-family: var(--font-mono); font-size: 14px; color: var(--dust); cursor: pointer;
     }
 
-    /* ── PANEL BOTTOM = LE BLOC ── */
-    #panel-wrap {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: var(--panel-h);
-      z-index: 20;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    #panel-wrap.collapsed {
-      transform: translateY(calc(var(--panel-h) - 40px));
-    }
+    /* (ancien #panel-wrap greige supprimé — remplacé par le panneau v4 plus bas) */
 
     /* Poignée = languette de la fiche, en haut à gauche, avec chevron large */
     /* Poignée = slider hexa sur rail pointillé + flèche (croquis ggg) */
@@ -809,76 +809,7 @@
 
     .geoloc-marker { width: 30px; height: 30px; }
 
-    /* ══ PANNEAU EP-133 K.O. II (design handoff) ══════════════════════════════ */
-    #panel-wrap {
-      --char: #201f1d; --char-wall: #0d0d0c; --char-txt: #e9e7e0;
-      --cream: #efece3; --cream-wall: #cbc6b9;
-      --korange: #c05f24; --orange-wall: #7a3810;
-      --silk: #8a877c; --slit: #141210;
-      /* key = 13.6% de la largeur panneau (proportions du SVG, mises à l'échelle écran) */
-      --key: min(54px, 13.5vw);
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: var(--panel-h);
-      z-index: 20;
-      display: flex; flex-direction: column;
-      border-radius: 4px 4px 0 0;
-      background: #cbc8c1;
-      box-shadow: 0 -6px 20px rgba(48,38,20,.20);
-      overflow: hidden;
-      transition: transform 0.16s cubic-bezier(0.2, 0, 0, 1);
-    }
-    #panel-wrap.collapsed { transform: translateY(calc(var(--panel-h) - 46px)); }
-    .panel-body { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 14px 0; min-width: 0; position: relative; z-index: 1; }
-    .panel-content {
-      flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
-      display: flex; flex-direction: column; gap: 14px;
-      scrollbar-width: none; padding: 0 0 14px; background: transparent;
-    }
-    .panel-content::-webkit-scrollbar { display: none; }
-    .panel-content > * { min-width: 0; max-width: 100%; }
-    .fond-cols, .group { min-width: 0; }
 
-    /* Tab-bar horizontale (intercalaires en haut) */
-    .tab-bar { display: flex; gap: 4px; padding: 8px 10px 0; flex: none; align-items: stretch; position: relative; z-index: 2; }
-    .ptab {
-      flex: 1 1 0; min-width: 0; height: 30px; border: none; cursor: pointer;
-      border-radius: 2px 2px 0 0;
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: .03em;
-      color: var(--silk);
-      background: #c4c0b5;
-      display: flex; align-items: center; justify-content: center;
-      transition: color 120ms linear, background 120ms linear;
-      overflow: hidden; white-space: nowrap;
-    }
-    .ptab.active { color: #fff; background: var(--korange); }
-    .ptab:not(.active):active { filter: brightness(.97); }
-    .tab-bar .collapse {
-      flex: none; width: 34px; height: 30px; border-radius: 4px; border: none; cursor: pointer;
-      background: var(--cream);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 2px rgba(50,40,22,.16);
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* Ligne du haut : pills − / + · recherche · plaque */
-    .panel-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    /* − / + = minimiser / agrandir le panneau (dans la tab-bar, remplace le carré) */
-    .tab-bar .pills {
-      display: flex; gap: 4px; flex: none; align-self: center; padding: 3px; margin-left: 2px;
-      border-radius: 999px; background: #bdbab2;
-      box-shadow: inset 0 1px 3px rgba(50,40,22,.32), inset 0 -1px 0 rgba(255,255,255,.3);
-    }
-    .pill {
-      width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
-      background: var(--cream); color: #2a2a28;
-      font-family: var(--font-mono); font-size: 15px; line-height: 1;
-      box-shadow: 0 1px 0 var(--cream-wall);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 90ms linear, filter 90ms linear;
-    }
-    .pill:active { transform: translateY(1px); filter: brightness(.95); box-shadow: none; }
-    .pill:disabled { opacity: .4; }
-    .chev { width: 7px; height: 7px; border-left: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); transform: rotate(-45deg); margin-top: -2px; transition: transform .16s linear; }
-    #panel-wrap.collapsed .chev { transform: rotate(135deg); margin-top: 2px; }
     /* Search minimisable : loupe seule (28px), s'ouvre au focus */
     .search-wrap { position: relative; flex: 0 0 30px; transition: flex-basis 180ms cubic-bezier(.2,0,0,1); }
     .search-wrap:focus-within { flex: 1 1 auto; }
@@ -905,98 +836,26 @@
     }
     .search-wrap .search-result:last-child { border-bottom: none; }
 
-    /* Groupe + languette silkscreen */
-    .group { }
-    .group-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
-    .silkscreen {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: .15em;
-      text-transform: uppercase; color: var(--ink);
-    }
-    .group-head .silkscreen { font-size: 8px; letter-spacing: .16em; }
-    .group-head .count { font-family: var(--font-mono); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--silk); }
 
-    /* Grille de keys */
-    /* grille = keys de taille fixe (var --key), airy, justifiée à droite (proportions SVG) */
-    .key-grid { display: grid; grid-template-columns: repeat(3, var(--key)); gap: calc(var(--key) * .42); justify-content: end; }
-    .cell { display: flex; flex-direction: column; }
-
-    /* FOND : colonne contrôle gauche (30%) + grille droite (57%) */
-    .fond-cols { display: flex; gap: 3%; align-items: stretch; }
-    .ctrl-col { flex: 0 0 30%; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .fond-cols .key-grid { flex: 1; justify-content: end; align-content: start; }
-
-    /* Demi-key (relief / village) : keycap landscape, largeur = 1 key, hauteur = moitié */
-    .half-key {
-      --fill:#1c1c1a; --wall:#000; --txt:#c6c6c2;
-      position: relative; z-index: 1; width: var(--key); height: calc(var(--key) * .5); border: none; cursor: pointer;
-      border-radius: 2px; display: flex; align-items: center; padding: 0 8px;
-      background: var(--fill);
-      box-shadow: 0 1px 0 var(--wall);
-      transition: filter 80ms linear, transform 80ms linear;
-    }
-    .half-key:active { transform: translateY(1px); box-shadow: none; filter: brightness(1.12); }
-    .half-key.on { --fill:#c05f24; --wall:#7a3810; --txt:#fff; }
-    .hk-label { font-family:var(--font-mono); font-size:11px; letter-spacing:.02em; color:var(--txt); }
-
-    /* Fader vertical = trace signal orange sharp. 3 segments (2 horizontales +
-       1 verticale), plonge dans relief (haut) / village (bas), coupée par lidar/ortho. */
-    .fader-v { position: relative; flex: 1; min-height: 82px; display: flex; justify-content: center; margin: 2px 0; z-index: 0; }
-    .fv-track { position: relative; width: 44px; cursor: pointer; }
-    .fv-line { position: absolute; top: -11px; bottom: -11px; left: calc(50% - 1px); width: 2px; background: var(--korange); }
-    .fv-line::before, .fv-line::after { content: ""; position: absolute; left: -6px; width: 8px; height: 2px; background: var(--korange); }
-    .fv-line::before { top: 0; }      /* horizontale haute, plonge dans relief */
-    .fv-line::after  { bottom: 0; }   /* horizontale basse, plonge dans village */
-    .fv-cap { position: absolute; left: 50%; width: 18px; height: 11px; background: #c9c5b9; box-shadow: 0 1px 0 rgba(46,37,18,.35); transform: translate(-50%,-50%); }
-    .fv-cap::after { content:""; position:absolute; left:3px; right:3px; top:calc(50% - .5px); height:1px; background:rgba(46,37,18,.4); }
-    /* labels qui COUPENT la trace (bg panneau derrière) */
-    .fv-end { position: absolute; left: 50%; transform: translateX(-50%); padding: 0 2px; background: #c9c6bf; font-family:var(--font-mono); font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--silk); white-space:nowrap; }
-    .fv-end.top { top: -9px; } .fv-end.bot { bottom: -9px; }
-    .fv-read { position: absolute; right: calc(50% + 8px); transform: translateY(-50%); font-family:var(--font-mono); font-size:9px; color:var(--ink); font-variant-numeric:tabular-nums; }
-    /* KEYCAP — cube (face) posé sur une base un peu plus large. Sharp, congés courts. */
-    /* KEY = aplat mat (langage écran TE). Zéro dégradé/grain/skirt. 1px bas mini. */
-    .key {
-      --fill: #1c1c1a; --wall: #000; --txt: #c6c6c2;
-      position: relative; width: 100%; aspect-ratio: 1/1;
-      border-radius: 2px; border: none; cursor: pointer;
-      display: flex; align-items: flex-start; justify-content: flex-start;
-      background: var(--fill);
-      box-shadow: 0 1px 0 var(--wall);
-      transition: filter 80ms linear, transform 80ms linear;
-    }
-    .key:active { transform: translateY(1px); box-shadow: none; filter: brightness(1.12); }
-    .key--orange { --fill: #c05f24; --wall: #7a3810; --txt: #fff; }
-    .key--cream  { --fill: #e7e4db; --wall: #c4c0b4; --txt: #26261f; }
-    .key-label {
-      font-family: var(--font-mono); font-size: 9px; line-height: 1.08; letter-spacing: .02em;
-      color: var(--txt); padding: 5px 5px 0; text-align: left;
-      position: relative; z-index: 1; word-break: break-word;
-    }
-    .key-silk { display: flex; align-items: center; gap: 7px; margin-top: 7px; padding-left: 2px; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; border: 1.5px solid var(--silk); background: transparent; }
-    .dot.on { background: var(--korange); border-color: var(--korange); }
-    .key-silk .sub { font-family: var(--font-mono); font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--silk); }
-
-    /* Fader */
-    .fader-wrap { position: relative; padding-top: 8px; }
-    .signal { position: absolute; top: -13px; left: calc(50% - .5px); width: 1px; height: 20px; background: rgba(26,26,26,.28); }
-    .fader { display: flex; align-items: center; gap: 16px; }
-    .fader > .silkscreen { flex: none; width: 54px; }
-    .fader-track { flex: 1; position: relative; height: 22px; display: flex; align-items: center; cursor: pointer; }
-    .fader-slit { position: absolute; left: 0; right: 0; top: calc(50% - 1.5px); height: 3px; border-radius: 2px; background: var(--slit); box-shadow: inset 0 1px 1.5px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.4); }
-    .zero-tick { position: absolute; left: 0; top: calc(50% - 6px); width: 1px; height: 12px; background: var(--silk); }
-    .fader-cap { position: absolute; top: calc(50% - 11px); width: 22px; height: 22px; border-radius: 50%; background: #c2bdb0; box-shadow: 0 3px 5px rgba(46,37,18,.34), 0 1px 1px rgba(46,37,18,.24), inset 0 1px 0 rgba(255,255,255,.4); transform: translateX(-50%); }
-    .fader-cap::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(46,37,18,.3); }
-    .fader .readout { flex: none; width: 26px; text-align: right; font-family: var(--font-mono); font-size: 12px; color: var(--ink); font-variant-numeric: tabular-nums; }
-
-    /* Plaque = seule déco : "Drome Diois" noir + "cartographie" orange */
-    .np { display: flex; flex-direction: column; align-items: flex-end; flex: none; margin-left: auto; text-align: right; }
-    .np-title { font-family: var(--font-mono); font-size: 14px; font-weight: 700; letter-spacing: .02em; color: #111; line-height: 1; }
-    .np-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--korange); margin-top: 3px; }
-
-    /* Réglages secondaires (sliders slope/curv/drone/grille) : rail slit + readout */
-    .setting { margin-top: 12px; }
-    .setting .silkscreen { display: block; margin-bottom: 6px; }
-    .setting input[type=range] { width: 100%; }
+    /* ── Panneau v4 : plaque sprite, scale-to-fit largeur, ancrée en bas ── */
+    #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
+      height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
+    #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
+    #panel-v4 { width:100%; overflow:hidden; display:block; }
+    #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
+      background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
+    #panel-v4 .led { position:absolute; width:20px; height:20px; pointer-events:none;
+      background:url('assets/ui/led-off.png') center/contain no-repeat; }
+    #panel-v4 .led.on { background-image:url('assets/ui/led-on.png'); }
+    #panel-v4 .ksub { position:absolute; font-size:17px; color:#8a877c; text-transform:uppercase; letter-spacing:.12em; pointer-events:none; }
+    #panel-v4 .knoll { position:absolute; width:52px; height:52px; cursor:grab; transform:translate(-50%,-50%); background:url('assets/ui/knoll.png') center/contain no-repeat; }
+    #panel-v4 .sknoll { position:absolute; width:46px; height:46px; cursor:grab; transform:translate(-50%,-50%); background:url('assets/ui/knoll.png') center/contain no-repeat; }
+    #panel-v4 #kptr { position:absolute; background:url('assets/ui/azimuth-pointer.png') center/100% 100% no-repeat; transform-origin:50% 0; pointer-events:none; }
+    #panel-v4 #kread { position:absolute; font-size:26px; color:#7c766c; pointer-events:none; transform:translateY(-50%); }
+    #panel-v4 #khit { position:absolute; border-radius:50%; cursor:grab; }
+    #panel-v4 #fscreen { position:absolute; border-radius:22px; }
+    #search-overlay { position:absolute; left:10px; right:10px; bottom:calc(100% - 4px); z-index:30; }
+    #search-overlay[hidden] { display:none; }
   </style>
 </head>
 <body>
@@ -1042,34 +901,17 @@
 </button>
 
 <div id="panel-wrap">
-  <div class="tab-bar">
-    <button class="ptab active" data-tab="fond">Fond</button>
-    <button class="ptab" data-tab="nature">Nature</button>
-    <button class="ptab" data-tab="faune">Faune</button>
-    <button class="ptab" data-tab="activites">Activ.</button>
-    <button class="ptab" data-tab="patri">Patri.</button>
-    <button class="ptab" data-tab="commerce">Comm.</button>
-    <button class="ptab" data-tab="experimental">Expe.</button>
-    <div class="pills">
-      <button class="pill" id="panel-lower" title="Minimiser">−</button>
-      <button class="pill" id="panel-raise" title="Agrandir">+</button>
-    </div>
+  <div id="panel-v4"><div id="plate"></div></div>
+  <!-- recherche conservée (logique inchangée) : overlay ouvert par le pill recherche -->
+  <div class="search-wrap" id="search-overlay" hidden>
+    <input class="search" id="search-input" type="text" placeholder="Chercher…" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
   </div>
-  <div class="panel-body">
-    <div class="panel-top">
-      <div class="search-wrap">
-        <input class="search" id="search-input" type="text" placeholder="Chercher…" autocomplete="off">
-        <div class="search-results" id="search-results"></div>
-      </div>
-      <div class="np">
-        <span class="np-title">Drome Diois</span>
-        <span class="np-sub">cartographie</span>
-      </div>
-    </div>
-    <div class="panel-content" id="panel-content"><!-- injecté --></div>
-  </div>
+  <!-- ancien conteneur gardé caché : renderBestiaire/faune y injecte encore -->
+  <div class="panel-content" id="panel-content" hidden></div>
 </div>
 
+<script src="buttons-v4.js"></script>
 <script>
 // ── Service Worker (cache offline 30j) — https/localhost seulement ───────────
 if ('serviceWorker' in navigator) {
@@ -2475,11 +2317,182 @@ function loadPoiIcons() {
   });
 }
 
-function renderPanel() {
-  content.innerHTML = PANELS[state.activeTab]();
-  attachPanelEvents();
-  if (state.activeTab === 'faune') renderBestiaire();
+// ── PANNEAU v4 (plaque sprite) — remplace l'ancien rendu HTML ───────────────
+const V4 = { TABS:['fond','nature','faune','activites','patri','commerce','experimental'],
+  TABX:[14,178,342,506,670,825,989], fkind:'mammiferes', P:null };
+// icônes transport (Tabler, fournies) — c = couleur (encodée %23…)
+const ICON4={
+  car:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${c}' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'/><path d='M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'/><path d='M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5'/></svg>`,
+  bike:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${c}'><path d='M5 14a4 4 0 1 1 -4 4l.005 -.2a4 4 0 0 1 3.995 -3.8'/><path d='M19 14a4 4 0 1 1 -4 4l.005 -.2a4 4 0 0 1 3.995 -3.8'/><path d='M14.832 7.445l1.703 2.555h2.465a1 1 0 0 1 .993 .883l.007 .117a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -.832 -.445l-1.396 -2.093l-3.275 2.62l2.21 2.21a1 1 0 0 1 .284 .577l.009 .131v4a1 1 0 0 1 -2 0v-3.585l-2.707 -2.708a1 1 0 0 1 -.01 -1.403l.092 -.085l5 -4a1 1 0 0 1 1.457 .226'/><path d='M17 3a2 2 0 1 1 -2 2l.005 -.15a2 2 0 0 1 1.995 -1.85'/></svg>`,
+  foot:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${c}' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M13 4m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/><path d='M7 21l3 -4'/><path d='M16 21l-2 -4l-3 -3l1 -6'/><path d='M6 12l2 -3l4 -1l3 3l3 1'/></svg>`};
+function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activites:'activ',patri:'patri',commerce:'comm',experimental:'expe'}[id]; }
+function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
+function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
+function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.getElementById('plate');
+  if(!pv||!pl)return;
+  // bbox OPAQUE de la plaque (le rectangle plein) — on scale/translate pour coller
+  // bord/bord (les marges transparentes + peel-shadow sortent de l'écran).
+  const OX=9, OY=9, OW=1132, OH=1063;
+  const s=pv.clientWidth/OW; pl.style.setProperty('--s',s);
+  pl.style.transform=`translate(${(-OX*s).toFixed(2)}px,${(-OY*s).toFixed(2)}px) scale(${s})`;
+  const h=Math.round(OH*s); pv.style.height=h+'px';
+  document.documentElement.style.setProperty('--panel-h', h+'px');
+  // repli : laisse voir tabs + top-bar (Drôme-Diois)
+  document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
+addEventListener('resize',fitPanel);
+function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
+  // LED = point coloré par couche (moyen habile de remettre les couleurs)
+  const col=o.color||'#c05f24';
+  V4.P.appendChild(v4El('',{position:'absolute',left:(o.x+2)+'px',top:(o.y+166)+'px',width:'18px',height:'18px',
+    borderRadius:'50%',boxSizing:'border-box',pointerEvents:'none',
+    background:o.on?col:'transparent',border:o.on?'none':'2px solid #9a978c',boxShadow:o.on?`0 0 5px ${col}99`:'none'}));
+  if(o.sub) V4.P.appendChild(v4El('ksub',{left:(o.x+34)+'px',top:(o.y+167)+'px'},o.sub)); }
+function pillsV4(){
+  makeButton(V4.P,{type:'minmax',x:79,y:120,onClick:()=>setPanelCollapsed(!document.getElementById('panel-wrap').classList.contains('collapsed'))});
+  makeButton(V4.P,{type:'search',x:249,y:118,onClick:()=>{
+    const ov=document.getElementById('search-overlay');
+    if(!ov.hidden){ ov.hidden=true; return; }
+    const pl=document.getElementById('plate'), r=pl.getBoundingClientRect(), s=v4scale();
+    Object.assign(ov.style,{position:'fixed',left:(r.left+249*s)+'px',top:(r.top+118*s)+'px',
+      width:(283*s)+'px',right:'auto',bottom:'auto'});
+    ov.hidden=false; document.getElementById('search-input').focus();
+  }}); }
+function basemapV4(id,label,sub,x,y){ const night=id==='nuit', on=night?nightMode:state.basemap===id;
+  keyV4({x,y,label,sub,on,onClick:()=>{ if(night){nightMode=!nightMode;document.body.classList.toggle('night',nightMode);} else state.basemap=id; drawPanel(); rerender(); }}); }
+function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id],color:(typeof ledColor==='function'?ledColor(id):'#c05f24'),
+  onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); if(id==='threeD')map.easeTo({pitch:state.layers.threeD?62:0,duration:700}); }}); }
+function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!state.layers[id],
+  onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
+// drag vertical LISSE : bouge le knoll direct + applique, zéro re-render (commit à la fin)
+function v4DragY(kn,RT,apply,commit){ kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
+  const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
+    const v=Math.max(0,Math.min(100,Math.round((RT.y1-(ev.clientY-r.top)/s)/(RT.y1-RT.y0)*100)));
+    kn.style.top=(RT.y1-v/100*(RT.y1-RT.y0))+'px'; apply(v);};
+  const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);commit&&commit();};
+  kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
+// slider HORIZONTAL générique LISSE : {min,max,get,set,live,commit}
+function v4HSlider(kn,x0,len,o){
+  const pos=()=>{ const n=(o.get()-o.min)/(o.max-o.min); kn.style.left=(x0+Math.max(0,Math.min(1,n))*len)+'px'; };
+  pos();
+  kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
+    const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
+      let v=o.min+((ev.clientX-r.left)/s-x0)/len*(o.max-o.min); v=Math.max(o.min,Math.min(o.max,v));
+      o.set(v); pos(); o.live&&o.live(); };
+    const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);o.commit&&o.commit();};
+    kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
+
+// écran faune = bestiaire (cartes SVG + nom cliquables) filtré par groupe, avec cache
+const V4GROUP={mammiferes:'Mammalia',oiseaux:'Aves',reptiles:'Reptilia',amphibiens:'Amphibia'};
+async function v4LoadBestiaire(){
+  const obs=await fetchFaune(), byTaxon={};
+  obs.forEach(o=>{ if(!o.taxon)return; const k=o.taxon.id;
+    if(!byTaxon[k]) byTaxon[k]={name:o.taxon.preferred_common_name||o.taxon.name,group:o.taxon.iconic_taxon_name,count:0,ll:o.geojson?o.geojson.coordinates:null};
+    byTaxon[k].count++; });
+  const byGroup={}; Object.values(byTaxon).forEach(t=>{ (byGroup[t.group]=byGroup[t.group]||[]).push(t); });
+  Object.values(byGroup).forEach(l=>l.sort((a,b)=>b.count-a.count)); return byGroup;
 }
+async function v4FauneScreen(){
+  const S={x:96,y:247,w:474,h:600};
+  const box=v4El('',{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute',
+    overflowY:'auto',borderRadius:'22px',background:'#c6c9c1',boxShadow:'inset 0 2px 7px #2a2c2755',
+    padding:'14px',boxSizing:'border-box'}); box.id='fscreen'; V4.P.appendChild(box);
+  const msg=t=>box.innerHTML=`<div style="color:#3a3d38;font:15px VG5000,monospace;padding:10px;text-align:center">${t}</div>`;
+  if(!V4.bestiaire || !Object.keys(V4.bestiaire).length){ msg('Chargement du bestiaire…');
+    let b; try{ b=await v4LoadBestiaire(); }catch(e){ msg('Bestiaire hors-ligne'); return; }
+    if(document.getElementById('fscreen')!==box) return;
+    if(!b || !Object.keys(b).length){ msg('Aucune observation'); return; } // pas de cache si vide → retry
+    V4.bestiaire=b; }
+  const g=V4GROUP[V4.fkind], list=(V4.bestiaire[g]||[]);
+  if(!list.length){ msg(`Aucun ${({mammiferes:'mammifère',oiseaux:'oiseau',reptiles:'reptile',amphibiens:'amphibien'})[V4.fkind]||'animal'} observé`); return; }
+  box.innerHTML='';
+  const grid=v4El('',{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}); box.appendChild(grid);
+  list.forEach(t=>{
+    const cell=v4El('',{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',padding:'9px 4px',
+      background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'6px',cursor:t.ll?'pointer':'default'});
+    cell.innerHTML=`${taxonSvg(g,34)}<div style="font:11px VG5000,monospace;color:#2a2c27;text-align:center;line-height:1.15;letter-spacing:.03em">${esc(t.name)}</div>`;
+    if(t.ll) cell.onclick=()=>map.flyTo({center:[t.ll[0],t.ll[1]],zoom:13,duration:1000});
+    grid.appendChild(cell);
+  });
+}
+
+const PANELV4={
+  fond(){ pillsV4();
+    layerHalfV4('daylight','Relief',79,262); layerHalfV4('villages','Village',79,816);
+    const RT={x:161,y0:400,y1:721},ky=RT.y1-state.reliefOpacity*(RT.y1-RT.y0);
+    const kn=v4El('knoll',{left:RT.x+'px',top:ky+'px'});
+    v4DragY(kn,RT,v=>{ state.reliefOpacity=v/100; if(map.getLayer('lidardem-hs'))map.setPaintProperty('lidardem-hs','hillshade-exaggeration',Math.min(state.reliefOpacity*0.8,1)); },()=>rerender());
+    V4.P.appendChild(kn);
+    [['sat','Sat','2024',419,269],['ign','Plan IGN','plan',661,269],['lidar-only','LiDAR','mnt',904,269],
+     ['aerienne50','Aérienne','1950',419,498],['etatmajor','État-Major','1850',659,498],
+     ['cassini','Cassini','1750',902,495],['nuit','Nuit','',419,742]].forEach(a=>basemapV4(...a));
+    // ── itinéraire A→B : 2 barres fines (itin) = inputs route + 3 boutons transport ──
+    const IY1=700, IY2=752;
+    [['route-a','Départ (A)',IY1,0],['route-b','Arrivée (B)',IY2,1]].forEach(([id,ph,y,idx])=>{
+      makeButton(V4.P,{type:'itin',x:655,y});
+      const inp=document.createElement('input'); inp.id=id; inp.placeholder=ph; inp.autocomplete='off';
+      Object.assign(inp.style,{position:'absolute',left:'690px',top:(y+4)+'px',width:'208px',height:'30px',
+        background:'transparent',border:0,outline:0,font:"16px VG5000,monospace",color:'#2a2a28'});
+      V4.P.appendChild(inp);
+      const res=document.createElement('div'); res.id=id+'-res'; res.className='search-results route-res';
+      Object.assign(res.style,{position:'absolute',left:'655px',top:(y+42)+'px',width:'300px',zIndex:'40'});
+      V4.P.appendChild(res);
+      inp.addEventListener('input',debounce(()=>routeSearch(inp.value,res,idx,inp),350));
+      inp.value = idx===0 ? (routeA&&routeA.label||'') : (routeB&&routeB.label||'');
+    });
+    [['car-fast','car',668],['trekking','bike',742],['hiking-mountain','foot',816]].forEach(([prof,ic,x])=>{
+      const b=makeButton(V4.P,{type:'transport',x,y:812,onClick:()=>{routeProfile=prof;computeRoute();drawPanel();}});
+      const svg=ICON4[ic](routeProfile===prof?'%23c05f24':'%231a1a1a');
+      b.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'32px',height:'32px',pointerEvents:'none',background:`url("data:image/svg+xml,${svg}") center/contain no-repeat`}));
+    }); },
+  nature(){ pillsV4(); [['contours','Contours','niveau',653,270],['sentiers','Sentiers','GR',896,270],['rivieres','Rivières','eau',651,499],['baignade','Baignade','eau',894,496],['viewpoints','Vues','pano',651,743],['forets','Forêts','noms',896,743]].forEach(a=>layerKeyV4(...a)); },
+  activites(){ pillsV4(); [['nautique','Canoë','eau vive',653,270],['canyoning','Canyon','gorge',896,270],['transport','Transport','arrêts',651,499]].forEach(a=>layerKeyV4(...a)); },
+  patri(){ pillsV4(); [['monuments','Monuments','MH',653,270],['villages','Villages','noms',896,270]].forEach(a=>layerKeyV4(...a)); },
+  commerce(){ pillsV4(); [['restaurants','Restos','food',651,270],['cafes','Cafés','bar',896,270],['glaciers','Glaciers','glace',651,499],['boulangeries','Pain','four',894,496]].forEach(a=>layerKeyV4(...a)); },
+  experimental(){ pillsV4();
+    makeButton(V4.P,{type:'half',x:79,y:262,label:'Auto',on:!sunManual,onClick:()=>{sunManual=false;updateSunlight();drawPanel();}});
+    makeButton(V4.P,{type:'half',x:79,y:816,label:'Manuel',on:sunManual,onClick:()=>{sunManual=true;updateSunlight();drawPanel();}});
+    [['daylight','Lumière','soleil',417,269],['slope','Pentes','°',659,269],['curvature','Courbure','crêtes',902,269],['grille','Grille','coord',417,498],['drone','Drone','vol',417,742]].forEach(a=>layerKeyV4(...a));
+    makeButton(V4.P,{type:'dl',x:955,y:955,onClick:()=>{ if(typeof precacheZone==='function')precacheZone(document.getElementById('precache-btn')||{}); }});
+    const SL=[
+      {get:()=>state.slopeOpacity,set:v=>state.slopeOpacity=v,min:.1,max:1,live:()=>map.getLayer('slope-lyr')&&map.setPaintProperty('slope-lyr','raster-opacity',state.slopeOpacity)},
+      {get:()=>state.slopeMin,set:v=>state.slopeMin=Math.round(v),min:0,max:55,commit:()=>{if(typeof reapplySlope==='function')reapplySlope();}},
+      {get:()=>state.slopeMax,set:v=>state.slopeMax=Math.round(v),min:10,max:80,commit:()=>{if(typeof reapplySlope==='function')reapplySlope();}},
+      {get:()=>state.curvOpacity,set:v=>state.curvOpacity=v,min:.1,max:1,live:()=>map.getLayer('curv-lyr')&&map.setPaintProperty('curv-lyr','raster-opacity',state.curvOpacity)},
+      {get:()=>state.curvStrength,set:v=>state.curvStrength=Math.round(v),min:3000,max:22000,commit:()=>{if(typeof reapplyCurvature==='function')reapplyCurvature();}},
+      null ];
+    const TRK={x0:107,len:168,ys:[442,481,521,652,691,731]};
+    TRK.ys.forEach((y,i)=>{ if(!SL[i])return; // 3e curv retiré (sert à rien)
+      const kn=v4El('sknoll',{top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`}); V4.P.appendChild(kn);
+      v4HSlider(kn,TRK.x0,TRK.len,SL[i]); });
+    const KN={cx:841,cy:709},az=Math.round(sunManual?sunAzimuthManual:sunAzimuth());
+    V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°`),{id:'kread'}));
+    V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
+    const kh=Object.assign(v4El('',{left:(KN.cx-160)+'px',top:(KN.cy-160)+'px',width:'320px',height:'320px'}),{id:'khit'});
+    kh.onpointerdown=e=>{e.preventDefault();kh.setPointerCapture(e.pointerId);
+      const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
+        sunManual=true; sunAzimuthManual=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360); updateSunlight();
+        document.getElementById('kptr').style.transform=`rotate(${sunAzimuthManual-180}deg)`;
+        document.getElementById('kread').textContent=Math.round(sunAzimuthManual)+'°'; };
+      const up=()=>{kh.removeEventListener('pointermove',mv);kh.removeEventListener('pointerup',up);};
+      kh.addEventListener('pointermove',mv);kh.addEventListener('pointerup',up);};
+    V4.P.appendChild(kh); },
+  faune(){ pillsV4();
+    makeButton(V4.P,{type:'key',x:888,y:255,on:!!state.layers.faune,onClick:()=>{state.layers.faune=!state.layers.faune;drawPanel();rerender();}});
+    [['mammiferes','Mammifères'],['oiseaux','Oiseaux'],['reptiles','Reptiles'],['amphibiens','Amphibiens']].forEach(([id,label],i)=>
+      makeButton(V4.P,{type:'kind',x:778,y:[468,579,686,797][i],label,on:V4.fkind===id,onClick:()=>{V4.fkind=id;drawPanel();}}));
+    v4FauneScreen(); },
+};
+function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)return; V4.P=plate; plate.innerHTML='';
+  plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
+  // onglets = bakés dans la plaque (état actif par plaque) + noms + zones cliquables
+  const TABN=['Fond','Nature','Faune','Activ','Patri','Comm','Expe'];
+  V4.TABS.forEach((id,i)=>{ const act=id===state.activeTab;
+    plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+75)+'px',top:'30px',transform:'translate(-50%,-50%)',
+      font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#3a3a3a',pointerEvents:'none'},TABN[i]));
+    const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
+    hit.onclick=()=>{state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
+  (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
+function renderPanel(){ drawPanel(); }  // compat : anciens appels
 
 // Fader K.O. II : drag du cap → valeur 0-100
 function wireFader(id, set, commit) {
@@ -2725,8 +2738,9 @@ function setPanelCollapsed(c) {
   panelWrap.classList.toggle('collapsed', c);
   document.body.classList.toggle('panel-collapsed', c);
 }
-document.getElementById('panel-lower').addEventListener('click', () => setPanelCollapsed(true));
-document.getElementById('panel-raise').addEventListener('click', () => setPanelCollapsed(false));
+// (min/max déplacé sur le pill de la plaque v4 — voir pillsV4)
+document.getElementById('panel-lower')?.addEventListener('click', () => setPanelCollapsed(true));
+document.getElementById('panel-raise')?.addEventListener('click', () => setPanelCollapsed(false));
 
 // ── Géolocalisation ─────────────────────────────────────────────────────────
 let geolocActive = false, geolocMarker = null, watchId = null;
