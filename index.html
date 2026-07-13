@@ -2340,12 +2340,10 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   if(!pv||!pl)return;
   // bbox OPAQUE de la plaque (le rectangle plein) — on scale/translate pour coller
   // bord/bord (les marges transparentes + peel-shadow sortent de l'écran).
-  const OX=9, OY=9, OW=1132, PH=1073;  // PH = hauteur LAYOUT de #plate (px CSS)
+  const OX=9, OY=9, OW=1132, OH=1231;
   const s=pv.clientWidth/OW; pl.style.setProperty('--s',s);
   pl.style.transform=`translate(${(-OX*s).toFixed(2)}px,${(-OY*s).toFixed(2)}px) scale(${s})`;
-  // transform scale ne change PAS la taille layout → on force pv à la hauteur VISUELLE
-  // du plate (sinon pv reste haut = gros vide gris sous le plate, ancré bottom:0).
-  const h=Math.round((PH-OY)*s); pv.style.height=h+'px';
+  const h=Math.round(OH*s); pv.style.height=h+'px';
   document.documentElement.style.setProperty('--panel-h', h+'px');
   // repli : laisse voir tabs + top-bar (Drôme-Diois)
   document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
@@ -2871,6 +2869,43 @@ setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
 renderPanel();
+
+// ─── DEBUG OVERLAY (mesure PWA, temporaire) ───
+(function(){
+  const box=document.createElement('div');
+  box.id='dbg';
+  Object.assign(box.style,{position:'fixed',top:'0',left:'0',zIndex:99999,
+    font:'11px/1.35 monospace',color:'#0f0',background:'rgba(0,0,0,.82)',
+    padding:'4px 6px',whiteSpace:'pre',pointerEvents:'none',maxWidth:'62vw'});
+  document.body.appendChild(box);
+  // sonde pour lire env(safe-area-inset-*) via padding calculé
+  const probe=document.createElement('div');
+  Object.assign(probe.style,{position:'fixed',top:'0',left:'0',width:'0',height:'0',
+    visibility:'hidden',pointerEvents:'none',
+    paddingTop:'env(safe-area-inset-top,0px)',
+    paddingBottom:'env(safe-area-inset-bottom,0px)'});
+  document.body.appendChild(probe);
+  function upd(){
+    const cs=getComputedStyle(probe);
+    const vv=window.visualViewport||{height:0,width:0};
+    const w=document.getElementById('panel-wrap'), pl=document.getElementById('plate');
+    const wb=w?w.getBoundingClientRect().bottom.toFixed(1):'?';
+    const pb=pl?pl.getBoundingClientRect().bottom.toFixed(1):'?';
+    box.textContent=
+      'innerH   '+window.innerHeight+'\n'+
+      'screen.h '+screen.height+'\n'+
+      'vv.h     '+vv.height.toFixed(1)+'\n'+
+      'sa-top   '+cs.paddingTop+'\n'+
+      'sa-bot   '+cs.paddingBottom+'\n'+
+      'wrap.bot '+wb+'\n'+
+      'plate.bot '+pb+'\n'+
+      'standalone '+matchMedia('(display-mode: standalone)').matches;
+  }
+  upd();
+  addEventListener('resize',upd);
+  if(window.visualViewport) visualViewport.addEventListener('resize',upd);
+  setInterval(upd,500);
+})();
 </script>
 </body>
 </html>
