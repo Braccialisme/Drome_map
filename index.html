@@ -841,6 +841,13 @@
     #panel-wrap { position:fixed !important; bottom:0; left:0; right:0; top:auto !important;
       height:auto !important; z-index:20; transition:transform .18s cubic-bezier(.2,0,0,1); }
     #panel-wrap.collapsed { transform:translateY(calc(100% - var(--collapsed-peek, 52px))); }
+    /* PWA installée : descend le panneau jusqu'au bas physique → le gris de la plaque
+       remplit la barre safe-area (fini l'écart), sa ligne d'ombre passe sous l'indicateur
+       home. En navigateur cette règle ne s'applique pas → layout Safari intact. */
+    @media (display-mode: standalone) {
+      #panel-wrap { bottom: calc(-1 * env(safe-area-inset-bottom, 0px) - 2px); }
+    }
+    html.pwa #panel-wrap { bottom: calc(-1 * env(safe-area-inset-bottom, 0px) - 2px); }
     #panel-v4 { width:100%; overflow:hidden; display:block; }
     #panel-v4 > #plate { width:1244px; height:1073px; transform-origin:top left;
       background:no-repeat 0 0/1244px 1073px; position:relative; font-family:var(--font-mono); }
@@ -913,6 +920,9 @@
 
 <script src="buttons-v4.js"></script>
 <script>
+// PWA installée (iOS/Android) → classe .pwa pour les ajustements standalone-only
+if (navigator.standalone || matchMedia('(display-mode: standalone)').matches)
+  document.documentElement.classList.add('pwa');
 // ── Service Worker (cache offline 30j) — https/localhost seulement ───────────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
