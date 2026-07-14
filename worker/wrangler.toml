@@ -16,4 +16,4 @@ new_classes = ["Room"]
 # dernier snapshot d'une salle (points partagés) pour survie au redémarrage du DO.
 [[kv_namespaces]]
 binding = "PINS"
-id = "REMPLIR_APRES_wrangler_kv_namespace_create"
+id = "50f3ff3f6be74b078148831e2acc9370"
