@@ -2734,16 +2734,19 @@ function renderLive(){ liveMarkers.forEach(m=>m.remove()); liveMarkers=[];
 function commuAutoConnect(){ if(COMMU.room) commuConnect(COMMU.room); }
 
 // ── Boussole Nature : cap réel via capteur d'orientation ──────────────────────
-// Assets à fournir (vides = visuel de secours CSS) :
-const COMPASS_FACE='';   // ex: 'assets/ui/compass-face.png' (fond assemblé fixe)
-const COMPASS_BALL='';   // ex: 'assets/ui/compass-ball.png' (indicateur qui tourne)
+const COMPASS_FACE='';   // fond assemblé SANS le core (boule+texte) — à fournir → 'assets/ui/compass-face.png'
+const COMPASS_BALL='assets/ui/compass-ball.png';   // boule orange (Group 204)
+// géométrie en fractions du box carré (calage quand le vrai fond arrive)
+const CO={ orbit:.34, ballSz:.15, degSz:.14, cardSz:.055 };
 let compassHeading=null, compassStarted=false;
+function compassPoint(h){ return ['N','NE','E','SE','S','SO','O','NO'][Math.round((((h||0)%360)/45))%8]; }
 function compassOnOrient(e){ let h=null;
   if(e.webkitCompassHeading!=null) h=e.webkitCompassHeading;            // iOS : cap boussole direct
   else if(e.alpha!=null) h=(360-e.alpha)%360;                          // Android absolu : 360-alpha
   if(h==null||isNaN(h)) return; compassHeading=(h+360)%360;
   const rot=document.getElementById('compass-rot'); if(rot) rot.style.transform=`rotate(${compassHeading}deg)`;
-  const deg=document.getElementById('compass-deg'); if(deg) deg.textContent=Math.round(compassHeading)+'°'; }
+  const deg=document.getElementById('compass-deg'); if(deg) deg.textContent=Math.round(compassHeading)+'°';
+  const card=document.getElementById('compass-card'); if(card) card.textContent=compassPoint(compassHeading); }
 function compassStart(){ if(compassStarted) return;
   const go=()=>{ compassStarted=true;
     window.addEventListener('deviceorientationabsolute', compassOnOrient, true);
@@ -2752,22 +2755,26 @@ function compassStart(){ if(compassStarted) return;
   if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function')
     DeviceOrientationEvent.requestPermission().then(s=>{ s==='granted'?go():toast('Boussole refusée',3000); }).catch(()=>toast('Boussole indisponible',3000));
   else go(); }
-function natureCompass(){ const C={cx:305, cy:585, r:190};
-  const box=v4El('',{position:'absolute',left:(C.cx-C.r)+'px',top:(C.cy-C.r)+'px',width:(2*C.r)+'px',height:(2*C.r)+'px',borderRadius:'50%'}); box.id='compass-box';
+function natureCompass(){ const C={cx:305, cy:585, r:190}, D=2*C.r;
+  const box=v4El('',{position:'absolute',left:(C.cx-C.r)+'px',top:(C.cy-C.r)+'px',width:D+'px',height:D+'px',borderRadius:'50%'}); box.id='compass-box';
   if(COMPASS_FACE) box.style.background=`url('${COMPASS_FACE}') center/contain no-repeat`;
   else box.style.cssText+=';border:3px solid #8a877c;background:radial-gradient(circle,#d7d8d2,#c3c4be)';
-  // rotor (tourne avec le cap)
-  const rot=v4El('',{position:'absolute',inset:'0',transformOrigin:'50% 50%'}); rot.id='compass-rot';
+  // rotor centré : tourne au cap ; la boule est posée sur l'orbite (au-dessus du centre) → part à l'angle
+  const rot=v4El('',{position:'absolute',left:'0',top:'0',width:D+'px',height:D+'px',transformOrigin:'50% 50%'}); rot.id='compass-rot';
   if(compassHeading!=null) rot.style.transform=`rotate(${compassHeading}deg)`;
-  if(COMPASS_BALL) rot.innerHTML=`<img src="${COMPASS_BALL}" style="position:absolute;left:50%;top:0;transform:translate(-50%,-6px);width:${Math.round(C.r*0.22)}px"/>`;
-  else rot.innerHTML=`<div style="position:absolute;left:50%;top:8px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:#c05f24;box-shadow:0 0 7px #c05f24aa"></div>`;
-  box.appendChild(rot);
+  const bs=Math.round(D*CO.ballSz);
+  const ball=v4El('',{position:'absolute',left:'50%',top:(D*(0.5-CO.orbit))+'px',transform:'translate(-50%,-50%)',width:bs+'px',height:bs+'px'});
+  if(COMPASS_BALL) ball.style.background=`url('${COMPASS_BALL}') center/contain no-repeat`;
+  else { ball.style.borderRadius='50%'; ball.style.background='#c05f24'; ball.style.boxShadow='0 0 7px #c05f24aa'; }
+  rot.appendChild(ball); box.appendChild(rot);
   if(!COMPASS_FACE) ['N','E','S','O'].forEach((d,i)=>box.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',
     transform:`translate(-50%,-50%) rotate(${i*90}deg) translateY(${-C.r+30}px) rotate(${-i*90}deg)`,font:'22px VG5000,monospace',color:'#3a3a3a'},d)));
-  box.appendChild(Object.assign(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',
-    font:'42px VG5000,monospace',color:'#2a2a28'},compassHeading!=null?Math.round(compassHeading)+'°':'--°'),{id:'compass-deg'}));
-  if(!compassStarted){ const act=v4El('',{position:'absolute',left:'50%',top:'74%',transform:'translate(-50%,-50%)',cursor:'pointer',
-    font:'14px VG5000,monospace',color:'#fff',background:'#0a4da0',borderRadius:'8px',padding:'8px 14px'},'Activer'); act.onclick=()=>compassStart(); box.appendChild(act); }
+  const ctr=v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',textAlign:'center',pointerEvents:'none'});
+  ctr.innerHTML=`<div id="compass-deg" style="font:${Math.round(D*CO.degSz)}px VG5000,monospace;color:${COMPASS_FACE?'#fff':'#2a2a28'};line-height:1">${compassHeading!=null?Math.round(compassHeading)+'°':'--°'}</div>`+
+    `<div id="compass-card" style="font:${Math.round(D*CO.cardSz)}px VG5000,monospace;color:${COMPASS_FACE?'#c9ccd2':'#5a5d55'};letter-spacing:.1em;margin-top:2px">${compassHeading!=null?compassPoint(compassHeading):''}</div>`;
+  box.appendChild(ctr);
+  if(!compassStarted){ const act=v4El('',{position:'absolute',left:'50%',top:'84%',transform:'translate(-50%,-50%)',cursor:'pointer',
+    font:'13px VG5000,monospace',color:'#fff',background:'#0a4da0',borderRadius:'8px',padding:'7px 13px'},'Activer'); act.onclick=()=>compassStart(); box.appendChild(act); }
   V4.P.appendChild(box); }
 
 const PANELV4={
