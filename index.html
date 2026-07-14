@@ -2475,9 +2475,9 @@ const COMMU_ICON_KEYS = Object.keys(COMMU_ICONS);
 function commuSvg(icon,size,color){ const p=COMMU_ICONS[icon]||COMMU_ICONS.star;
   return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${color||'#0a4da0'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`; }
 const COMMU_COLORS = ['#0a4da0','#c0392b','#27ae60','#8e44ad','#e67e22','#16a085','#2c3e50','#d81b8c'];
-// pastille avatar : cercle blanc + svg coloré (3e arg ignoré = ex-couronne, retirée)
+// avatar/point = svg coloré SANS fond (ni cercle blanc ni bordure)
 function commuAvatarHTML(a,size){ const c=(a&&a.color)||'#0a4da0', ic=(a&&a.icon)||'star';
-  return `<div style="background:#fff;border-radius:50%;width:${size}px;height:${size}px;display:inline-flex;align-items:center;justify-content:center;border:2px solid ${c};box-sizing:border-box">${commuSvg(ic,Math.round(size*0.56),c)}</div>`; }
+  return commuSvg(ic,size,c); }
 let COMMU = (()=>{ try{ return JSON.parse(localStorage.getItem('drm-commu'))||{}; }catch(e){ return {}; } })();
 function commuPoints(){ COMMU.points = COMMU.points || []; return COMMU.points; }
 function saveCommu(){ try{ localStorage.setItem('drm-commu',JSON.stringify(COMMU)); }catch(e){} }
@@ -2589,11 +2589,12 @@ function commuPanel(){
   // moins de boutons : l'essentiel vit dans l'écran (pokédex). Colonne générique, plaque dédiée à venir.
   const acts=[
     {label:'Poser un point', fn:()=>commuCreatePoint()},
+    {label:'Ma salle', fn:()=>{ V4.commuView='room'; drawPanel(); }},
     {label:'Créer une salle', fn:()=>commuCreateRoom()},
     {label:'Rejoindre (code)', fn:()=>commuJoinRoom()},
     {label:'Partager (lien)', fn:()=>commuShare()}
   ];
-  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:340+i*126,label:a.label,onClick:a.fn}));
+  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:300+i*114,label:a.label,onClick:a.fn}));
   v4CommuScreen(); }
 function commuScreenBox(){ const S={x:96,y:247,w:474,h:600};
   const box=v4El('',{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute',
@@ -2602,6 +2603,7 @@ function commuScreenBox(){ const S={x:96,y:247,w:474,h:600};
 function v4CommuScreen(){
   const box=commuScreenBox();
   const view=V4.commuView||'list';
+  if(view==='room') return commuRoomView(box);
   if(view && view.detail) return commuRenderDetail(box, view.detail);
   const me=commuMe();
   // header : avatar+couronne (édit) | nom | toggle visibilité
@@ -2612,25 +2614,15 @@ function v4CommuScreen(){
   const eye=v4El('',{cursor:'pointer',font:'11px VG5000,monospace',color:'#2a2c27',padding:'7px 9px',border:'1px solid #cdd2c6',borderRadius:'6px',background:state.layers.amis?'#a9c6a0':'#d6d9d0',whiteSpace:'nowrap'},state.layers.amis?'Visible':'Masqué');
   eye.onclick=()=>{ state.layers.amis=!state.layers.amis; renderAmis(); drawPanel(); };
   head.appendChild(av); head.appendChild(nm); head.appendChild(eye); box.appendChild(head);
-  // GROUPE LIVE (salle par code)
+  // GROUPE : bloc compact cliquable → ouvre la vue Salle (code en gros)
   const gb=v4El('',{background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',padding:'10px',marginBottom:'12px'});
   if(COMMU.room){
     const st=commuLiveConnected();
-    gb.appendChild(v4El('',{}, '')).innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="font:13px VG5000,monospace;color:#2a2c27">Salle ${COMMU.room}</div><div style="font:11px VG5000,monospace;color:${st?'#1c8f4e':'#b06a1a'}">${st?'● connecté':'○ …'}</div></div>`;
-    const strip=v4El('',{display:'flex',gap:'8px',flexWrap:'wrap',alignItems:'center',marginBottom:'8px'});
-    strip.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#5a5d55'},`Live (${liveMembers.length}) :`));
-    liveMembers.forEach(mm=>{ const pr=mm.profile||{}; const c=v4El('',{}); c.title=pr.name||'?'; c.innerHTML=commuAvatarHTML({icon:pr.icon,color:pr.color},30);
-      if(mm.pos){ c.style.cursor='pointer'; c.onclick=()=>map.flyTo({center:[mm.pos.lng,mm.pos.lat],zoom:13,duration:1000}); } strip.appendChild(c); });
-    if(!liveMembers.length) strip.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#7a7d73'},'seul pour l\'instant'));
-    gb.appendChild(strip);
-    const row=v4El('',{display:'flex',gap:'8px'});
-    const loc=v4El('',{cursor:'pointer',flex:'1',textAlign:'center',font:'11px VG5000,monospace',color:'#fff',background:COMMU.shareLoc?'#1c8f4e':'#6a6d64',borderRadius:'6px',padding:'9px'},COMMU.shareLoc?'Position partagée ✓':'Partager ma position');
-    loc.onclick=()=>commuShareLocToggle();
-    const leave=v4El('',{cursor:'pointer',textAlign:'center',font:'11px VG5000,monospace',color:'#fff',background:'#c0392b',borderRadius:'6px',padding:'9px 12px'},'Quitter');
-    leave.onclick=()=>commuLeaveRoom();
-    row.appendChild(loc); row.appendChild(leave); gb.appendChild(row);
+    gb.style.cursor='pointer';
+    gb.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font:13px VG5000,monospace;color:#2a2c27">${roomName?esc(roomName)+' · ':''}Salle ${COMMU.room}</div><div style="font:11px VG5000,monospace;color:${st?'#1c8f4e':'#b06a1a'}">${st?'● connecté':'○ …'} · ${liveMembers.length} live</div></div><div style="font:22px;color:#7a7d73;line-height:1">›</div></div>`;
+    gb.onclick=()=>{ V4.commuView='room'; drawPanel(); };
   } else {
-    gb.innerHTML='<div style="font:12px VG5000,monospace;color:#5a5d55;line-height:1.45">Crée une salle ou rejoins-en une (code 6 chiffres) pour voir tes amis <b>en live</b> sur la carte.</div>';
+    gb.innerHTML='<div style="font:12px VG5000,monospace;color:#5a5d55;line-height:1.45">Crée une salle ou rejoins-en une (bouton « Ma salle ») pour voir tes amis <b>en live</b> sur la carte.</div>';
   }
   box.appendChild(gb);
   // strip amis (imports par lien)
@@ -2666,30 +2658,60 @@ function commuRenderDetail(box, id){
   fly.onclick=()=>{ state.layers.amis=true; renderAmis(); map.flyTo({center:[pt.lng,pt.lat],zoom:14,duration:1000}); }; box.appendChild(fly);
   if(pt.mine){ const del=v4El('',{cursor:'pointer',textAlign:'center',font:'12px VG5000,monospace',color:'#c0392b',padding:'6px'},'Supprimer ce point');
     del.onclick=()=>{ COMMU.points=commuPoints().filter(p=>p.id!==id); saveCommu(); V4.commuView='list'; renderAmis(); drawPanel(); }; box.appendChild(del); } }
+function commuRoomView(box){
+  const back=v4El('',{cursor:'pointer',font:'13px VG5000,monospace',color:'#2a2c27',marginBottom:'12px'},'‹ Retour');
+  back.onclick=()=>{ V4.commuView='list'; drawPanel(); }; box.appendChild(back);
+  if(!COMMU.room){
+    box.appendChild(v4El('',{font:'13px VG5000,monospace',color:'#5a5d55',marginBottom:'14px',lineHeight:'1.4'},'Tu n\'es dans aucune salle.'));
+    const b1=v4El('',{cursor:'pointer',textAlign:'center',font:'13px VG5000,monospace',color:'#fff',background:'#0a4da0',borderRadius:'8px',padding:'12px',marginBottom:'8px'},'Créer une salle'); b1.onclick=()=>commuCreateRoom(); box.appendChild(b1);
+    const b2=v4El('',{cursor:'pointer',textAlign:'center',font:'13px VG5000,monospace',color:'#2a2c27',background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',padding:'12px'},'Rejoindre (code)'); b2.onclick=()=>commuJoinRoom(); box.appendChild(b2);
+    return;
+  }
+  const st=commuLiveConnected();
+  if(roomName) box.appendChild(v4El('',{font:'16px VG5000,monospace',color:'#2a2c27',marginBottom:'2px'},roomName));
+  box.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#7a7d73',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:'6px'},'Code de la salle'));
+  const code=v4El('',{font:'46px VG5000,monospace',color:'#0a4da0',letterSpacing:'.16em',cursor:'pointer',textAlign:'center',padding:'10px 0',background:'#fff',borderRadius:'10px',marginBottom:'6px'},COMMU.room);
+  code.title='Copier le code'; code.onclick=()=>{ if(navigator.clipboard) navigator.clipboard.writeText(COMMU.room).then(()=>toast('Code copié',2000)); }; box.appendChild(code);
+  box.appendChild(v4El('',{font:'11px VG5000,monospace',color:st?'#1c8f4e':'#b06a1a',marginBottom:'14px'},st?'● connecté — appuie sur le code pour le copier':'○ connexion…'));
+  box.appendChild(v4El('',{font:'12px VG5000,monospace',color:'#5a5d55',marginBottom:'6px'},`Membres live (${liveMembers.length})`));
+  if(liveMembers.length){ const strip=v4El('',{display:'flex',gap:'12px',flexWrap:'wrap',marginBottom:'14px'});
+    liveMembers.forEach(mm=>{ const pr=mm.profile||{}; const c=v4El('',{display:'flex',flexDirection:'column',alignItems:'center',gap:'3px',cursor:mm.pos?'pointer':'default'});
+      c.innerHTML=`${commuAvatarHTML({icon:pr.icon,color:pr.color},34)}<div style="font:10px VG5000,monospace;color:#2a2c27">${esc(pr.name||'?')}</div>`;
+      if(mm.pos) c.onclick=()=>map.flyTo({center:[mm.pos.lng,mm.pos.lat],zoom:13,duration:1000}); strip.appendChild(c); });
+    box.appendChild(strip);
+  } else box.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#7a7d73',marginBottom:'14px'},'seul pour l\'instant'));
+  const loc=v4El('',{cursor:'pointer',textAlign:'center',font:'13px VG5000,monospace',color:'#fff',background:COMMU.shareLoc?'#1c8f4e':'#6a6d64',borderRadius:'8px',padding:'12px',marginBottom:'8px'},COMMU.shareLoc?'Position partagée ✓':'Partager ma position');
+  loc.onclick=()=>commuShareLocToggle(); box.appendChild(loc);
+  const leave=v4El('',{cursor:'pointer',textAlign:'center',font:'12px VG5000,monospace',color:'#c0392b',padding:'8px'},'Quitter la salle');
+  leave.onclick=()=>commuLeaveRoom(); box.appendChild(leave); }
 
 // ── Communauté LIVE : Worker Cloudflare, une SALLE par code PIN (6 chiffres) ──
 const COMMU_API='https://drome-commu.bracciali-a-m.workers.dev';
 const COMMU_WS=COMMU_API.replace(/^http/,'ws');
-let liveWS=null, liveMembers=[], liveMarkers=[], geoWatch=0, livePos=null;
+let liveWS=null, liveMembers=[], liveMarkers=[], geoWatch=0, livePos=null, roomName='';
 function commuUid(){ if(!COMMU.uid){ COMMU.uid='u_'+Math.random().toString(36).slice(2,10); saveCommu(); } return COMMU.uid; }
 function commuLiveConnected(){ return liveWS && liveWS.readyState===1; }
 function commuHello(){ if(!commuLiveConnected())return; const me=commuMe();
   liveWS.send(JSON.stringify({type:'hello',uid:commuUid(),profile:{name:me.name,icon:me.icon,color:me.color},pos:livePos})); }
-function commuConnect(code){ commuDisconnect(); COMMU.room=code; saveCommu();
+function commuConnect(code, metaName){ commuDisconnect(); COMMU.room=code; saveCommu(); roomName='';
   try{ liveWS=new WebSocket(COMMU_WS+'/room/'+code); }catch(e){ toast('Connexion impossible',3000); return; }
-  liveWS.onopen=()=>{ state.layers.amis=true; commuHello(); if(COMMU.shareLoc) commuStartGeo(); if(state.activeTab==='patri')drawPanel(); };
+  liveWS.onopen=()=>{ state.layers.amis=true; commuHello();
+    if(metaName && metaName.trim()) liveWS.send(JSON.stringify({type:'meta',name:metaName.trim()}));
+    if(COMMU.shareLoc) commuStartGeo(); if(state.activeTab==='patri')drawPanel(); };
   liveWS.onmessage=ev=>{ let m; try{m=JSON.parse(ev.data);}catch(e){return;}
     if(m.type==='members'){ liveMembers=(m.members||[]).filter(x=>x.uid!==commuUid()); renderLive(); if(state.activeTab==='patri')drawPanel(); }
+    else if(m.type==='meta'){ roomName=m.name||''; if(state.activeTab==='patri')drawPanel(); }
     else if(m.type==='points'){ commuMergeShared(m.points||[]); renderAmis(); if(state.activeTab==='patri')drawPanel(); } };
   liveWS.onclose=()=>{ liveWS=null; liveMembers=[]; renderLive(); if(state.activeTab==='patri')drawPanel(); };
   liveWS.onerror=()=>{}; }
 function commuDisconnect(){ if(liveWS){ try{liveWS.close();}catch(e){} liveWS=null; } liveMembers=[]; renderLive(); }
-function commuLeaveRoom(){ commuStopGeo(); commuDisconnect(); COMMU.room=null; COMMU.shareLoc=false; saveCommu(); drawPanel(); }
-function commuCreateRoom(){ fetch(COMMU_API+'/room/new',{method:'POST'}).then(r=>r.json()).then(d=>{
-  if(d&&d.code){ commuConnect(d.code); toast('Salle '+d.code+' créée — partage ce code',6000); } else toast('Erreur',3000); }).catch(()=>toast('Erreur réseau',3000)); }
+function commuLeaveRoom(){ commuStopGeo(); commuDisconnect(); COMMU.room=null; COMMU.shareLoc=false; roomName=''; saveCommu(); V4.commuView='list'; drawPanel(); }
+function commuCreateRoom(){ const name=prompt('Nom de la salle (ex : Rando dimanche) :'); if(name===null)return;
+  fetch(COMMU_API+'/room/new',{method:'POST'}).then(r=>r.json()).then(d=>{
+  if(d&&d.code){ V4.commuView='room'; commuConnect(d.code, name); toast('Salle '+d.code+' créée — partage ce code',6000); } else toast('Erreur',3000); }).catch(()=>toast('Erreur réseau',3000)); }
 function commuJoinRoom(){ const code=prompt('Code de la salle (6 chiffres) :'); if(!code)return; const c=code.replace(/\D/g,'').slice(0,6);
   if(c.length!==6){ toast('Code invalide',2500); return; }
-  fetch(COMMU_API+'/room/'+c+'/exists').then(r=>r.json()).then(d=>{ if(d&&d.exists){ commuConnect(c); toast('Salle rejointe',2500); } else toast('Salle introuvable',3000); }).catch(()=>toast('Erreur réseau',3000)); }
+  fetch(COMMU_API+'/room/'+c+'/exists').then(r=>r.json()).then(d=>{ if(d&&d.exists){ V4.commuView='room'; commuConnect(c); toast('Salle rejointe',2500); } else toast('Salle introuvable',3000); }).catch(()=>toast('Erreur réseau',3000)); }
 function commuMergeShared(pts){ const mine=commuPoints(); pts.forEach(q=>{ if(!q.id)return; const ex=mine.find(x=>x.id===q.id);
   if(ex){ if(!ex.mine) Object.assign(ex,{title:q.title,comment:q.comment,lng:q.lng,lat:q.lat,aicon:q.aicon,acolor:q.acolor,author:q.author}); }
   else mine.push({id:q.id,author:q.author||'?',aicon:q.aicon,acolor:q.acolor,lng:q.lng,lat:q.lat,title:q.title||'Point',comment:q.comment||'',ts:q.ts||Date.now(),mine:false,shared:true}); });
