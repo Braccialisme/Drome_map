@@ -10,7 +10,7 @@ class_name = "Room"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["Room"]
+new_sqlite_classes = ["Room"]   # SQLite backend = requis (et gratuit) pour les DO en plan free
 
 # KV : réserve les codes PIN (évite les collisions entre groupes) + stocke le
 # dernier snapshot d'une salle (points partagés) pour survie au redémarrage du DO.
