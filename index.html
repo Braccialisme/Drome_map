@@ -979,7 +979,8 @@ const state = {
     glaciers: false,
     boulangeries: false,
     eau_potable: false,
-    amis: false
+    amis: false,
+    mesures: false
   }
 };
 
@@ -2592,9 +2593,10 @@ function commuPanel(){
     {label:'Ma salle', fn:()=>{ V4.commuView='room'; drawPanel(); }},
     {label:'Créer une salle', fn:()=>commuCreateRoom()},
     {label:'Rejoindre (code)', fn:()=>commuJoinRoom()},
+    {label:'Mesures (Limbes)', fn:()=>{ V4.commuView='mesures'; drawPanel(); }},
     {label:'Partager (lien)', fn:()=>commuShare()}
   ];
-  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:300+i*114,label:a.label,onClick:a.fn}));
+  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:296+i*98,label:a.label,onClick:a.fn}));
   v4CommuScreen(); }
 function commuScreenBox(){ const S={x:96,y:247,w:474,h:600};
   const box=v4El('',{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute',
@@ -2604,6 +2606,7 @@ function v4CommuScreen(){
   const box=commuScreenBox();
   const view=V4.commuView||'list';
   if(view==='room') return commuRoomView(box);
+  if(view==='mesures') return v4MesuresScreen(box);
   if(view && view.detail) return commuRenderDetail(box, view.detail);
   const me=commuMe();
   // header : avatar+couronne (édit) | nom | toggle visibilité
@@ -2732,6 +2735,38 @@ function renderLive(){ liveMarkers.forEach(m=>m.remove()); liveMarkers=[];
     el.title=(pr.name||'?')+' (live)';
     liveMarkers.push(new maplibregl.Marker({element:el,anchor:'center'}).setLngLat([mem.pos.lng,mem.pos.lat]).addTo(map)); }); }
 function commuAutoConnect(){ if(COMMU.room) commuConnect(COMMU.room); }
+
+// ── Pont Limbes : ouvre Limbes (mesures sextant/GPS), récupère la mesure via #mesure= ──
+const LIMBES_URL='https://limbes.bracciali-a-m.workers.dev';
+function commuMesures(){ COMMU.mesures=COMMU.mesures||[]; return COMMU.mesures; }
+function mesuresOpenLimbes(){ location.href=LIMBES_URL+'/?cb='+encodeURIComponent(location.origin+location.pathname); }
+function mesuresIngest(){ const m=(location.hash||'').match(/mesure=([^&]+)/); if(!m) return false;
+  const d=commuDecode(m[1]); history.replaceState(null,'',location.pathname+location.search); if(!d) return false;
+  const arr=commuMesures(), id=d.id||('m_'+Date.now());
+  if(!arr.some(x=>x.id===id)) arr.unshift({id,ts:d.ts||Date.now(),kind:d.kind||'',label:d.label||'Mesure',detail:d.detail||'',lat:d.lat,lon:d.lon,altM:d.altM});
+  saveCommu(); state.layers.mesures=true; renderMesures(); if(state.activeTab==='patri')drawPanel(); toast('Mesure importée de Limbes',3500); return true; }
+let mesuresMarkers=[];
+function renderMesures(){ mesuresMarkers.forEach(m=>m.remove()); mesuresMarkers=[];
+  if(!state.layers.mesures || typeof maplibregl==='undefined') return;
+  commuMesures().forEach(z=>{ if(z.lat==null||z.lon==null) return;
+    const el=document.createElement('div'); el.style.cssText='cursor:pointer;filter:drop-shadow(0 1px 2px #0007)';
+    el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:15px;height:15px;background:#0a8a8a;border:2px solid #fff;transform:rotate(45deg)"></div><div style="font:10px VG5000,monospace;color:#083a3a;background:#ffffffd0;padding:0 3px;border-radius:3px;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis">${esc(z.detail||z.label)}</div></div>`;
+    el.title=z.label+' — '+z.detail;
+    el.onclick=()=>{ V4.commuView='mesures'; state.activeTab='patri'; if(typeof setPanelCollapsed==='function'&&document.getElementById('panel-wrap').classList.contains('collapsed'))setPanelCollapsed(false); drawPanel(); };
+    mesuresMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat([z.lon,z.lat]).addTo(map)); }); }
+function v4MesuresScreen(box){
+  const back=v4El('',{cursor:'pointer',font:'13px VG5000,monospace',color:'#2a2c27',marginBottom:'12px'},'‹ Retour'); back.onclick=()=>{V4.commuView='list';drawPanel();}; box.appendChild(back);
+  const nv=v4El('',{cursor:'pointer',textAlign:'center',font:'13px VG5000,monospace',color:'#fff',background:'#0a8a8a',borderRadius:'8px',padding:'12px',marginBottom:'8px'},'Nouvelle mesure (Limbes)'); nv.onclick=()=>mesuresOpenLimbes(); box.appendChild(nv);
+  const eye=v4El('',{cursor:'pointer',textAlign:'center',font:'12px VG5000,monospace',color:state.layers.mesures?'#fff':'#2a2c27',background:state.layers.mesures?'#1c8f4e':'#d6d9d0',borderRadius:'8px',padding:'9px',marginBottom:'12px'},state.layers.mesures?'Mesures visibles ✓':'Afficher sur la carte');
+  eye.onclick=()=>{ state.layers.mesures=!state.layers.mesures; renderMesures(); drawPanel(); }; box.appendChild(eye);
+  const arr=commuMesures();
+  box.appendChild(v4El('',{font:'12px VG5000,monospace',color:'#5a5d55',margin:'2px 0 8px'},`Mesures (${arr.length})`));
+  if(!arr.length){ box.appendChild(v4El('',{color:'#5a5d55',font:'13px VG5000,monospace',textAlign:'center',padding:'14px',lineHeight:'1.5'},'Aucune mesure.\n« Nouvelle mesure » ouvre Limbes ;\nà la fin, « Envoyer à Drôme ».')); return; }
+  arr.forEach(z=>{ const card=v4El('',{display:'flex',alignItems:'center',gap:'10px',padding:'8px',marginBottom:'8px',background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',cursor:z.lat!=null?'pointer':'default'});
+    const d=new Date(z.ts), st=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+    card.innerHTML=`<div style="width:13px;height:13px;background:#0a8a8a;transform:rotate(45deg);flex:none"></div><div style="flex:1;min-width:0"><div style="font:13px VG5000,monospace;color:#2a2c27">${esc(z.label)}</div><div style="font:11px VG5000,monospace;color:#5a5d55">${esc(z.detail)}${z.lat!=null?' · '+st:''}</div></div>`;
+    if(z.lat!=null) card.onclick=()=>{ state.layers.mesures=true; renderMesures(); map.flyTo({center:[z.lon,z.lat],zoom:13,duration:1000}); };
+    box.appendChild(card); }); }
 
 // ── Boussole Nature : cap réel via capteur d'orientation ──────────────────────
 const COMPASS_FACE='assets/ui/compass-face.png';   // fond assemblé (1449x1617, centre vide)
@@ -3237,7 +3272,7 @@ function hideSplash() {
   s.classList.add('hide');
   setTimeout(() => { s.style.display = 'none'; }, 650);
 }
-map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender(); if(typeof commuIngest==='function') commuIngest(); if(typeof commuAutoConnect==='function') commuAutoConnect(); setTimeout(hideSplash, 500); });
+map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender(); if(typeof commuIngest==='function') commuIngest(); if(typeof mesuresIngest==='function') mesuresIngest(); if(typeof commuAutoConnect==='function') commuAutoConnect(); setTimeout(hideSplash, 500); });
 setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init

@@ -3,7 +3,7 @@
 // navigation, réutilisables hors-ligne pendant 30 jours.
 // Actif uniquement en https (GitHub Pages) ou localhost — pas en file://.
 
-const VERSION = 'v23';
+const VERSION = 'v24';
 const SHELL = 'drome-shell-' + VERSION;
 const RUNTIME = 'drome-runtime-' + VERSION;
 const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 jours
