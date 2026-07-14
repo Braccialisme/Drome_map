@@ -2537,9 +2537,10 @@ function commuPlaceConfirm(cx,cy){ const ll=map.unproject([cx,cy]); commuPlaceEn
   const me=commuMe();
   const title=prompt('Titre du point (ex : Vue sur la Tour de Crest) :'); if(title==null){ drawPanel(); return; }
   const comment=prompt('Commentaire (ex : vue à 4.5km) :')||'';
-  commuPoints().push({ id:'p_'+Date.now()+'_'+Math.floor(Math.random()*1e4), author:me.name, aicon:me.icon, acolor:me.color,
-    lng:+ll.lng.toFixed(5), lat:+ll.lat.toFixed(5), title:title.trim()||'Point', comment:comment.trim(), ts:Date.now(), mine:true });
-  saveCommu(); state.layers.amis=true; renderAmis(); drawPanel(); toast('Point posé',2500); }
+  const pt={ id:'p_'+Date.now()+'_'+Math.floor(Math.random()*1e4), author:me.name, aicon:me.icon, acolor:me.color,
+    lng:+ll.lng.toFixed(5), lat:+ll.lat.toFixed(5), title:title.trim()||'Point', comment:comment.trim(), ts:Date.now(), mine:true };
+  commuPoints().push(pt); saveCommu(); commuBroadcastPoint(pt);   // partage live si en salle
+  state.layers.amis=true; renderAmis(); drawPanel(); toast('Point posé',2500); }
 let amisMarkers=[];
 function renderAmis(){ amisMarkers.forEach(m=>m.remove()); amisMarkers=[];  // markers = points personnalisés (posés par toi/amis)
   if(!state.layers.amis || typeof maplibregl==='undefined') return;
@@ -2588,9 +2589,9 @@ function commuPanel(){
   // moins de boutons : l'essentiel vit dans l'écran (pokédex). Colonne générique, plaque dédiée à venir.
   const acts=[
     {label:'Poser un point', fn:()=>commuCreatePoint()},
-    {label:'Partager', fn:()=>commuShare()},
-    {label:'Copier le lien', fn:()=>commuCopyLink()},
-    {label:'+ Ami (lien)', fn:()=>commuAddFriend()}
+    {label:'Créer une salle', fn:()=>commuCreateRoom()},
+    {label:'Rejoindre (code)', fn:()=>commuJoinRoom()},
+    {label:'Partager (lien)', fn:()=>commuShare()}
   ];
   acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:340+i*126,label:a.label,onClick:a.fn}));
   v4CommuScreen(); }
@@ -2611,7 +2612,28 @@ function v4CommuScreen(){
   const eye=v4El('',{cursor:'pointer',font:'11px VG5000,monospace',color:'#2a2c27',padding:'7px 9px',border:'1px solid #cdd2c6',borderRadius:'6px',background:state.layers.amis?'#a9c6a0':'#d6d9d0',whiteSpace:'nowrap'},state.layers.amis?'Visible':'Masqué');
   eye.onclick=()=>{ state.layers.amis=!state.layers.amis; renderAmis(); drawPanel(); };
   head.appendChild(av); head.appendChild(nm); head.appendChild(eye); box.appendChild(head);
-  // strip amis
+  // GROUPE LIVE (salle par code)
+  const gb=v4El('',{background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',padding:'10px',marginBottom:'12px'});
+  if(COMMU.room){
+    const st=commuLiveConnected();
+    gb.appendChild(v4El('',{}, '')).innerHTML=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="font:13px VG5000,monospace;color:#2a2c27">Salle ${COMMU.room}</div><div style="font:11px VG5000,monospace;color:${st?'#1c8f4e':'#b06a1a'}">${st?'● connecté':'○ …'}</div></div>`;
+    const strip=v4El('',{display:'flex',gap:'8px',flexWrap:'wrap',alignItems:'center',marginBottom:'8px'});
+    strip.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#5a5d55'},`Live (${liveMembers.length}) :`));
+    liveMembers.forEach(mm=>{ const pr=mm.profile||{}; const c=v4El('',{}); c.title=pr.name||'?'; c.innerHTML=commuAvatarHTML({icon:pr.icon,color:pr.color},30);
+      if(mm.pos){ c.style.cursor='pointer'; c.onclick=()=>map.flyTo({center:[mm.pos.lng,mm.pos.lat],zoom:13,duration:1000}); } strip.appendChild(c); });
+    if(!liveMembers.length) strip.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#7a7d73'},'seul pour l\'instant'));
+    gb.appendChild(strip);
+    const row=v4El('',{display:'flex',gap:'8px'});
+    const loc=v4El('',{cursor:'pointer',flex:'1',textAlign:'center',font:'11px VG5000,monospace',color:'#fff',background:COMMU.shareLoc?'#1c8f4e':'#6a6d64',borderRadius:'6px',padding:'9px'},COMMU.shareLoc?'Position partagée ✓':'Partager ma position');
+    loc.onclick=()=>commuShareLocToggle();
+    const leave=v4El('',{cursor:'pointer',textAlign:'center',font:'11px VG5000,monospace',color:'#fff',background:'#c0392b',borderRadius:'6px',padding:'9px 12px'},'Quitter');
+    leave.onclick=()=>commuLeaveRoom();
+    row.appendChild(loc); row.appendChild(leave); gb.appendChild(row);
+  } else {
+    gb.innerHTML='<div style="font:12px VG5000,monospace;color:#5a5d55;line-height:1.45">Crée une salle ou rejoins-en une (code 6 chiffres) pour voir tes amis <b>en live</b> sur la carte.</div>';
+  }
+  box.appendChild(gb);
+  // strip amis (imports par lien)
   const fr=commuFriends();
   if(fr.length){ const strip=v4El('',{display:'flex',gap:'8px',flexWrap:'wrap',alignItems:'center',marginBottom:'12px'});
     strip.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#5a5d55'},'Amis :'));
@@ -2644,6 +2666,50 @@ function commuRenderDetail(box, id){
   fly.onclick=()=>{ state.layers.amis=true; renderAmis(); map.flyTo({center:[pt.lng,pt.lat],zoom:14,duration:1000}); }; box.appendChild(fly);
   if(pt.mine){ const del=v4El('',{cursor:'pointer',textAlign:'center',font:'12px VG5000,monospace',color:'#c0392b',padding:'6px'},'Supprimer ce point');
     del.onclick=()=>{ COMMU.points=commuPoints().filter(p=>p.id!==id); saveCommu(); V4.commuView='list'; renderAmis(); drawPanel(); }; box.appendChild(del); } }
+
+// ── Communauté LIVE : Worker Cloudflare, une SALLE par code PIN (6 chiffres) ──
+const COMMU_API='https://drome-commu.bracciali-a-m.workers.dev';
+const COMMU_WS=COMMU_API.replace(/^http/,'ws');
+let liveWS=null, liveMembers=[], liveMarkers=[], geoWatch=0, livePos=null;
+function commuUid(){ if(!COMMU.uid){ COMMU.uid='u_'+Math.random().toString(36).slice(2,10); saveCommu(); } return COMMU.uid; }
+function commuLiveConnected(){ return liveWS && liveWS.readyState===1; }
+function commuHello(){ if(!commuLiveConnected())return; const me=commuMe();
+  liveWS.send(JSON.stringify({type:'hello',uid:commuUid(),profile:{name:me.name,icon:me.icon,color:me.color},pos:livePos})); }
+function commuConnect(code){ commuDisconnect(); COMMU.room=code; saveCommu();
+  try{ liveWS=new WebSocket(COMMU_WS+'/room/'+code); }catch(e){ toast('Connexion impossible',3000); return; }
+  liveWS.onopen=()=>{ state.layers.amis=true; commuHello(); if(COMMU.shareLoc) commuStartGeo(); if(state.activeTab==='patri')drawPanel(); };
+  liveWS.onmessage=ev=>{ let m; try{m=JSON.parse(ev.data);}catch(e){return;}
+    if(m.type==='members'){ liveMembers=(m.members||[]).filter(x=>x.uid!==commuUid()); renderLive(); if(state.activeTab==='patri')drawPanel(); }
+    else if(m.type==='points'){ commuMergeShared(m.points||[]); renderAmis(); if(state.activeTab==='patri')drawPanel(); } };
+  liveWS.onclose=()=>{ liveWS=null; liveMembers=[]; renderLive(); if(state.activeTab==='patri')drawPanel(); };
+  liveWS.onerror=()=>{}; }
+function commuDisconnect(){ if(liveWS){ try{liveWS.close();}catch(e){} liveWS=null; } liveMembers=[]; renderLive(); }
+function commuLeaveRoom(){ commuStopGeo(); commuDisconnect(); COMMU.room=null; COMMU.shareLoc=false; saveCommu(); drawPanel(); }
+function commuCreateRoom(){ fetch(COMMU_API+'/room/new',{method:'POST'}).then(r=>r.json()).then(d=>{
+  if(d&&d.code){ commuConnect(d.code); toast('Salle '+d.code+' créée — partage ce code',6000); } else toast('Erreur',3000); }).catch(()=>toast('Erreur réseau',3000)); }
+function commuJoinRoom(){ const code=prompt('Code de la salle (6 chiffres) :'); if(!code)return; const c=code.replace(/\D/g,'').slice(0,6);
+  if(c.length!==6){ toast('Code invalide',2500); return; }
+  fetch(COMMU_API+'/room/'+c+'/exists').then(r=>r.json()).then(d=>{ if(d&&d.exists){ commuConnect(c); toast('Salle rejointe',2500); } else toast('Salle introuvable',3000); }).catch(()=>toast('Erreur réseau',3000)); }
+function commuMergeShared(pts){ const mine=commuPoints(); pts.forEach(q=>{ if(!q.id)return; const ex=mine.find(x=>x.id===q.id);
+  if(ex){ if(!ex.mine) Object.assign(ex,{title:q.title,comment:q.comment,lng:q.lng,lat:q.lat,aicon:q.aicon,acolor:q.acolor,author:q.author}); }
+  else mine.push({id:q.id,author:q.author||'?',aicon:q.aicon,acolor:q.acolor,lng:q.lng,lat:q.lat,title:q.title||'Point',comment:q.comment||'',ts:q.ts||Date.now(),mine:false,shared:true}); });
+  saveCommu(); }
+function commuBroadcastPoint(pt){ if(commuLiveConnected()) liveWS.send(JSON.stringify({type:'point',point:{id:pt.id,title:pt.title,comment:pt.comment,lng:pt.lng,lat:pt.lat,author:pt.author,aicon:pt.aicon,acolor:pt.acolor,ts:pt.ts}})); }
+function commuStartGeo(){ if(!navigator.geolocation)return; commuStopGeo();
+  geoWatch=navigator.geolocation.watchPosition(p=>{ livePos={lng:+p.coords.longitude.toFixed(5),lat:+p.coords.latitude.toFixed(5)};
+    if(commuLiveConnected()) liveWS.send(JSON.stringify({type:'pos',lng:livePos.lng,lat:livePos.lat})); }, ()=>{}, {enableHighAccuracy:true,maximumAge:5000,timeout:15000}); }
+function commuStopGeo(){ if(geoWatch){ navigator.geolocation.clearWatch(geoWatch); geoWatch=0; } }
+function commuShareLocToggle(){ COMMU.shareLoc=!COMMU.shareLoc; saveCommu();
+  if(COMMU.shareLoc){ commuStartGeo(); toast('Ta position est partagée dans la salle',3500); } else commuStopGeo();
+  drawPanel(); }
+function renderLive(){ liveMarkers.forEach(m=>m.remove()); liveMarkers=[];
+  if(!state.layers.amis || typeof maplibregl==='undefined')return;
+  liveMembers.forEach(mem=>{ if(!mem.pos)return; const pr=mem.profile||{};
+    const el=document.createElement('div'); el.style.cssText='cursor:pointer;filter:drop-shadow(0 1px 3px #0007)';
+    el.innerHTML=`<div style="position:relative">${commuAvatarHTML({icon:pr.icon,color:pr.color},38)}<div style="position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:#27d07a;border:2px solid #fff"></div></div>`;
+    el.title=(pr.name||'?')+' (live)';
+    liveMarkers.push(new maplibregl.Marker({element:el,anchor:'center'}).setLngLat([mem.pos.lng,mem.pos.lat]).addTo(map)); }); }
+function commuAutoConnect(){ if(COMMU.room) commuConnect(COMMU.room); }
 
 const PANELV4={
   fond(){ pillsV4();
@@ -3103,7 +3169,7 @@ function hideSplash() {
   s.classList.add('hide');
   setTimeout(() => { s.style.display = 'none'; }, 650);
 }
-map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender(); if(typeof commuIngest==='function') commuIngest(); setTimeout(hideSplash, 500); });
+map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender(); if(typeof commuIngest==='function') commuIngest(); if(typeof commuAutoConnect==='function') commuAutoConnect(); setTimeout(hideSplash, 500); });
 setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
