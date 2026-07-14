@@ -2738,7 +2738,7 @@ const COMPASS_FACE='assets/ui/compass-face.png';   // fond assemblé (1449x1617,
 const COMPASS_BALL='assets/ui/compass-ball.png';   // boule orange (Group 204)
 // géométrie en fractions du box carré. Fond en center/contain (1449x1617 → padding H),
 // le ring est plus HAUT que le centre du box (jupe d'ombre en bas) → cyf<0.5.
-const CO={ cxf:.5, cyf:.455, orbit:.205, ballSz:.11, degSz:.11, cardSz:.046 };
+const CO={ cxf:.5, cyf:.455, orbit:.205, ballSz:.11, degSz:.095, cardSz:.044 };
 let compassHeading=null, compassStarted=false;
 function compassPoint(h){ return ['N','NE','E','SE','S','SO','O','NO'][Math.round((((h||0)%360)/45))%8]; }
 function compassOnOrient(e){ let h=null;
@@ -2756,7 +2756,7 @@ function compassStart(){ if(compassStarted) return;
   if(typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function')
     DeviceOrientationEvent.requestPermission().then(s=>{ s==='granted'?go():toast('Boussole refusée',3000); }).catch(()=>toast('Boussole indisponible',3000));
   else go(); }
-function natureCompass(){ const C={cx:305, cy:585, r:205}, D=2*C.r;
+function natureCompass(){ const C={cx:336, cy:542, r:205}, D=2*C.r;
   const CXf=CO.cxf*100, CYf=CO.cyf*100, cx=D*CO.cxf, cy=D*CO.cyf;
   const box=v4El('',{position:'absolute',left:(C.cx-D/2)+'px',top:(C.cy-D/2)+'px',width:D+'px',height:D+'px'}); box.id='compass-box';
   if(COMPASS_FACE) box.style.background=`url('${COMPASS_FACE}') center/contain no-repeat`;
