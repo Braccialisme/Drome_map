@@ -2344,11 +2344,14 @@ const ICON4={
   car:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${c}' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'/><path d='M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0'/><path d='M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5'/></svg>`,
   bike:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='${c}'><path d='M5 14a4 4 0 1 1 -4 4l.005 -.2a4 4 0 0 1 3.995 -3.8'/><path d='M19 14a4 4 0 1 1 -4 4l.005 -.2a4 4 0 0 1 3.995 -3.8'/><path d='M14.832 7.445l1.703 2.555h2.465a1 1 0 0 1 .993 .883l.007 .117a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -.832 -.445l-1.396 -2.093l-3.275 2.62l2.21 2.21a1 1 0 0 1 .284 .577l.009 .131v4a1 1 0 0 1 -2 0v-3.585l-2.707 -2.708a1 1 0 0 1 -.01 -1.403l.092 -.085l5 -4a1 1 0 0 1 1.457 .226'/><path d='M17 3a2 2 0 1 1 -2 2l.005 -.15a2 2 0 0 1 1.995 -1.85'/></svg>`,
   foot:c=>`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='${c}' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M13 4m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/><path d='M7 21l3 -4'/><path d='M16 21l-2 -4l-3 -3l1 -6'/><path d='M6 12l2 -3l4 -1l3 3l3 1'/></svg>`};
-function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activites:'nature',patri:'faune',commerce:'comm',experimental:'expe'}[id]; }
+function v4Plate(id){ return {fond:'fond',nature:'nature',faune:'faune',activites:'activ',patri:'patri',commerce:'comm',experimental:'expe'}[id]; }
 function v4El(c,s,t){const d=document.createElement('div');d.className=c;Object.assign(d.style,s);if(t!=null)d.textContent=t;return d;}
 function v4scale(){ return parseFloat(document.getElementById('plate').style.getPropertyValue('--s'))||1; }
 function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.getElementById('plate');
   if(!pv||!pl)return;
+  // garde paysage : ne PAS recalculer le scale sur la largeur paysage (sinon panneau à 350%
+  // et coincé au retour portrait). Le #rotate-guard couvre l'écran de toute façon.
+  if(matchMedia('(orientation: landscape)').matches && window.innerHeight<560) return;
   // bbox OPAQUE de la plaque (le rectangle plein) — on scale/translate pour coller
   // bord/bord (les marges transparentes + peel-shadow sortent de l'écran).
   const OX=9, OY=9, OW=1132, OH=1063;
@@ -2359,6 +2362,8 @@ function fitPanel(){ const pv=document.getElementById('panel-v4'),pl=document.ge
   // repli : laisse voir tabs + top-bar (Drôme-Diois)
   document.documentElement.style.setProperty('--collapsed-peek', Math.round((235-OY)*s)+'px'); }
 addEventListener('resize',fitPanel);
+// retour portrait après rotation : re-fit décalé (les dims se stabilisent tard sur iOS/Android)
+addEventListener('orientationchange',()=>{ [150,400,800].forEach(t=>setTimeout(fitPanel,t)); });
 function keyV4(o){ makeButton(V4.P,{type:'key',x:o.x,y:o.y,label:o.label,on:o.on,onClick:o.onClick});
   // LED = point coloré par couche (moyen habile de remettre les couleurs)
   const col=o.color||'#c05f24';
@@ -2384,13 +2389,14 @@ function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
 // drag vertical LISSE : bouge le knoll direct + applique, zéro re-render (commit à la fin)
 function v4DragY(kn,RT,apply,commit){ kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
-  // rect caché au down (pas de getBoundingClientRect par move) + coalesce rAF → fluide Android
+  // knoll suit le doigt EN DIRECT (fluide) ; apply carte (lourd) throttlé ~90ms → fin du jank Android
   const r=document.getElementById('plate').getBoundingClientRect(), s=v4scale();
-  let raf=0, pend=null, lastV=null;
-  const flush=()=>{ raf=0; if(pend==null)return; const v=pend; pend=null;
-    kn.style.top=(RT.y1-v/100*(RT.y1-RT.y0))+'px'; if(v!==lastV){ lastV=v; apply(v); } };
-  const mv=ev=>{ pend=Math.max(0,Math.min(100,Math.round((RT.y1-(ev.clientY-r.top)/s)/(RT.y1-RT.y0)*100))); if(!raf) raf=requestAnimationFrame(flush); };
-  const up=()=>{ kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up); if(raf)cancelAnimationFrame(raf); flush(); commit&&commit(); };
+  let last=0, timer=0, pend=null, lastV=null;
+  const applyNow=()=>{ timer=0; if(pend==null)return; if(pend!==lastV){ lastV=pend; apply(pend); } last=performance.now(); };
+  const mv=ev=>{ const v=Math.max(0,Math.min(100,Math.round((RT.y1-(ev.clientY-r.top)/s)/(RT.y1-RT.y0)*100)));
+    kn.style.top=(RT.y1-v/100*(RT.y1-RT.y0))+'px'; pend=v;
+    const dt=performance.now()-last; if(dt>=90) applyNow(); else if(!timer) timer=setTimeout(applyNow,90-dt); };
+  const up=()=>{ kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up); if(timer)clearTimeout(timer); applyNow(); commit&&commit(); };
   kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
 // slider HORIZONTAL générique LISSE : {min,max,get,set,live,commit}
 function v4HSlider(kn,x0,len,o){
@@ -2398,12 +2404,12 @@ function v4HSlider(kn,x0,len,o){
   pos();
   kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
     const r=document.getElementById('plate').getBoundingClientRect(), s=v4scale();
-    let raf=0, pendX=null;
-    const flush=()=>{ raf=0; if(pendX==null)return; const cx=pendX; pendX=null;
-      let v=o.min+((cx-r.left)/s-x0)/len*(o.max-o.min); v=Math.max(o.min,Math.min(o.max,v));
-      o.set(v); pos(); o.live&&o.live(); };
-    const mv=ev=>{ pendX=ev.clientX; if(!raf) raf=requestAnimationFrame(flush); };
-    const up=()=>{ kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up); if(raf)cancelAnimationFrame(raf); flush(); o.commit&&o.commit(); };
+    let last=0, timer=0;
+    const live=()=>{ timer=0; o.live&&o.live(); last=performance.now(); };
+    const mv=ev=>{ let v=o.min+((ev.clientX-r.left)/s-x0)/len*(o.max-o.min); v=Math.max(o.min,Math.min(o.max,v));
+      o.set(v); pos();                       // set + knoll EN DIRECT (fluide, léger)
+      const dt=performance.now()-last; if(dt>=90) live(); else if(!timer) timer=setTimeout(live,90-dt); };  // o.live (carte) throttlé
+    const up=()=>{ kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up); if(timer)clearTimeout(timer); o.live&&o.live(); o.commit&&o.commit(); };
     kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
 
 // écran faune = bestiaire (cartes SVG + nom cliquables) filtré par groupe, avec cache
@@ -2602,6 +2608,14 @@ const PANELV4={
     TRK.ys.forEach((y,i)=>{ if(!SL[i])return; // 3e curv retiré (sert à rien)
       const kn=v4El('sknoll',{top:y+'px',backgroundImage:`url('assets/ui/${i%3===0?'knoll':'knoll-dot'}.png')`}); V4.P.appendChild(kn);
       v4HSlider(kn,TRK.x0,TRK.len,SL[i]); });
+    // slider opacité drone (générique, sous le bouton Drone) — track dessiné, pas baké
+    { const DX=417, DY=945, DLEN=250;
+      V4.P.appendChild(v4El('',{position:'absolute',left:DX+'px',top:'908px',font:'17px VG5000,monospace',color:'#7c766c',pointerEvents:'none'},'Opacité drone'));
+      V4.P.appendChild(v4El('',{position:'absolute',left:DX+'px',top:(DY-5)+'px',width:DLEN+'px',height:'10px',
+        borderRadius:'5px',background:'#9a978c',boxShadow:'inset 0 2px 4px #2a2c2755',pointerEvents:'none'}));
+      const kn=v4El('sknoll',{top:DY+'px',backgroundImage:"url('assets/ui/knoll.png')"}); V4.P.appendChild(kn);
+      v4HSlider(kn,DX,DLEN,{get:()=>state.droneOpacity,set:v=>state.droneOpacity=v,min:.1,max:1,
+        live:()=>map.getLayer('drone-lyr')&&map.setPaintProperty('drone-lyr','raster-opacity',state.droneOpacity)}); }
     const KN={cx:841,cy:709},az=Math.round(sunManual?sunAzimuthManual:sunAzimuth());
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx+48)+'px',top:'510px'},`${az}°`),{id:'kread'}));
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
@@ -2625,14 +2639,12 @@ function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)re
   plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
   // onglets = bakés dans la plaque (état actif par plaque) + noms + zones cliquables
   const TABN=['Fond','Nature','Faune','Activ','Amis','Comm','Expe'];
-  // onglets = chips PLATS en overlay (couvrent le highlight baké de la plaque, qui sinon
-  // reste orange sur le mauvais onglet quand une plaque est réutilisée). Générique, à redesigner.
+  // onglets = highlight BAKÉ dans la plaque (design keycap) ; labels + zones cliquables en overlay.
+  // Plaques activ/patri = corps réutilisé + bande d'onglets de la bonne plaque (bon onglet orange).
   V4.TABS.forEach((id,i)=>{ const act=id===state.activeTab;
-    plate.appendChild(v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'164px',height:'70px',
-      background:act?'#ee7a45':'#c2c3bd',borderRadius:'13px 13px 0 0',pointerEvents:'none'}));
-    plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+82)+'px',top:'34px',transform:'translate(-50%,-50%)',
-      font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#38382f',pointerEvents:'none'},TABN[i]));
-    const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'164px',height:'70px',cursor:'pointer'});
+    plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+75)+'px',top:'30px',transform:'translate(-50%,-50%)',
+      font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#3a3a3a',pointerEvents:'none'},TABN[i]));
+    const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
     hit.onclick=()=>{state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
   (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
 function renderPanel(){ drawPanel(); }  // compat : anciens appels
