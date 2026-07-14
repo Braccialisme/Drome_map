@@ -2338,7 +2338,7 @@ function loadPoiIcons() {
 }
 
 // ── PANNEAU v4 (plaque sprite) — remplace l'ancien rendu HTML ───────────────
-const V4 = { TABS:['fond','nature','faune','activites','patri','commerce','experimental'],
+const V4 = { TABS:['fond','nature','faune','activites','commerce','patri','experimental'],
   TABX:[14,178,342,506,670,825,989], fkind:'mammiferes', P:null };
 // icônes transport (Tabler, fournies) — c = couleur (encodée %23…)
 const ICON4={
@@ -2900,7 +2900,7 @@ const PANELV4={
 function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)return; V4.P=plate; plate.innerHTML='';
   plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
   // onglets = bakés dans la plaque (état actif par plaque) + noms + zones cliquables
-  const TABN=['Fond','Nature','Faune','Activ','Amis','Comm','Expe'];
+  const TABN=['Fond','Nature','Faune','Activ','Comm','Amis','Expe'];
   // onglets = highlight BAKÉ dans la plaque (design keycap) ; labels + zones cliquables en overlay.
   // Plaques activ/patri = corps réutilisé + bande d'onglets de la bonne plaque (bon onglet orange).
   V4.TABS.forEach((id,i)=>{ const act=id===state.activeTab;
