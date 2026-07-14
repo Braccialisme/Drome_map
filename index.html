@@ -2466,19 +2466,18 @@ const COMMU_ICONS = {
   bike:'<circle cx="6" cy="17" r="3" /><circle cx="18" cy="17" r="3" /><path d="M6 17l3 -7h5l2 7" /><path d="M14 10l-1 -3h-2" />',
   anchor:'<circle cx="12" cy="5" r="2" /><path d="M12 7v13" /><path d="M6 13a6 6 0 0 0 12 0" /><path d="M4 13h4" /><path d="M16 13h4" />',
   ghost:'<path d="M6 20v-8a6 6 0 1 1 12 0v8l-2 -1.5l-2 1.5l-2 -1.5l-2 1.5z" /><circle cx="9.5" cy="10.5" r="1" /><circle cx="14.5" cy="10.5" r="1" />',
-  music:'<circle cx="7" cy="18" r="2" /><circle cx="17" cy="16" r="2" /><path d="M9 18v-10l10 -2v10" />'
+  music:'<circle cx="7" cy="18" r="2" /><circle cx="17" cy="16" r="2" /><path d="M9 18v-10l10 -2v10" />',
+  crown:'<path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z" />',
+  skull:'<circle cx="12" cy="10" r="7" /><path d="M9 16v3M15 16v3M9 16h6" /><circle cx="9.5" cy="10" r="1.3" /><circle cx="14.5" cy="10" r="1.3" />',
+  leaf:'<path d="M5 21c0 -9 5 -14 14 -14c0 9 -5 14 -14 14" /><path d="M5 21c4 -4 7 -7 10 -9" />'
 };
 const COMMU_ICON_KEYS = Object.keys(COMMU_ICONS);
 function commuSvg(icon,size,color){ const p=COMMU_ICONS[icon]||COMMU_ICONS.star;
   return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${color||'#0a4da0'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`; }
 const COMMU_COLORS = ['#0a4da0','#c0392b','#27ae60','#8e44ad','#e67e22','#16a085','#2c3e50','#d81b8c'];
-function crownSvg(size){ return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="#e8b923" stroke="#a67c00" stroke-width="1" stroke-linejoin="round"><path d="M3 8l4 4l5 -7l5 7l4 -4l-1.6 10.5h-14.8z"/></svg>`; }
-// pastille avatar : cercle blanc + svg coloré, couronne gold optionnelle (moi)
-function commuAvatarHTML(a,size,crown){ const c=(a&&a.color)||'#0a4da0', ic=(a&&a.icon)||'star';
-  return `<div style="position:relative;width:${size}px;height:${size}px">`+
-    `<div style="background:#fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;border:2px solid ${c};box-sizing:border-box">${commuSvg(ic,Math.round(size*0.56),c)}</div>`+
-    (crown?`<div style="position:absolute;top:${-Math.round(size*0.28)}px;left:50%;transform:translateX(-50%)">${crownSvg(Math.round(size*0.5))}</div>`:'')+
-  `</div>`; }
+// pastille avatar : cercle blanc + svg coloré (3e arg ignoré = ex-couronne, retirée)
+function commuAvatarHTML(a,size){ const c=(a&&a.color)||'#0a4da0', ic=(a&&a.icon)||'star';
+  return `<div style="background:#fff;border-radius:50%;width:${size}px;height:${size}px;display:inline-flex;align-items:center;justify-content:center;border:2px solid ${c};box-sizing:border-box">${commuSvg(ic,Math.round(size*0.56),c)}</div>`; }
 let COMMU = (()=>{ try{ return JSON.parse(localStorage.getItem('drm-commu'))||{}; }catch(e){ return {}; } })();
 function commuPoints(){ COMMU.points = COMMU.points || []; return COMMU.points; }
 function saveCommu(){ try{ localStorage.setItem('drm-commu',JSON.stringify(COMMU)); }catch(e){} }
@@ -2512,11 +2511,34 @@ function commuIngest(){ const m=(location.hash||'').match(/ami=([^&]+)/); if(!m)
   saveCommu(); state.layers.amis=true;
   if(p.map && p.map.center) setTimeout(()=>{ map.jumpTo({center:p.map.center,zoom:p.map.zoom||map.getZoom()}); },250);
   rerender(); renderAmis(); toast('Ami + ses points importés',3500); return true; }
-function commuCreatePoint(){ const c=map.getCenter(), me=commuMe();
-  const title=prompt('Titre du point (ex : Vue sur la Tour de Crest) :'); if(title==null) return;
+function commuCreatePoint(){ commuPlaceStart(); }
+// mode placement : viseur dans la zone carte visible (panneau replié) → l'utilisateur
+// déplace la carte sous le viseur, puis valide. unproject() = coord géo sous le viseur.
+function commuPlaceEnd(){ const ov=document.getElementById('commu-place'); if(ov){ ov._bar&&ov._bar.remove(); ov.remove(); } }
+function commuPlaceStart(){
+  if(typeof setPanelCollapsed==='function') setPanelCollapsed(true);   // révèle la carte
+  commuPlaceEnd();
+  const cx=Math.round(window.innerWidth/2), cy=Math.round(window.innerHeight*0.40);
+  const ov=document.createElement('div'); ov.id='commu-place';
+  ov.style.cssText='position:fixed;inset:0;z-index:50;pointer-events:none';   // la carte reste draggable
+  ov.innerHTML=`<div style="position:fixed;left:${cx}px;top:${cy}px;transform:translate(-50%,-50%)">
+    <svg viewBox="0 0 60 60" width="60" height="60" fill="none" stroke="#0a4da0" stroke-width="2.5" style="filter:drop-shadow(0 1px 3px #fff)">
+      <circle cx="30" cy="30" r="17"/><path d="M30 4v11M30 45v11M4 30h11M45 30h11"/><circle cx="30" cy="30" r="3" fill="#0a4da0"/></svg></div>`;
+  const bar=document.createElement('div');
+  bar.style.cssText='position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:51;display:flex;gap:10px;pointer-events:auto';
+  const mk=(t,bg,fn)=>{ const b=document.createElement('button'); b.textContent=t;
+    b.style.cssText=`background:${bg};color:#fff;border:0;border-radius:10px;padding:11px 18px;font:14px VG5000,monospace;box-shadow:0 3px 10px #0006;cursor:pointer`; b.onclick=fn; return b; };
+  bar.appendChild(mk('Placer ici','#0a4da0',()=>commuPlaceConfirm(cx,cy)));
+  bar.appendChild(mk('Annuler','#555',()=>{ commuPlaceEnd(); }));
+  document.body.appendChild(ov); document.body.appendChild(bar); ov._bar=bar;
+  toast('Déplace la carte : le viseur marque le point',3200); }
+function commuPlaceConfirm(cx,cy){ const ll=map.unproject([cx,cy]); commuPlaceEnd();
+  if(typeof setPanelCollapsed==='function') setPanelCollapsed(false);
+  const me=commuMe();
+  const title=prompt('Titre du point (ex : Vue sur la Tour de Crest) :'); if(title==null){ drawPanel(); return; }
   const comment=prompt('Commentaire (ex : vue à 4.5km) :')||'';
   commuPoints().push({ id:'p_'+Date.now()+'_'+Math.floor(Math.random()*1e4), author:me.name, aicon:me.icon, acolor:me.color,
-    lng:+c.lng.toFixed(5), lat:+c.lat.toFixed(5), title:title.trim()||'Point', comment:comment.trim(), ts:Date.now(), mine:true });
+    lng:+ll.lng.toFixed(5), lat:+ll.lat.toFixed(5), title:title.trim()||'Point', comment:comment.trim(), ts:Date.now(), mine:true });
   saveCommu(); state.layers.amis=true; renderAmis(); drawPanel(); toast('Point posé',2500); }
 let amisMarkers=[];
 function renderAmis(){ amisMarkers.forEach(m=>m.remove()); amisMarkers=[];  // markers = points personnalisés (posés par toi/amis)
