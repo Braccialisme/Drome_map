@@ -2471,14 +2471,24 @@ const COMMU_ICONS = {
 const COMMU_ICON_KEYS = Object.keys(COMMU_ICONS);
 function commuSvg(icon,size,color){ const p=COMMU_ICONS[icon]||COMMU_ICONS.star;
   return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${color||'#0a4da0'}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`; }
+const COMMU_COLORS = ['#0a4da0','#c0392b','#27ae60','#8e44ad','#e67e22','#16a085','#2c3e50','#d81b8c'];
+function crownSvg(size){ return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="#e8b923" stroke="#a67c00" stroke-width="1" stroke-linejoin="round"><path d="M3 8l4 4l5 -7l5 7l4 -4l-1.6 10.5h-14.8z"/></svg>`; }
+// pastille avatar : cercle blanc + svg coloré, couronne gold optionnelle (moi)
+function commuAvatarHTML(a,size,crown){ const c=(a&&a.color)||'#0a4da0', ic=(a&&a.icon)||'star';
+  return `<div style="position:relative;width:${size}px;height:${size}px">`+
+    `<div style="background:#fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;border:2px solid ${c};box-sizing:border-box">${commuSvg(ic,Math.round(size*0.56),c)}</div>`+
+    (crown?`<div style="position:absolute;top:${-Math.round(size*0.28)}px;left:50%;transform:translateX(-50%)">${crownSvg(Math.round(size*0.5))}</div>`:'')+
+  `</div>`; }
 let COMMU = (()=>{ try{ return JSON.parse(localStorage.getItem('drm-commu'))||{}; }catch(e){ return {}; } })();
+function commuPoints(){ COMMU.points = COMMU.points || []; return COMMU.points; }
 function saveCommu(){ try{ localStorage.setItem('drm-commu',JSON.stringify(COMMU)); }catch(e){} }
 function commuMe(){ COMMU.me = COMMU.me || {name:'Moi',icon:'star',color:'#0a4da0'}; return COMMU.me; }
 function commuFriends(){ COMMU.friends = COMMU.friends || []; return COMMU.friends; }
 function commuEncode(o){ return btoa(unescape(encodeURIComponent(JSON.stringify(o)))); }
 function commuDecode(s){ try{ return JSON.parse(decodeURIComponent(escape(atob(s)))); }catch(e){ return null; } }
 function commuShareLink(){ const me=commuMe(), c=map.getCenter();
-  const payload={ v:1, name:me.name, icon:me.icon, color:me.color, pin: me.pin||{lng:c.lng,lat:c.lat},
+  const mine=commuPoints().filter(p=>p.mine).map(p=>({id:p.id,title:p.title,comment:p.comment,lng:p.lng,lat:p.lat,ts:p.ts,aicon:p.aicon,acolor:p.acolor,author:me.name}));
+  const payload={ v:2, me:{name:me.name,icon:me.icon,color:me.color}, points:mine,
     map:{ basemap:state.basemap, layers:Object.keys(state.layers).filter(k=>state.layers[k]&&k!=='amis'),
           center:[+c.lng.toFixed(5),+c.lat.toFixed(5)], zoom:+map.getZoom().toFixed(2) } };
   return location.origin+location.pathname+'#ami='+commuEncode(payload); }
@@ -2491,38 +2501,60 @@ function commuIngest(){ const m=(location.hash||'').match(/ami=([^&]+)/); if(!m)
   if(!p) return false;
   if(p.map){ if(p.map.basemap) state.basemap=p.map.basemap;
     if(Array.isArray(p.map.layers)) Object.keys(state.layers).forEach(k=>{ if(k!=='amis') state.layers[k]=p.map.layers.includes(k); }); }
-  if(p.name && p.pin){ const fr=commuFriends();
-    const id=p.name+'@'+(+p.pin.lng).toFixed(4)+','+(+p.pin.lat).toFixed(4);
-    const ex=fr.find(f=>f.id===id);
-    if(ex){ ex.icon=p.icon||ex.icon; ex.color=p.color||ex.color; ex.pin=p.pin; }
-    else fr.push({id,name:p.name,icon:p.icon||'star',color:p.color||'#0a4da0',pin:p.pin});
-    saveCommu(); state.layers.amis=true; }
+  // avatar expéditeur → ami (v2 {me:…} ou v1 {name,icon,color})
+  const sd = p.me || (p.name?{name:p.name,icon:p.icon,color:p.color}:null);
+  if(sd && sd.name){ const fr=commuFriends(), id='f_'+sd.name; const ex=fr.find(f=>f.id===id);
+    if(ex){ ex.icon=sd.icon||ex.icon; ex.color=sd.color||ex.color; } else fr.push({id,name:sd.name,icon:sd.icon||'star',color:sd.color||'#0a4da0'}); }
+  // points de l'expéditeur → importés (dedupe par id)
+  if(Array.isArray(p.points)){ const pts=commuPoints();
+    p.points.forEach(q=>{ if(!q.id||pts.some(x=>x.id===q.id))return;
+      pts.push({id:q.id,author:q.author||(sd&&sd.name)||'?',aicon:q.aicon,acolor:q.acolor,lng:q.lng,lat:q.lat,title:q.title||'Point',comment:q.comment||'',ts:q.ts||Date.now(),mine:false}); }); }
+  saveCommu(); state.layers.amis=true;
   if(p.map && p.map.center) setTimeout(()=>{ map.jumpTo({center:p.map.center,zoom:p.map.zoom||map.getZoom()}); },250);
-  rerender(); renderAmis(); toast('Carte d\'un ami importée',3500); return true; }
+  rerender(); renderAmis(); toast('Ami + ses points importés',3500); return true; }
+function commuCreatePoint(){ const c=map.getCenter(), me=commuMe();
+  const title=prompt('Titre du point (ex : Vue sur la Tour de Crest) :'); if(title==null) return;
+  const comment=prompt('Commentaire (ex : vue à 4.5km) :')||'';
+  commuPoints().push({ id:'p_'+Date.now()+'_'+Math.floor(Math.random()*1e4), author:me.name, aicon:me.icon, acolor:me.color,
+    lng:+c.lng.toFixed(5), lat:+c.lat.toFixed(5), title:title.trim()||'Point', comment:comment.trim(), ts:Date.now(), mine:true });
+  saveCommu(); state.layers.amis=true; renderAmis(); drawPanel(); toast('Point posé',2500); }
 let amisMarkers=[];
-function renderAmis(){ amisMarkers.forEach(m=>m.remove()); amisMarkers=[];
+function renderAmis(){ amisMarkers.forEach(m=>m.remove()); amisMarkers=[];  // markers = points personnalisés (posés par toi/amis)
   if(!state.layers.amis || typeof maplibregl==='undefined') return;
-  const all=[]; const me=COMMU.me; if(me && me.pin) all.push(Object.assign({me:true},me));
-  commuFriends().forEach(f=>all.push(f));
-  all.forEach(a=>{ if(!a.pin) return;
-    const el=document.createElement('div');
-    el.style.cssText='width:34px;height:34px;transform:translate(-50%,-50%);cursor:pointer;filter:drop-shadow(0 1px 2px #0006)';
-    el.innerHTML=`<div style="background:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:2px solid ${a.color||'#0a4da0'}">${commuSvg(a.icon,20,a.color||'#0a4da0')}</div>`;
-    el.title=a.name;
-    amisMarkers.push(new maplibregl.Marker({element:el}).setLngLat([a.pin.lng,a.pin.lat]).addTo(map)); }); }
+  commuPoints().forEach(pt=>{ const el=document.createElement('div');
+    el.style.cssText='cursor:pointer;filter:drop-shadow(0 1px 2px #0006)';
+    el.innerHTML=commuAvatarHTML({icon:pt.aicon,color:pt.acolor},34,pt.mine);
+    el.title=(pt.title||'Point')+' — '+pt.author;
+    el.onclick=()=>{ V4.commuView={detail:pt.id}; state.activeTab='patri';
+      if(typeof setPanelCollapsed==='function' && document.getElementById('panel-wrap').classList.contains('collapsed')) setPanelCollapsed(false);
+      drawPanel(); };
+    amisMarkers.push(new maplibregl.Marker({element:el,anchor:'center'}).setLngLat([pt.lng,pt.lat]).addTo(map)); }); }
 function commuEditAvatar(){ const me=commuMe();
   const name=prompt('Ton nom :',me.name); if(name!=null && name.trim()){ me.name=name.trim(); saveCommu(); }
   let ov=document.getElementById('commu-ic'); if(ov)ov.remove();
   ov=document.createElement('div'); ov.id='commu-ic';
   ov.style.cssText='position:fixed;inset:0;z-index:60;background:#0007;display:flex;align-items:center;justify-content:center';
-  const card=document.createElement('div');
-  card.style.cssText='background:#c6c9c1;border-radius:14px;padding:16px;max-width:320px;width:80vw';
-  card.innerHTML='<div style="font:15px VG5000,monospace;color:#2a2c27;margin-bottom:10px;text-align:center">Choisis ton icône</div>';
-  const g=document.createElement('div'); g.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:8px'; card.appendChild(g);
-  COMMU_ICON_KEYS.forEach(k=>{ const b=document.createElement('button');
-    b.style.cssText=`background:#fff;border:2px solid ${me.icon===k?me.color:'#cdd2c6'};border-radius:10px;padding:8px;cursor:pointer;display:flex;align-items:center;justify-content:center`;
-    b.innerHTML=commuSvg(k,26,me.color); b.onclick=()=>{ me.icon=k; saveCommu(); ov.remove(); renderAmis(); drawPanel(); }; g.appendChild(b); });
-  ov.appendChild(card); ov.onclick=e=>{ if(e.target===ov){ ov.remove(); drawPanel(); } };
+  const card=document.createElement('div'); card.style.cssText='background:#c6c9c1;border-radius:14px;padding:16px;max-width:340px;width:84vw;max-height:86vh;overflow:auto';
+  const lbl=t=>Object.assign(document.createElement('div'),{textContent:t,style:'font:13px VG5000,monospace;color:#2a2c27;margin:2px 0 6px'});
+  const render=()=>{ card.innerHTML='';
+    const prev=document.createElement('div'); prev.style.cssText='display:flex;justify-content:center;margin:6px 0 14px';
+    prev.innerHTML=commuAvatarHTML(me,58,true); card.appendChild(prev);
+    card.appendChild(lbl('Icône'));
+    const g=document.createElement('div'); g.style.cssText='display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px';
+    COMMU_ICON_KEYS.forEach(k=>{ const b=document.createElement('button');
+      b.style.cssText=`background:#fff;border:2px solid ${me.icon===k?me.color:'#cdd2c6'};border-radius:9px;padding:6px;cursor:pointer;display:flex;align-items:center;justify-content:center`;
+      b.innerHTML=commuSvg(k,22,me.color); b.onclick=()=>{ me.icon=k; saveCommu(); render(); }; g.appendChild(b); });
+    card.appendChild(g);
+    card.appendChild(lbl('Couleur'));
+    const cg=document.createElement('div'); cg.style.cssText='display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:14px;justify-items:center';
+    COMMU_COLORS.forEach(col=>{ const b=document.createElement('button');
+      b.style.cssText=`background:${col};border:3px solid ${me.color===col?'#2a2c27':'#fff'};border-radius:50%;width:28px;height:28px;cursor:pointer`;
+      b.onclick=()=>{ me.color=col; saveCommu(); render(); }; cg.appendChild(b); });
+    card.appendChild(cg);
+    const done=document.createElement('button'); done.textContent='OK'; done.style.cssText='width:100%;background:#0a4da0;color:#fff;border:0;border-radius:9px;padding:10px;font:14px VG5000,monospace;cursor:pointer';
+    done.onclick=()=>{ ov.remove(); renderAmis(); drawPanel(); }; card.appendChild(done); };
+  render();
+  ov.appendChild(card); ov.onclick=e=>{ if(e.target===ov){ ov.remove(); renderAmis(); drawPanel(); } };
   document.body.appendChild(ov); }
 function commuCopyLink(){ const l=commuShareLink();
   if(navigator.clipboard) navigator.clipboard.writeText(l).then(()=>toast('Lien copié',3000)).catch(()=>prompt('Copie ce lien :',l));
@@ -2531,37 +2563,65 @@ function commuAddFriend(){ const l=prompt('Colle le lien d\'un ami :'); if(!l)re
   const m=l.match(/ami=([^&\s]+)/); if(!m){ toast('Lien invalide',2500); return; }
   location.hash='ami='+m[1]; commuIngest(); drawPanel(); }
 function commuPanel(){
-  // colonne de boutons génériques (kind), non-overlap, à redesigner avec la plaque dédiée
+  // moins de boutons : l'essentiel vit dans l'écran (pokédex). Colonne générique, plaque dédiée à venir.
   const acts=[
-    {label:'Mon avatar', fn:()=>commuEditAvatar()},
-    {label:state.layers.amis?'Amis: visibles':'Amis: masqués', on:!!state.layers.amis,
-      fn:()=>{ state.layers.amis=!state.layers.amis; renderAmis(); drawPanel(); }},
-    {label:'Épingler ici', fn:()=>{ const c=map.getCenter(); commuMe().pin={lng:+c.lng.toFixed(5),lat:+c.lat.toFixed(5)}; saveCommu(); state.layers.amis=true; renderAmis(); drawPanel(); toast('Position épinglée',2500); }},
+    {label:'Poser un point', fn:()=>commuCreatePoint()},
     {label:'Partager', fn:()=>commuShare()},
     {label:'Copier le lien', fn:()=>commuCopyLink()},
-    {label:'+ Ami (coller lien)', fn:()=>commuAddFriend()}
+    {label:'+ Ami (lien)', fn:()=>commuAddFriend()}
   ];
-  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:300+i*116,label:a.label,on:!!a.on,onClick:a.fn}));
+  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:340+i*126,label:a.label,onClick:a.fn}));
   v4CommuScreen(); }
-function v4CommuScreen(){
-  const S={x:96,y:247,w:474,h:600};
+function commuScreenBox(){ const S={x:96,y:247,w:474,h:600};
   const box=v4El('',{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute',
     overflowY:'auto',borderRadius:'22px',background:'#c6c9c1',boxShadow:'inset 0 2px 7px #2a2c2755',
-    padding:'14px',boxSizing:'border-box'}); box.id='fscreen'; V4.P.appendChild(box);
+    padding:'14px',boxSizing:'border-box'}); box.id='fscreen'; V4.P.appendChild(box); return box; }
+function v4CommuScreen(){
+  const box=commuScreenBox();
+  const view=V4.commuView||'list';
+  if(view && view.detail) return commuRenderDetail(box, view.detail);
   const me=commuMe();
-  const head=v4El('',{display:'flex',alignItems:'center',gap:'10px',padding:'8px 10px',marginBottom:'10px',
-    background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',cursor:'pointer'});
-  head.innerHTML=`<div style="background:#fff;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid ${me.color}">${commuSvg(me.icon,26,me.color)}</div>
-    <div><div style="font:15px VG5000,monospace;color:#2a2c27">${esc(me.name)}</div><div style="font:11px VG5000,monospace;color:#5a5d55">toi — appuie pour éditer${me.pin?'':' · pas encore épinglé'}</div></div>`;
-  head.onclick=()=>commuEditAvatar(); box.appendChild(head);
+  // header : avatar+couronne (édit) | nom | toggle visibilité
+  const head=v4El('',{display:'flex',alignItems:'center',gap:'10px',padding:'8px 10px',marginBottom:'12px',
+    background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px'});
+  const av=v4El('',{cursor:'pointer'}); av.innerHTML=commuAvatarHTML(me,46,true); av.onclick=()=>commuEditAvatar();
+  const nm=v4El('',{flex:'1',cursor:'pointer'}); nm.innerHTML=`<div style="font:15px VG5000,monospace;color:#2a2c27">${esc(me.name)}</div><div style="font:11px VG5000,monospace;color:#5a5d55">appuie pour éditer ton avatar</div>`; nm.onclick=()=>commuEditAvatar();
+  const eye=v4El('',{cursor:'pointer',font:'11px VG5000,monospace',color:'#2a2c27',padding:'7px 9px',border:'1px solid #cdd2c6',borderRadius:'6px',background:state.layers.amis?'#a9c6a0':'#d6d9d0',whiteSpace:'nowrap'},state.layers.amis?'Visible':'Masqué');
+  eye.onclick=()=>{ state.layers.amis=!state.layers.amis; renderAmis(); drawPanel(); };
+  head.appendChild(av); head.appendChild(nm); head.appendChild(eye); box.appendChild(head);
+  // strip amis
   const fr=commuFriends();
-  if(!fr.length){ box.appendChild(v4El('',{color:'#5a5d55',font:'13px VG5000,monospace',textAlign:'center',padding:'14px',lineHeight:'1.4'},'Aucun ami pour l\'instant.\nPartage ton lien ou colle celui d\'un ami.')); return; }
-  const grid=v4El('',{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}); box.appendChild(grid);
-  fr.forEach(f=>{ const cell=v4El('',{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',padding:'9px 4px',
-      background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'6px',cursor:'pointer',position:'relative'});
-    cell.innerHTML=`<div style="background:#fff;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:2px solid ${f.color||'#0a4da0'}">${commuSvg(f.icon,22,f.color||'#0a4da0')}</div><div style="font:11px VG5000,monospace;color:#2a2c27;text-align:center;line-height:1.15">${esc(f.name)}</div>`;
-    cell.onclick=()=>{ if(f.pin){ state.layers.amis=true; renderAmis(); map.flyTo({center:[f.pin.lng,f.pin.lat],zoom:13,duration:1000}); } };
-    grid.appendChild(cell); }); }
+  if(fr.length){ const strip=v4El('',{display:'flex',gap:'8px',flexWrap:'wrap',alignItems:'center',marginBottom:'12px'});
+    strip.appendChild(v4El('',{font:'11px VG5000,monospace',color:'#5a5d55'},'Amis :'));
+    fr.forEach(f=>{ const c=v4El('',{}); c.title=f.name; c.innerHTML=commuAvatarHTML(f,32,false); strip.appendChild(c); });
+    box.appendChild(strip); }
+  // liste des points
+  const pts=commuPoints();
+  box.appendChild(v4El('',{font:'12px VG5000,monospace',color:'#5a5d55',margin:'2px 0 8px'},`Points (${pts.length})`));
+  if(!pts.length){ box.appendChild(v4El('',{color:'#5a5d55',font:'13px VG5000,monospace',textAlign:'center',padding:'14px',lineHeight:'1.5'},'Aucun point.\n« Poser un point » pour marquer un lieu,\nou importe le lien d\'un ami.')); return; }
+  pts.slice().sort((a,b)=>b.ts-a.ts).forEach(pt=>{
+    const card=v4El('',{display:'flex',alignItems:'center',gap:'10px',padding:'8px',marginBottom:'8px',
+      background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',cursor:'pointer'});
+    const ic=v4El('',{}); ic.innerHTML=commuAvatarHTML({icon:pt.aicon,color:pt.acolor},34,pt.mine);
+    const tx=v4El('',{flex:'1',minWidth:'0'}); tx.innerHTML=`<div style="font:13px VG5000,monospace;color:#2a2c27;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pt.title)}</div><div style="font:11px VG5000,monospace;color:#5a5d55">par ${esc(pt.author)}${pt.mine?' (toi)':''}</div>`;
+    card.appendChild(ic); card.appendChild(tx);
+    card.onclick=()=>{ V4.commuView={detail:pt.id}; drawPanel(); };
+    box.appendChild(card); }); }
+function commuRenderDetail(box, id){
+  const pt=commuPoints().find(p=>p.id===id);
+  if(!pt){ V4.commuView='list'; box.remove(); return v4CommuScreen(); }
+  const back=v4El('',{cursor:'pointer',font:'13px VG5000,monospace',color:'#2a2c27',marginBottom:'12px'},'‹ Retour');
+  back.onclick=()=>{ V4.commuView='list'; drawPanel(); }; box.appendChild(back);
+  const hdr=v4El('',{display:'flex',alignItems:'center',gap:'12px',marginBottom:'14px'});
+  const ic=v4El('',{}); ic.innerHTML=commuAvatarHTML({icon:pt.aicon,color:pt.acolor},54,pt.mine); hdr.appendChild(ic);
+  const ht=v4El('',{}); ht.innerHTML=`<div style="font:11px VG5000,monospace;color:#7a7d73;text-transform:uppercase;letter-spacing:.1em">Point personnalisé</div><div style="font:17px VG5000,monospace;color:#2a2c27">${esc(pt.title)}</div>`; hdr.appendChild(ht);
+  box.appendChild(hdr);
+  box.appendChild(v4El('',{font:'13px VG5000,monospace',color:'#2a2c27',marginBottom:'10px'},`ajouté par ${pt.author}${pt.mine?' (toi)':''}`));
+  if(pt.comment) box.appendChild(v4El('',{font:'14px VG5000,monospace',color:'#3a3d38',lineHeight:'1.45',background:'#b8bcae',border:'1px solid #cdd2c6',borderRadius:'8px',padding:'12px',marginBottom:'12px',whiteSpace:'pre-wrap'},pt.comment));
+  const fly=v4El('',{cursor:'pointer',textAlign:'center',font:'13px VG5000,monospace',color:'#fff',background:'#0a4da0',borderRadius:'8px',padding:'11px',marginBottom:'8px'},'Voir sur la carte');
+  fly.onclick=()=>{ state.layers.amis=true; renderAmis(); map.flyTo({center:[pt.lng,pt.lat],zoom:14,duration:1000}); }; box.appendChild(fly);
+  if(pt.mine){ const del=v4El('',{cursor:'pointer',textAlign:'center',font:'12px VG5000,monospace',color:'#c0392b',padding:'6px'},'Supprimer ce point');
+    del.onclick=()=>{ COMMU.points=commuPoints().filter(p=>p.id!==id); saveCommu(); V4.commuView='list'; renderAmis(); drawPanel(); }; box.appendChild(del); } }
 
 const PANELV4={
   fond(){ pillsV4();
@@ -2628,11 +2688,15 @@ const PANELV4={
     V4.P.appendChild(Object.assign(v4El('',{left:(KN.cx-19.5)+'px',top:KN.cy+'px',width:'39px',height:'180px',transform:`rotate(${az-180}deg)`}),{id:'kptr'}));
     const kh=Object.assign(v4El('',{left:(KN.cx-160)+'px',top:(KN.cy-160)+'px',width:'320px',height:'320px'}),{id:'khit'});
     kh.onpointerdown=e=>{e.preventDefault();kh.setPointerCapture(e.pointerId);
-      const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
-        sunManual=true; sunAzimuthManual=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360); updateSunlight();
-        document.getElementById('kptr').style.transform=`rotate(${sunAzimuthManual-180}deg)`;
-        document.getElementById('kread').textContent=Math.round(sunAzimuthManual)+'°'; };
-      const up=()=>{kh.removeEventListener('pointermove',mv);kh.removeEventListener('pointerup',up);};
+      const r=document.getElementById('plate').getBoundingClientRect(), s=v4scale();
+      const kptr=document.getElementById('kptr'), kread=document.getElementById('kread');
+      let last=0, timer=0;
+      const apply=()=>{ timer=0; updateSunlight(); last=performance.now(); };
+      const mv=ev=>{ sunManual=true;
+        sunAzimuthManual=Math.round((Math.atan2(ev.clientX-(r.left+KN.cx*s),-(ev.clientY-(r.top+KN.cy*s)))*180/Math.PI+360)%360);
+        kptr.style.transform=`rotate(${sunAzimuthManual-180}deg)`; kread.textContent=Math.round(sunAzimuthManual)+'°';
+        const dt=performance.now()-last; if(dt>=90) apply(); else if(!timer) timer=setTimeout(apply,90-dt); };
+      const up=()=>{kh.removeEventListener('pointermove',mv);kh.removeEventListener('pointerup',up); if(timer)clearTimeout(timer); updateSunlight();};
       kh.addEventListener('pointermove',mv);kh.addEventListener('pointerup',up);};
     V4.P.appendChild(kh); },
   faune(){ pillsV4();
@@ -2652,7 +2716,7 @@ function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)re
     plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+75)+'px',top:'30px',transform:'translate(-50%,-50%)',
       font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#3a3a3a',pointerEvents:'none'},TABN[i]));
     const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
-    hit.onclick=()=>{state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
+    hit.onclick=()=>{ if(id==='patri')V4.commuView='list'; state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
   (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
 function renderPanel(){ drawPanel(); }  // compat : anciens appels
 
