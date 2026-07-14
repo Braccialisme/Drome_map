@@ -98,6 +98,13 @@
       font-family: var(--font-ui);
       color: var(--ink);
     }
+    /* garde paysage : l'app est portrait-only (layout casse en paysage). manifest +
+       screen.orientation.lock gèrent le PWA Android ; ce garde couvre iOS/navigateur. */
+    #rotate-guard { display:none; position:fixed; inset:0; z-index:9999; background:#1a1e21;
+      color:#e8e6df; flex-direction:column; align-items:center; justify-content:center; gap:16px;
+      text-align:center; padding:24px; font-family:var(--font-ui); }
+    #rotate-guard svg { width:52px; height:52px; stroke:#e8e6df; }
+    @media (orientation: landscape) and (max-height: 560px) { #rotate-guard { display:flex; } }
 
     #map { position: absolute; inset: 0; background: #1a1e21; }
     .maplibregl-canvas {
@@ -863,6 +870,8 @@
   </style>
 </head>
 <body>
+
+<div id="rotate-guard"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 0 -18"/><path d="M12 3l-2.5 2.5M12 3l2.5 2.5"/><rect x="7" y="9" width="10" height="12" rx="1.5"/></svg><div>Tourne ton téléphone<br>en portrait</div></div>
 
 <div id="splash"><img src="assets_logo.png" alt="Drôme · Diois"><div class="splash-cap">Drôme · Diois</div></div>
 
@@ -2375,20 +2384,26 @@ function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
 // drag vertical LISSE : bouge le knoll direct + applique, zéro re-render (commit à la fin)
 function v4DragY(kn,RT,apply,commit){ kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
-  const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
-    const v=Math.max(0,Math.min(100,Math.round((RT.y1-(ev.clientY-r.top)/s)/(RT.y1-RT.y0)*100)));
-    kn.style.top=(RT.y1-v/100*(RT.y1-RT.y0))+'px'; apply(v);};
-  const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);commit&&commit();};
+  // rect caché au down (pas de getBoundingClientRect par move) + coalesce rAF → fluide Android
+  const r=document.getElementById('plate').getBoundingClientRect(), s=v4scale();
+  let raf=0, pend=null, lastV=null;
+  const flush=()=>{ raf=0; if(pend==null)return; const v=pend; pend=null;
+    kn.style.top=(RT.y1-v/100*(RT.y1-RT.y0))+'px'; if(v!==lastV){ lastV=v; apply(v); } };
+  const mv=ev=>{ pend=Math.max(0,Math.min(100,Math.round((RT.y1-(ev.clientY-r.top)/s)/(RT.y1-RT.y0)*100))); if(!raf) raf=requestAnimationFrame(flush); };
+  const up=()=>{ kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up); if(raf)cancelAnimationFrame(raf); flush(); commit&&commit(); };
   kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
 // slider HORIZONTAL générique LISSE : {min,max,get,set,live,commit}
 function v4HSlider(kn,x0,len,o){
   const pos=()=>{ const n=(o.get()-o.min)/(o.max-o.min); kn.style.left=(x0+Math.max(0,Math.min(1,n))*len)+'px'; };
   pos();
   kn.onpointerdown=e=>{e.preventDefault();kn.setPointerCapture(e.pointerId);
-    const mv=ev=>{const r=document.getElementById('plate').getBoundingClientRect(),s=v4scale();
-      let v=o.min+((ev.clientX-r.left)/s-x0)/len*(o.max-o.min); v=Math.max(o.min,Math.min(o.max,v));
+    const r=document.getElementById('plate').getBoundingClientRect(), s=v4scale();
+    let raf=0, pendX=null;
+    const flush=()=>{ raf=0; if(pendX==null)return; const cx=pendX; pendX=null;
+      let v=o.min+((cx-r.left)/s-x0)/len*(o.max-o.min); v=Math.max(o.min,Math.min(o.max,v));
       o.set(v); pos(); o.live&&o.live(); };
-    const up=()=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up);o.commit&&o.commit();};
+    const mv=ev=>{ pendX=ev.clientX; if(!raf) raf=requestAnimationFrame(flush); };
+    const up=()=>{ kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',up); if(raf)cancelAnimationFrame(raf); flush(); o.commit&&o.commit(); };
     kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',up);};}
 
 // écran faune = bestiaire (cartes SVG + nom cliquables) filtré par groupe, avec cache
@@ -2496,15 +2511,24 @@ function commuEditAvatar(){ const me=commuMe();
     b.innerHTML=commuSvg(k,26,me.color); b.onclick=()=>{ me.icon=k; saveCommu(); ov.remove(); renderAmis(); drawPanel(); }; g.appendChild(b); });
   ov.appendChild(card); ov.onclick=e=>{ if(e.target===ov){ ov.remove(); drawPanel(); } };
   document.body.appendChild(ov); }
+function commuCopyLink(){ const l=commuShareLink();
+  if(navigator.clipboard) navigator.clipboard.writeText(l).then(()=>toast('Lien copié',3000)).catch(()=>prompt('Copie ce lien :',l));
+  else prompt('Copie ce lien :',l); }
+function commuAddFriend(){ const l=prompt('Colle le lien d\'un ami :'); if(!l)return;
+  const m=l.match(/ami=([^&\s]+)/); if(!m){ toast('Lien invalide',2500); return; }
+  location.hash='ami='+m[1]; commuIngest(); drawPanel(); }
 function commuPanel(){
-  makeButton(V4.P,{type:'key',x:888,y:255,on:!!state.layers.amis,onClick:()=>{ state.layers.amis=!state.layers.amis; renderAmis(); drawPanel(); }});
+  // colonne de boutons génériques (kind), non-overlap, à redesigner avec la plaque dédiée
   const acts=[
-    ['Mon avatar',()=>commuEditAvatar()],
-    ['Épingler ici',()=>{ const c=map.getCenter(); commuMe().pin={lng:+c.lng.toFixed(5),lat:+c.lat.toFixed(5)}; saveCommu(); state.layers.amis=true; renderAmis(); drawPanel(); toast('Position épinglée',2500); }],
-    ['Partager',()=>commuShare()],
-    ['+ Ami (lien)',()=>{ const l=prompt('Colle le lien d\'un ami :'); if(!l)return; const m=l.match(/ami=([^&\\s]+)/); if(!m){ toast('Lien invalide',2500); return; } location.hash='ami='+m[1]; commuIngest(); drawPanel(); }]
+    {label:'Mon avatar', fn:()=>commuEditAvatar()},
+    {label:state.layers.amis?'Amis: visibles':'Amis: masqués', on:!!state.layers.amis,
+      fn:()=>{ state.layers.amis=!state.layers.amis; renderAmis(); drawPanel(); }},
+    {label:'Épingler ici', fn:()=>{ const c=map.getCenter(); commuMe().pin={lng:+c.lng.toFixed(5),lat:+c.lat.toFixed(5)}; saveCommu(); state.layers.amis=true; renderAmis(); drawPanel(); toast('Position épinglée',2500); }},
+    {label:'Partager', fn:()=>commuShare()},
+    {label:'Copier le lien', fn:()=>commuCopyLink()},
+    {label:'+ Ami (coller lien)', fn:()=>commuAddFriend()}
   ];
-  acts.forEach(([label,fn],i)=> makeButton(V4.P,{type:'kind',x:778,y:[468,579,686,797][i],label,on:false,onClick:fn}));
+  acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:300+i*116,label:a.label,on:!!a.on,onClick:a.fn}));
   v4CommuScreen(); }
 function v4CommuScreen(){
   const S={x:96,y:247,w:474,h:600};
@@ -2601,10 +2625,14 @@ function drawPanel(){ const plate=document.getElementById('plate'); if(!plate)re
   plate.style.backgroundImage=`url('assets/ui/panel-${v4Plate(state.activeTab)}-v4-plate.png')`;
   // onglets = bakés dans la plaque (état actif par plaque) + noms + zones cliquables
   const TABN=['Fond','Nature','Faune','Activ','Amis','Comm','Expe'];
+  // onglets = chips PLATS en overlay (couvrent le highlight baké de la plaque, qui sinon
+  // reste orange sur le mauvais onglet quand une plaque est réutilisée). Générique, à redesigner.
   V4.TABS.forEach((id,i)=>{ const act=id===state.activeTab;
-    plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+75)+'px',top:'30px',transform:'translate(-50%,-50%)',
-      font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#3a3a3a',pointerEvents:'none'},TABN[i]));
-    const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'160px',height:'64px',cursor:'pointer'});
+    plate.appendChild(v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'164px',height:'70px',
+      background:act?'#ee7a45':'#c2c3bd',borderRadius:'13px 13px 0 0',pointerEvents:'none'}));
+    plate.appendChild(v4El('',{position:'absolute',left:(V4.TABX[i]+82)+'px',top:'34px',transform:'translate(-50%,-50%)',
+      font:"19px VG5000,monospace",letterSpacing:'.02em',color:act?'#fff':'#38382f',pointerEvents:'none'},TABN[i]));
+    const hit=v4El('',{position:'absolute',left:V4.TABX[i]+'px',top:'0px',width:'164px',height:'70px',cursor:'pointer'});
     hit.onclick=()=>{state.activeTab=id;drawPanel();}; plate.appendChild(hit); });
   (PANELV4[state.activeTab]||(()=>{}))(); fitPanel(); }
 function renderPanel(){ drawPanel(); }  // compat : anciens appels
@@ -2975,6 +3003,9 @@ setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
 renderPanel();
+
+// Portrait-only : lock l'orientation en PWA Android (ignoré/échoue ailleurs → garde CSS prend le relais)
+try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('portrait').catch(()=>{}); } catch(e) {}
 </script>
 </body>
 </html>
