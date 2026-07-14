@@ -2586,6 +2586,58 @@ function commuCopyLink(){ const l=commuShareLink();
 function commuAddFriend(){ const l=prompt('Colle le lien d\'un ami :'); if(!l)return;
   const m=l.match(/ami=([^&\s]+)/); if(!m){ toast('Lien invalide',2500); return; }
   location.hash='ami='+m[1]; commuIngest(); drawPanel(); }
+const INFO_SVG="%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 9h.01'/%3E%3Cpath d='M11 12h1v4h1'/%3E%3C/svg%3E";
+function openGuide(){ let ov=document.getElementById('guide-ov'); if(ov){ov.remove();return;}
+  ov=document.createElement('div'); ov.id='guide-ov';
+  ov.style.cssText='position:fixed;inset:0;z-index:200;background:#1a1e21;color:#e8e6df;overflow:auto;-webkit-overflow-scrolling:touch;font-family:var(--font-ui);line-height:1.5;padding:calc(18px + env(safe-area-inset-top,0px)) 20px calc(30px + env(safe-area-inset-bottom,0px))';
+  const H=t=>`<h2 style="font:20px VG5000,monospace;color:#c05f24;margin:26px 0 8px">${t}</h2>`;
+  const S=t=>`<div style="font:13px VG5000,monospace;color:#9a978c;text-transform:uppercase;letter-spacing:.12em;margin:22px 0 6px">${t}</div>`;
+  ov.innerHTML=`<div style="max-width:660px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font:26px VG5000,monospace;color:#e8e6df">Guide — Drôme·Diois</div>
+      <button id="guide-x" style="background:#333;color:#fff;border:0;border-radius:10px;padding:9px 14px;font:15px VG5000,monospace;cursor:pointer">Fermer</button></div>
+    <p style="color:#c9c6bc;margin-top:10px">Carte du Diois : relief, sentiers, faune, itinéraires, communauté. Application web installable (PWA) — elle marche <b>hors-ligne</b>, les tuiles vues sont gardées 30 jours.</p>
+
+    ${H('Comment ça marche')}
+    <p>Le <b>panneau du bas</b> porte des <b>onglets</b> (un thème chacun). Le bouton <b>− / +</b> le replie/déplie. La <b>loupe</b> ouvre la recherche de lieu. En haut à droite : <b>boussole</b> (remet au nord), <b>géoloc</b> (ta position), <b>maison</b> (recentre le Diois).</p>
+
+    ${H('Les onglets')}
+    ${S('Fond — le fond de carte')}
+    <p>Choix du fond : <b>Sat + relief</b>, <b>Plan IGN</b>, <b>LiDAR</b> (relief nu haute résolution), <b>Aérienne 1950</b>, <b>État-Major</b> (~1850), <b>Cassini</b> (~1750), <b>Nuit</b>. Le curseur <b>Relief</b> règle l'intensité de l'ombrage. Barres <b>Itinéraire A→B</b> (voiture / vélo / à pied).</p>
+    ${S('Nature')}
+    <p><b>Contours</b> (courbes de niveau), <b>Sentiers</b> (GR/PR), <b>Rivières</b>, <b>Baignade</b>, <b>Vues</b> (panoramas), <b>Forêts</b>. Plus une <b>boussole</b> qui suit le cap réel (capteur du téléphone — appuie sur « Activer »).</p>
+    ${S('Faune')}
+    <p>Le <b>bestiaire</b> des observations <b>iNaturalist</b> autour de toi (mammifères, oiseaux, reptiles, amphibiens). Appuie sur une bête → la carte vole vers l'observation.</p>
+    ${S('Activités')}
+    <p><b>Canoë</b>, <b>Canyon</b>, <b>Transport</b> (arrêts), <b>Monuments</b> historiques, <b>Villages</b>, <b>Eau potable</b> (sources et fontaines publiques).</p>
+    ${S('Comm')}
+    <p>Commerces : <b>Restos</b>, <b>Cafés</b>, <b>Glaciers</b>, <b>Boulangeries</b>.</p>
+    ${S('Amis — communauté')}
+    <p>Ton <b>avatar</b> (nom, icône, couleur). <b>Points perso</b> : « Poser un point » → un viseur → titre + commentaire. <b>Salles live</b> par <b>code à 6 chiffres</b> : « Créer une salle » puis partage le code ; « Rejoindre » avec le code d'un ami. « Partager ma position » (optionnel) → vous vous voyez bouger en temps réel. <b>Mesures</b> : ouvre Limbes, mesure, renvoie vers Drôme.</p>
+    ${S('Expe — relief avancé')}
+    <p><b>Lumière</b> (soleil), <b>Pentes</b>, <b>Courbure</b>, <b>Grille</b> (coordonnées), <b>Drone</b>, et le cadran <b>azimut</b> du soleil.</p>
+
+    ${H('Pentes & Courbure')}
+    <p><b>Pentes (slope)</b> — colore le terrain selon l'inclinaison : plus c'est raide, plus c'est chaud. Pratique en rando/ski pour repérer les pentes fortes. Curseurs <b>min/max</b> (plage d'angles) + <b>opacité</b>.</p>
+    <p><b>Courbure (curvature)</b> — fait ressortir les <b>crêtes</b> (bombé) et les <b>ravins/talwegs</b> (creux). Révèle le modelé fin du terrain. Curseurs <b>force</b> + opacité.</p>
+    <p>Les deux sont calculés depuis le <b>LiDAR HD de l'IGN</b> (modèle numérique de terrain très précis).</p>
+
+    ${H('Sources')}
+    <p><b>IGN Géoplateforme</b> — cartes, orthophotos, LiDAR HD (relief, pentes, courbure), Cassini, État-Major.<br>
+    <b>OpenStreetMap / Overpass</b> — points d'intérêt (commerces, eau, transport, activités, monuments).<br>
+    <b>iNaturalist</b> — observations de faune.<br>
+    <b>Waymarked Trails</b> — tracés de randonnée.<br>
+    <b>Limbes</b> — mesures sextant / GPS.<br>
+    Police <b>VG5000</b> (Velvetyne).</p>
+
+    ${H('Installer')}
+    <p>Menu du navigateur → « Sur l'écran d'accueil ». L'app s'ouvre plein écran, en portrait, et fonctionne hors-ligne.</p>
+
+    <button id="guide-x2" style="width:100%;margin-top:26px;background:#c05f24;color:#fff;border:0;border-radius:10px;padding:13px;font:16px VG5000,monospace;cursor:pointer">Fermer le guide</button>
+  </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('#guide-x').onclick=()=>ov.remove();
+  ov.querySelector('#guide-x2').onclick=()=>ov.remove(); }
 function commuPanel(){
   // moins de boutons : l'essentiel vit dans l'écran (pokédex). Colonne générique, plaque dédiée à venir.
   const acts=[
@@ -2597,6 +2649,9 @@ function commuPanel(){
     {label:'Partager (lien)', fn:()=>commuShare()}
   ];
   acts.forEach((a,i)=> makeButton(V4.P,{type:'kind',x:778,y:296+i*98,label:a.label,onClick:a.fn}));
+  // bouton info (style transport) sous l'écran, justifié à gauche → guide plein page
+  const ib=makeButton(V4.P,{type:'transport',x:106,y:872,onClick:()=>openGuide()});
+  ib.appendChild(v4El('',{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:'34px',height:'34px',pointerEvents:'none',background:`url("data:image/svg+xml,${INFO_SVG}") center/contain no-repeat`}));
   v4CommuScreen(); }
 function commuScreenBox(){ const S={x:96,y:247,w:474,h:600};
   const box=v4El('',{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px',position:'absolute',
