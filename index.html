@@ -1069,7 +1069,8 @@ function getBasemapConfig(key) {
   let cfg = configs[key];
   // En mode "Lumière du jour", on retire l'ombre LiDAR cuite : c'est la couche
   // hillshade dynamique (applyDaylight) qui fait le relief, soleil à l'heure réelle.
-  if (cfg && state.layers.daylight && demSupported()) cfg = { layers: cfg.layers.filter(l => !l.id.includes('lidar')) };
+  // ...sauf sur le fond "LiDAR seul" où l'ombre cuite EST l'imagerie primaire (sinon fond vide → mesh 3D translucide).
+  if (cfg && state.layers.daylight && demSupported() && key !== 'lidar-only') cfg = { layers: cfg.layers.filter(l => !l.id.includes('lidar')) };
   return cfg;
 }
 
@@ -3336,7 +3337,7 @@ map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender
   // Ciel brume claire — ne se voit qu'incliné (pitch haut) ; horizon blanc cassé → greige clair en haut
   try { map.setSky({
     'sky-color': '#d0ccc0', 'horizon-color': '#f2efe7', 'fog-color': '#f2efe7',
-    'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.5, 'fog-ground-blend': 0.35, 'atmosphere-blend': 1
+    'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.3, 'fog-ground-blend': 0.12, 'atmosphere-blend': 1
   }); } catch(e){} if(typeof commuIngest==='function') commuIngest(); if(typeof mesuresIngest==='function') mesuresIngest(); if(typeof commuAutoConnect==='function') commuAutoConnect(); setTimeout(hideSplash, 500); });
 setTimeout(hideSplash, 3500); // filet de sécurité
 
