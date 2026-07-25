@@ -1006,6 +1006,7 @@ const map = new maplibregl.Map({
   zoom: 10.5,
   maxZoom: 18,
   minZoom: 7,
+  maxPitch: 80,           // défaut MapLibre = 60 ; on lève à 80 (≈10° avant l'horizon) pour une 3D rasante
   attributionControl: false
 });
 
@@ -2385,7 +2386,7 @@ function pillsV4(){
 function basemapV4(id,label,sub,x,y){ const night=id==='nuit', on=night?nightMode:state.basemap===id;
   keyV4({x,y,label,sub,on,onClick:()=>{ if(night){nightMode=!nightMode;document.body.classList.toggle('night',nightMode);} else state.basemap=id; drawPanel(); rerender(); }}); }
 function layerKeyV4(id,label,sub,x,y){ keyV4({x,y,label,sub,on:!!state.layers[id],color:(typeof ledColor==='function'?ledColor(id):'#c05f24'),
-  onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); if(id==='threeD')map.easeTo({pitch:state.layers.threeD?62:0,duration:700}); }}); }
+  onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); if(id==='threeD')map.easeTo({pitch:state.layers.threeD?80:0,duration:700}); }}); }
 function layerHalfV4(id,label,x,y){ makeButton(V4.P,{type:'half',x,y,label,on:!!state.layers[id],
   onClick:()=>{ state.layers[id]=!state.layers[id]; drawPanel(); rerender(); }}); }
 // drag vertical LISSE : bouge le knoll direct + applique, zéro re-render (commit à la fin)
@@ -2871,7 +2872,11 @@ function natureCompass(){ const C={cx:336, cy:542, r:205}, D=2*C.r;
 
 const PANELV4={
   fond(){ pillsV4();
-    layerHalfV4('daylight','Relief',79,262); layerHalfV4('villages','Village',79,816);
+    // « Relief » couplé : hillshade dynamique + 3D DEM (setTerrain) + inclinaison, en 1 tap
+    makeButton(V4.P,{type:'half',x:79,y:262,label:'Relief',on:!!state.layers.daylight,
+      onClick:()=>{ const on=!state.layers.daylight; state.layers.daylight=on; state.layers.threeD=on;
+        drawPanel(); rerender(); map.easeTo({pitch:on?80:0,duration:700}); }});
+    layerHalfV4('villages','Village',79,816);
     const RT={x:161,y0:400,y1:721},ky=RT.y1-state.reliefOpacity*(RT.y1-RT.y0);
     const kn=v4El('knoll',{left:RT.x+'px',top:ky+'px'});
     v4DragY(kn,RT,v=>{ state.reliefOpacity=v/100; if(map.getLayer('lidardem-hs'))map.setPaintProperty('lidardem-hs','hillshade-exaggeration',Math.min(state.reliefOpacity*0.8,1)); },()=>rerender());
@@ -3014,7 +3019,7 @@ function attachPanelEvents() {
       state.layers[l] = !state.layers[l];
       renderPanel();
       rerender();
-      if (l === 'threeD') map.easeTo({ pitch: state.layers.threeD ? 62 : 0, duration: 700 });
+      if (l === 'threeD') map.easeTo({ pitch: state.layers.threeD ? 80 : 0, duration: 700 });
     });
   });
 
