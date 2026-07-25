@@ -3332,7 +3332,12 @@ function hideSplash() {
   s.classList.add('hide');
   setTimeout(() => { s.style.display = 'none'; }, 650);
 }
-map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender(); if(typeof commuIngest==='function') commuIngest(); if(typeof mesuresIngest==='function') mesuresIngest(); if(typeof commuAutoConnect==='function') commuAutoConnect(); setTimeout(hideSplash, 500); });
+map.on('load', () => { loadPoiIcons(); loadFauneIcons(); updateScale(); rerender();
+  // Ciel brume claire — ne se voit qu'incliné (pitch haut) ; horizon blanc cassé → greige clair en haut
+  try { map.setSky({
+    'sky-color': '#d0ccc0', 'horizon-color': '#f2efe7', 'fog-color': '#f2efe7',
+    'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.5, 'fog-ground-blend': 0.35, 'atmosphere-blend': 1
+  }); } catch(e){} if(typeof commuIngest==='function') commuIngest(); if(typeof mesuresIngest==='function') mesuresIngest(); if(typeof commuAutoConnect==='function') commuAutoConnect(); setTimeout(hideSplash, 500); });
 setTimeout(hideSplash, 3500); // filet de sécurité
 
 // Init
